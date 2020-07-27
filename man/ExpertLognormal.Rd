@@ -15,11 +15,9 @@ ExpertLognormal(tl, yl, yu, tu, meanlog, sdlog)
 
 \item{tu}{A vector of length N: upper bounds of truncation.}
 
-\item{meanlog}{A vector of length \code{g}: Lognormal mean parameters.}
+\item{meanlog}{A vector of length \code{1}: Lognormal mean parameters.}
 
-\item{sdlog}{A vector of length \code{g}: Lognormal sd parameters.}
-
-\item{g}{A numeric which is set to 1. See Note.}
+\item{sdlog}{A vector of length \code{1}: Lognormal sd parameters.}
 }
 \value{
 A list of matrices of expert loglikelihood for Log Normal.
