@@ -57,3 +57,12 @@ test_that("Lornormal Expert", {
   expect_equal(ExpertLognormal(tl, yl, yu, tu, 0, 1)[[2]], expert.lognormal(tl, yl, yu, tu, 1, 0, 1)[[2]])
   expect_equal(ExpertLognormal(tl, yl, yu, tu, 0, 1)[[3]], expert.lognormal(tl, yl, yu, tu, 1, 0, 1)[[3]])
 })
+
+# library(microbenchmark)
+# bench = microbenchmark(
+#   ExpertLognormal(tl, yl, yu, tu, 0, 1),
+#   expert.lognormal(tl, yl, yu, tu, 1, 0, 1)
+# )
+#
+# library(ggplot2)
+# autoplot(bench)
