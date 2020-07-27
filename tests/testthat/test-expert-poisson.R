@@ -2,10 +2,10 @@ context("ExpertPoisson")
 library(copula)
 
 y = rpois(100000, 10)
-tl = floor(y*0.50)
-yl = floor(y*0.75)
-yu = ceiling(y*1.25)
-tu = rep(Inf, 100000)
+tl = y # floor(y*0.50)
+yl = y # floor(y*0.75)
+yu = y # ceiling(y*1.25)
+tu = y # rep(Inf, 100000)
 
 expert.poisson = function(tl, yl, yu, tu, g = 1, mean.theta)
 {
