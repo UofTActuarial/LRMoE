@@ -6,6 +6,20 @@ Author: Who wrote it
 Maintainer: The package maintainer <yourself@somewhere.net>
 Description: More about what it does (maybe more than one line)
     Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+License: GPL (>= 2)
 Encoding: UTF-8
 LazyData: true
+Depends: R (>= 3.5)
+Imports: Rcpp (>= 1.0.5),
+  actuar,
+  copula,
+  expint,
+  EnvStats,
+  ggplot2,
+  matrixStats,
+  NMOF,
+  reshape2,
+  rmutil,
+  statmod,
+  stats
+RoxygenNote: 7.1.1
