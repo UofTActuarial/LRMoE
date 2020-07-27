@@ -1,11 +1,18 @@
 Package: LRMoECPNew
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Logit-Weighted Reduced Mixture-of-Experts
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
+Author: Spark Tseung [aut, cre],
+  Tsz Chai Fung [aut],
+  Andrei L. Badescu [aut],
+  Sheldon X. Lin [aut]
+Maintainer: Spark Tseung <spark.tseung@mail.utoronto.ca>
+Description: Thhe Logit-Weighted Reduced Mixture-of-Experts (LRMoE) 
+  proposed by Fung et al. (2019) is a flexible framework actuarial loss modelling.
+  For more details, see Fung et al. (2019) "A class of mixture of experts models for general insurance: Theoretical developments"
+  published in Insurance: Mathematics and Economics, and
+  Fung et al. (2019) "A CLASS OF MIXTURE OF EXPERTS MODELS FOR GENERAL INSURANCE: APPLICATION TO CORRELATED CLAIM FREQUENCIES"
+  in ASTIN Bulletin: The Journal of the IAA.
 License: GPL (>= 2)
 Encoding: UTF-8
 LazyData: true
