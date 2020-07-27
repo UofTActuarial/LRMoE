@@ -16,3 +16,9 @@
 hello <- function() {
   print("Hello, world!")
 }
+
+#' @useDynLib LRMoECPNew, .registration = TRUE
+#' @importFrom Rcpp sourceCpp
+NULL
+## NULL
+

@@ -2,6 +2,6 @@
 # Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 XColMinusY <- function(x, y) {
-    .Call('_LRMoECPNew_XColMinusY', PACKAGE = 'LRMoECPNew', x, y)
+    .Call(`_LRMoECPNew_XColMinusY`, x, y)
 }
 
