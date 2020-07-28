@@ -24,3 +24,7 @@
 # loglik.list = GateExpertLL(alpha.init, gate.ll, expert.list, T, 5, params.pen)
 
 # Returns numbers!
+
+
+
+

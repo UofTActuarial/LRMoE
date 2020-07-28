@@ -5,3 +5,7 @@ XColMinusY <- function(x, y) {
     .Call(`_LRMoECPNew_XColMinusY`, x, y)
 }
 
+XPlusYColTimesZ <- function(x, y, z) {
+    .Call(`_LRMoECPNew_XPlusYColTimesZ`, x, y, z)
+}
+

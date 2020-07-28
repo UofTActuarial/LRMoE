@@ -17,9 +17,23 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// XPlusYColTimesZ
+SEXP XPlusYColTimesZ(SEXP x, SEXP y, SEXP z);
+RcppExport SEXP _LRMoECPNew_XPlusYColTimesZ(SEXP xSEXP, SEXP ySEXP, SEXP zSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< SEXP >::type x(xSEXP);
+    Rcpp::traits::input_parameter< SEXP >::type y(ySEXP);
+    Rcpp::traits::input_parameter< SEXP >::type z(zSEXP);
+    rcpp_result_gen = Rcpp::wrap(XPlusYColTimesZ(x, y, z));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_LRMoECPNew_XColMinusY", (DL_FUNC) &_LRMoECPNew_XColMinusY, 2},
+    {"_LRMoECPNew_XPlusYColTimesZ", (DL_FUNC) &_LRMoECPNew_XPlusYColTimesZ, 3},
     {NULL, NULL, 0}
 };
 
