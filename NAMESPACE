@@ -2,6 +2,7 @@
 
 export(DimCompExpertLL)
 export(DimCompExpertPenalty)
+export(DimCompExpertPenaltyInit)
 export(ExpertBinom)
 export(ExpertBurr)
 export(ExpertGamma)
