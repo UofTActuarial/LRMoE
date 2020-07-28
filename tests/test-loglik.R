@@ -22,6 +22,8 @@
 # gate.ll = GateLogit(X.obs, alpha.init)
 # expert.list = DimCompExpertLL(Y.obs, comp.dist, zero.init, params.init)
 # loglik.list = GateExpertLL(alpha.init, gate.ll, expert.list, T, 5, params.pen)
+#
+# zkz.list = EMEzkz(gate.ll, expert.list, loglik.list)
 
 # Returns numbers!
 
