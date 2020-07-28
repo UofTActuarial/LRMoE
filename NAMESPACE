@@ -3,6 +3,7 @@
 export(ExpertBinom)
 export(ExpertBurr)
 export(ExpertGamma)
+export(ExpertGammaCount)
 export(ExpertInvgauss)
 export(ExpertLognormal)
 export(ExpertNbinom)
