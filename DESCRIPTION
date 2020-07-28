@@ -7,7 +7,7 @@ Author: Spark Tseung [aut, cre],
   Andrei L. Badescu [aut],
   Sheldon X. Lin [aut]
 Maintainer: Spark Tseung <spark.tseung@mail.utoronto.ca>
-Description: Thhe Logit-Weighted Reduced Mixture-of-Experts (LRMoE) 
+Description: The Logit-Weighted Reduced Mixture-of-Experts (LRMoE) 
   proposed by Fung et al. (2019) is a flexible framework actuarial loss modelling.
   For more details, see Fung et al. (2019) "A class of mixture of experts models for general insurance: Theoretical developments"
   published in Insurance: Mathematics and Economics, and
