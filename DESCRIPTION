@@ -19,6 +19,7 @@ LazyData: true
 Depends: R (>= 3.5)
 Imports: 
     Rcpp,
+    RcppEigen,
     actuar,
     copula,
     expint,
@@ -32,4 +33,4 @@ Imports:
     stats
 RoxygenNote: 7.1.1
 LinkingTo: 
-    Rcpp
+    Rcpp, RcppEigen
