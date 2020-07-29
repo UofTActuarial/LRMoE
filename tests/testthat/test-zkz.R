@@ -6,9 +6,6 @@ comp.aggre.ll.ind = matrix(runif(50000, -10, 10), ncol = 1)
 ll.tn.bar = matrix(runif(250000, -10, 10), ncol = 5)
 comp.aggre.ll.tn.bar = matrix(runif(50000, -10, 10), ncol = 1)
 
-
-# zobs + sweep(zlat, 1, ke, FUN = "*", check.margin = FALSE)
-
 cppFunction("
 SEXP tempf(SEXP x, SEXP y) {
   NumericMatrix xx(x);
