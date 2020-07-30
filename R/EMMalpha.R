@@ -42,7 +42,7 @@ EMMalpha = function(X, alpha, comp.zkz.e.list, alpha.iter.max,
       dQ2 = EMalphadQ2(X, comp.zpzk.marg, pp[,j], qqj) - if(penalty){diag(1/hyper.alpha^2,nrow = n.covar.p, ncol = n.covar.p)} else{diag(10^(-7),nrow = n.covar.p, ncol = n.covar.p)}
         # -crossprod(sweep(X,1,comp.zpzk.marg*exp(rowLogSumExps(array(gate.body[,-j],dim=c(sample.size.n,n.comp-1)))+gate.body[,j]-2*rowLogSumExps(gate.body)),FUN="*",check.margin=FALSE),X)-if(penalty){diag(1/hyper.alpha^2,nrow = n.covar.p, ncol = n.covar.p)} else{diag(10^(-7),nrow = n.covar.p, ncol = n.covar.p)}
 
-      alpha.new[j,]=alpha.new[j,]-crossprod(dQ,solve(dQ2))
+      alpha.new[j,]=alpha.new[j,] + crossprod(dQ, chol2inv(chol(-dQ2))) # -crossprod(dQ,solve(dQ2))
       iter[j] = iter[j]+1
     }
   }

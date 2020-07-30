@@ -153,8 +153,28 @@ test_that("EMMalpha", {
 #   tempdQ2(X, comp.zpzk.sum, pp[,1], qq1),
 #   -crossprod(sweep(X,1,comp.zpzk.sum*qqq1,FUN="*",check.margin=FALSE), X)
 # )
-#
+
 # library(ggplot2)
 # autoplot(bench)
 
 # Very significant improvement!
+
+
+dQ = tempdQ(X, comp.zpzk[,1], comp.zpzk.sum, pp[,1])
+dQ2 = tempdQ2(X, comp.zpzk.sum, pp[,1], exp(rowLogSumExps(array(gate.body[,-1],dim=c(50000,5-1)))-rowLogSumExps(gate.body)))
+
+test_that("EMMalpha", {
+  expect_equal(crossprod(dQ, chol2inv(chol(-dQ2))),
+               -crossprod(dQ, solve(dQ2)))
+})
+
+# library(microbenchmark)
+# bench = microbenchmark(
+#   crossprod(dQ, chol2inv(chol(-dQ2))),
+#   -crossprod(dQ, solve(dQ2))
+# )
+#
+# library(ggplot2)
+# autoplot(bench)
+
+# Decent improvement!
