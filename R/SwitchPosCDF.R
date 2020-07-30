@@ -56,8 +56,8 @@ PosCDF = function(y, comp.dist, params)
           "ZI-nbinom"   = {temp = ifelse(y<0, 0, pnbinom(y, size = params[1], prob = params[2], lower.tail = TRUE, log.p = FALSE)) },
           "binom"       = {temp = ifelse(y<0, 0, pbinom(y, size = params[1], prob = params[2], lower.tail = TRUE, log.p = FALSE)) },
           "ZI-binom"    = {temp = ifelse(y<0, 0, pbinom(y, size = params[1], prob = params[2], lower.tail = TRUE, log.p = FALSE)) },
-          "gammacount"  = {temp = ifelse(y<0, 0, pgammacount.new(y, m = params[1], s = params[2], log.p = FALSE)) },
-          "ZI-gammacount"  = {temp = ifelse(y<0, 0, pgammacount.new(y, m = params[1], s = params[2], log.p = FALSE)) }
+          "gammacount"  = {temp = ifelse(y<0, 0, pgammacount(y, m = params[1], s = params[2], log.p = FALSE)) },
+          "ZI-gammacount"  = {temp = ifelse(y<0, 0, pgammacount(y, m = params[1], s = params[2], log.p = FALSE)) }
   )
   return(temp)
 }

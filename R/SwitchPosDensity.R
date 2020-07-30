@@ -58,8 +58,8 @@ PosDensity = function(comp.dist, params, y.series)
           "ZI-nbinom"   = {temp = dnbinom(y.series, size = params[1], prob = params[2], log = FALSE) },
           "binom"       = {temp = dbinom(y.series, size = params[1], prob = params[2], log = FALSE) },
           "ZI-binom"    = {temp = dbinom(y.series, size = params[1], prob = params[2], log = FALSE) },
-          "gammacount"  = {temp = dgammacount.new(y.series, m = params[1], s = params[2], log = FALSE) },
-          "ZI-gammacount"  = {temp = dgammacount.new(y.series, m = params[1], s = params[2], log = FALSE) }
+          "gammacount"  = {temp = dgammacount(y.series, m = params[1], s = params[2], log = FALSE) },
+          "ZI-gammacount"  = {temp = dgammacount(y.series, m = params[1], s = params[2], log = FALSE) }
   )
   return(temp)
 }
