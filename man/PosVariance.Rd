@@ -37,7 +37,4 @@ PosVariance(comp.dist, params)
 \description{
 A switch to calculate the variance of a given distribution.
 }
-\seealso{
-\code{\link{LRMoE.fit}}.
-}
 \keyword{internal}

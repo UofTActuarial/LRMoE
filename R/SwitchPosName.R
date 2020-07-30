@@ -1,8 +1,6 @@
 ## A function to format model output: add names for parameters
 #' A function to format model output: add names for parameters
 #'
-#' @seealso \code{\link{pos.expert.loglik.calc}}
-#'
 #' @keywords internal
 #'
 #' @export PosName

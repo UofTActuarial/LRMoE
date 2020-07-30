@@ -9,7 +9,4 @@ PosName(comp.dist)
 \description{
 A function to format model output: add names for parameters
 }
-\seealso{
-\code{\link{pos.expert.loglik.calc}}
-}
 \keyword{internal}

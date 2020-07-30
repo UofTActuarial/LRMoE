@@ -26,7 +26,6 @@
 #'     \item \code{gammacount}: \code{(m, s)}
 #' }
 #'
-#' @seealso \code{\link{LRMoE.fit}}.
 #'
 #' @importFrom actuar mburr
 #'
