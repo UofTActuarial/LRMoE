@@ -9,6 +9,10 @@ EMalphadQ2 <- function(x, z, p, q) {
     .Call(`_LRMoECPNew_EMalphadQ2`, x, z, p, q)
 }
 
+XAPlusYZB <- function(x, a, y, z, b) {
+    .Call(`_LRMoECPNew_XAPlusYZB`, x, a, y, z, b)
+}
+
 XColMinusY <- function(x, y) {
     .Call(`_LRMoECPNew_XColMinusY`, x, y)
 }

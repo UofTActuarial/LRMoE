@@ -20,6 +20,7 @@ Depends: R (>= 3.5)
 Imports: 
     Rcpp,
     RcppEigen,
+    RcppNumerical,
     actuar,
     copula,
     expint,
@@ -33,4 +34,4 @@ Imports:
     stats
 RoxygenNote: 7.1.1
 LinkingTo: 
-    Rcpp, RcppEigen
+    Rcpp, RcppEigen, RcppNumerical
