@@ -32,7 +32,7 @@
 #' @param print TRUE/FALSE: whether paramater updates are printed on screen. Default is TRUE.
 #'
 #'
-#' @export LRMoE.fit
+#' @export LRMoEFit
 #'
 LRMoEFit = function(Y, X, n.comp = 2, comp.dist = NULL,
                      alpha.init = NULL,
