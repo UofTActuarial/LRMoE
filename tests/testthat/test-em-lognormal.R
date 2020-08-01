@@ -58,3 +58,4 @@ test_that("EMMLognormal", {
 #
 # censor.idx = (tempY[,2]!=tempY[,3])
 
+
