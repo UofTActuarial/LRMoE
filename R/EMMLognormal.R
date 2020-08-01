@@ -76,7 +76,8 @@ EMMLognormal = function(params.old,
   # meanlog.new = sum(term.zkz.logy[pos.idx]) / sum(term.zkz[pos.idx])
   # sdlog.new = sqrt( 1/sum(term.zkz[pos.idx]) * ( sum(term.zkz.logy.sq[pos.idx]) - 2*meanlog.new*sum(term.zkz.logy[pos.idx]) + (meanlog.new^2)*sum(term.zkz[pos.idx]) ) )
 
-  term.zkz = XPlusYColTimesZ(z.e.obs[pos.idx], z.e.lat[pos.idx], k.e[pos.idx])
+  term.zkz = XPlusYZ(z.e.obs[pos.idx], z.e.lat[pos.idx], k.e[pos.idx])
+    # XPlusYColTimesZ(z.e.obs[pos.idx], z.e.lat[pos.idx], k.e[pos.idx])
     # sweep(matrix(z.e.obs[pos.idx]), 1,
     #               sweep(matrix(k.e[pos.idx]), 1, matrix(z.e.lat[pos.idx]), FUN = "*", check.margin = FALSE),
     #               FUN = "+", check.margin = FALSE)

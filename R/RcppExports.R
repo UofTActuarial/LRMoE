@@ -21,3 +21,7 @@ XPlusYColTimesZ <- function(x, y, z) {
     .Call(`_LRMoECPNew_XPlusYColTimesZ`, x, y, z)
 }
 
+XPlusYZ <- function(x, y, z) {
+    .Call(`_LRMoECPNew_XPlusYZ`, x, y, z)
+}
+
