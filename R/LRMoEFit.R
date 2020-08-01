@@ -197,11 +197,11 @@ LRMoEFit = function(Y, X, n.comp = 2, comp.dist = NULL,
 
         params.em.kj.old = params.em[[k]][[j]] # Before update
 
-        params.em[[k]][[j]] = comp.kj.params.m.recur(comp.kj.dist, comp.kj.params.old,
-                                                     tl.k, yl.k, yu.k, tu.k,
-                                                     comp.kj.pos.expert.ll, comp.kj.pos.expert.tn, comp.kj.pos.expert.tn.bar,
-                                                     z.pos.e.obs, z.pos.e.lat, comp.zkz.e.list$k.e,
-                                                     penalty, hyper.params[[k]][[j]])
+        params.em[[k]][[j]] = EMMCompParams(comp.kj.dist, comp.kj.params.old,
+                                             tl.k, yl.k, yu.k, tu.k,
+                                             comp.kj.pos.expert.ll, comp.kj.pos.expert.tn, comp.kj.pos.expert.tn.bar,
+                                             z.pos.e.obs, z.pos.e.lat, comp.zkz.e.list$k.e,
+                                             penalty, hyper.params[[k]][[j]])
 
         params.em.kj.new = params.em[[k]][[j]] # After update
 
@@ -289,8 +289,8 @@ LRMoEFit = function(Y, X, n.comp = 2, comp.dist = NULL,
   }
 
   # Information criteria
-  AIC = -2*loglik.em.np + 2*(count.alpha(alpha.init) + count.zero(comp.dist) + count.pos.params(comp.dist))
-  BIC = -2*loglik.em.np + log(sample.size.n)*(count.alpha(alpha.init) + count.zero(comp.dist) + count.pos.params(comp.dist))
+  AIC = -2*loglik.em.np + 2*(CountAlpha(alpha.init) + CountZero(comp.dist) + PosCountParams(comp.dist))
+  BIC = -2*loglik.em.np + log(sample.size.n)*(CountAlpha(alpha.init) + CountZero(comp.dist) + PosCountParams(comp.dist))
 
   # Naming all output
   # rownames(zero.init) = rownames(zero.em) = paste("dim", c(1:dim.m), sep = " ")

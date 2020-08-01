@@ -6,7 +6,7 @@
 #' @keywords internal
 #'
 #' @export EMMLognormal
-EMMLognormal = function(lnorm.params.old,
+EMMLognormal = function(params.old,
                         tl, yl, yu, tu,
                         expert.ll, expert.tn, expert.tn.bar,
                         z.e.obs, z.e.lat, k.e,
@@ -15,22 +15,22 @@ EMMLognormal = function(lnorm.params.old,
   # Constants
   sample.size.n = length(tl)
   # Take old parameters
-  meanlog = lnorm.params.old[1]
-  sdlog   = lnorm.params.old[2]
+  meanlog = params.old[1]
+  sdlog   = params.old[2]
   # Take hyper parameters
   hyper.meanlog = hyper.params[1]
   hyper.sdlog.1   = hyper.params[2]
   hyper.sdlog.2   = hyper.params[3]
   # Value to return
-  lnorm.params.new = lnorm.params.old
+  params.new = params.old
 
 
   # E-Step: conditional expectations for log(y), (log(y))^2
   censor.idx = (yl!=yu)
-  y.log.e.obs = array(0, dim = c(sample.size.n, 1))
-  y.log.e.lat = array(0, dim = c(sample.size.n, 1))
-  y.log.sq.e.obs = array(0, dim = c(sample.size.n, 1))
-  y.log.sq.e.lat = array(0, dim = c(sample.size.n, 1))
+  y.log.e.obs = rep(0, sample.size.n) # array(0, dim = c(sample.size.n, 1))
+  y.log.e.lat = rep(0, sample.size.n) # array(0, dim = c(sample.size.n, 1))
+  y.log.sq.e.obs = rep(0, sample.size.n) # array(0, dim = c(sample.size.n, 1))
+  y.log.sq.e.lat = rep(0, sample.size.n) # array(0, dim = c(sample.size.n, 1))
 
   # Conditional expectation of log(y): untruncated and uncensored case.
   y.log.e.obs[!censor.idx] = log(yl[!censor.idx])
@@ -106,12 +106,12 @@ EMMLognormal = function(lnorm.params.old,
     # sqrt( 1/sum(term.zkz) * ( sum(term.zkz.logy.sq) - 2*meanlog.new*sum(term.zkz.logy) + (meanlog.new^2)*sum(term.zkz) ) )
 
   # Update the parameters and return the result
-  lnorm.params.new[1] = meanlog.new
-  lnorm.params.new[2] = sdlog.new
+  params.new[1] = meanlog.new
+  params.new[2] = sdlog.new
 
   # print(meanlog.new)
   # print(sdlog.new)
 
-  return(lnorm.params.new)
+  return(params.new)
 
 }

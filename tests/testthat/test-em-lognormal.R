@@ -1,15 +1,5 @@
 context("EMMLognormal")
 library(Rcpp)
-# data("LRMoEDemoData")
-#
-# head(Y.obs)
-# summary(Y.obs)
-# tempY = Y.obs[,5:8]
-#
-# meanlog = 2
-# sdlog = 1
-#
-# censor.idx = (tempY[,2]!=tempY[,3])
 
 
 zobs = matrix(runif(50000, 0, 1), ncol = 1)
@@ -54,3 +44,17 @@ test_that("EMMLognormal", {
 # autoplot(bench)
 
 # Slight improvement!
+
+
+
+# data("LRMoEDemoData")
+#
+# head(Y.obs)
+# summary(Y.obs)
+# tempY = Y.obs[,5:8]
+#
+# meanlog = 2
+# sdlog = 1
+#
+# censor.idx = (tempY[,2]!=tempY[,3])
+

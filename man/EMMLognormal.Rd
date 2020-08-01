@@ -5,7 +5,7 @@
 \title{ECM: M-Step for LognOrmal expert.}
 \usage{
 EMMLognormal(
-  lnorm.params.old,
+  params.old,
   tl,
   yl,
   yu,
