@@ -65,13 +65,13 @@ EMMGamma = function(params.old,
   y.log.e.obs.unique=array(0, dim = c(y.unique.length, 1))
   y.log.e.lat.unique=array(0, dim = c(tn.unique.length, 1))
 
-  y.log.e.obs.unique[,1]=
-    mapply(function(x, y) ifelse(x!=y,
-                                 integrate(Q.y.log, log(x), log(y),
-                                           m = m, theta = theta,
-                                           rel.tol=.Machine$double.eps^0.5)$value,
-                                 0),
-           yl.unique, yu.unique)
+  y.log.e.obs.unique[,1]= intGammaLogYObs(m, theta, log(yl.unique), log(yu.unique))
+    # mapply(function(x, y) ifelse(x!=y,
+    #                              integrate(Q.y.log, log(x), log(y),
+    #                                        m = m, theta = theta,
+    #                                        rel.tol=.Machine$double.eps^0.5)$value,
+    #                              0),
+    #        yl.unique, yu.unique)
   y.log.e.obs = y.log.e.obs.unique[y.unique.match,]
   y.log.e.obs[censor.idx] = exp(-expert.ll[censor.idx]) * y.log.e.obs[censor.idx]
 
@@ -80,19 +80,19 @@ EMMGamma = function(params.old,
   y.log.e.obs[is.na(y.log.e.obs)] = 0 # Hardcode zeros to prevent NaN's
 
   # Conditional expectation of log(y): truncated case.
-  y.log.e.lat.unique[,1]=
-    sapply(tl.unique,
-           function(x) ifelse(x!=0,
-                              integrate(Q.y.log, -Inf, log(x),
-                                        m = m, theta = theta,
-                                        rel.tol=.Machine$double.eps^0.5)$value,
-                              0))+
-    sapply(tu.unique,
-           function(x) ifelse(x!=Inf,
-                              integrate(Q.y.log, log(x), Inf,
-                                        m = m, theta = theta,
-                                        rel.tol=.Machine$double.eps^0.5)$value,
-                              0))
+  y.log.e.lat.unique[,1]= intGammaLogYLat(m, theta, log(tl.unique), log(tu.unique))
+    # sapply(tl.unique,
+    #        function(x) ifelse(x!=0,
+    #                           integrate(Q.y.log, -Inf, log(x),
+    #                                     m = m, theta = theta,
+    #                                     rel.tol=.Machine$double.eps^0.5)$value,
+    #                           0))+
+    # sapply(tu.unique,
+    #        function(x) ifelse(x!=Inf,
+    #                           integrate(Q.y.log, log(x), Inf,
+    #                                     m = m, theta = theta,
+    #                                     rel.tol=.Machine$double.eps^0.5)$value,
+    #                           0))
 
   y.log.e.lat = y.log.e.lat.unique[tn.unique.match,]
   y.log.e.lat = exp(-expert.tn.bar) * y.log.e.lat

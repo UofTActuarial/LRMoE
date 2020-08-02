@@ -34,6 +34,34 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// intGammaLogYObs
+SEXP intGammaLogYObs(SEXP m_, SEXP theta_, SEXP lower_, SEXP upper_);
+RcppExport SEXP _LRMoECPNew_intGammaLogYObs(SEXP m_SEXP, SEXP theta_SEXP, SEXP lower_SEXP, SEXP upper_SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< SEXP >::type m_(m_SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type theta_(theta_SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type lower_(lower_SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type upper_(upper_SEXP);
+    rcpp_result_gen = Rcpp::wrap(intGammaLogYObs(m_, theta_, lower_, upper_));
+    return rcpp_result_gen;
+END_RCPP
+}
+// intGammaLogYLat
+SEXP intGammaLogYLat(SEXP m_, SEXP theta_, SEXP lower_, SEXP upper_);
+RcppExport SEXP _LRMoECPNew_intGammaLogYLat(SEXP m_SEXP, SEXP theta_SEXP, SEXP lower_SEXP, SEXP upper_SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< SEXP >::type m_(m_SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type theta_(theta_SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type lower_(lower_SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type upper_(upper_SEXP);
+    rcpp_result_gen = Rcpp::wrap(intGammaLogYLat(m_, theta_, lower_, upper_));
+    return rcpp_result_gen;
+END_RCPP
+}
 // XAPlusYZB
 SEXP XAPlusYZB(SEXP x, SEXP a, SEXP y, SEXP z, SEXP b);
 RcppExport SEXP _LRMoECPNew_XAPlusYZB(SEXP xSEXP, SEXP aSEXP, SEXP ySEXP, SEXP zSEXP, SEXP bSEXP) {
@@ -91,6 +119,8 @@ END_RCPP
 static const R_CallMethodDef CallEntries[] = {
     {"_LRMoECPNew_EMalphadQ", (DL_FUNC) &_LRMoECPNew_EMalphadQ, 4},
     {"_LRMoECPNew_EMalphadQ2", (DL_FUNC) &_LRMoECPNew_EMalphadQ2, 4},
+    {"_LRMoECPNew_intGammaLogYObs", (DL_FUNC) &_LRMoECPNew_intGammaLogYObs, 4},
+    {"_LRMoECPNew_intGammaLogYLat", (DL_FUNC) &_LRMoECPNew_intGammaLogYLat, 4},
     {"_LRMoECPNew_XAPlusYZB", (DL_FUNC) &_LRMoECPNew_XAPlusYZB, 5},
     {"_LRMoECPNew_XColMinusY", (DL_FUNC) &_LRMoECPNew_XColMinusY, 2},
     {"_LRMoECPNew_XPlusYColTimesZ", (DL_FUNC) &_LRMoECPNew_XPlusYColTimesZ, 3},
