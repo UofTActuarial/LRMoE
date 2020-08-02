@@ -46,11 +46,11 @@ EMMGamma = function(params.old,
 
   # Conditional expectation of log(y): untruncated but censored case.
   # A function to numerically integrate for log(y)
-  Q.y.log = function(u, m, theta) # Change of variable: u = log(y) for numerical stability
-  {
-    dens.u.log = dgamma(exp(u), shape = m, scale = theta, log = TRUE) + u
-    return( u *exp(dens.u.log))
-  }
+  # Q.y.log = function(u, m, theta) # Change of variable: u = log(y) for numerical stability
+  # {
+  #   dens.u.log = dgamma(exp(u), shape = m, scale = theta, log = TRUE) + u
+  #   return( u *exp(dens.u.log))
+  # }
   # Find unique integration limits, for numerical speed
   y.unique = unique(cbind(yl,yu),MARGIN=1)
   y.unique.length = nrow(y.unique)
