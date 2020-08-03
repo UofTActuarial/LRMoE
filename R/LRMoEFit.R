@@ -215,7 +215,7 @@ LRMoEFit = function(Y, X, n.comp = 2, comp.dist = NULL,
         # }
 
         # no.jump.list = c("gamma", "ZI-gamma", "burr", "ZI-burr", "nbinom", "ZI-nbinom")
-        no.jump.list = c("nbinom", "ZI-nbinom", "binom", "ZI-binom")
+        no.jump.list = c("nbinom", "ZI-nbinom", "binom", "ZI-binom", "weibull", "ZI-weibull")
 
         if( grad.jump==TRUE & (iter%%grad.period)==0 & !(comp.kj.dist %in% no.jump.list) ){
           diff.log.params = log(params.em.kj.new) - log(params.em.kj.old)

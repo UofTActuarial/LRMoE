@@ -200,7 +200,7 @@ EMMWeibull = function(params.old,
   pos.idx = (yu!=0)
 
   # Update of shape.k
-  shape.k.new = optimize(f = Q.shape, lower = 0.5*shape.k, upper = 2*shape.k,
+  shape.k.new = optimize(f = Q.shape, lower = max(0.5*shape.k, 1.0000), upper = 2*shape.k,
                          # lower = max(0.5*shape.k, 1.0000), upper = 5*shape.k, # interval = c(0.5*shape.k, 5*shape.k),
                          shape.k.old = shape.k, scale.lambda.old = scale.lambda,
                          z.e.obs = z.e.obs[pos.idx], z.e.lat = z.e.lat[pos.idx], k.e = k.e[pos.idx],
