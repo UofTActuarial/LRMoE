@@ -146,6 +146,34 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// intWeibullLogYObs
+SEXP intWeibullLogYObs(SEXP k_, SEXP lambda_, SEXP lower_, SEXP upper_);
+RcppExport SEXP _LRMoECPNew_intWeibullLogYObs(SEXP k_SEXP, SEXP lambda_SEXP, SEXP lower_SEXP, SEXP upper_SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< SEXP >::type k_(k_SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type lambda_(lambda_SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type lower_(lower_SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type upper_(upper_SEXP);
+    rcpp_result_gen = Rcpp::wrap(intWeibullLogYObs(k_, lambda_, lower_, upper_));
+    return rcpp_result_gen;
+END_RCPP
+}
+// intWeibullLogYLat
+SEXP intWeibullLogYLat(SEXP k_, SEXP lambda_, SEXP lower_, SEXP upper_);
+RcppExport SEXP _LRMoECPNew_intWeibullLogYLat(SEXP k_SEXP, SEXP lambda_SEXP, SEXP lower_SEXP, SEXP upper_SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< SEXP >::type k_(k_SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type lambda_(lambda_SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type lower_(lower_SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type upper_(upper_SEXP);
+    rcpp_result_gen = Rcpp::wrap(intWeibullLogYLat(k_, lambda_, lower_, upper_));
+    return rcpp_result_gen;
+END_RCPP
+}
 // XAPlusYZB
 SEXP XAPlusYZB(SEXP x, SEXP a, SEXP y, SEXP z, SEXP b);
 RcppExport SEXP _LRMoECPNew_XAPlusYZB(SEXP xSEXP, SEXP aSEXP, SEXP ySEXP, SEXP zSEXP, SEXP bSEXP) {
@@ -211,6 +239,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"_LRMoECPNew_intInvGaussYLat", (DL_FUNC) &_LRMoECPNew_intInvGaussYLat, 4},
     {"_LRMoECPNew_intInvGaussInvYObs", (DL_FUNC) &_LRMoECPNew_intInvGaussInvYObs, 4},
     {"_LRMoECPNew_intInvGaussInvYLat", (DL_FUNC) &_LRMoECPNew_intInvGaussInvYLat, 4},
+    {"_LRMoECPNew_intWeibullLogYObs", (DL_FUNC) &_LRMoECPNew_intWeibullLogYObs, 4},
+    {"_LRMoECPNew_intWeibullLogYLat", (DL_FUNC) &_LRMoECPNew_intWeibullLogYLat, 4},
     {"_LRMoECPNew_XAPlusYZB", (DL_FUNC) &_LRMoECPNew_XAPlusYZB, 5},
     {"_LRMoECPNew_XColMinusY", (DL_FUNC) &_LRMoECPNew_XColMinusY, 2},
     {"_LRMoECPNew_XPlusYColTimesZ", (DL_FUNC) &_LRMoECPNew_XPlusYColTimesZ, 3},

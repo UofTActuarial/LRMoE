@@ -58,13 +58,13 @@ EMMWeibull = function(params.old,
   # Integration: untruncated case
   y.log.e.obs.unique = array(0,dim=c(y.unique.length, 1))
 
-  y.log.e.obs.unique[,1]=
-    mapply(function(x, y) ifelse(x!=y,
-                                 integrate(int.y.log.fcn, log(x), log(y),
-                                           shape.k.j=shape.k, scale.lambda.j = scale.lambda,
-                                           rel.tol=.Machine$double.eps^0.5)$value,
-                                 0),
-           yl.unique, yu.unique)
+  y.log.e.obs.unique[,1]= intWeibullLogYObs(shape.k, scale.lambda, (yl.unique), (yu.unique)) # NO log transformation
+    # mapply(function(x, y) ifelse(x!=y,
+    #                              integrate(int.y.log.fcn, log(x), log(y),
+    #                                        shape.k.j=shape.k, scale.lambda.j = scale.lambda,
+    #                                        rel.tol=.Machine$double.eps^0.5)$value,
+    #                              0),
+    #        yl.unique, yu.unique)
   # Match to all observations of y
   temp.y.log.e.obs = array(0, dim = c(sample.size.n, 1))
   temp.y.log.e.obs = y.log.e.obs.unique[y.unique.match,]
@@ -81,19 +81,19 @@ EMMWeibull = function(params.old,
   # Integration
   y.log.e.lat.unique = array(0,dim=c(tn.unique.length, 1))
 
-  y.log.e.lat.unique[,1]=
-    sapply(tl.unique,
-           function(x) ifelse(x!=0,
-                              integrate(int.y.log.fcn, -Inf, log(x),
-                                        shape.k.j=shape.k, scale.lambda.j = scale.lambda,
-                                        rel.tol=.Machine$double.eps^0.5)$value,
-                              0))+
-    sapply(tu.unique,
-           function(x) ifelse(x!=Inf,
-                              integrate(int.y.log.fcn, log(x), stats::qweibull(1-1e-09, shape = shape.k, scale = scale.lambda, log.p = F), # Inf is a problem
-                                        shape.k.j=shape.k, scale.lambda.j = scale.lambda,
-                                        rel.tol=.Machine$double.eps^0.5)$value,
-                              0))
+  y.log.e.lat.unique[,1]= intWeibullLogYLat(shape.k, scale.lambda, (tl.unique), (tu.unique))
+    # sapply(tl.unique,
+    #        function(x) ifelse(x!=0,
+    #                           integrate(int.y.log.fcn, -Inf, log(x),
+    #                                     shape.k.j=shape.k, scale.lambda.j = scale.lambda,
+    #                                     rel.tol=.Machine$double.eps^0.5)$value,
+    #                           0))+
+    # sapply(tu.unique,
+    #        function(x) ifelse(x!=Inf,
+    #                           integrate(int.y.log.fcn, log(x), stats::qweibull(1-1e-09, shape = shape.k, scale = scale.lambda, log.p = F), # Inf is a problem
+    #                                     shape.k.j=shape.k, scale.lambda.j = scale.lambda,
+    #                                     rel.tol=.Machine$double.eps^0.5)$value,
+    #                           0))
   # Match to all observations of y
   temp.y.log.e.lat = array(0, dim = c(sample.size.n, 1))
   temp.y.log.e.lat = y.log.e.lat.unique[tn.unique.match,]
@@ -158,6 +158,8 @@ EMMWeibull = function(params.old,
     # Finally, get rid of NaN's
     y.pow.e.obs[is.nan(y.pow.e.obs)] = 0
     y.pow.e.lat[is.nan(y.pow.e.lat)] = 0
+    # y.pow.e.obs[y.pow.e.obs==Inf] = 0
+    # y.pow.e.lat[y.pow.e.lat==Inf] = 0
 
     scale.shape.new = scale.shape(shape.k.new, z.e.obs, z.e.lat, k.e, y.pow.e.obs, y.pow.e.lat)
 
@@ -236,6 +238,8 @@ EMMWeibull = function(params.old,
   # Finally, get rid of NaN's
   y.pow.e.obs[is.nan(y.pow.e.obs)] = 0
   y.pow.e.lat[is.nan(y.pow.e.lat)] = 0
+  # y.pow.e.obs[y.pow.e.obs==Inf] = 0
+  # y.pow.e.lat[y.pow.e.lat==Inf] = 0
 
   scale.lambda.new = scale.shape(shape.k.new, z.e.obs[pos.idx], z.e.lat[pos.idx], k.e[pos.idx], y.pow.e.obs[pos.idx], y.pow.e.lat[pos.idx])
 

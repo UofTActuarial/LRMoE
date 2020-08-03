@@ -17,12 +17,10 @@ intGammaLogYLat <- function(m_, theta_, lower_, upper_) {
     .Call(`_LRMoECPNew_intGammaLogYLat`, m_, theta_, lower_, upper_)
 }
 
-#' @export
 intInvGaussLogYObs <- function(mu_, lambda_, lower_, upper_) {
     .Call(`_LRMoECPNew_intInvGaussLogYObs`, mu_, lambda_, lower_, upper_)
 }
 
-#' @export
 intInvGaussLogYLat <- function(mu_, lambda_, lower_, upper_) {
     .Call(`_LRMoECPNew_intInvGaussLogYLat`, mu_, lambda_, lower_, upper_)
 }
@@ -41,6 +39,16 @@ intInvGaussInvYObs <- function(mu_, lambda_, lower_, upper_) {
 
 intInvGaussInvYLat <- function(mu_, lambda_, lower_, upper_) {
     .Call(`_LRMoECPNew_intInvGaussInvYLat`, mu_, lambda_, lower_, upper_)
+}
+
+#' @export
+intWeibullLogYObs <- function(k_, lambda_, lower_, upper_) {
+    .Call(`_LRMoECPNew_intWeibullLogYObs`, k_, lambda_, lower_, upper_)
+}
+
+#' @export
+intWeibullLogYLat <- function(k_, lambda_, lower_, upper_) {
+    .Call(`_LRMoECPNew_intWeibullLogYLat`, k_, lambda_, lower_, upper_)
 }
 
 XAPlusYZB <- function(x, a, y, z, b) {
