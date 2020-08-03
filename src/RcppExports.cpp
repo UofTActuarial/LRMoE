@@ -62,6 +62,90 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// intInvGaussLogYObs
+SEXP intInvGaussLogYObs(SEXP mu_, SEXP lambda_, SEXP lower_, SEXP upper_);
+RcppExport SEXP _LRMoECPNew_intInvGaussLogYObs(SEXP mu_SEXP, SEXP lambda_SEXP, SEXP lower_SEXP, SEXP upper_SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< SEXP >::type mu_(mu_SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type lambda_(lambda_SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type lower_(lower_SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type upper_(upper_SEXP);
+    rcpp_result_gen = Rcpp::wrap(intInvGaussLogYObs(mu_, lambda_, lower_, upper_));
+    return rcpp_result_gen;
+END_RCPP
+}
+// intInvGaussLogYLat
+SEXP intInvGaussLogYLat(SEXP mu_, SEXP lambda_, SEXP lower_, SEXP upper_);
+RcppExport SEXP _LRMoECPNew_intInvGaussLogYLat(SEXP mu_SEXP, SEXP lambda_SEXP, SEXP lower_SEXP, SEXP upper_SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< SEXP >::type mu_(mu_SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type lambda_(lambda_SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type lower_(lower_SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type upper_(upper_SEXP);
+    rcpp_result_gen = Rcpp::wrap(intInvGaussLogYLat(mu_, lambda_, lower_, upper_));
+    return rcpp_result_gen;
+END_RCPP
+}
+// intInvGaussYObs
+SEXP intInvGaussYObs(SEXP mu_, SEXP lambda_, SEXP lower_, SEXP upper_);
+RcppExport SEXP _LRMoECPNew_intInvGaussYObs(SEXP mu_SEXP, SEXP lambda_SEXP, SEXP lower_SEXP, SEXP upper_SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< SEXP >::type mu_(mu_SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type lambda_(lambda_SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type lower_(lower_SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type upper_(upper_SEXP);
+    rcpp_result_gen = Rcpp::wrap(intInvGaussYObs(mu_, lambda_, lower_, upper_));
+    return rcpp_result_gen;
+END_RCPP
+}
+// intInvGaussYLat
+SEXP intInvGaussYLat(SEXP mu_, SEXP lambda_, SEXP lower_, SEXP upper_);
+RcppExport SEXP _LRMoECPNew_intInvGaussYLat(SEXP mu_SEXP, SEXP lambda_SEXP, SEXP lower_SEXP, SEXP upper_SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< SEXP >::type mu_(mu_SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type lambda_(lambda_SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type lower_(lower_SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type upper_(upper_SEXP);
+    rcpp_result_gen = Rcpp::wrap(intInvGaussYLat(mu_, lambda_, lower_, upper_));
+    return rcpp_result_gen;
+END_RCPP
+}
+// intInvGaussInvYObs
+SEXP intInvGaussInvYObs(SEXP mu_, SEXP lambda_, SEXP lower_, SEXP upper_);
+RcppExport SEXP _LRMoECPNew_intInvGaussInvYObs(SEXP mu_SEXP, SEXP lambda_SEXP, SEXP lower_SEXP, SEXP upper_SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< SEXP >::type mu_(mu_SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type lambda_(lambda_SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type lower_(lower_SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type upper_(upper_SEXP);
+    rcpp_result_gen = Rcpp::wrap(intInvGaussInvYObs(mu_, lambda_, lower_, upper_));
+    return rcpp_result_gen;
+END_RCPP
+}
+// intInvGaussInvYLat
+SEXP intInvGaussInvYLat(SEXP mu_, SEXP lambda_, SEXP lower_, SEXP upper_);
+RcppExport SEXP _LRMoECPNew_intInvGaussInvYLat(SEXP mu_SEXP, SEXP lambda_SEXP, SEXP lower_SEXP, SEXP upper_SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< SEXP >::type mu_(mu_SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type lambda_(lambda_SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type lower_(lower_SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type upper_(upper_SEXP);
+    rcpp_result_gen = Rcpp::wrap(intInvGaussInvYLat(mu_, lambda_, lower_, upper_));
+    return rcpp_result_gen;
+END_RCPP
+}
 // XAPlusYZB
 SEXP XAPlusYZB(SEXP x, SEXP a, SEXP y, SEXP z, SEXP b);
 RcppExport SEXP _LRMoECPNew_XAPlusYZB(SEXP xSEXP, SEXP aSEXP, SEXP ySEXP, SEXP zSEXP, SEXP bSEXP) {
@@ -121,6 +205,12 @@ static const R_CallMethodDef CallEntries[] = {
     {"_LRMoECPNew_EMalphadQ2", (DL_FUNC) &_LRMoECPNew_EMalphadQ2, 4},
     {"_LRMoECPNew_intGammaLogYObs", (DL_FUNC) &_LRMoECPNew_intGammaLogYObs, 4},
     {"_LRMoECPNew_intGammaLogYLat", (DL_FUNC) &_LRMoECPNew_intGammaLogYLat, 4},
+    {"_LRMoECPNew_intInvGaussLogYObs", (DL_FUNC) &_LRMoECPNew_intInvGaussLogYObs, 4},
+    {"_LRMoECPNew_intInvGaussLogYLat", (DL_FUNC) &_LRMoECPNew_intInvGaussLogYLat, 4},
+    {"_LRMoECPNew_intInvGaussYObs", (DL_FUNC) &_LRMoECPNew_intInvGaussYObs, 4},
+    {"_LRMoECPNew_intInvGaussYLat", (DL_FUNC) &_LRMoECPNew_intInvGaussYLat, 4},
+    {"_LRMoECPNew_intInvGaussInvYObs", (DL_FUNC) &_LRMoECPNew_intInvGaussInvYObs, 4},
+    {"_LRMoECPNew_intInvGaussInvYLat", (DL_FUNC) &_LRMoECPNew_intInvGaussInvYLat, 4},
     {"_LRMoECPNew_XAPlusYZB", (DL_FUNC) &_LRMoECPNew_XAPlusYZB, 5},
     {"_LRMoECPNew_XColMinusY", (DL_FUNC) &_LRMoECPNew_XColMinusY, 2},
     {"_LRMoECPNew_XPlusYColTimesZ", (DL_FUNC) &_LRMoECPNew_XPlusYColTimesZ, 3},

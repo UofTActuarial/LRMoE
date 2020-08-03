@@ -44,35 +44,35 @@ EMMInverseGaussian = function(params.old,
   y.inv.e.obs[!censor.idx, 1] = 1/yl[!censor.idx]
 
   # Conditional expectation of y, log(y) and inv(y): untruncated but cencored case
-  int.y.fcn = function(u, mean.mu, shape.lambda) # u = log(y) for numerical stability
-  {
-    u.dens.log = statmod::dinvgauss(exp(u), mean = mean.mu, shape = shape.lambda, log = TRUE) + u
-    temp = exp(u) * exp(u.dens.log)
-    temp[which(u==Inf)] = 0
-    temp[which(u==-Inf)] = 0
-    temp[which(is.na(temp))] = 0
-    return(temp)
-  }
-
-  int.y.log.fcn = function(u, mean.mu, shape.lambda) # u = log(y) for numerical stability
-  {
-    u.dens.log = statmod::dinvgauss(exp(u), mean = mean.mu, shape = shape.lambda, log = TRUE) + u
-    temp = u * exp(u.dens.log)
-    temp[which(u==Inf)] = 0
-    temp[which(u==-Inf)] = 0
-    temp[which(is.na(temp))] = 0
-    return(temp)
-  }
-
-  int.y.inv.fcn = function(u, mean.mu, shape.lambda) # u = log(y) for numerical stability
-  {
-    u.dens.log = statmod::dinvgauss(exp(u), mean = mean.mu, shape = shape.lambda, log = TRUE) + u
-    temp = exp(-u) * exp(u.dens.log)
-    temp[which(u==Inf)] = 0
-    temp[which(u==-Inf)] = 0
-    temp[which(is.na(temp))] = 0
-    return(temp)
-  }
+  # int.y.fcn = function(u, mean.mu, shape.lambda) # u = log(y) for numerical stability
+  # {
+  #   u.dens.log = statmod::dinvgauss(exp(u), mean = mean.mu, shape = shape.lambda, log = TRUE) + u
+  #   temp = exp(u) * exp(u.dens.log)
+  #   temp[which(u==Inf)] = 0
+  #   temp[which(u==-Inf)] = 0
+  #   temp[which(is.na(temp))] = 0
+  #   return(temp)
+  # }
+  #
+  # int.y.log.fcn = function(u, mean.mu, shape.lambda) # u = log(y) for numerical stability
+  # {
+  #   u.dens.log = statmod::dinvgauss(exp(u), mean = mean.mu, shape = shape.lambda, log = TRUE) + u
+  #   temp = u * exp(u.dens.log)
+  #   temp[which(u==Inf)] = 0
+  #   temp[which(u==-Inf)] = 0
+  #   temp[which(is.na(temp))] = 0
+  #   return(temp)
+  # }
+  #
+  # int.y.inv.fcn = function(u, mean.mu, shape.lambda) # u = log(y) for numerical stability
+  # {
+  #   u.dens.log = statmod::dinvgauss(exp(u), mean = mean.mu, shape = shape.lambda, log = TRUE) + u
+  #   temp = exp(-u) * exp(u.dens.log)
+  #   temp[which(u==Inf)] = 0
+  #   temp[which(u==-Inf)] = 0
+  #   temp[which(is.na(temp))] = 0
+  #   return(temp)
+  # }
 
   # First find unique upper and lower bounds of integration
   y.unique = unique(cbind(yl,yu),MARGIN=1)
@@ -86,29 +86,29 @@ EMMInverseGaussian = function(params.old,
   y.log.e.obs.unique = array(0,dim=c(y.unique.length,1))
   y.inv.e.obs.unique = array(0,dim=c(y.unique.length,1))
 
-  y.e.obs.unique[,1]=
-    mapply(function(x, y) ifelse(x!=y,
-                                 integrate(int.y.fcn, log(x), log(y),
-                                           mean.mu=mean.mu, shape.lambda=shape.lambda,
-                                           rel.tol=.Machine$double.eps^0.5)$value,
-                                 0),
-           yl.unique, yu.unique)
+  y.e.obs.unique[,1]= intInvGaussYObs(mean.mu, shape.lambda, log(yl.unique), log(yu.unique))
+    # mapply(function(x, y) ifelse(x!=y,
+    #                              integrate(int.y.fcn, log(x), log(y),
+    #                                        mean.mu=mean.mu, shape.lambda=shape.lambda,
+    #                                        rel.tol=.Machine$double.eps^0.5)$value,
+    #                              0),
+    #        yl.unique, yu.unique)
 
-  y.log.e.obs.unique[,1]=
-    mapply(function(x, y) ifelse(x!=y,
-                                 integrate(int.y.log.fcn, log(x), log(y),
-                                           mean.mu=mean.mu, shape.lambda=shape.lambda,
-                                           rel.tol=.Machine$double.eps^0.5)$value,
-                                 0),
-           yl.unique, yu.unique)
+  y.log.e.obs.unique[,1]= intInvGaussLogYObs(mean.mu, shape.lambda, log(yl.unique), log(yu.unique))
+    # mapply(function(x, y) ifelse(x!=y,
+    #                              integrate(int.y.log.fcn, log(x), log(y),
+    #                                        mean.mu=mean.mu, shape.lambda=shape.lambda,
+    #                                        rel.tol=.Machine$double.eps^0.5)$value,
+    #                              0),
+    #        yl.unique, yu.unique)
 
-  y.inv.e.obs.unique[,1]=
-    mapply(function(x, y) ifelse(x!=y,
-                                 integrate(int.y.inv.fcn, log(x), log(y),
-                                           mean.mu=mean.mu, shape.lambda=shape.lambda,
-                                           rel.tol=.Machine$double.eps^0.5)$value,
-                                 0),
-           yl.unique, yu.unique)
+  y.inv.e.obs.unique[,1]= intInvGaussInvYObs(mean.mu, shape.lambda, log(yl.unique), log(yu.unique))
+    # mapply(function(x, y) ifelse(x!=y,
+    #                              integrate(int.y.inv.fcn, log(x), log(y),
+    #                                        mean.mu=mean.mu, shape.lambda=shape.lambda,
+    #                                        rel.tol=.Machine$double.eps^0.5)$value,
+    #                              0),
+    #        yl.unique, yu.unique)
 
   # Match to all observations of y
   temp.y.e.obs = temp.y.log.e.obs = temp.y.inv.e.obs = array(0, dim = c(sample.size.n, 1))
@@ -137,47 +137,47 @@ EMMInverseGaussian = function(params.old,
   y.log.e.lat.unique = array(0,dim=c(tn.unique.length,1))
   y.inv.e.lat.unique = array(0,dim=c(tn.unique.length,1))
 
-  y.e.lat.unique[,1]=
-    sapply(tl.unique,
-           function(x) ifelse(x!=0,
-                              integrate(int.y.fcn, -Inf, log(x),
-                                        mean.mu=mean.mu, shape.lambda=shape.lambda,
-                                        rel.tol=.Machine$double.eps^0.5)$value,
-                              0))+
-    sapply(tu.unique,
-           function(x) ifelse(x!=Inf,
-                              integrate(int.y.fcn, log(x), Inf,
-                                        mean.mu=mean.mu, shape.lambda=shape.lambda,
-                                        rel.tol=.Machine$double.eps^0.5)$value,
-                              0))
+  y.e.lat.unique[,1]= intInvGaussYLat(mean.mu, shape.lambda, log(tl.unique), log(tu.unique))
+    # sapply(tl.unique,
+    #        function(x) ifelse(x!=0,
+    #                           integrate(int.y.fcn, -Inf, log(x),
+    #                                     mean.mu=mean.mu, shape.lambda=shape.lambda,
+    #                                     rel.tol=.Machine$double.eps^0.5)$value,
+    #                           0))+
+    # sapply(tu.unique,
+    #        function(x) ifelse(x!=Inf,
+    #                           integrate(int.y.fcn, log(x), Inf,
+    #                                     mean.mu=mean.mu, shape.lambda=shape.lambda,
+    #                                     rel.tol=.Machine$double.eps^0.5)$value,
+    #                           0))
 
-  y.log.e.lat.unique[,1]=
-    sapply(tl.unique,
-           function(x) ifelse(x!=0,
-                              integrate(int.y.log.fcn, -Inf, log(x),
-                                        mean.mu=mean.mu, shape.lambda=shape.lambda,
-                                        rel.tol=.Machine$double.eps^0.5)$value,
-                              0))+
-    sapply(tu.unique,
-           function(x) ifelse(x!=Inf,
-                              integrate(int.y.log.fcn, log(x), Inf,
-                                        mean.mu=mean.mu, shape.lambda=shape.lambda,
-                                        rel.tol=.Machine$double.eps^0.5)$value,
-                              0))
+  y.log.e.lat.unique[,1]= intInvGaussLogYLat(mean.mu, shape.lambda, log(tl.unique), log(tu.unique))
+    # sapply(tl.unique,
+    #        function(x) ifelse(x!=0,
+    #                           integrate(int.y.log.fcn, -Inf, log(x),
+    #                                     mean.mu=mean.mu, shape.lambda=shape.lambda,
+    #                                     rel.tol=.Machine$double.eps^0.5)$value,
+    #                           0))+
+    # sapply(tu.unique,
+    #        function(x) ifelse(x!=Inf,
+    #                           integrate(int.y.log.fcn, log(x), Inf,
+    #                                     mean.mu=mean.mu, shape.lambda=shape.lambda,
+    #                                     rel.tol=.Machine$double.eps^0.5)$value,
+    #                           0))
 
-  y.inv.e.lat.unique[,1]=
-    sapply(tl.unique,
-           function(x) ifelse(x!=0,
-                              integrate(int.y.inv.fcn, -Inf, log(x),
-                                        mean.mu=mean.mu, shape.lambda=shape.lambda,
-                                        rel.tol=.Machine$double.eps^0.5)$value,
-                              0))+
-    sapply(tu.unique,
-           function(x) ifelse(x!=Inf,
-                              integrate(int.y.inv.fcn, log(x), Inf,
-                                        mean.mu=mean.mu, shape.lambda=shape.lambda,
-                                        rel.tol=.Machine$double.eps^0.5)$value,
-                              0))
+  y.inv.e.lat.unique[,1]= intInvGaussInvYLat(mean.mu, shape.lambda, log(tl.unique), log(tu.unique))
+    # sapply(tl.unique,
+    #        function(x) ifelse(x!=0,
+    #                           integrate(int.y.inv.fcn, -Inf, log(x),
+    #                                     mean.mu=mean.mu, shape.lambda=shape.lambda,
+    #                                     rel.tol=.Machine$double.eps^0.5)$value,
+    #                           0))+
+    # sapply(tu.unique,
+    #        function(x) ifelse(x!=Inf,
+    #                           integrate(int.y.inv.fcn, log(x), Inf,
+    #                                     mean.mu=mean.mu, shape.lambda=shape.lambda,
+    #                                     rel.tol=.Machine$double.eps^0.5)$value,
+    #                           0))
 
   # Match to all observations of y
   temp.y.e.lat = temp.y.log.e.lat = temp.y.inv.e.lat = array(0, dim = c(sample.size.n, 1))
@@ -205,44 +205,49 @@ EMMInverseGaussian = function(params.old,
   # Closed-form solution exists, if there is no penalty
   mu.update = function(z.obs.j, z.lat.j, k.e, y.e.obs.j, y.e.lat.j)
   {
-    sum.one = sweep(matrix(z.obs.j), 1,
-                    sweep(matrix(k.e), 1, matrix(z.lat.j), FUN = "*", check.margin = FALSE),
-                    FUN = "+", check.margin = FALSE)
+    sum.one = XPlusYZ(z.obs.j, z.lat.j, k.e)
+      # sweep(matrix(z.obs.j), 1,
+      #               sweep(matrix(k.e), 1, matrix(z.lat.j), FUN = "*", check.margin = FALSE),
+      #               FUN = "+", check.margin = FALSE)
     # z.obs.j + k.e * z.lat.j
-    sum.two = sweep(
-      sweep(matrix(z.obs.j), 1, matrix(y.e.obs.j), FUN = "*", check.margin = FALSE), 1,
-      sweep(matrix(k.e), 1,
-            sweep(matrix(z.lat.j), 1, matrix(y.e.lat.j), FUN = "*", check.margin = FALSE),
-            FUN = "*", check.margin = FALSE),
-      FUN = "+", check.margin = FALSE)
+    sum.two = XAPlusYZB(z.obs.j, y.e.obs.j, z.lat.j, k.e, y.e.lat.j)
+      # sweep(
+      # sweep(matrix(z.obs.j), 1, matrix(y.e.obs.j), FUN = "*", check.margin = FALSE), 1,
+      # sweep(matrix(k.e), 1,
+      #       sweep(matrix(z.lat.j), 1, matrix(y.e.lat.j), FUN = "*", check.margin = FALSE),
+      #       FUN = "*", check.margin = FALSE),
+      # FUN = "+", check.margin = FALSE)
     # z.obs.j * y.e.obs.j + k.e * z.lat.j * y.e.lat.j
 
-    # return( sum(sum.two)/sum(sum.one) )
-    return( apply(sum.two, 2, FUN = "sum")/apply(sum.one, 2, FUN = "sum") )
+    return( sum(sum.two)/sum(sum.one) )
+    # return( apply(sum.two, 2, FUN = "sum")/apply(sum.one, 2, FUN = "sum") )
   }
 
   lambda.mu = function(mean.mu, z.obs.j, z.lat.j, k.e, y.e.obs.j, y.e.lat.j, y.inv.e.obs.j, y.inv.e.lat.j)
   {
-    sum.one = sweep(matrix(z.obs.j), 1,
-                    sweep(matrix(k.e), 1, matrix(z.lat.j), FUN = "*", check.margin = FALSE),
-                    FUN = "+", check.margin = FALSE)
+    sum.one = XPlusYZ(z.obs.j, z.lat.j, k.e)
+      # sweep(matrix(z.obs.j), 1,
+      #               sweep(matrix(k.e), 1, matrix(z.lat.j), FUN = "*", check.margin = FALSE),
+      #               FUN = "+", check.margin = FALSE)
     # z.obs.j + k.e * z.lat.j
-    sum.two = sweep(
-      sweep(matrix(z.obs.j), 1, matrix(y.e.obs.j), FUN = "*", check.margin = FALSE), 1,
-      sweep(matrix(k.e), 1,
-            sweep(matrix(z.lat.j), 1, matrix(y.e.lat.j), FUN = "*", check.margin = FALSE),
-            FUN = "*", check.margin = FALSE),
-      FUN = "+", check.margin = FALSE)
+    sum.two = XAPlusYZB(z.obs.j, y.e.obs.j, z.lat.j, k.e, y.e.lat.j)
+      # sweep(
+      # sweep(matrix(z.obs.j), 1, matrix(y.e.obs.j), FUN = "*", check.margin = FALSE), 1,
+      # sweep(matrix(k.e), 1,
+      #       sweep(matrix(z.lat.j), 1, matrix(y.e.lat.j), FUN = "*", check.margin = FALSE),
+      #       FUN = "*", check.margin = FALSE),
+      # FUN = "+", check.margin = FALSE)
     # z.obs.j * y.e.obs.j + k.e * z.lat.j * y.e.lat.j
-    sum.three = sweep(
-      sweep(matrix(z.obs.j), 1, matrix(y.inv.e.obs.j), FUN = "*", check.margin = FALSE), 1,
-      sweep(matrix(k.e), 1,
-            sweep(matrix(z.lat.j), 1, matrix(y.inv.e.lat.j), FUN = "*", check.margin = FALSE),
-            FUN = "*", check.margin = FALSE),
-      FUN = "+", check.margin = FALSE)
+    sum.three = XAPlusYZB(z.obs.j, y.inv.e.obs.j, z.lat.j, k.e, y.inv.e.lat.j)
+      # sweep(
+      # sweep(matrix(z.obs.j), 1, matrix(y.inv.e.obs.j), FUN = "*", check.margin = FALSE), 1,
+      # sweep(matrix(k.e), 1,
+      #       sweep(matrix(z.lat.j), 1, matrix(y.inv.e.lat.j), FUN = "*", check.margin = FALSE),
+      #       FUN = "*", check.margin = FALSE),
+      # FUN = "+", check.margin = FALSE)
     # z.obs.j * y.inv.e.obs.j + k.e * z.lat.j * y.inv.e.lat.j
-    shape.lambda.temp = apply(sum.one, 2, FUN = "sum") / ( (1/(mean.mu^2))*apply(sum.two, 2, FUN = "sum") - (2/(mean.mu))*apply(sum.one, 2, FUN = "sum") + apply(sum.three, 2, FUN = "sum") )
-    # sum(sum.one) / ( (1/(mean.mu^2))*sum(sum.two) - (2/(mean.mu))*sum(sum.one) + sum(sum.three) )
+    shape.lambda.temp = sum(sum.one) / ( (1/(mean.mu^2))*sum(sum.two) - (2/(mean.mu))*sum(sum.one) + sum(sum.three) )
+      # apply(sum.one, 2, FUN = "sum") / ( (1/(mean.mu^2))*apply(sum.two, 2, FUN = "sum") - (2/(mean.mu))*apply(sum.one, 2, FUN = "sum") + apply(sum.three, 2, FUN = "sum") )
 
     return(shape.lambda.temp)
   }

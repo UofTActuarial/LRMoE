@@ -1,58 +1,128 @@
-context("EMMGamma")
-library(Rcpp)
+context("EMMInverseGaussian")
+# library(Rcpp)
 
-# m = 10
-# theta = 10
-# Q.y.log = function(u, m, theta) # Change of variable: u = log(y) for numerical stability
+# mu = 15
+# lambda = 10
+# int.y.fcn = function(u, mean.mu, shape.lambda) # u = log(y) for numerical stability
 # {
-#   dens.u.log = dgamma(exp(u), shape = m, scale = theta, log = TRUE) + u
-#   return( u *exp(dens.u.log))
+#   u.dens.log = statmod::dinvgauss(exp(u), mean = mean.mu, shape = shape.lambda, log = TRUE) + u
+#   temp = exp(u) * exp(u.dens.log)
+#   temp[which(u==Inf)] = 0
+#   temp[which(u==-Inf)] = 0
+#   temp[which(is.na(temp))] = 0
+#   return(temp)
 # }
 #
-# yl = rgamma(10000, shape = m, scale = theta)
-# yu = yl + rgamma(10000, shape = m, scale = theta)
+# int.y.log.fcn = function(u, mean.mu, shape.lambda) # u = log(y) for numerical stability
+# {
+#   u.dens.log = statmod::dinvgauss(exp(u), mean = mean.mu, shape = shape.lambda, log = TRUE) + u
+#   temp = u * exp(u.dens.log)
+#   temp[which(u==Inf)] = 0
+#   temp[which(u==-Inf)] = 0
+#   temp[which(is.na(temp))] = 0
+#   return(temp)
+# }
+#
+# int.y.inv.fcn = function(u, mean.mu, shape.lambda) # u = log(y) for numerical stability
+# {
+#   u.dens.log = statmod::dinvgauss(exp(u), mean = mean.mu, shape = shape.lambda, log = TRUE) + u
+#   temp = exp(-u) * exp(u.dens.log)
+#   temp[which(u==Inf)] = 0
+#   temp[which(u==-Inf)] = 0
+#   temp[which(is.na(temp))] = 0
+#   return(temp)
+# }
+#
+# yl = rinvgauss(10000, mean = mu, shape = lambda)
+# yu = yl + rinvgauss(10000, mean = mu, shape = lambda)
 #
 # yl[1:1000] = 0
 # yu[1001:2000] = Inf
 # yl[2001:3000] = yu[2001:3000]
 #
 # temp1 = mapply(function(x, y) ifelse(x!=y,
-#                                      integrate(Q.y.log, log(x), log(y),
-#                                                m = m, theta = theta,
+#                                      integrate(int.y.log.fcn, log(x), log(y),
+#                                                mean.mu=mu, shape.lambda=lambda,
 #                                                rel.tol=.Machine$double.eps^0.5)$value,
 #                                      0),
 #                yl, yu)
-# temp2 = intGammaLogYObs(m, theta, log(yl), log(yu))
+# temp2 = intInvGaussLogYObs(mu, lambda, log(yl), log(yu))
 #
 # temp3 = sapply(yl,
 #                function(x) ifelse(x!=0,
-#                                   integrate(Q.y.log, -Inf, log(x),
-#                                             m = m, theta = theta,
+#                                   integrate(int.y.log.fcn, -Inf, log(x),
+#                                             mean.mu=mu, shape.lambda=lambda,
 #                                             rel.tol=.Machine$double.eps^0.5)$value,
 #                                   0))+
 #         sapply(yu,
 #                function(x) ifelse(x!=Inf,
-#                                   integrate(Q.y.log, log(x), Inf,
-#                                             m = m, theta = theta,
+#                                   integrate(int.y.log.fcn, log(x), Inf,
+#                                             mean.mu=mu, shape.lambda=lambda,
 #                                             rel.tol=.Machine$double.eps^0.5)$value,
 #                                   0))
+# temp4 = intInvGaussLogYLat(mu, lambda, log(yl), log(yu))
 #
-# temp4 = intGammaLogYLat(m, theta, log(yl), log(yu))
+# temp5 = mapply(function(x, y) ifelse(x!=y,
+#                                     integrate(int.y.fcn, log(x), log(y),
+#                                               mean.mu=mu, shape.lambda=lambda,
+#                                               rel.tol=.Machine$double.eps^0.5)$value,
+#                                     0),
+#               yl, yu)
+# temp6 = intInvGaussYObs(mu, lambda, log(yl), log(yu))
 #
+# temp7 = sapply(yl,
+#                function(x) ifelse(x!=0,
+#                                   integrate(int.y.fcn, -Inf, log(x),
+#                                             mean.mu=mu, shape.lambda=lambda,
+#                                             rel.tol=.Machine$double.eps^0.5)$value,
+#                                   0))+
+#         sapply(yu,
+#                function(x) ifelse(x!=Inf,
+#                                   integrate(int.y.fcn, log(x), Inf,
+#                                             mean.mu=mu, shape.lambda=lambda,
+#                                             rel.tol=.Machine$double.eps^0.5)$value,
+#                                   0))
+# temp8 = intInvGaussYLat(mu, lambda, log(yl), log(yu))
 #
-# test_that("EMMGamma", {
+# temp9 = mapply(function(x, y) ifelse(x!=y,
+#                                      integrate(int.y.inv.fcn, log(x), log(y),
+#                                                mean.mu=mu, shape.lambda=lambda,
+#                                                rel.tol=.Machine$double.eps^0.5)$value,
+#                                      0),
+#                yl, yu)
+# temp10 = intInvGaussInvYObs(mu, lambda, log(yl), log(yu))
+#
+# temp11 = sapply(yl,
+#                 function(x) ifelse(x!=0,
+#                                    integrate(int.y.inv.fcn, -Inf, log(x),
+#                                              mean.mu=mu, shape.lambda=lambda,
+#                                              rel.tol=.Machine$double.eps^0.5)$value,
+#                                    0))+
+#         sapply(yu,
+#                function(x) ifelse(x!=Inf,
+#                                   integrate(int.y.inv.fcn, log(x), Inf,
+#                                             mean.mu=mu, shape.lambda=lambda,
+#                                             rel.tol=.Machine$double.eps^0.5)$value,
+#                                   0))
+# temp12 = intInvGaussInvYLat(mu, lambda, log(yl), log(yu))
+#
+# test_that("EMMInverseGaussian", {
 #   expect_equal(temp1, temp2)
 #   expect_equal(temp3, temp4)
+#   expect_equal(temp5, temp6)
+#   expect_equal(temp7, temp8)
+#   expect_equal(temp9, temp10)
+#   expect_equal(temp11, temp12)
 # })
 
 # library(microbenchmark)
 # bench = microbenchmark(
 #
-#   intGammaLogYObs(m, theta, log(yl), log(yu)),
+#   intInvGaussLogYObs(mu, lambda, log(yl), log(yu)),
 #
 #   mapply(function(x, y) ifelse(x!=y,
-#                                integrate(Q.y.log, log(x), log(y),
-#                                          m = m, theta = theta,
+#                                integrate(int.y.log.fcn, log(x), log(y),
+#                                          mean.mu=mu, shape.lambda=lambda,
 #                                          rel.tol=.Machine$double.eps^0.5)$value,
 #                                0),
 #          yl, yu)
@@ -60,25 +130,28 @@ library(Rcpp)
 #
 # library(ggplot2)
 # autoplot(bench)
-#
+
+# library(microbenchmark)
 # bench = microbenchmark(
 #
-#   intGammaLogYLat(m, theta, log(yl), log(yu)),
+#   intInvGaussLogYLat(mu, lambda, log(yl), log(yu)),
 #
 #   sapply(yl,
 #          function(x) ifelse(x!=0,
-#                             integrate(Q.y.log, -Inf, log(x),
-#                                       m = m, theta = theta,
+#                             integrate(int.y.log.fcn, -Inf, log(x),
+#                                       mean.mu=mu, shape.lambda=lambda,
 #                                       rel.tol=.Machine$double.eps^0.5)$value,
 #                             0))+
 #     sapply(yu,
 #            function(x) ifelse(x!=Inf,
-#                               integrate(Q.y.log, log(x), Inf,
-#                                         m = m, theta = theta,
+#                               integrate(int.y.log.fcn, log(x), Inf,
+#                                         mean.mu=mu, shape.lambda=lambda,
 #                                         rel.tol=.Machine$double.eps^0.5)$value,
-#                               0))
+#                               0)),
+#   times = 10
 # )
 #
+# library(ggplot2)
 # autoplot(bench)
 
 # Very good improvement!
@@ -131,4 +204,6 @@ library(Rcpp)
 #                    nrow = 1, byrow = T)
 # params.init = list(list(c(15, 15), c(20, 8)))
 #
+#
 # modelfit = LRMoEFit(YY, X, 2, comp.dist, alpha.init, zero.init, params.init)
+#
