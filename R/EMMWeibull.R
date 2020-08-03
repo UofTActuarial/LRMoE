@@ -37,16 +37,16 @@ EMMWeibull = function(params.old,
   y.log.e.obs[!censor.idx, 1] = log(yl[!censor.idx])
 
   # Function to numerically integrate for censored and truncated case
-  int.y.log.fcn = function(u, shape.k.j, scale.lambda.j) # u = log(y) for numerical stability
-  {
-    u.density.log = stats::dweibull(exp(u), shape = shape.k.j, scale = scale.lambda.j, log = TRUE) + u
-    # Numerical underflow of dweibull for small u, and certain set of parameters. e.g. (4, 35)
-    temp = u*exp(u.density.log)
-    temp[which(u==Inf)] = 0
-    temp[which(u==-Inf)] = 0
-    temp[which(is.na(temp))] = 0
-    return(temp)
-  }
+  # int.y.log.fcn = function(u, shape.k.j, scale.lambda.j) # u = log(y) for numerical stability
+  # {
+  #   u.density.log = stats::dweibull(exp(u), shape = shape.k.j, scale = scale.lambda.j, log = TRUE) + u
+  #   # Numerical underflow of dweibull for small u, and certain set of parameters. e.g. (4, 35)
+  #   temp = u*exp(u.density.log)
+  #   temp[which(u==Inf)] = 0
+  #   temp[which(u==-Inf)] = 0
+  #   temp[which(is.na(temp))] = 0
+  #   return(temp)
+  # }
 
   # First find unique upper and lower bounds of integration: untruncated case
   y.unique = unique(cbind(yl,yu),MARGIN=1)
@@ -144,12 +144,16 @@ EMMWeibull = function(params.old,
     y.pow.e.obs[!censor.idx] = (yu[!censor.idx])^(shape.k.new)
 
     # Untrencated and uncensored case
-    y.pow.e.obs[censor.idx] = exp(-expert.ll[censor.idx]) * scale.lambda.old^(shape.k.new) *
-      (gammainc((shape.k.old+shape.k.new)/shape.k.old, (yl[censor.idx]/scale.lambda.old)^(shape.k.old)) -
-         gammainc((shape.k.old+shape.k.new)/shape.k.old, (yu[censor.idx]/scale.lambda.old)^(shape.k.old)) )
+    y.pow.e.obs[censor.idx] = exp(-expert.ll[censor.idx]) *
+      # intWeibullPowYObs(shape.k.old, scale.lambda.old, shape.k.new, yl[censor.idx], yu[censor.idx])
+      scale.lambda.old^(shape.k.new) *
+        (gammainc((shape.k.old+shape.k.new)/shape.k.old, (yl[censor.idx]/scale.lambda.old)^(shape.k.old)) -
+           gammainc((shape.k.old+shape.k.new)/shape.k.old, (yu[censor.idx]/scale.lambda.old)^(shape.k.old)) )
 
     # Truncated case
-    y.pow.e.lat = exp(-expert.tn.bar) * scale.lambda.old^(shape.k.new) *
+    y.pow.e.lat = exp(-expert.tn.bar) *
+      # intWeibullPowYLat(shape.k.old, scale.lambda.old, shape.k.new, tl, tu)
+      scale.lambda.old^(shape.k.new) *
       (gammainc((shape.k.old+shape.k.new)/shape.k.old, (0 /scale.lambda.old)^(shape.k.old)) -
          gammainc((shape.k.old+shape.k.new)/shape.k.old, (tl/scale.lambda.old)^(shape.k.old)) +
          gammainc((shape.k.old+shape.k.new)/shape.k.old, (tu/scale.lambda.old)^(shape.k.old)) -
@@ -224,12 +228,16 @@ EMMWeibull = function(params.old,
   y.pow.e.obs[!censor.idx] = (yu[!censor.idx])^(shape.k.new)
 
   # Untrencated and uncensored case
-  y.pow.e.obs[censor.idx] = exp(-expert.ll[censor.idx]) * scale.lambda.old^(shape.k.new) *
+  y.pow.e.obs[censor.idx] = exp(-expert.ll[censor.idx]) *
+    # intWeibullPowYObs(shape.k.old, scale.lambda.old, shape.k.new, yl[censor.idx], yu[censor.idx])
+    scale.lambda.old^(shape.k.new) *
     (gammainc((shape.k.old+shape.k.new)/shape.k.old, (yl[censor.idx]/scale.lambda.old)^(shape.k.old)) -
        gammainc((shape.k.old+shape.k.new)/shape.k.old, (yu[censor.idx]/scale.lambda.old)^(shape.k.old)) )
 
   # Truncated case
-  y.pow.e.lat = exp(-expert.tn.bar) * scale.lambda.old^(shape.k.new) *
+  y.pow.e.lat = exp(-expert.tn.bar) *
+    # intWeibullPowYLat(shape.k.old, scale.lambda.old, shape.k.new, tl, tu)
+    scale.lambda.old^(shape.k.new) *
     (gammainc((shape.k.old+shape.k.new)/shape.k.old, (0 /scale.lambda.old)^(shape.k.old)) -
        gammainc((shape.k.old+shape.k.new)/shape.k.old, (tl/scale.lambda.old)^(shape.k.old)) +
        gammainc((shape.k.old+shape.k.new)/shape.k.old, (tu/scale.lambda.old)^(shape.k.old)) -
@@ -246,6 +254,11 @@ EMMWeibull = function(params.old,
   # Return results
   params.new[1] = shape.k.new
   params.new[2] = scale.lambda.new
+
+  if(is.nan(sum(params.new))){
+    params.new = params.old
+  }
+
   return(params.new)
 
 }

@@ -1,5 +1,6 @@
 context("EMMWeibull")
 # library(Rcpp)
+library(expint)
 
 k = 3
 lambda = 10
@@ -33,24 +34,26 @@ temp1 = mapply(function(x, y) ifelse(x!=y,
                yl, yu)
 temp2 = intWeibullLogYObs(k, lambda, (yl), (yu))
 
-# temp3 = sapply(yl,
-#                function(x) ifelse(x!=0,
-#                                   integrate(int.y.log.fcn, -Inf, (x),
-#                                             shape.k.j=k, scale.lambda.j = lambda,
-#                                             rel.tol=.Machine$double.eps^0.5)$value,
-#                                   0))+
-#   sapply(yu,
-#          function(x) ifelse(x!=Inf,
-#                             integrate(int.y.log.fcn, (x), stats::qweibull(1-1e-09, shape = k, scale = lambda, log.p = F), # Inf is a problem
-#                                       shape.k.j=k, scale.lambda.j = lambda,
-#                                       rel.tol=.Machine$double.eps^0.5)$value,
-#                             0))
-# temp4 = intWeibullLogYLat(k, lambda, (yl), (yu))
+k1 = 1
+
+temp3 = lambda^(k1) *(gammainc((k+k1)/k, (yl/lambda)^(k)) -
+           gammainc((k+k1)/k, (yu/lambda)^(k)) )
+
+temp4 = intWeibullPowYObs(k, lambda, k1, (yl), (yu))
+
+temp5 = lambda^(k1) *
+  (gammainc((k+k1)/k, (0 /lambda)^(k)) -
+     gammainc((k+k1)/k, (yl/lambda)^(k)) +
+     gammainc((k+k1)/k, (yu/lambda)^(k)) -
+     gammainc((k+k1)/k, (Inf/lambda)^(k)))
+
+temp6 = intWeibullPowYLat(k, lambda, k1, (yl), (yu))
 
 
 test_that("EMMWeibull", {
   expect_equal(temp1, temp2)
-  # expect_equal(temp3, temp4)
+  expect_equal(temp3, temp4)
+  expect_equal(temp5, temp6)
 })
 
 # library(microbenchmark)

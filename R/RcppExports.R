@@ -51,6 +51,16 @@ intWeibullLogYLat <- function(k_, lambda_, lower_, upper_) {
     .Call(`_LRMoECPNew_intWeibullLogYLat`, k_, lambda_, lower_, upper_)
 }
 
+#' @export
+intWeibullPowYObs <- function(k_, lambda_, p_, lower_, upper_) {
+    .Call(`_LRMoECPNew_intWeibullPowYObs`, k_, lambda_, p_, lower_, upper_)
+}
+
+#' @export
+intWeibullPowYLat <- function(k_, lambda_, p_, lower_, upper_) {
+    .Call(`_LRMoECPNew_intWeibullPowYLat`, k_, lambda_, p_, lower_, upper_)
+}
+
 XAPlusYZB <- function(x, a, y, z, b) {
     .Call(`_LRMoECPNew_XAPlusYZB`, x, a, y, z, b)
 }
