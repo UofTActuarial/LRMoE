@@ -43,7 +43,7 @@ Rcpp::List intInvGaussLogY(double mu, double lambda, double lower, double upper)
   );
 }
 
-//' @export
+// //' @export
 // [[Rcpp::export]]
 SEXP intInvGaussLogYObs(SEXP mu_, SEXP lambda_, SEXP lower_, SEXP upper_)
 {
@@ -61,7 +61,7 @@ SEXP intInvGaussLogYObs(SEXP mu_, SEXP lambda_, SEXP lower_, SEXP upper_)
   return result;
 }
 
-//' @export
+// //' @export
 // [[Rcpp::export]]
 SEXP intInvGaussLogYLat(SEXP mu_, SEXP lambda_, SEXP lower_, SEXP upper_)
 {
