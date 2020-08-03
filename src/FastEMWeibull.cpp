@@ -51,7 +51,7 @@ Rcpp::List intWeibullLogY(double k, double lambda, double lower, double upper)
   );
 }
 
-//' @export
+////' @export
 // [[Rcpp::export]]
 SEXP intWeibullLogYObs(SEXP k_, SEXP lambda_, SEXP lower_, SEXP upper_)
 {
@@ -69,7 +69,7 @@ SEXP intWeibullLogYObs(SEXP k_, SEXP lambda_, SEXP lower_, SEXP upper_)
   return result;
 }
 
-//' @export
+////' @export
 // [[Rcpp::export]]
 SEXP intWeibullLogYLat(SEXP k_, SEXP lambda_, SEXP lower_, SEXP upper_)
 {
@@ -135,7 +135,7 @@ Rcpp::List intWeibullPowY(double k, double lambda, double p, double lower, doubl
   );
 }
 
-//' @export
+////' @export
 // [[Rcpp::export]]
 SEXP intWeibullPowYObs(SEXP k_, SEXP lambda_, SEXP p_, SEXP lower_, SEXP upper_)
 {
@@ -154,7 +154,7 @@ SEXP intWeibullPowYObs(SEXP k_, SEXP lambda_, SEXP p_, SEXP lower_, SEXP upper_)
   return result;
 }
 
-//' @export
+////' @export
 // [[Rcpp::export]]
 SEXP intWeibullPowYLat(SEXP k_, SEXP lambda_, SEXP p_, SEXP lower_, SEXP upper_)
 {

@@ -255,9 +255,9 @@ EMMWeibull = function(params.old,
   params.new[1] = shape.k.new
   params.new[2] = scale.lambda.new
 
-  if(is.nan(sum(params.new))){
-    params.new = params.old
-  }
+  # if(is.nan(sum(params.new))){
+  #   params.new = params.old
+  # }
 
   return(params.new)
 
