@@ -31,6 +31,12 @@ ExpertWeibull = function(tl, yl, yu, tu, shape.k, scale.lambda)
   expert.ll[censor.idx,1] = prob.log.yu + log1mexp(prob.log.yu - prob.log.yl) # likelihood of censored interval: some easy algebra
   expert.ll[!censor.idx,1] = stats::dweibull(yu[!censor.idx], shape = shape.k, scale = scale.lambda, log = TRUE) # exact likelihood
 
+  ###################################################################
+  # Deal with numerical underflow: prob.log.yu and prob.log.yl can both be -Inf
+  # NA.idx = which(is.na(expert.ll[,j]))
+  expert.ll[which(is.na(expert.ll[,1])), 1] = -Inf
+  ###################################################################
+
   # Compute loglikelihood for expert j, then for truncation limits t
   prob.log.tu = stats::pweibull(tu, shape = shape.k, scale = scale.lambda, lower.tail = TRUE, log.p = TRUE)
   prob.log.tl = stats::pweibull(tl, shape = shape.k, scale = scale.lambda, lower.tail = TRUE, log.p = TRUE)
