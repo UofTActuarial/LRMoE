@@ -32,29 +32,29 @@ EMMPoisson = function(params.old,
   y.e.obs[!censor.idx, 1] = yl[!censor.idx]
 
   # Conditional expectation of y: untruncated but cencored case
-  int.y.fcn = function(lower, upper, mean.theta.j)
-  {
-    lower.bound = ceiling(lower)
-    upper.bound = floor(upper)
-
-    if (upper!=Inf) {
-      y.series = c((lower.bound):(upper.bound))
-      dens.series = dpois(y.series, mean.theta.j, log = FALSE)
-      result = sum(y.series * dens.series)
-    }else{
-      if(lower.bound<=1)
-      {
-        y.series = c(0)
-      }else
-      {
-        y.series = c((0):(lower.bound-1))
-      }
-      dens.series = dpois(y.series, mean.theta.j, log = FALSE)
-      result = mean.theta.j - sum(y.series * dens.series)
-    }
-
-    return(sum(result))
-  }
+  # int.y.fcn = function(lower, upper, mean.theta.j)
+  # {
+  #   lower.bound = ceiling(lower)
+  #   upper.bound = floor(upper)
+  #
+  #   if (upper!=Inf) {
+  #     y.series = c((lower.bound):(upper.bound))
+  #     dens.series = dpois(y.series, mean.theta.j, log = FALSE)
+  #     result = sum(y.series * dens.series)
+  #   }else{
+  #     if(lower.bound<=1)
+  #     {
+  #       y.series = c(0)
+  #     }else
+  #     {
+  #       y.series = c((0):(lower.bound-1))
+  #     }
+  #     dens.series = dpois(y.series, mean.theta.j, log = FALSE)
+  #     result = mean.theta.j - sum(y.series * dens.series)
+  #   }
+  #
+  #   return(sum(result))
+  # }
 
   # First find unique upper and lower bounds of integration
   y.unique = unique(cbind(yl,yu),MARGIN=1)
