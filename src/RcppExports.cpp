@@ -210,6 +210,45 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// sumPoissonY
+double sumPoissonY(double mu, double lower_, double upper_);
+RcppExport SEXP _LRMoECPNew_sumPoissonY(SEXP muSEXP, SEXP lower_SEXP, SEXP upper_SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< double >::type mu(muSEXP);
+    Rcpp::traits::input_parameter< double >::type lower_(lower_SEXP);
+    Rcpp::traits::input_parameter< double >::type upper_(upper_SEXP);
+    rcpp_result_gen = Rcpp::wrap(sumPoissonY(mu, lower_, upper_));
+    return rcpp_result_gen;
+END_RCPP
+}
+// sumPoissonYObs
+SEXP sumPoissonYObs(SEXP mu_, SEXP lower_, SEXP upper_);
+RcppExport SEXP _LRMoECPNew_sumPoissonYObs(SEXP mu_SEXP, SEXP lower_SEXP, SEXP upper_SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< SEXP >::type mu_(mu_SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type lower_(lower_SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type upper_(upper_SEXP);
+    rcpp_result_gen = Rcpp::wrap(sumPoissonYObs(mu_, lower_, upper_));
+    return rcpp_result_gen;
+END_RCPP
+}
+// sumPoissonYLat
+SEXP sumPoissonYLat(SEXP mu_, SEXP lower_, SEXP upper_);
+RcppExport SEXP _LRMoECPNew_sumPoissonYLat(SEXP mu_SEXP, SEXP lower_SEXP, SEXP upper_SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< SEXP >::type mu_(mu_SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type lower_(lower_SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type upper_(upper_SEXP);
+    rcpp_result_gen = Rcpp::wrap(sumPoissonYLat(mu_, lower_, upper_));
+    return rcpp_result_gen;
+END_RCPP
+}
 // intWeibullLogYObs
 SEXP intWeibullLogYObs(SEXP k_, SEXP lambda_, SEXP lower_, SEXP upper_);
 RcppExport SEXP _LRMoECPNew_intWeibullLogYObs(SEXP k_SEXP, SEXP lambda_SEXP, SEXP lower_SEXP, SEXP upper_SEXP) {
@@ -337,6 +376,9 @@ static const R_CallMethodDef CallEntries[] = {
     {"_LRMoECPNew_intInvGaussYLat", (DL_FUNC) &_LRMoECPNew_intInvGaussYLat, 4},
     {"_LRMoECPNew_intInvGaussInvYObs", (DL_FUNC) &_LRMoECPNew_intInvGaussInvYObs, 4},
     {"_LRMoECPNew_intInvGaussInvYLat", (DL_FUNC) &_LRMoECPNew_intInvGaussInvYLat, 4},
+    {"_LRMoECPNew_sumPoissonY", (DL_FUNC) &_LRMoECPNew_sumPoissonY, 3},
+    {"_LRMoECPNew_sumPoissonYObs", (DL_FUNC) &_LRMoECPNew_sumPoissonYObs, 3},
+    {"_LRMoECPNew_sumPoissonYLat", (DL_FUNC) &_LRMoECPNew_sumPoissonYLat, 3},
     {"_LRMoECPNew_intWeibullLogYObs", (DL_FUNC) &_LRMoECPNew_intWeibullLogYObs, 4},
     {"_LRMoECPNew_intWeibullLogYLat", (DL_FUNC) &_LRMoECPNew_intWeibullLogYLat, 4},
     {"_LRMoECPNew_intWeibullPowYObs", (DL_FUNC) &_LRMoECPNew_intWeibullPowYObs, 5},

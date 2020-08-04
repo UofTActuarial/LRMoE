@@ -57,6 +57,18 @@ intInvGaussInvYLat <- function(mu_, lambda_, lower_, upper_) {
     .Call(`_LRMoECPNew_intInvGaussInvYLat`, mu_, lambda_, lower_, upper_)
 }
 
+sumPoissonY <- function(mu, lower_, upper_) {
+    .Call(`_LRMoECPNew_sumPoissonY`, mu, lower_, upper_)
+}
+
+sumPoissonYObs <- function(mu_, lower_, upper_) {
+    .Call(`_LRMoECPNew_sumPoissonYObs`, mu_, lower_, upper_)
+}
+
+sumPoissonYLat <- function(mu_, lower_, upper_) {
+    .Call(`_LRMoECPNew_sumPoissonYLat`, mu_, lower_, upper_)
+}
+
 intWeibullLogYObs <- function(k_, lambda_, lower_, upper_) {
     .Call(`_LRMoECPNew_intWeibullLogYObs`, k_, lambda_, lower_, upper_)
 }
