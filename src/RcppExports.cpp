@@ -34,6 +34,48 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// sumBinomialY
+double sumBinomialY(double n, double p, double lower_, double upper_);
+RcppExport SEXP _LRMoECPNew_sumBinomialY(SEXP nSEXP, SEXP pSEXP, SEXP lower_SEXP, SEXP upper_SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< double >::type n(nSEXP);
+    Rcpp::traits::input_parameter< double >::type p(pSEXP);
+    Rcpp::traits::input_parameter< double >::type lower_(lower_SEXP);
+    Rcpp::traits::input_parameter< double >::type upper_(upper_SEXP);
+    rcpp_result_gen = Rcpp::wrap(sumBinomialY(n, p, lower_, upper_));
+    return rcpp_result_gen;
+END_RCPP
+}
+// sumBinomialYObs
+SEXP sumBinomialYObs(SEXP n_, SEXP p_, SEXP lower_, SEXP upper_);
+RcppExport SEXP _LRMoECPNew_sumBinomialYObs(SEXP n_SEXP, SEXP p_SEXP, SEXP lower_SEXP, SEXP upper_SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< SEXP >::type n_(n_SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type p_(p_SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type lower_(lower_SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type upper_(upper_SEXP);
+    rcpp_result_gen = Rcpp::wrap(sumBinomialYObs(n_, p_, lower_, upper_));
+    return rcpp_result_gen;
+END_RCPP
+}
+// sumBinomialYLat
+SEXP sumBinomialYLat(SEXP n_, SEXP p_, SEXP lower_, SEXP upper_);
+RcppExport SEXP _LRMoECPNew_sumBinomialYLat(SEXP n_SEXP, SEXP p_SEXP, SEXP lower_SEXP, SEXP upper_SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< SEXP >::type n_(n_SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type p_(p_SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type lower_(lower_SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type upper_(upper_SEXP);
+    rcpp_result_gen = Rcpp::wrap(sumBinomialYLat(n_, p_, lower_, upper_));
+    return rcpp_result_gen;
+END_RCPP
+}
 // intBurrLogYObs
 SEXP intBurrLogYObs(SEXP k_, SEXP c_, SEXP lambda_, SEXP lower_, SEXP upper_);
 RcppExport SEXP _LRMoECPNew_intBurrLogYObs(SEXP k_SEXP, SEXP c_SEXP, SEXP lambda_SEXP, SEXP lower_SEXP, SEXP upper_SEXP) {
@@ -364,6 +406,9 @@ END_RCPP
 static const R_CallMethodDef CallEntries[] = {
     {"_LRMoECPNew_EMalphadQ", (DL_FUNC) &_LRMoECPNew_EMalphadQ, 4},
     {"_LRMoECPNew_EMalphadQ2", (DL_FUNC) &_LRMoECPNew_EMalphadQ2, 4},
+    {"_LRMoECPNew_sumBinomialY", (DL_FUNC) &_LRMoECPNew_sumBinomialY, 4},
+    {"_LRMoECPNew_sumBinomialYObs", (DL_FUNC) &_LRMoECPNew_sumBinomialYObs, 4},
+    {"_LRMoECPNew_sumBinomialYLat", (DL_FUNC) &_LRMoECPNew_sumBinomialYLat, 4},
     {"_LRMoECPNew_intBurrLogYObs", (DL_FUNC) &_LRMoECPNew_intBurrLogYObs, 5},
     {"_LRMoECPNew_intBurrLogYLat", (DL_FUNC) &_LRMoECPNew_intBurrLogYLat, 5},
     {"_LRMoECPNew_intBurrPolYObs", (DL_FUNC) &_LRMoECPNew_intBurrPolYObs, 7},

@@ -33,29 +33,29 @@ EMMBinomial = function(params.old,
   y.e.obs[!censor.idx, 1] = yl[!censor.idx]
 
   # Conditional expectation of y: untruncated but cencored case
-  int.y.fcn = function(lower, upper, size.n.j, prob.p.j)
-  {
-    lower.bound = ceiling(lower)
-    upper.bound = floor(upper)
-
-    if (upper!=Inf) {
-      y.series = c((lower.bound):(upper.bound))
-      dens.series = dbinom(y.series, size.n.j, prob.p.j, log = FALSE)
-      result = sum(y.series * dens.series)
-    }else{
-      if(lower.bound<=1)
-      {
-        y.series = c(0)
-      }else
-      {
-        y.series = c((0):(lower.bound-1))
-      }
-      dens.series = dbinom(y.series, size.n.j, prob.p.j, log = FALSE)
-      result = size.n.j*prob.p.j - sum(y.series * dens.series)
-    }
-
-    return(sum(result))
-  }
+  # int.y.fcn = function(lower, upper, size.n.j, prob.p.j)
+  # {
+  #   lower.bound = ceiling(lower)
+  #   upper.bound = floor(upper)
+  #
+  #   if (upper!=Inf) {
+  #     y.series = c((lower.bound):(upper.bound))
+  #     dens.series = dbinom(y.series, size.n.j, prob.p.j, log = FALSE)
+  #     result = sum(y.series * dens.series)
+  #   }else{
+  #     if(lower.bound<=1)
+  #     {
+  #       y.series = c(0)
+  #     }else
+  #     {
+  #       y.series = c((0):(lower.bound-1))
+  #     }
+  #     dens.series = dbinom(y.series, size.n.j, prob.p.j, log = FALSE)
+  #     result = size.n.j*prob.p.j - sum(y.series * dens.series)
+  #   }
+  #
+  #   return(sum(result))
+  # }
 
   # First find unique upper and lower bounds of integration
   y.unique = unique(cbind(yl,yu),MARGIN=1)
@@ -67,11 +67,11 @@ EMMBinomial = function(params.old,
   # Integration
   y.e.obs.unique = array(0,dim=c(y.unique.length,1))
 
-  y.e.obs.unique[,1]=
-    mapply(function(x, y) ifelse(x!=y,
-                                 int.y.fcn(x, y, size.n, prob.p),
-                                 y*dbinom(y, size.n, prob.p) ),
-           yl.unique, yu.unique)
+  y.e.obs.unique[,1]= sumBinomialYObs(size.n, prob.p, (yl.unique), (yu.unique))
+    # mapply(function(x, y) ifelse(x!=y,
+    #                              int.y.fcn(x, y, size.n, prob.p),
+    #                              y*dbinom(y, size.n, prob.p) ),
+    #        yl.unique, yu.unique)
 
   # Match to all observations of y
   temp.y.e.obs = array(0, dim = c(sample.size.n, 1))
@@ -90,11 +90,12 @@ EMMBinomial = function(params.old,
   # Integration
   y.e.lat.unique = array(0,dim=c(tn.unique.length,1))
 
-  y.e.lat.unique[,1] = size.n*prob.p -
-    mapply(function(x, y) ifelse(x!=y,
-                                 int.y.fcn(x, y, size.n, prob.p),
-                                 y*dbinom(y, size.n, prob.p) ),
-           tl.unique, tu.unique)
+  y.e.lat.unique[,1] = size.n*prob.p - sumBinomialYObs(size.n, prob.p, (tl.unique), (tu.unique))
+    # size.n*prob.p -
+    # mapply(function(x, y) ifelse(x!=y,
+    #                              int.y.fcn(x, y, size.n, prob.p),
+    #                              y*dbinom(y, size.n, prob.p) ),
+    #        tl.unique, tu.unique)
 
   # Match to all observations of y
   temp.y.e.lat = array(0, dim = c(sample.size.n, 1))

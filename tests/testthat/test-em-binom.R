@@ -1,15 +1,17 @@
 context("EMMBinomial")
 # library(Rcpp)
 
-# mu = 15
-# int.y.fcn = function(lower, upper, mean.theta.j)
+# n = 20
+# p = 0.30
+#
+# int.y.fcn = function(lower, upper, size.n.j, prob.p.j)
 # {
 #   lower.bound = ceiling(lower)
 #   upper.bound = floor(upper)
 #
 #   if (upper!=Inf) {
 #     y.series = c((lower.bound):(upper.bound))
-#     dens.series = dpois(y.series, mean.theta.j, log = FALSE)
+#     dens.series = dbinom(y.series, size.n.j, prob.p.j, log = FALSE)
 #     result = sum(y.series * dens.series)
 #   }else{
 #     if(lower.bound<=1)
@@ -19,29 +21,30 @@ context("EMMBinomial")
 #     {
 #       y.series = c((0):(lower.bound-1))
 #     }
-#     dens.series = dpois(y.series, mean.theta.j, log = FALSE)
-#     result = mean.theta.j - sum(y.series * dens.series)
+#     dens.series = dbinom(y.series, size.n.j, prob.p.j, log = FALSE)
+#     result = size.n.j*prob.p.j - sum(y.series * dens.series)
 #   }
 #
 #   return(sum(result))
 # }
 #
-# yl = rpois(10000, mu)
-# yu = yl + rpois(10000, mu)
+# yl = rbinom(10000, size= n, prob = p)
+# yu = yl + rbinom(10000, size= n, prob = p)
+# yu = pmin(yu, n)
+#
 #
 # yl[1:1000] = 0
 # yu[1001:2000] = Inf
 # yl[2001:3000] = yu[2001:3000]
 #
 # temp1 = mapply(function(x, y) ifelse(x!=y,
-#                                      int.y.fcn(x, y, mu),
-#                                      # 0),
-#                                      y*dpois(y, mu) ),
+#                                      int.y.fcn(x, y, n, p),
+#                                      y*dbinom(y, n, p) ),
 #                yl, yu)
-# temp2 = sumPoissonYObs(mu, (yl), (yu))
+# temp2 = sumBinomialYObs(n, p, (yl), (yu))
 
 
-#
+
 # test_that("EMMBinomial", {
 #   expect_equal(temp1, temp2)
 # })
@@ -49,12 +52,11 @@ context("EMMBinomial")
 # library(microbenchmark)
 # bench = microbenchmark(
 #
-#   sumPoissonYObs(mu, (yl), (yu)),
+#   sumBinomialYObs(n, p, (yl), (yu)),
 #
 #   mapply(function(x, y) ifelse(x!=y,
-#                                int.y.fcn(x, y, mu),
-#                                # 0),
-#                                y*dpois(y, mu) ),
+#                                int.y.fcn(x, y, n, p),
+#                                y*dbinom(y, n, p) ),
 #          yl, yu)
 # )
 #

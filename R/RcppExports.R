@@ -9,6 +9,18 @@ EMalphadQ2 <- function(x, z, p, q) {
     .Call(`_LRMoECPNew_EMalphadQ2`, x, z, p, q)
 }
 
+sumBinomialY <- function(n, p, lower_, upper_) {
+    .Call(`_LRMoECPNew_sumBinomialY`, n, p, lower_, upper_)
+}
+
+sumBinomialYObs <- function(n_, p_, lower_, upper_) {
+    .Call(`_LRMoECPNew_sumBinomialYObs`, n_, p_, lower_, upper_)
+}
+
+sumBinomialYLat <- function(n_, p_, lower_, upper_) {
+    .Call(`_LRMoECPNew_sumBinomialYLat`, n_, p_, lower_, upper_)
+}
+
 intBurrLogYObs <- function(k_, c_, lambda_, lower_, upper_) {
     .Call(`_LRMoECPNew_intBurrLogYObs`, k_, c_, lambda_, lower_, upper_)
 }
