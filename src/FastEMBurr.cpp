@@ -110,7 +110,8 @@ public:
     if(isinf(u)){
       temp = 0.0;
     }else{
-      temp = log(1+pow(exp(u)/ll, cc))* exp( log(c*k/lambda) + (c-1)*log(exp(u)/lambda) + (-k-1)*log(1+pow(exp(u)/lambda, c)) + u );
+      temp = log1p( exp(cc* (u-log(ll)) ) ) * exp( log(c*k/lambda) + (c-1)*log(exp(u)/lambda) + (-k-1)*log(1+pow(exp(u)/lambda, c)) + u );
+        // log(1+pow(exp(u)/ll, cc))* exp( log(c*k/lambda) + (c-1)*log(exp(u)/lambda) + (-k-1)*log(1+pow(exp(u)/lambda, c)) + u );
       // log(u) * c*k/lambda * pow((u/lambda), c-1) * pow(1+pow(u/lambda, c), -k-1);
     }
     if(isnan(temp) || isinf(temp)){

@@ -405,3 +405,120 @@ EMMBurr = function(params.old,
   return(params.new)
 
 }
+
+
+#' ## ECM algorithm of Inverse Gaussian expert
+#' #' ECM: M-Step for Inverse Gaussian expert.
+#' #'
+#' #' @importFrom stats optim integrate
+#' #' @importFrom actuar dburr qburr pburr
+#' #'
+#' #' @keywords internal
+#' #'
+#' #' @export EMMBurrFast
+#' EMMBurrFast = function(params.old,
+#'                    tl, yl, yu, tu,
+#'                    expert.ll, expert.tn, expert.tn.bar,
+#'                    z.e.obs, z.e.lat, k.e,
+#'                    penalty, hyper.params)
+#' {
+#'   # Constants
+#'   sample.size.n = length(tl)
+#'   # Take old parameters
+#'   shape1.k = params.old[1]
+#'   shape2.c = params.old[2]
+#'   scale.lambda = params.old[3]
+#'   # Take hyper parameters
+#'   hyper.k.1 = hyper.params[1]
+#'   hyper.k.2 = hyper.params[2]
+#'   hyper.c.1 = hyper.params[3]
+#'   hyper.c.2 = hyper.params[4]
+#'   hyper.lambda.1 = hyper.params[5]
+#'   hyper.lambda.2 = hyper.params[6]
+#'   # Value to return
+#'   params.new = params.old
+#'
+#'   # Use brute-force optimization, due to complex form of pdf/cdf of gammacount
+#'   Q.params = function(params.new,
+#'                       tl, yl, yu, tu,
+#'                       z.e.obs, z.e.lat, k.e,
+#'                       penalty,
+#'                       hyper.k.1, hyper.k.2, hyper.c.1, hyper.c.2, hyper.lambda.1, hyper.lambda.2)
+#'   {
+#'     shape1.k = params.new[1]
+#'     shape2.c = params.new[2]
+#'     scale.lambda = params.new[3]
+#'
+#'     # Initialization: return value are N * 1 matrices
+#'     expert.ll = expert.tn = expert.tn.bar = array(-Inf, dim=c(length(yu),1))
+#'
+#'     # Find indexes of unequal yl & yu: Not exact observations, but censored
+#'     censor.idx = (yl!=yu)
+#'     prob.log.yu = actuar::pburr(yu[censor.idx], shape1 = shape1.k, shape2 = shape2.c, scale = scale.lambda, lower.tail = TRUE, log.p = TRUE)
+#'     prob.log.yl = actuar::pburr(yl[censor.idx], shape1 = shape1.k, shape2 = shape2.c, scale = scale.lambda, lower.tail = TRUE, log.p = TRUE)
+#'
+#'     # Compute loglikelihood for expert j, first for y
+#'     expert.ll[censor.idx,1] = prob.log.yu + log1mexp(prob.log.yu - prob.log.yl) # likelihood of censored interval: some easy algebra
+#'     expert.ll[!censor.idx,1] = actuar::dburr(yu[!censor.idx], shape1 = shape1.k, shape2 = shape2.c, scale = scale.lambda, log = TRUE)  # exact likelihood
+#'
+#'     ###################################################################
+#'     # Deal with numerical underflow: prob.log.yu and prob.log.yl can both be -Inf
+#'     # NA.idx = which(is.na(expert.ll[,j]))
+#'     expert.ll[which(is.na(expert.ll[,1])), 1] = -Inf
+#'     ###################################################################
+#'
+#'     # Compute loglikelihood for expert j, then for truncation limits t
+#'     prob.log.tu = actuar::pburr(tu, shape1 = shape1.k, shape2 = shape2.c, scale = scale.lambda, lower.tail = TRUE, log.p = TRUE)
+#'     prob.log.tl = actuar::pburr(tl, shape1 = shape1.k, shape2 = shape2.c, scale = scale.lambda, lower.tail = TRUE, log.p = TRUE)
+#'
+#'     # Normalizing factor for truncation limits, in log
+#'     expert.tn[,1]= prob.log.tu + log1mexp(prob.log.tu - prob.log.tl)
+#'
+#'     ###################################################################
+#'     # Deal with numerical underflow: prob.log.tu and prob.log.tl can both be -Inf
+#'     # NA.idx = which(is.na(expert.tn[,j]))
+#'     expert.tn[which(is.na(expert.tn[,1])), 1] = -Inf
+#'     ###################################################################
+#'
+#'     ###################################################################
+#'     # Deal with no truncation case
+#'     no.trunc.idx = (tl==tu)
+#'     expert.tn[no.trunc.idx,1] = actuar::dburr(tu[no.trunc.idx], shape1 = shape1.k, shape2 = shape2.c, scale = scale.lambda, log = TRUE)
+#'     ###################################################################
+#'
+#'     ###################################################################
+#'     # Deal with exact zero case
+#'     zero.idx = (tu==0)
+#'     expert.ll[zero.idx,1]=(-Inf)
+#'     expert.tn[zero.idx,1]=(-Inf)
+#'     ###################################################################
+#'
+#'     # Log of Pr(outside of truncation interval)
+#'     expert.tn.bar[!no.trunc.idx,1] = log1mexp(-expert.tn[!no.trunc.idx,1])
+#'     expert.tn.bar[no.trunc.idx,1] = 0
+#'
+#'     result = sum(XAPlusYZB(z.e.obs, expert.ll[,1], z.e.lat, k.e, expert.tn[,1]))
+#'     if(penalty==TRUE){
+#'       result = result + (hyper.k.1-1)*log(shape1.k) - shape1.k/hyper.k.2
+#'       + (hyper.c.1-1)*log(shape2.c) - shape2.c/hyper.c.2
+#'       + (hyper.lambda.1-1)*log(scale.lambda) - scale.lambda/hyper.lambda.2
+#'     }
+#'
+#'     return(result * (-1))
+#'   }
+#'
+#'   pos.idx = (yu!=0)
+#'
+#'   temp.params = optim(par = params.old, fn = Q.params,
+#'                       tl = tl[pos.idx], yl = yl[pos.idx], yu = yu[pos.idx], tu = tu[pos.idx],
+#'                       z.e.obs = z.e.obs[pos.idx], z.e.lat = z.e.lat[pos.idx], k.e = k.e[pos.idx],
+#'                       penalty = penalty,
+#'                       hyper.k.1 = hyper.k.1, hyper.k.2 = hyper.k.2, hyper.c.1 = hyper.c.1, hyper.c.2 = hyper.c.2,
+#'                       hyper.lambda.1 = hyper.lambda.1, hyper.lambda.2 = hyper.lambda.2,
+#'                       method = "L-BFGS-B", lower = 0.5*params.old, upper = 2*params.old)$par
+#'
+#'   params.new = temp.params
+#'
+#'   return(params.new)
+#'
+#' }

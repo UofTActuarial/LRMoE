@@ -114,51 +114,51 @@ context("EMMGammaCount")
 
 
 
-data("LRMoEDemoData")
-head(X)
-
-alpha = matrix(c(0.5, 0.25, -0.05, 0.3, -0.2,
-                 0, 0, 0, 0, 0),
-               nrow = 2, byrow = T)
-
-head(exp(GateLogit(X, alpha)))
-hist(exp(GateLogit(X, alpha))[,1])
-
-comp.dist = matrix(c("gammacount", "ZI-gammacount"),
-                   nrow = 1, byrow = T)
-
-zero.prob = matrix(c(0, 0.10),
-                   nrow = 1, byrow = T)
-
-params.list = list(list(c(20, 0.3), c(35, 1)))
-
-simy = SimYSet(X, alpha, comp.dist, zero.prob, params.list)
-
-hist(simy, breaks = 300, xlim = c(0, 100))
-
-YY = cbind(rep(0, nrow(X)), simy, simy, rep(Inf, nrow(X)))
-
-YY[c(1000:2000),2] = floor(simy[c(1000:2000)] * 0.75)
-YY[c(2001:3000),3] = ceiling(simy[c(2001:3000)] * 1.50)
-
-YY[c(3001:4000),1] = floor(simy[c(3001:4000)] * 0.25)
-
-# YY[c(4001:5000),4] = ceiling(simy[c(4001:5000)] * 1.5)
-
-YY[c(5001:7000),1] = floor(simy[c(5001:7000)] * 0.25)
-YY[c(5001:7000),2] = floor(simy[c(5001:7000)] * 0.75)
-YY[c(5001:7000),3] = ceiling(simy[c(5001:7000)] * 1.25)
-# YY[c(5001:7000),4] = ceiling(simy[c(5001:7000)] * 2)
-
-
-alpha.init = alpha = matrix(c(0, 0, 0, 0, 0,
-                              0, 0, 0, 0, 0),
-                            nrow = 2, byrow = T)
-comp.dist = comp.dist
-zero.init = matrix(c(0, 0.50),
-                   nrow = 1, byrow = T)
-params.init = list(list(c(20, 0.2), c(25, 0.8)))
-
-
-modelfit = LRMoEFit(YY, X, 2, comp.dist, alpha.init, zero.init, params.init)
+# data("LRMoEDemoData")
+# head(X)
+#
+# alpha = matrix(c(0.5, 0.25, -0.05, 0.3, -0.2,
+#                  0, 0, 0, 0, 0),
+#                nrow = 2, byrow = T)
+#
+# head(exp(GateLogit(X, alpha)))
+# hist(exp(GateLogit(X, alpha))[,1])
+#
+# comp.dist = matrix(c("gammacount", "ZI-gammacount"),
+#                    nrow = 1, byrow = T)
+#
+# zero.prob = matrix(c(0, 0.10),
+#                    nrow = 1, byrow = T)
+#
+# params.list = list(list(c(20, 0.3), c(35, 1)))
+#
+# simy = SimYSet(X, alpha, comp.dist, zero.prob, params.list)
+#
+# hist(simy, breaks = 300, xlim = c(0, 100))
+#
+# YY = cbind(rep(0, nrow(X)), simy, simy, rep(Inf, nrow(X)))
+#
+# YY[c(1000:2000),2] = floor(simy[c(1000:2000)] * 0.75)
+# YY[c(2001:3000),3] = ceiling(simy[c(2001:3000)] * 1.50)
+#
+# YY[c(3001:4000),1] = floor(simy[c(3001:4000)] * 0.25)
+#
+# # YY[c(4001:5000),4] = ceiling(simy[c(4001:5000)] * 1.5)
+#
+# YY[c(5001:7000),1] = floor(simy[c(5001:7000)] * 0.25)
+# YY[c(5001:7000),2] = floor(simy[c(5001:7000)] * 0.75)
+# YY[c(5001:7000),3] = ceiling(simy[c(5001:7000)] * 1.25)
+# # YY[c(5001:7000),4] = ceiling(simy[c(5001:7000)] * 2)
+#
+#
+# alpha.init = alpha = matrix(c(0, 0, 0, 0, 0,
+#                               0, 0, 0, 0, 0),
+#                             nrow = 2, byrow = T)
+# comp.dist = comp.dist
+# zero.init = matrix(c(0, 0.50),
+#                    nrow = 1, byrow = T)
+# params.init = list(list(c(20, 0.2), c(25, 0.8)))
+#
+#
+# modelfit = LRMoEFit(YY, X, 2, comp.dist, alpha.init, zero.init, params.init)
 
