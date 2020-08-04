@@ -23,7 +23,7 @@ double sumPoissonY(double mu, double lower_, double upper_)
       result = result + (lower+j)* exp(-mu + (lower+j)*log(mu)) / tgamma(lower+j+1);
     }
   }else{
-    if(lower_==upper_){
+    if(lower==upper){
       result = (lower)* exp(-mu + (lower)*log(mu)) / tgamma(lower+1);
     }else{
       double temp = 0;

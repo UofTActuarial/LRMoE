@@ -23,7 +23,7 @@ double sumBinomialY(double n, double p, double lower_, double upper_)
       result = result + (lower+j)* exp((lower+j)*log(p) + (n-(lower+j))*log(1-p)) * tgamma(n+1) / (tgamma(lower+j+1) * tgamma(n-(lower+j)+1));
     }
   }else{
-    if(lower_==upper_){
+    if(lower==upper){
       result = (lower)* exp((lower)*log(p) + (n-(lower))*log(1-p)) * tgamma(n+1) / (tgamma(lower+1) * tgamma(n-(lower)+1));
     }else{
       double temp = 0;
