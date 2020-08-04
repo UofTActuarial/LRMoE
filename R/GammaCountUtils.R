@@ -17,13 +17,17 @@ pgammacount = function(q, m, s, log.p=FALSE)
   if(any(s<=0))stop("s must be positive")
 
   neg.idx = which(q<0)
+  inf.idx = which(q==Inf)
+
   q = floor(q) # convert to integers
+
   if(log.p==TRUE){
-    temp = log1mexp(-pgamma(m*s,(q+1)*s,1,log.p=TRUE))
+    temp = log1mexp(-pgamma(m*s, shape = (q+1)*s, rate = 1,log.p=TRUE) )
+      # log1mexp(-pgamma(m*s, shape = (q+1)*s, rate = 1,log.p=TRUE))
     temp[neg.idx] = -Inf
     return(temp)
   }else{
-    temp = 1-pgamma(m*s,(q+1)*s,1)
+    temp = 1-pgamma(m*s, shape = (q+1)*s, rate = 1)
     temp[neg.idx] = 0
     return(temp)
   }
@@ -49,9 +53,9 @@ dgammacount = function(y, m, s, log=FALSE)
 
   neg.idx = which(y<0)
   nonint.idx = which(y!=floor(y))
-  tmp = ifelse(y==0,pgamma(m*s,(y+1)*s,1,log.p=TRUE,lower.tail=FALSE),
+  tmp = ifelse(y==0,pgamma(m*s, shape = (y+1)*s, rate = 1,log.p=TRUE,lower.tail=FALSE),
                # pgamma(m*s,y*s+(y==0),1,log=TRUE) + log1mexp(pgamma(m*s,y*s+(y==0),1,log.p=TRUE)-pgamma(m*s,(y+1)*s,1,log.p=TRUE)) )
-               pgamma(m*s,y*s,1,log.p=TRUE) + log1mexp( pgamma(m*s,y*s,1,log.p=TRUE)-pgamma(m*s,(y+1)*s,1,log.p=TRUE)) )
+               pgamma(m*s, shape = y*s, rate = 1,log.p=TRUE) + log1mexp( pgamma(m*s, shape = y*s, rate = 1,log.p=TRUE)-pgamma(m*s, shape = (y+1)*s, rate = 1,log.p=TRUE)) )
 
   tmp[neg.idx] = -Inf
   tmp[nonint.idx] = -Inf
