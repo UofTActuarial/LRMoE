@@ -2,7 +2,7 @@
 #' ECM: M-Step for Weibull expert.
 #'
 #'
-#' @importFrom stats dweibull optimize integrate
+#' @importFrom stats dweibull optimize integrate optim
 #' @importFrom expint gammainc
 #'
 #' @keywords internal
@@ -198,7 +198,8 @@ EMMWeibull = function(params.old,
       result = result + (nu.shape-1)*log(shape.k.new) - shape.k.new/theta.shape
     }
 
-    return(result)
+    # return(result)
+    return(result * (-1))
 
   }
 
@@ -206,15 +207,25 @@ EMMWeibull = function(params.old,
   pos.idx = (yu!=0)
 
   # Update of shape.k
-  shape.k.new = optimize(f = Q.shape, lower = max(0.5*shape.k, 1.0000), upper = 2*shape.k,
-                         # lower = max(0.5*shape.k, 1.0000), upper = 5*shape.k, # interval = c(0.5*shape.k, 5*shape.k),
-                         shape.k.old = shape.k, scale.lambda.old = scale.lambda,
-                         z.e.obs = z.e.obs[pos.idx], z.e.lat = z.e.lat[pos.idx], k.e = k.e[pos.idx],
-                         y.log.e.obs = y.log.e.obs[pos.idx], y.log.e.lat = y.log.e.lat[pos.idx],
-                         tl = tl[pos.idx], yl = yl[pos.idx], yu = yu[pos.idx], tu = tu[pos.idx],
-                         expert.ll = expert.ll[pos.idx], expert.tn = expert.tn[pos.idx], expert.tn.bar = expert.tn.bar[pos.idx],
-                         penalty = penalty, nu.shape = hyper.k.1, theta.shape = hyper.k.2,
-                         maximum = TRUE)$maximum
+  shape.k.new =
+    optim(par = shape.k, fn = Q.shape,
+          shape.k.old = shape.k, scale.lambda.old = scale.lambda,
+          z.e.obs = z.e.obs[pos.idx], z.e.lat = z.e.lat[pos.idx], k.e = k.e[pos.idx],
+          y.log.e.obs = y.log.e.obs[pos.idx], y.log.e.lat = y.log.e.lat[pos.idx],
+          tl = tl[pos.idx], yl = yl[pos.idx], yu = yu[pos.idx], tu = tu[pos.idx],
+          expert.ll = expert.ll[pos.idx], expert.tn = expert.tn[pos.idx], expert.tn.bar = expert.tn.bar[pos.idx],
+          penalty = penalty, nu.shape = hyper.k.1, theta.shape = hyper.k.2,
+          lower = 0.5*shape.k, upper = 2*shape.k,
+          method = "L-BFGS-B")$par
+  # optimize(f = Q.shape, lower = max(0.5*shape.k, 1.0000), upper = 2*shape.k,
+  #          # lower = max(0.5*shape.k, 1.0000), upper = 5*shape.k, # interval = c(0.5*shape.k, 5*shape.k),
+  #          shape.k.old = shape.k, scale.lambda.old = scale.lambda,
+  #          z.e.obs = z.e.obs[pos.idx], z.e.lat = z.e.lat[pos.idx], k.e = k.e[pos.idx],
+  #          y.log.e.obs = y.log.e.obs[pos.idx], y.log.e.lat = y.log.e.lat[pos.idx],
+  #          tl = tl[pos.idx], yl = yl[pos.idx], yu = yu[pos.idx], tu = tu[pos.idx],
+  #          expert.ll = expert.ll[pos.idx], expert.tn = expert.tn[pos.idx], expert.tn.bar = expert.tn.bar[pos.idx],
+  #          penalty = penalty, nu.shape = hyper.k.1, theta.shape = hyper.k.2,
+  #          maximum = TRUE)$maximum
 
   # Update of scale.lambda
   shape.k.old = shape.k

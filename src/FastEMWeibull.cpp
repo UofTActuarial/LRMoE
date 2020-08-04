@@ -22,7 +22,8 @@ public:
 
   double operator()(const double& u) const
   {
-    double temp = k/lambda * pow((u/lambda),k-1) * exp(-1.0*pow(u/lambda, k)) * log(u);
+    double temp = k/lambda * exp((k-1)*(log(u)-log(lambda))) * exp(-1.0* exp((k)*(log(u)-log(lambda))) ) * log(u);
+      // k/lambda * pow((u/lambda),k-1) * exp(-1.0*pow(u/lambda, k)) * log(u);
     // if(isinf(u)){
     //   temp = 0.0;
     // }else{
@@ -106,7 +107,8 @@ public:
 
   double operator()(const double& u) const
   {
-    double temp = k/lambda * pow((u/lambda),k-1) * exp(-1.0*pow(u/lambda, k)) * pow(u, p);
+    double temp = k/lambda * exp((k-1)*(log(u)-log(lambda))) * exp(-1.0* exp((k)*(log(u)-log(lambda))) ) * exp(p*log(u));
+      // k/lambda * pow((u/lambda),k-1) * exp(-1.0*pow(u/lambda, k)) * pow(u, p);
     // if(isinf(u)){
     //   temp = 0.0;
     // }else{
