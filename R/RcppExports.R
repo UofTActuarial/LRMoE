@@ -69,6 +69,30 @@ intInvGaussInvYLat <- function(mu_, lambda_, lower_, upper_) {
     .Call(`_LRMoECPNew_intInvGaussInvYLat`, mu_, lambda_, lower_, upper_)
 }
 
+sumNegativeBinomialY <- function(n, p, lower_, upper_) {
+    .Call(`_LRMoECPNew_sumNegativeBinomialY`, n, p, lower_, upper_)
+}
+
+sumNegativeBinomialYObs <- function(n_, p_, lower_, upper_) {
+    .Call(`_LRMoECPNew_sumNegativeBinomialYObs`, n_, p_, lower_, upper_)
+}
+
+sumNegativeBinomialYLat <- function(n_, p_, lower_, upper_) {
+    .Call(`_LRMoECPNew_sumNegativeBinomialYLat`, n_, p_, lower_, upper_)
+}
+
+sumNegativeBinomialLfacY <- function(n, p, nn, lower_, upper_) {
+    .Call(`_LRMoECPNew_sumNegativeBinomialLfacY`, n, p, nn, lower_, upper_)
+}
+
+sumNegativeBinomialLfacYObs <- function(n_, p_, nn_, lower_, upper_) {
+    .Call(`_LRMoECPNew_sumNegativeBinomialLfacYObs`, n_, p_, nn_, lower_, upper_)
+}
+
+sumNegativeBinomialLfacYLat <- function(n_, p_, nn_, lower_, upper_) {
+    .Call(`_LRMoECPNew_sumNegativeBinomialLfacYLat`, n_, p_, nn_, lower_, upper_)
+}
+
 sumPoissonY <- function(mu, lower_, upper_) {
     .Call(`_LRMoECPNew_sumPoissonY`, mu, lower_, upper_)
 }

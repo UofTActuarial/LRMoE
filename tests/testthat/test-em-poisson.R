@@ -66,7 +66,7 @@ context("EMMPoisson")
 
 
 
-#
+
 # data("LRMoEDemoData")
 # head(X)
 #
@@ -96,7 +96,7 @@ context("EMMPoisson")
 #
 # YY[c(3001:4000),1] = floor(simy[c(3001:4000)] * 0.25)
 #
-# YY[c(4001:5000),4] = ceiling(simy[c(4001:5000)] * 1.5)
+# YY[c(4001:5000),4] = ceiling(simy[c(4001:5000)] * 2)
 #
 # YY[c(5001:7000),1] = floor(simy[c(5001:7000)] * 0.25)
 # YY[c(5001:7000),2] = floor(simy[c(5001:7000)] * 0.75)
