@@ -252,6 +252,48 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// sumNegativeBinomialY
+double sumNegativeBinomialY(double n, double p, double lower_, double upper_);
+RcppExport SEXP _LRMoECPNew_sumNegativeBinomialY(SEXP nSEXP, SEXP pSEXP, SEXP lower_SEXP, SEXP upper_SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< double >::type n(nSEXP);
+    Rcpp::traits::input_parameter< double >::type p(pSEXP);
+    Rcpp::traits::input_parameter< double >::type lower_(lower_SEXP);
+    Rcpp::traits::input_parameter< double >::type upper_(upper_SEXP);
+    rcpp_result_gen = Rcpp::wrap(sumNegativeBinomialY(n, p, lower_, upper_));
+    return rcpp_result_gen;
+END_RCPP
+}
+// sumNegativeBinomialYObs
+SEXP sumNegativeBinomialYObs(SEXP n_, SEXP p_, SEXP lower_, SEXP upper_);
+RcppExport SEXP _LRMoECPNew_sumNegativeBinomialYObs(SEXP n_SEXP, SEXP p_SEXP, SEXP lower_SEXP, SEXP upper_SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< SEXP >::type n_(n_SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type p_(p_SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type lower_(lower_SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type upper_(upper_SEXP);
+    rcpp_result_gen = Rcpp::wrap(sumNegativeBinomialYObs(n_, p_, lower_, upper_));
+    return rcpp_result_gen;
+END_RCPP
+}
+// sumNegativeBinomialYLat
+SEXP sumNegativeBinomialYLat(SEXP n_, SEXP p_, SEXP lower_, SEXP upper_);
+RcppExport SEXP _LRMoECPNew_sumNegativeBinomialYLat(SEXP n_SEXP, SEXP p_SEXP, SEXP lower_SEXP, SEXP upper_SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< SEXP >::type n_(n_SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type p_(p_SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type lower_(lower_SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type upper_(upper_SEXP);
+    rcpp_result_gen = Rcpp::wrap(sumNegativeBinomialYLat(n_, p_, lower_, upper_));
+    return rcpp_result_gen;
+END_RCPP
+}
 // sumPoissonY
 double sumPoissonY(double mu, double lower_, double upper_);
 RcppExport SEXP _LRMoECPNew_sumPoissonY(SEXP muSEXP, SEXP lower_SEXP, SEXP upper_SEXP) {
@@ -421,6 +463,9 @@ static const R_CallMethodDef CallEntries[] = {
     {"_LRMoECPNew_intInvGaussYLat", (DL_FUNC) &_LRMoECPNew_intInvGaussYLat, 4},
     {"_LRMoECPNew_intInvGaussInvYObs", (DL_FUNC) &_LRMoECPNew_intInvGaussInvYObs, 4},
     {"_LRMoECPNew_intInvGaussInvYLat", (DL_FUNC) &_LRMoECPNew_intInvGaussInvYLat, 4},
+    {"_LRMoECPNew_sumNegativeBinomialY", (DL_FUNC) &_LRMoECPNew_sumNegativeBinomialY, 4},
+    {"_LRMoECPNew_sumNegativeBinomialYObs", (DL_FUNC) &_LRMoECPNew_sumNegativeBinomialYObs, 4},
+    {"_LRMoECPNew_sumNegativeBinomialYLat", (DL_FUNC) &_LRMoECPNew_sumNegativeBinomialYLat, 4},
     {"_LRMoECPNew_sumPoissonY", (DL_FUNC) &_LRMoECPNew_sumPoissonY, 3},
     {"_LRMoECPNew_sumPoissonYObs", (DL_FUNC) &_LRMoECPNew_sumPoissonYObs, 3},
     {"_LRMoECPNew_sumPoissonYLat", (DL_FUNC) &_LRMoECPNew_sumPoissonYLat, 3},

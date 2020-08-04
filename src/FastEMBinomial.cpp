@@ -20,18 +20,18 @@ double sumBinomialY(double n, double p, double lower_, double upper_)
 
   if(!isinf(upper)){
     for(int j=0; j<upper-lower+1; j++){
-      result = result + (lower+j)* exp((lower+j)*log(p) + (n-(lower+j))*log(1-p)) * tgamma(n+1) / (tgamma(lower+j+1) * tgamma(n-(lower+j)+1));
+      result = result + (lower+j)* exp((lower+j)*log(p) + (n-(lower+j))*log(1-p) + lgamma(n+1) - lgamma(lower+j+1) - lgamma(n-(lower+j)+1));
     }
   }else{
     if(lower==upper){
-      result = (lower)* exp((lower)*log(p) + (n-(lower))*log(1-p)) * tgamma(n+1) / (tgamma(lower+1) * tgamma(n-(lower)+1));
+      result = (lower)* exp((lower)*log(p) + (n-(lower))*log(1-p) + lgamma(n+1) - lgamma(lower+1) - lgamma(n-(lower)+1) );
     }else{
       double temp = 0;
       if(lower<=1){
         temp = 0.0;
       }else{
         for(int j=0; j<lower; j++){
-          temp = temp + (j)* exp((j)*log(p) + (n-(j))*log(1-p)) * tgamma(n+1) / (tgamma(j+1) * tgamma(n-(j)+1));
+          temp = temp + (j)* exp((j)*log(p) + (n-(j))*log(1-p) + lgamma(n+1) - lgamma(j+1) - lgamma(n-(j)+1));
         }
       }
       result = n*p - temp;

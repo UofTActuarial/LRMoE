@@ -116,4 +116,4 @@ context("EMMBinomial")
 #
 #
 # modelfit = LRMoEFit(YY, X, 2, comp.dist, alpha.init, zero.init, params.init)
-#
+
