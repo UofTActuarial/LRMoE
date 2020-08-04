@@ -34,6 +34,70 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// intBurrLogYObs
+SEXP intBurrLogYObs(SEXP k_, SEXP c_, SEXP lambda_, SEXP lower_, SEXP upper_);
+RcppExport SEXP _LRMoECPNew_intBurrLogYObs(SEXP k_SEXP, SEXP c_SEXP, SEXP lambda_SEXP, SEXP lower_SEXP, SEXP upper_SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< SEXP >::type k_(k_SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type c_(c_SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type lambda_(lambda_SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type lower_(lower_SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type upper_(upper_SEXP);
+    rcpp_result_gen = Rcpp::wrap(intBurrLogYObs(k_, c_, lambda_, lower_, upper_));
+    return rcpp_result_gen;
+END_RCPP
+}
+// intBurrLogYLat
+SEXP intBurrLogYLat(SEXP k_, SEXP c_, SEXP lambda_, SEXP lower_, SEXP upper_);
+RcppExport SEXP _LRMoECPNew_intBurrLogYLat(SEXP k_SEXP, SEXP c_SEXP, SEXP lambda_SEXP, SEXP lower_SEXP, SEXP upper_SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< SEXP >::type k_(k_SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type c_(c_SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type lambda_(lambda_SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type lower_(lower_SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type upper_(upper_SEXP);
+    rcpp_result_gen = Rcpp::wrap(intBurrLogYLat(k_, c_, lambda_, lower_, upper_));
+    return rcpp_result_gen;
+END_RCPP
+}
+// intBurrPolYObs
+SEXP intBurrPolYObs(SEXP k_, SEXP c_, SEXP lambda_, SEXP cc_, SEXP ll_, SEXP lower_, SEXP upper_);
+RcppExport SEXP _LRMoECPNew_intBurrPolYObs(SEXP k_SEXP, SEXP c_SEXP, SEXP lambda_SEXP, SEXP cc_SEXP, SEXP ll_SEXP, SEXP lower_SEXP, SEXP upper_SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< SEXP >::type k_(k_SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type c_(c_SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type lambda_(lambda_SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type cc_(cc_SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type ll_(ll_SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type lower_(lower_SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type upper_(upper_SEXP);
+    rcpp_result_gen = Rcpp::wrap(intBurrPolYObs(k_, c_, lambda_, cc_, ll_, lower_, upper_));
+    return rcpp_result_gen;
+END_RCPP
+}
+// intBurrPolYLat
+SEXP intBurrPolYLat(SEXP k_, SEXP c_, SEXP lambda_, SEXP cc_, SEXP ll_, SEXP lower_, SEXP upper_);
+RcppExport SEXP _LRMoECPNew_intBurrPolYLat(SEXP k_SEXP, SEXP c_SEXP, SEXP lambda_SEXP, SEXP cc_SEXP, SEXP ll_SEXP, SEXP lower_SEXP, SEXP upper_SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< SEXP >::type k_(k_SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type c_(c_SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type lambda_(lambda_SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type cc_(cc_SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type ll_(ll_SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type lower_(lower_SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type upper_(upper_SEXP);
+    rcpp_result_gen = Rcpp::wrap(intBurrPolYLat(k_, c_, lambda_, cc_, ll_, lower_, upper_));
+    return rcpp_result_gen;
+END_RCPP
+}
 // intGammaLogYObs
 SEXP intGammaLogYObs(SEXP m_, SEXP theta_, SEXP lower_, SEXP upper_);
 RcppExport SEXP _LRMoECPNew_intGammaLogYObs(SEXP m_SEXP, SEXP theta_SEXP, SEXP lower_SEXP, SEXP upper_SEXP) {
@@ -261,6 +325,10 @@ END_RCPP
 static const R_CallMethodDef CallEntries[] = {
     {"_LRMoECPNew_EMalphadQ", (DL_FUNC) &_LRMoECPNew_EMalphadQ, 4},
     {"_LRMoECPNew_EMalphadQ2", (DL_FUNC) &_LRMoECPNew_EMalphadQ2, 4},
+    {"_LRMoECPNew_intBurrLogYObs", (DL_FUNC) &_LRMoECPNew_intBurrLogYObs, 5},
+    {"_LRMoECPNew_intBurrLogYLat", (DL_FUNC) &_LRMoECPNew_intBurrLogYLat, 5},
+    {"_LRMoECPNew_intBurrPolYObs", (DL_FUNC) &_LRMoECPNew_intBurrPolYObs, 7},
+    {"_LRMoECPNew_intBurrPolYLat", (DL_FUNC) &_LRMoECPNew_intBurrPolYLat, 7},
     {"_LRMoECPNew_intGammaLogYObs", (DL_FUNC) &_LRMoECPNew_intGammaLogYObs, 4},
     {"_LRMoECPNew_intGammaLogYLat", (DL_FUNC) &_LRMoECPNew_intGammaLogYLat, 4},
     {"_LRMoECPNew_intInvGaussLogYObs", (DL_FUNC) &_LRMoECPNew_intInvGaussLogYObs, 4},

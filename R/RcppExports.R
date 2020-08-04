@@ -9,6 +9,22 @@ EMalphadQ2 <- function(x, z, p, q) {
     .Call(`_LRMoECPNew_EMalphadQ2`, x, z, p, q)
 }
 
+intBurrLogYObs <- function(k_, c_, lambda_, lower_, upper_) {
+    .Call(`_LRMoECPNew_intBurrLogYObs`, k_, c_, lambda_, lower_, upper_)
+}
+
+intBurrLogYLat <- function(k_, c_, lambda_, lower_, upper_) {
+    .Call(`_LRMoECPNew_intBurrLogYLat`, k_, c_, lambda_, lower_, upper_)
+}
+
+intBurrPolYObs <- function(k_, c_, lambda_, cc_, ll_, lower_, upper_) {
+    .Call(`_LRMoECPNew_intBurrPolYObs`, k_, c_, lambda_, cc_, ll_, lower_, upper_)
+}
+
+intBurrPolYLat <- function(k_, c_, lambda_, cc_, ll_, lower_, upper_) {
+    .Call(`_LRMoECPNew_intBurrPolYLat`, k_, c_, lambda_, cc_, ll_, lower_, upper_)
+}
+
 intGammaLogYObs <- function(m_, theta_, lower_, upper_) {
     .Call(`_LRMoECPNew_intGammaLogYObs`, m_, theta_, lower_, upper_)
 }
