@@ -23,7 +23,7 @@ ExpertGammaCount = function(tl, yl, yu, tu, m, s)
 
   # Find indexes of unequal yl & yu: Not exact observations, but censored
   censor.idx = (yl!=yu)
-  prob.log.yu = pgammacount(yu[censor.idx], m = m, s = s, log.p = TRUE)
+  prob.log.yu = ifelse(yu[censor.idx]==Inf, 0, pgammacount(yu[censor.idx], m = m, s = s, log.p = TRUE))
   prob.log.yl = pgammacount(ceiling(yl[censor.idx])-1, m = m, s = s, log.p = TRUE)
 
   # Compute loglikelihood for expert j, first for y
@@ -31,7 +31,7 @@ ExpertGammaCount = function(tl, yl, yu, tu, m, s)
   expert.ll[!censor.idx,1] = dgammacount(yl[!censor.idx], m = m, s = s, log = TRUE)  # exact likelihood
 
   # Compute loglikelihood for expert j, then for truncation limits t
-  prob.log.tu = pgammacount(tu, m = m, s = s, log.p = TRUE)
+  prob.log.tu = ifelse(tu==Inf, 0, pgammacount(tu, m = m, s = s, log.p = TRUE))
   prob.log.tl = pgammacount(ceiling(tl)-1, m = m, s = s, log.p = TRUE)
 
   # Normalizing factor for truncation limits, in log
@@ -40,7 +40,7 @@ ExpertGammaCount = function(tl, yl, yu, tu, m, s)
   ###################################################################
   # Deal with no truncation case
   no.trunc.idx = (tl==tu)
-  expert.tn[no.trunc.idx,1] = dgammacount(tu[no.trunc.idx], m =  m, s = s, log = FALSE)
+  expert.tn[no.trunc.idx,1] = dgammacount(tu[no.trunc.idx], m =  m, s = s, log = TRUE)
   ###################################################################
 
   ###################################################################
