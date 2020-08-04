@@ -20,18 +20,18 @@ double sumPoissonY(double mu, double lower_, double upper_)
 
   if(!isinf(upper)){
     for(int j=0; j<upper-lower+1; j++){
-      result = result + (lower+j)* exp(-mu + (lower+j)*log(mu)) / tgamma(lower+j+1);
+      result = result + (lower+j)* exp(-mu + (lower+j)*log(mu) - lgamma(lower+j+1));
     }
   }else{
     if(lower==upper){
-      result = (lower)* exp(-mu + (lower)*log(mu)) / tgamma(lower+1);
+      result = (lower)* exp(-mu + (lower)*log(mu) - lgamma(lower+1));
     }else{
       double temp = 0;
       if(lower<=1){
         temp = 0.0;
       }else{
         for(int j=0; j<lower; j++){
-          temp = temp + (j)* exp(-mu + (j)*log(mu)) / tgamma(j+1);
+          temp = temp + (j)* exp(-mu + (j)*log(mu) - lgamma(j+1));
         }
       }
       result = mu - temp;
