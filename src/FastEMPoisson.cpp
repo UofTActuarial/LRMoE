@@ -15,7 +15,7 @@ using namespace Numer;
 double sumPoissonY(double mu, double lower_, double upper_)
 {
   double result = 0;
-  double lower = floor(lower_);
+  double lower = fmax(floor(lower_), 0.0);
   double upper = ceil(upper_);
 
   if(!isinf(upper)){
