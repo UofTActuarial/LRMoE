@@ -9,6 +9,7 @@
 #'     \item \code{weibull}: Weibull
 #'     \item \code{burr}: Burr
 #'     \item \code{poisson}: Poisson
+#'     \item \code{ztpoisson}: Zero-Truncated Poisson
 #'     \item \code{nbinom}: Negative Binomial
 #'     \item \code{binom}: Binomial
 #'     \item \code{gammacount}: Gamma Count
@@ -52,6 +53,8 @@ PosExpertLL = function(ind.dist, tl, yl, yu, tu, params)
           # Frequency distributions & their zero-inflation
           "poisson"     = {temp = ExpertPoisson(tl, yl, yu, tu, params[1])},
           "ZI-poisson"  = {temp = ExpertPoisson(tl, yl, yu, tu, params[1])},
+          "ztpoisson"     = {temp = ExpertZTPoisson(tl, yl, yu, tu, params[1])},
+          "ZI-ztpoisson"  = {temp = ExpertZTPoisson(tl, yl, yu, tu, params[1])},
           "nbinom"      = {temp = ExpertNbinom(tl, yl, yu, tu, params[1], params[2])},
           "ZI-nbinom"   = {temp = ExpertNbinom(tl, yl, yu, tu, params[1], params[2])},
           "binom"       = {temp = ExpertBinom(tl, yl, yu, tu, params[1], params[2])},

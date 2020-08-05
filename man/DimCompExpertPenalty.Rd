@@ -17,6 +17,7 @@ DimCompExpertPenalty(ind.dist, params, hyper.params)
     \item \code{weibull}: \code{(shape.k, scale.lambda)}
     \item \code{burr}: \code{(shape1.k, shape2.c, scale.lambda)}
     \item \code{poisson}: \code{(mean.theta)}
+    \item \code{ztpoisson}: \code{(mean.theta)}
     \item \code{nbinom}: \code{(size.n, prob.p)}
     \item \code{binom}: \code{(size.n, prob.p)}
     \item \code{gammacount}: \code{(m, s)}
@@ -32,7 +33,8 @@ DimCompExpertPenalty(ind.dist, params, hyper.params)
     \item \code{invgauss}: \code{(hyper.mean.mu.1, hyper.scale.lambda.1, hyper.scale.lambda.2)}
     \item \code{weibull}: \code{(hyper.shape.k.1, hyper.shape.k.2, hyper.scale.lambda.1, hyper.scale.lambda.2)}
     \item \code{burr}: \code{(hyper.shape1.k.1, hyper.shape1.k.2, hyper.shape2.c.1, hyper.shape2.c.2, hyper.scale.lambda.1, hyper.scale.lambda.2)}
-    \item \code{poisson}: \code{(hyper.mean.theta.1)}
+    \item \code{poisson}: \code{(hyper.mean.theta.1, hyper.mean.theta.2)}
+    \item \code{ztpoisson}: \code{(hyper.mean.theta.1, hyper.mean.theta.2)}
     \item \code{nbinom}: \code{(hyper.size.n.1, hyper.size.n.2)}
     \item \code{binom}: \code{()}
     \item \code{gammacount}: \code{(hyper.m,1, hyper.m.2, hyper.s.1, hyper.s.2)}

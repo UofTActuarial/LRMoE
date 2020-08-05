@@ -9,6 +9,7 @@
 #'     \item \code{weibull}: Weibull
 #'     \item \code{burr}: Burr
 #'     \item \code{poisson}: Poisson
+#'     \item \code{ztpoisson}: Zero-Truncated Poisson
 #'     \item \code{nbinom}: Negative Binomial
 #'     \item \code{binom}: Binomial
 #'     \item \code{gammacount}: Gamma Count
@@ -41,6 +42,8 @@ DimCompExpertPenaltyInit = function(ind.dist)
           # Frequency distributions & their zero-inflation
           "poisson"     = {temp = c(2, 1) },
           "ZI-poisson"  = {temp = c(2, 1) },
+          "ztpoisson"     = {temp = c(2, 1) },
+          "ZI-ztpoisson"  = {temp = c(2, 1) },
           "nbinom"      = {temp = c(2, 1) },
           "ZI-nbinom"   = {temp = c(2, 1) },
           "binom"      = {temp = c() },

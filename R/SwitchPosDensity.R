@@ -8,6 +8,7 @@
 #'     \item \code{weibull}: Weibull
 #'     \item \code{burr}: Burr
 #'     \item \code{poisson}: Poisson
+#'     \item \code{ztpoisson}: Zero-Truncated Poisson
 #'     \item \code{nbinom}: Negative Binomial
 #'     \item \code{binom}: Binomial
 #'     \item \code{gammacount}: Gamma Count
@@ -21,6 +22,7 @@
 #'     \item \code{weibull}: \code{(shape.k, scale.lambda)}
 #'     \item \code{burr}: \code{(shape1.k, shape2.c, scale.lambda)}
 #'     \item \code{poisson}: \code{(mean.theta)}
+#'     \item \code{ztpoisson}: \code{(mean.theta)}
 #'     \item \code{nbinom}: \code{(size.n, prob.p)}
 #'     \item \code{binom}: \code{(size.n, prob.p)}
 #'     \item \code{gammacount}: \code{(m, s)}
@@ -32,6 +34,7 @@
 #' @importFrom stats dgamma dlnorm dweibull dpois dnbinom dbinom
 #' @importFrom statmod dinvgauss
 #' @importFrom actuar dburr
+#' @importFrom countreg dztpois
 #'
 #' @keywords internal
 #'
@@ -54,6 +57,8 @@ PosDensity = function(comp.dist, params, y.series)
           # Frequency distributions & their zero-inflation
           "poisson"     = {temp = dpois(y.series, lambda = params[1], log = FALSE) },
           "ZI-poisson"  = {temp = dpois(y.series, lambda = params[1], log = FALSE) },
+          "ztpoisson"     = {temp = dztpois(y.series, lambda = params[1], log = FALSE) },
+          "ZI-ztpoisson"  = {temp = dztpois(y.series, lambda = params[1], log = FALSE) },
           "nbinom"      = {temp = dnbinom(y.series, size = params[1], prob = params[2], log = FALSE) },
           "ZI-nbinom"   = {temp = dnbinom(y.series, size = params[1], prob = params[2], log = FALSE) },
           "binom"       = {temp = dbinom(y.series, size = params[1], prob = params[2], log = FALSE) },

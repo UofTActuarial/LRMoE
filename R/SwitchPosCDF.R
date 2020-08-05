@@ -9,6 +9,7 @@
 #'     \item \code{weibull}: Weibull
 #'     \item \code{burr}: Burr
 #'     \item \code{poisson}: Poisson
+#'     \item \code{ztpoisson}: Zero-Truncated Poisson
 #'     \item \code{nbinom}: Negative Binomial
 #'     \item \code{binom}: Binomial
 #'     \item \code{gammacount}: Gamma Count
@@ -22,6 +23,7 @@
 #'     \item \code{weibull}: \code{(shape.k, scale.lambda)}
 #'     \item \code{burr}: \code{(shape1.k, shape2.c, scale.lambda)}
 #'     \item \code{poisson}: \code{(mean.theta)}
+#'     \item \code{ztpoisson}: \code{(mean.theta)}
 #'     \item \code{nbinom}: \code{(size.n, prob.p)}
 #'     \item \code{binom}: \code{(size.n, prob.p)}
 #'     \item \code{gammacount}: \code{(m, s)}
@@ -30,6 +32,7 @@
 #' @importFrom stats pgamma plnorm pweibull ppois pnbinom pbinom
 #' @importFrom statmod pinvgauss
 #' @importFrom actuar pburr
+#' @importFrom countreg pztpois
 #'
 #' @keywords internal
 #'
@@ -52,6 +55,8 @@ PosCDF = function(y, comp.dist, params)
           # Frequency distributions & their zero-inflation
           "poisson"     = {temp = ifelse(y<0, 0, ppois(y, lambda = params[1], lower.tail = TRUE, log.p = FALSE)) },
           "ZI-poisson"  = {temp = ifelse(y<0, 0, ppois(y, lambda = params[1], lower.tail = TRUE, log.p = FALSE)) },
+          "ztpoisson"     = {temp = ifelse(y<0, 0, pztpois(y, lambda = params[1], lower.tail = TRUE, log.p = FALSE)) },
+          "ZI-ztpoisson"  = {temp = ifelse(y<0, 0, pztpois(y, lambda = params[1], lower.tail = TRUE, log.p = FALSE)) },
           "nbinom"      = {temp = ifelse(y<0, 0, pnbinom(y, size = params[1], prob = params[2], lower.tail = TRUE, log.p = FALSE)) },
           "ZI-nbinom"   = {temp = ifelse(y<0, 0, pnbinom(y, size = params[1], prob = params[2], lower.tail = TRUE, log.p = FALSE)) },
           "binom"       = {temp = ifelse(y<0, 0, pbinom(y, size = params[1], prob = params[2], lower.tail = TRUE, log.p = FALSE)) },

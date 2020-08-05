@@ -15,6 +15,7 @@ PosDensity(comp.dist, params, y.series)
     \item \code{weibull}: Weibull
     \item \code{burr}: Burr
     \item \code{poisson}: Poisson
+    \item \code{ztpoisson}: Zero-Truncated Poisson
     \item \code{nbinom}: Negative Binomial
     \item \code{binom}: Binomial
     \item \code{gammacount}: Gamma Count
@@ -29,6 +30,7 @@ PosDensity(comp.dist, params, y.series)
     \item \code{weibull}: \code{(shape.k, scale.lambda)}
     \item \code{burr}: \code{(shape1.k, shape2.c, scale.lambda)}
     \item \code{poisson}: \code{(mean.theta)}
+    \item \code{ztpoisson}: \code{(mean.theta)}
     \item \code{nbinom}: \code{(size.n, prob.p)}
     \item \code{binom}: \code{(size.n, prob.p)}
     \item \code{gammacount}: \code{(m, s)}

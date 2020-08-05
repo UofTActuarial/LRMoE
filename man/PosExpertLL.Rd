@@ -15,6 +15,7 @@ PosExpertLL(ind.dist, tl, yl, yu, tu, params)
     \item \code{weibull}: Weibull
     \item \code{burr}: Burr
     \item \code{poisson}: Poisson
+    \item \code{ztpoisson}: Zero-Truncated Poisson
     \item \code{nbinom}: Negative Binomial
     \item \code{binom}: Binomial
     \item \code{gammacount}: Gamma Count

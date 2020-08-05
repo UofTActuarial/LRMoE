@@ -84,7 +84,7 @@ DimCompExpertLL = function(Y, comp.dist, zero.init, params.init)
       obs.exact.zero.idx = (Y[,(4*(k-1)+4)]==0) # (tu==0) # tu=0: the ovservation is exactly zero, subset of preceding two cases
 
       # If modifying this code in future, make sure to change this freq.list, if new frequency distributions are to be added!
-      freq.dist = c("poisson", "ZI-poisson", "nbinom", "ZI-nbinom", "binom", "ZI-binom", "gammacount", "ZI-gammacount")
+      freq.dist = c("poisson", "ZI-poisson", "nbinom", "ZI-nbinom", "binom", "ZI-binom", "gammacount", "ZI-gammacount", "ztpoisson", "ZI-ztpoisson")
       # ll.ind: only possibility is the non-zero component
       expert.list[[k]]$expert.ll[!obs.y.zero.idx,j] = log(0 + (1-expert.list[[k]]$zero.prob[j])*exp(expert.list[[k]]$pos.expert.ll[!obs.y.zero.idx,j]))
       # ll.ind: can come from zero component. Need to separate severity and frequency

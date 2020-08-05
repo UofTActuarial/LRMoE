@@ -9,6 +9,7 @@
 #' @importFrom statmod rinvgauss
 #' @importFrom actuar rburr
 #' @importFrom rmutil rgammacount
+#' @importFrom countreg rztpois
 #'
 #'
 #' @keywords internal
@@ -32,6 +33,8 @@ SimPosY = function(sample.size.n, comp.dist, params)
           # Frequency distributions & their zero-inflation
           "poisson"     = {temp = rpois(sample.size.n, lambda = params[1])},
           "ZI-poisson"  = {temp = rpois(sample.size.n, lambda = params[1])},
+          "ztpoisson"     = {temp = rztpois(sample.size.n, lambda = params[1])},
+          "ZI-ztpoisson"  = {temp = rztpois(sample.size.n, lambda = params[1])},
           "nbinom"      = {temp = rnbinom(sample.size.n, size = params[1], prob = params[2])},
           "ZI-nbinom"   = {temp = rnbinom(sample.size.n, size = params[1], prob = params[2])},
           "binom"       = {temp = rbinom(sample.size.n, size = params[1], prob = params[2])},

@@ -31,6 +31,8 @@ PosCountParams = function(comp.dist)
               # Frequency distributions & their zero-inflation
               "poisson"     = {result = result + 1},
               "ZI-poisson"  = {result = result + 1},
+              "ztpoisson"     = {result = result + 1},
+              "ZI-ztpoisson"  = {result = result + 1},
               "nbinom"      = {result = result + 2},
               "ZI-nbinom"   = {result = result + 2},
               "binom"       = {result = result + 1},

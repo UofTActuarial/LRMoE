@@ -22,6 +22,8 @@ PosName = function(comp.dist)
           # Frequency distributions & their zero-inflation
           "poisson"     = {temp = c("mean") },
           "ZI-poisson"  = {temp = c("mean") },
+          "ztpoisson"     = {temp = c("lambda") },
+          "ZI-ztpoisson"  = {temp = c("lambda") },
           "nbinom"      = {temp = c("size", "prob") },
           "ZI-nbinom"   = {temp = c("size", "prob") },
           "binom"      = {temp = c("size", "prob") },
