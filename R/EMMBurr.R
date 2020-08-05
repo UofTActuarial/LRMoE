@@ -171,8 +171,12 @@ EMMBurr = function(params.old,
     # Constants
     sample.size.n = length(tl)
     censor.idx = (yl!=yu)
-    shape2.c.new = params.new[1]
-    scale.lambda.new = params.new[2]
+
+    # shape2.c.new = params.new[1]
+    # scale.lambda.new = params.new[2]
+
+    shape2.c.new = exp(params.new[1])
+    scale.lambda.new = exp(params.new[2])
 
     # E-Step: conditional expectation of y.pol
     y.pol.e.obs = array(0, dim = c(sample.size.n ,1))
@@ -306,7 +310,7 @@ EMMBurr = function(params.old,
   shape1.k.old = shape1.k
   shape2.c.old = shape2.c
   scale.lambda.old = scale.lambda
-  params.init = c(shape2.c.old, scale.lambda.old)
+  params.init = log(c(shape2.c.old, scale.lambda.old)) # c(shape2.c.old, scale.lambda.old)
   temp.update = optim(par = params.init, fn = Q.T,
                       shape1.k.old = shape1.k.old, shape2.c.old = shape2.c.old, scale.lambda.old = scale.lambda.old,
                       z.e.obs = z.e.obs[pos.idx], z.e.lat = z.e.lat[pos.idx], k.e = k.e[pos.idx],
@@ -321,8 +325,10 @@ EMMBurr = function(params.old,
                       method = "L-BFGS-B")$par
 
   # Update of c and lambda
-  shape2.c.new = temp.update[1]
-  scale.lambda.new = temp.update[2]
+  # shape2.c.new = temp.update[1]
+  # scale.lambda.new = temp.update[2]
+  shape2.c.new = exp(temp.update[1])
+  scale.lambda.new = exp(temp.update[2])
 
   # Update of k
   # E-Step: conditional expectation of y.pol

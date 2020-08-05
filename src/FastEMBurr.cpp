@@ -173,8 +173,18 @@ SEXP intBurrPolYLat(SEXP k_, SEXP c_, SEXP lambda_, SEXP cc_, SEXP ll_, SEXP low
   NumericVector result(lower.length());
 
   for(int j=0; j<lower.length(); j++){
-    double temp1 = intBurrPolY(k(0), c(0), lambda(0), cc(0), ll(0), R_NegInf, lower(j))[0];
-    double temp2 = intBurrPolY(k(0), c(0), lambda(0), cc(0), ll(0), upper(j), R_PosInf)[0];
+    double temp1;
+    if(lower(j)==R_NegInf){
+      temp1 = 0.0;
+    }else{
+      temp1 = intBurrPolY(k(0), c(0), lambda(0), cc(0), ll(0), R_NegInf, lower(j))[0];
+    }
+    double temp2;
+    if(upper(j)==R_PosInf){
+      temp2 = 0.0;
+    }else{
+      temp2 = intBurrPolY(k(0), c(0), lambda(0), cc(0), ll(0), upper(j), R_PosInf)[0];
+    }
     result(j) = temp1 + temp2;
 
   }
