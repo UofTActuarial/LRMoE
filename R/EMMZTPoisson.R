@@ -2,7 +2,7 @@
 #' ECM: M-Step for Zero-Truncated Poisson expert.
 #'
 #' @importFrom stats dpois optimise integrate
-#' @importFrom countreg pztpois dztpois
+#' @importFrom actuar pztpois dztpois
 #' @importFrom copula log1mexp
 #'
 #' @keywords internal
@@ -33,31 +33,6 @@ EMMZTPoisson = function(params.old,
   # Conditional expectation of y: untruncated and uncensored case
   y.e.obs[!censor.idx, 1] = yl[!censor.idx]
 
-  # Conditional expectation of y: untruncated but cencored case
-  # int.y.fcn = function(lower, upper, mean.theta.j)
-  # {
-  #   lower.bound = ceiling(lower)
-  #   upper.bound = floor(upper)
-  #
-  #   if (upper!=Inf) {
-  #     y.series = c((lower.bound):(upper.bound))
-  #     dens.series = dpois(y.series, mean.theta.j, log = FALSE)
-  #     result = sum(y.series * dens.series)
-  #   }else{
-  #     if(lower.bound<=1)
-  #     {
-  #       y.series = c(0)
-  #     }else
-  #     {
-  #       y.series = c((0):(lower.bound-1))
-  #     }
-  #     dens.series = dpois(y.series, mean.theta.j, log = FALSE)
-  #     result = mean.theta.j - sum(y.series * dens.series)
-  #   }
-  #
-  #   return(sum(result))
-  # }
-
   # First find unique upper and lower bounds of integration
   y.unique = unique(cbind(yl,yu),MARGIN=1)
   y.unique.length = nrow(y.unique)
@@ -69,7 +44,8 @@ EMMZTPoisson = function(params.old,
   y.e.obs.unique = array(0,dim=c(y.unique.length,1))
   # y.e.obs.unique = matrix(0, nrow = y.unique.length, ncol = 1)
 
-  y.e.obs.unique[,1] = sumPoissonYObs(mean.theta, (yl.unique), (yu.unique)) / (1-exp(-mean.theta))
+  y.e.obs.unique[,1] = sumZTPoissonYObs(mean.theta, (yl.unique), (yu.unique))
+    # sumPoissonYObs(mean.theta, (yl.unique), (yu.unique)) / (1-exp(-mean.theta))
 
   # Match to all observations of y
   temp.y.e.obs = array(0, dim = c(sample.size.n, 1))
@@ -88,7 +64,8 @@ EMMZTPoisson = function(params.old,
   # Integration
   y.e.lat.unique = array(0,dim=c(tn.unique.length,1))
 
-  y.e.lat.unique[,1] = ( mean.theta - sumPoissonYObs(mean.theta, (tl.unique), (tu.unique)) ) / (1-exp(-mean.theta))
+  y.e.lat.unique[,1] = mean.theta/(1-exp(-mean.theta)) - sumZTPoissonYObs(mean.theta, (tl.unique), (tu.unique))
+    # ( mean.theta - sumPoissonYObs(mean.theta, (tl.unique), (tu.unique)) ) / (1-exp(-mean.theta))
 
   # Match to all observations of y
   temp.y.e.lat = array(0, dim = c(sample.size.n, 1))
@@ -108,6 +85,7 @@ EMMZTPoisson = function(params.old,
                  penalty,
                  hyper.mean.1, hyper.mean.2)
   {
+    params.new = exp(params.new)
 
     sum.one = XPlusYZ(z.e.obs, z.e.lat, k.e)
     sum.two = XAPlusYZB(z.e.obs, y.e.obs, z.e.lat, k.e, y.e.lat)
@@ -126,15 +104,15 @@ EMMZTPoisson = function(params.old,
   # M-Step
   # pos.idx = (yu!=0)
   pos.idx = rep(TRUE, length(yu))
-  temp.update = optim(par = mean.theta, fn = Q.T,
+  temp.update = optim(par = log(mean.theta), fn = Q.T,
                       z.e.obs = z.e.obs[pos.idx], z.e.lat = z.e.lat[pos.idx], k.e = k.e[pos.idx],
                       y.e.obs = y.e.obs[pos.idx], y.e.lat = y.e.lat[pos.idx],
                       penalty = penalty,
                       hyper.mean.1 = hyper.mean.1, hyper.mean.2 = hyper.mean.2,
-                      lower = 0.5*mean.theta, upper = 5*mean.theta,
+                      lower = 0.5*log(mean.theta), upper = 5*log(mean.theta),
                       method = "L-BFGS-B")$par
 
-  params.new[1] = temp.update
+  params.new[1] = exp(temp.update)
 
   return(params.new)
 

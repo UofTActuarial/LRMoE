@@ -10,7 +10,7 @@
 #'
 #' @seealso \code{\link[stats]{Poisson}}.
 #'
-#' @importFrom countreg pztpois dztpois
+#' @importFrom actuar pztpois dztpois
 #' @importFrom copula log1mexp
 #'
 #' @keywords internal

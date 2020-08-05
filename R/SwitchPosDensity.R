@@ -34,7 +34,7 @@
 #' @importFrom stats dgamma dlnorm dweibull dpois dnbinom dbinom
 #' @importFrom statmod dinvgauss
 #' @importFrom actuar dburr
-#' @importFrom countreg dztpois
+#' @importFrom actuar dztpois
 #'
 #' @keywords internal
 #'

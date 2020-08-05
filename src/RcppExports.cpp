@@ -436,6 +436,45 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// sumZTPoissonY
+double sumZTPoissonY(double mu, double lower_, double upper_);
+RcppExport SEXP _LRMoECPNew_sumZTPoissonY(SEXP muSEXP, SEXP lower_SEXP, SEXP upper_SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< double >::type mu(muSEXP);
+    Rcpp::traits::input_parameter< double >::type lower_(lower_SEXP);
+    Rcpp::traits::input_parameter< double >::type upper_(upper_SEXP);
+    rcpp_result_gen = Rcpp::wrap(sumZTPoissonY(mu, lower_, upper_));
+    return rcpp_result_gen;
+END_RCPP
+}
+// sumZTPoissonYObs
+SEXP sumZTPoissonYObs(SEXP mu_, SEXP lower_, SEXP upper_);
+RcppExport SEXP _LRMoECPNew_sumZTPoissonYObs(SEXP mu_SEXP, SEXP lower_SEXP, SEXP upper_SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< SEXP >::type mu_(mu_SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type lower_(lower_SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type upper_(upper_SEXP);
+    rcpp_result_gen = Rcpp::wrap(sumZTPoissonYObs(mu_, lower_, upper_));
+    return rcpp_result_gen;
+END_RCPP
+}
+// sumZTPoissonYLat
+SEXP sumZTPoissonYLat(SEXP mu_, SEXP lower_, SEXP upper_);
+RcppExport SEXP _LRMoECPNew_sumZTPoissonYLat(SEXP mu_SEXP, SEXP lower_SEXP, SEXP upper_SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< SEXP >::type mu_(mu_SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type lower_(lower_SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type upper_(upper_SEXP);
+    rcpp_result_gen = Rcpp::wrap(sumZTPoissonYLat(mu_, lower_, upper_));
+    return rcpp_result_gen;
+END_RCPP
+}
 // XAPlusYZB
 SEXP XAPlusYZB(SEXP x, SEXP a, SEXP y, SEXP z, SEXP b);
 RcppExport SEXP _LRMoECPNew_XAPlusYZB(SEXP xSEXP, SEXP aSEXP, SEXP ySEXP, SEXP zSEXP, SEXP bSEXP) {
@@ -521,6 +560,9 @@ static const R_CallMethodDef CallEntries[] = {
     {"_LRMoECPNew_intWeibullLogYLat", (DL_FUNC) &_LRMoECPNew_intWeibullLogYLat, 4},
     {"_LRMoECPNew_intWeibullPowYObs", (DL_FUNC) &_LRMoECPNew_intWeibullPowYObs, 5},
     {"_LRMoECPNew_intWeibullPowYLat", (DL_FUNC) &_LRMoECPNew_intWeibullPowYLat, 5},
+    {"_LRMoECPNew_sumZTPoissonY", (DL_FUNC) &_LRMoECPNew_sumZTPoissonY, 3},
+    {"_LRMoECPNew_sumZTPoissonYObs", (DL_FUNC) &_LRMoECPNew_sumZTPoissonYObs, 3},
+    {"_LRMoECPNew_sumZTPoissonYLat", (DL_FUNC) &_LRMoECPNew_sumZTPoissonYLat, 3},
     {"_LRMoECPNew_XAPlusYZB", (DL_FUNC) &_LRMoECPNew_XAPlusYZB, 5},
     {"_LRMoECPNew_XColMinusY", (DL_FUNC) &_LRMoECPNew_XColMinusY, 2},
     {"_LRMoECPNew_XPlusYColTimesZ", (DL_FUNC) &_LRMoECPNew_XPlusYColTimesZ, 3},

@@ -9,7 +9,7 @@
 #' @importFrom statmod rinvgauss
 #' @importFrom actuar rburr
 #' @importFrom rmutil rgammacount
-#' @importFrom countreg rztpois
+#' @importFrom actuar rztpois
 #'
 #'
 #' @keywords internal

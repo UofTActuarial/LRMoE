@@ -32,7 +32,7 @@
 #' @importFrom stats pgamma plnorm pweibull ppois pnbinom pbinom
 #' @importFrom statmod pinvgauss
 #' @importFrom actuar pburr
-#' @importFrom countreg pztpois
+#' @importFrom actuar pztpois
 #'
 #' @keywords internal
 #'

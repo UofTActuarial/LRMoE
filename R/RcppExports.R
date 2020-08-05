@@ -121,6 +121,18 @@ intWeibullPowYLat <- function(k_, lambda_, p_, lower_, upper_) {
     .Call(`_LRMoECPNew_intWeibullPowYLat`, k_, lambda_, p_, lower_, upper_)
 }
 
+sumZTPoissonY <- function(mu, lower_, upper_) {
+    .Call(`_LRMoECPNew_sumZTPoissonY`, mu, lower_, upper_)
+}
+
+sumZTPoissonYObs <- function(mu_, lower_, upper_) {
+    .Call(`_LRMoECPNew_sumZTPoissonYObs`, mu_, lower_, upper_)
+}
+
+sumZTPoissonYLat <- function(mu_, lower_, upper_) {
+    .Call(`_LRMoECPNew_sumZTPoissonYLat`, mu_, lower_, upper_)
+}
+
 XAPlusYZB <- function(x, a, y, z, b) {
     .Call(`_LRMoECPNew_XAPlusYZB`, x, a, y, z, b)
 }
