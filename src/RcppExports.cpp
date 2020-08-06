@@ -6,6 +6,17 @@
 
 using namespace Rcpp;
 
+// ColMaxIdx
+SEXP ColMaxIdx(SEXP w);
+RcppExport SEXP _LRMoECPNew_ColMaxIdx(SEXP wSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< SEXP >::type w(wSEXP);
+    rcpp_result_gen = Rcpp::wrap(ColMaxIdx(w));
+    return rcpp_result_gen;
+END_RCPP
+}
 // EMalphadQ
 SEXP EMalphadQ(SEXP x, SEXP zj, SEXP z, SEXP p);
 RcppExport SEXP _LRMoECPNew_EMalphadQ(SEXP xSEXP, SEXP zjSEXP, SEXP zSEXP, SEXP pSEXP) {
@@ -530,6 +541,7 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
+    {"_LRMoECPNew_ColMaxIdx", (DL_FUNC) &_LRMoECPNew_ColMaxIdx, 1},
     {"_LRMoECPNew_EMalphadQ", (DL_FUNC) &_LRMoECPNew_EMalphadQ, 4},
     {"_LRMoECPNew_EMalphadQ2", (DL_FUNC) &_LRMoECPNew_EMalphadQ2, 4},
     {"_LRMoECPNew_sumBinomialY", (DL_FUNC) &_LRMoECPNew_sumBinomialY, 4},
