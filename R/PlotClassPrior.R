@@ -20,7 +20,7 @@ PlotClassPrior = function(X, alpha, title = "Latent Class Probabilities")
   df = data.frame(covariate = rep("X", nrow(alpha)), class = as.factor(c(1:nrow(alpha))), probability = t(weighting))
 
   return(
-    ggplot(df, aes(fill=class, y=probability, x = covariate)) +
+    ggplot(df, aes_string(fill='class', y='probability', x = 'covariate')) +
       geom_bar(position="fill", stat="identity") +
       # geom_text(aes(label = round(probability, 2)),
       #           position = position_stack(vjust = 0.5)) +

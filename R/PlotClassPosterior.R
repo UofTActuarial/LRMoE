@@ -18,7 +18,7 @@
 #'
 #' @export PlotClassPosterior
 #'
-PlotClassPosterior = function(Y, X, alpha, comp.dist, zero.prob, params.list, title = "")
+PlotClassPosterior = function(Y, X, alpha, comp.dist, zero.prob, params.list, title = "Latent Class Probabilities")
 {
   # prior
   alpha.old = alpha
@@ -32,7 +32,7 @@ PlotClassPosterior = function(Y, X, alpha, comp.dist, zero.prob, params.list, ti
   df$case = factor(df$case, levels = c("Prior", "Posterior"))
 
   return(
-    ggplot(df, aes(fill=class, y=probability, x = case)) +
+    ggplot(df, aes_string(fill='class', y='probability', x = 'case')) +
       geom_bar(position="fill", stat="identity") +
       # geom_text(aes(label = round(probability, 2)),
       #           position = position_stack(vjust = 0.5)) +
