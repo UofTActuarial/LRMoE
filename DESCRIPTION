@@ -1,4 +1,4 @@
-Package: LRMoECPNew
+Package: LRMoE
 Type: Package
 Title: Logit-Weighted Reduced Mixture-of-Experts
 Version: 0.1.0
@@ -13,7 +13,7 @@ Description: The Logit-Weighted Reduced Mixture-of-Experts (LRMoE)
   published in Insurance: Mathematics and Economics, and
   Fung et al. (2019) "A CLASS OF MIXTURE OF EXPERTS MODELS FOR GENERAL INSURANCE: APPLICATION TO CORRELATED CLAIM FREQUENCIES"
   in ASTIN Bulletin: The Journal of the IAA.
-License: GPL (>= 2)
+License: GPL-3 + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Depends: R (>= 3.5)

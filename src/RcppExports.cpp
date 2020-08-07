@@ -8,7 +8,7 @@ using namespace Rcpp;
 
 // ColMaxIdx
 SEXP ColMaxIdx(SEXP w);
-RcppExport SEXP _LRMoECPNew_ColMaxIdx(SEXP wSEXP) {
+RcppExport SEXP _LRMoE_ColMaxIdx(SEXP wSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -19,7 +19,7 @@ END_RCPP
 }
 // EMalphadQ
 SEXP EMalphadQ(SEXP x, SEXP zj, SEXP z, SEXP p);
-RcppExport SEXP _LRMoECPNew_EMalphadQ(SEXP xSEXP, SEXP zjSEXP, SEXP zSEXP, SEXP pSEXP) {
+RcppExport SEXP _LRMoE_EMalphadQ(SEXP xSEXP, SEXP zjSEXP, SEXP zSEXP, SEXP pSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -33,7 +33,7 @@ END_RCPP
 }
 // EMalphadQ2
 SEXP EMalphadQ2(SEXP x, SEXP z, SEXP p, SEXP q);
-RcppExport SEXP _LRMoECPNew_EMalphadQ2(SEXP xSEXP, SEXP zSEXP, SEXP pSEXP, SEXP qSEXP) {
+RcppExport SEXP _LRMoE_EMalphadQ2(SEXP xSEXP, SEXP zSEXP, SEXP pSEXP, SEXP qSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -47,7 +47,7 @@ END_RCPP
 }
 // sumBinomialY
 double sumBinomialY(double n, double p, double lower_, double upper_);
-RcppExport SEXP _LRMoECPNew_sumBinomialY(SEXP nSEXP, SEXP pSEXP, SEXP lower_SEXP, SEXP upper_SEXP) {
+RcppExport SEXP _LRMoE_sumBinomialY(SEXP nSEXP, SEXP pSEXP, SEXP lower_SEXP, SEXP upper_SEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -61,7 +61,7 @@ END_RCPP
 }
 // sumBinomialYObs
 SEXP sumBinomialYObs(SEXP n_, SEXP p_, SEXP lower_, SEXP upper_);
-RcppExport SEXP _LRMoECPNew_sumBinomialYObs(SEXP n_SEXP, SEXP p_SEXP, SEXP lower_SEXP, SEXP upper_SEXP) {
+RcppExport SEXP _LRMoE_sumBinomialYObs(SEXP n_SEXP, SEXP p_SEXP, SEXP lower_SEXP, SEXP upper_SEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -75,7 +75,7 @@ END_RCPP
 }
 // sumBinomialYLat
 SEXP sumBinomialYLat(SEXP n_, SEXP p_, SEXP lower_, SEXP upper_);
-RcppExport SEXP _LRMoECPNew_sumBinomialYLat(SEXP n_SEXP, SEXP p_SEXP, SEXP lower_SEXP, SEXP upper_SEXP) {
+RcppExport SEXP _LRMoE_sumBinomialYLat(SEXP n_SEXP, SEXP p_SEXP, SEXP lower_SEXP, SEXP upper_SEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -89,7 +89,7 @@ END_RCPP
 }
 // intBurrLogYObs
 SEXP intBurrLogYObs(SEXP k_, SEXP c_, SEXP lambda_, SEXP lower_, SEXP upper_);
-RcppExport SEXP _LRMoECPNew_intBurrLogYObs(SEXP k_SEXP, SEXP c_SEXP, SEXP lambda_SEXP, SEXP lower_SEXP, SEXP upper_SEXP) {
+RcppExport SEXP _LRMoE_intBurrLogYObs(SEXP k_SEXP, SEXP c_SEXP, SEXP lambda_SEXP, SEXP lower_SEXP, SEXP upper_SEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -104,7 +104,7 @@ END_RCPP
 }
 // intBurrLogYLat
 SEXP intBurrLogYLat(SEXP k_, SEXP c_, SEXP lambda_, SEXP lower_, SEXP upper_);
-RcppExport SEXP _LRMoECPNew_intBurrLogYLat(SEXP k_SEXP, SEXP c_SEXP, SEXP lambda_SEXP, SEXP lower_SEXP, SEXP upper_SEXP) {
+RcppExport SEXP _LRMoE_intBurrLogYLat(SEXP k_SEXP, SEXP c_SEXP, SEXP lambda_SEXP, SEXP lower_SEXP, SEXP upper_SEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -119,7 +119,7 @@ END_RCPP
 }
 // intBurrPolYObs
 SEXP intBurrPolYObs(SEXP k_, SEXP c_, SEXP lambda_, SEXP cc_, SEXP ll_, SEXP lower_, SEXP upper_);
-RcppExport SEXP _LRMoECPNew_intBurrPolYObs(SEXP k_SEXP, SEXP c_SEXP, SEXP lambda_SEXP, SEXP cc_SEXP, SEXP ll_SEXP, SEXP lower_SEXP, SEXP upper_SEXP) {
+RcppExport SEXP _LRMoE_intBurrPolYObs(SEXP k_SEXP, SEXP c_SEXP, SEXP lambda_SEXP, SEXP cc_SEXP, SEXP ll_SEXP, SEXP lower_SEXP, SEXP upper_SEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -136,7 +136,7 @@ END_RCPP
 }
 // intBurrPolYLat
 SEXP intBurrPolYLat(SEXP k_, SEXP c_, SEXP lambda_, SEXP cc_, SEXP ll_, SEXP lower_, SEXP upper_);
-RcppExport SEXP _LRMoECPNew_intBurrPolYLat(SEXP k_SEXP, SEXP c_SEXP, SEXP lambda_SEXP, SEXP cc_SEXP, SEXP ll_SEXP, SEXP lower_SEXP, SEXP upper_SEXP) {
+RcppExport SEXP _LRMoE_intBurrPolYLat(SEXP k_SEXP, SEXP c_SEXP, SEXP lambda_SEXP, SEXP cc_SEXP, SEXP ll_SEXP, SEXP lower_SEXP, SEXP upper_SEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -153,7 +153,7 @@ END_RCPP
 }
 // intGammaLogYObs
 SEXP intGammaLogYObs(SEXP m_, SEXP theta_, SEXP lower_, SEXP upper_);
-RcppExport SEXP _LRMoECPNew_intGammaLogYObs(SEXP m_SEXP, SEXP theta_SEXP, SEXP lower_SEXP, SEXP upper_SEXP) {
+RcppExport SEXP _LRMoE_intGammaLogYObs(SEXP m_SEXP, SEXP theta_SEXP, SEXP lower_SEXP, SEXP upper_SEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -167,7 +167,7 @@ END_RCPP
 }
 // intGammaLogYLat
 SEXP intGammaLogYLat(SEXP m_, SEXP theta_, SEXP lower_, SEXP upper_);
-RcppExport SEXP _LRMoECPNew_intGammaLogYLat(SEXP m_SEXP, SEXP theta_SEXP, SEXP lower_SEXP, SEXP upper_SEXP) {
+RcppExport SEXP _LRMoE_intGammaLogYLat(SEXP m_SEXP, SEXP theta_SEXP, SEXP lower_SEXP, SEXP upper_SEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -181,7 +181,7 @@ END_RCPP
 }
 // intInvGaussLogYObs
 SEXP intInvGaussLogYObs(SEXP mu_, SEXP lambda_, SEXP lower_, SEXP upper_);
-RcppExport SEXP _LRMoECPNew_intInvGaussLogYObs(SEXP mu_SEXP, SEXP lambda_SEXP, SEXP lower_SEXP, SEXP upper_SEXP) {
+RcppExport SEXP _LRMoE_intInvGaussLogYObs(SEXP mu_SEXP, SEXP lambda_SEXP, SEXP lower_SEXP, SEXP upper_SEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -195,7 +195,7 @@ END_RCPP
 }
 // intInvGaussLogYLat
 SEXP intInvGaussLogYLat(SEXP mu_, SEXP lambda_, SEXP lower_, SEXP upper_);
-RcppExport SEXP _LRMoECPNew_intInvGaussLogYLat(SEXP mu_SEXP, SEXP lambda_SEXP, SEXP lower_SEXP, SEXP upper_SEXP) {
+RcppExport SEXP _LRMoE_intInvGaussLogYLat(SEXP mu_SEXP, SEXP lambda_SEXP, SEXP lower_SEXP, SEXP upper_SEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -209,7 +209,7 @@ END_RCPP
 }
 // intInvGaussYObs
 SEXP intInvGaussYObs(SEXP mu_, SEXP lambda_, SEXP lower_, SEXP upper_);
-RcppExport SEXP _LRMoECPNew_intInvGaussYObs(SEXP mu_SEXP, SEXP lambda_SEXP, SEXP lower_SEXP, SEXP upper_SEXP) {
+RcppExport SEXP _LRMoE_intInvGaussYObs(SEXP mu_SEXP, SEXP lambda_SEXP, SEXP lower_SEXP, SEXP upper_SEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -223,7 +223,7 @@ END_RCPP
 }
 // intInvGaussYLat
 SEXP intInvGaussYLat(SEXP mu_, SEXP lambda_, SEXP lower_, SEXP upper_);
-RcppExport SEXP _LRMoECPNew_intInvGaussYLat(SEXP mu_SEXP, SEXP lambda_SEXP, SEXP lower_SEXP, SEXP upper_SEXP) {
+RcppExport SEXP _LRMoE_intInvGaussYLat(SEXP mu_SEXP, SEXP lambda_SEXP, SEXP lower_SEXP, SEXP upper_SEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -237,7 +237,7 @@ END_RCPP
 }
 // intInvGaussInvYObs
 SEXP intInvGaussInvYObs(SEXP mu_, SEXP lambda_, SEXP lower_, SEXP upper_);
-RcppExport SEXP _LRMoECPNew_intInvGaussInvYObs(SEXP mu_SEXP, SEXP lambda_SEXP, SEXP lower_SEXP, SEXP upper_SEXP) {
+RcppExport SEXP _LRMoE_intInvGaussInvYObs(SEXP mu_SEXP, SEXP lambda_SEXP, SEXP lower_SEXP, SEXP upper_SEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -251,7 +251,7 @@ END_RCPP
 }
 // intInvGaussInvYLat
 SEXP intInvGaussInvYLat(SEXP mu_, SEXP lambda_, SEXP lower_, SEXP upper_);
-RcppExport SEXP _LRMoECPNew_intInvGaussInvYLat(SEXP mu_SEXP, SEXP lambda_SEXP, SEXP lower_SEXP, SEXP upper_SEXP) {
+RcppExport SEXP _LRMoE_intInvGaussInvYLat(SEXP mu_SEXP, SEXP lambda_SEXP, SEXP lower_SEXP, SEXP upper_SEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -265,7 +265,7 @@ END_RCPP
 }
 // sumNegativeBinomialY
 double sumNegativeBinomialY(double n, double p, double lower_, double upper_);
-RcppExport SEXP _LRMoECPNew_sumNegativeBinomialY(SEXP nSEXP, SEXP pSEXP, SEXP lower_SEXP, SEXP upper_SEXP) {
+RcppExport SEXP _LRMoE_sumNegativeBinomialY(SEXP nSEXP, SEXP pSEXP, SEXP lower_SEXP, SEXP upper_SEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -279,7 +279,7 @@ END_RCPP
 }
 // sumNegativeBinomialYObs
 SEXP sumNegativeBinomialYObs(SEXP n_, SEXP p_, SEXP lower_, SEXP upper_);
-RcppExport SEXP _LRMoECPNew_sumNegativeBinomialYObs(SEXP n_SEXP, SEXP p_SEXP, SEXP lower_SEXP, SEXP upper_SEXP) {
+RcppExport SEXP _LRMoE_sumNegativeBinomialYObs(SEXP n_SEXP, SEXP p_SEXP, SEXP lower_SEXP, SEXP upper_SEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -293,7 +293,7 @@ END_RCPP
 }
 // sumNegativeBinomialYLat
 SEXP sumNegativeBinomialYLat(SEXP n_, SEXP p_, SEXP lower_, SEXP upper_);
-RcppExport SEXP _LRMoECPNew_sumNegativeBinomialYLat(SEXP n_SEXP, SEXP p_SEXP, SEXP lower_SEXP, SEXP upper_SEXP) {
+RcppExport SEXP _LRMoE_sumNegativeBinomialYLat(SEXP n_SEXP, SEXP p_SEXP, SEXP lower_SEXP, SEXP upper_SEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -307,7 +307,7 @@ END_RCPP
 }
 // sumNegativeBinomialLfacY
 double sumNegativeBinomialLfacY(double n, double p, double nn, double lower_, double upper_);
-RcppExport SEXP _LRMoECPNew_sumNegativeBinomialLfacY(SEXP nSEXP, SEXP pSEXP, SEXP nnSEXP, SEXP lower_SEXP, SEXP upper_SEXP) {
+RcppExport SEXP _LRMoE_sumNegativeBinomialLfacY(SEXP nSEXP, SEXP pSEXP, SEXP nnSEXP, SEXP lower_SEXP, SEXP upper_SEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -322,7 +322,7 @@ END_RCPP
 }
 // sumNegativeBinomialLfacYObs
 SEXP sumNegativeBinomialLfacYObs(SEXP n_, SEXP p_, SEXP nn_, SEXP lower_, SEXP upper_);
-RcppExport SEXP _LRMoECPNew_sumNegativeBinomialLfacYObs(SEXP n_SEXP, SEXP p_SEXP, SEXP nn_SEXP, SEXP lower_SEXP, SEXP upper_SEXP) {
+RcppExport SEXP _LRMoE_sumNegativeBinomialLfacYObs(SEXP n_SEXP, SEXP p_SEXP, SEXP nn_SEXP, SEXP lower_SEXP, SEXP upper_SEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -337,7 +337,7 @@ END_RCPP
 }
 // sumNegativeBinomialLfacYLat
 SEXP sumNegativeBinomialLfacYLat(SEXP n_, SEXP p_, SEXP nn_, SEXP lower_, SEXP upper_);
-RcppExport SEXP _LRMoECPNew_sumNegativeBinomialLfacYLat(SEXP n_SEXP, SEXP p_SEXP, SEXP nn_SEXP, SEXP lower_SEXP, SEXP upper_SEXP) {
+RcppExport SEXP _LRMoE_sumNegativeBinomialLfacYLat(SEXP n_SEXP, SEXP p_SEXP, SEXP nn_SEXP, SEXP lower_SEXP, SEXP upper_SEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -352,7 +352,7 @@ END_RCPP
 }
 // sumPoissonY
 double sumPoissonY(double mu, double lower_, double upper_);
-RcppExport SEXP _LRMoECPNew_sumPoissonY(SEXP muSEXP, SEXP lower_SEXP, SEXP upper_SEXP) {
+RcppExport SEXP _LRMoE_sumPoissonY(SEXP muSEXP, SEXP lower_SEXP, SEXP upper_SEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -365,7 +365,7 @@ END_RCPP
 }
 // sumPoissonYObs
 SEXP sumPoissonYObs(SEXP mu_, SEXP lower_, SEXP upper_);
-RcppExport SEXP _LRMoECPNew_sumPoissonYObs(SEXP mu_SEXP, SEXP lower_SEXP, SEXP upper_SEXP) {
+RcppExport SEXP _LRMoE_sumPoissonYObs(SEXP mu_SEXP, SEXP lower_SEXP, SEXP upper_SEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -378,7 +378,7 @@ END_RCPP
 }
 // sumPoissonYLat
 SEXP sumPoissonYLat(SEXP mu_, SEXP lower_, SEXP upper_);
-RcppExport SEXP _LRMoECPNew_sumPoissonYLat(SEXP mu_SEXP, SEXP lower_SEXP, SEXP upper_SEXP) {
+RcppExport SEXP _LRMoE_sumPoissonYLat(SEXP mu_SEXP, SEXP lower_SEXP, SEXP upper_SEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -391,7 +391,7 @@ END_RCPP
 }
 // intWeibullLogYObs
 SEXP intWeibullLogYObs(SEXP k_, SEXP lambda_, SEXP lower_, SEXP upper_);
-RcppExport SEXP _LRMoECPNew_intWeibullLogYObs(SEXP k_SEXP, SEXP lambda_SEXP, SEXP lower_SEXP, SEXP upper_SEXP) {
+RcppExport SEXP _LRMoE_intWeibullLogYObs(SEXP k_SEXP, SEXP lambda_SEXP, SEXP lower_SEXP, SEXP upper_SEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -405,7 +405,7 @@ END_RCPP
 }
 // intWeibullLogYLat
 SEXP intWeibullLogYLat(SEXP k_, SEXP lambda_, SEXP lower_, SEXP upper_);
-RcppExport SEXP _LRMoECPNew_intWeibullLogYLat(SEXP k_SEXP, SEXP lambda_SEXP, SEXP lower_SEXP, SEXP upper_SEXP) {
+RcppExport SEXP _LRMoE_intWeibullLogYLat(SEXP k_SEXP, SEXP lambda_SEXP, SEXP lower_SEXP, SEXP upper_SEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -419,7 +419,7 @@ END_RCPP
 }
 // intWeibullPowYObs
 SEXP intWeibullPowYObs(SEXP k_, SEXP lambda_, SEXP p_, SEXP lower_, SEXP upper_);
-RcppExport SEXP _LRMoECPNew_intWeibullPowYObs(SEXP k_SEXP, SEXP lambda_SEXP, SEXP p_SEXP, SEXP lower_SEXP, SEXP upper_SEXP) {
+RcppExport SEXP _LRMoE_intWeibullPowYObs(SEXP k_SEXP, SEXP lambda_SEXP, SEXP p_SEXP, SEXP lower_SEXP, SEXP upper_SEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -434,7 +434,7 @@ END_RCPP
 }
 // intWeibullPowYLat
 SEXP intWeibullPowYLat(SEXP k_, SEXP lambda_, SEXP p_, SEXP lower_, SEXP upper_);
-RcppExport SEXP _LRMoECPNew_intWeibullPowYLat(SEXP k_SEXP, SEXP lambda_SEXP, SEXP p_SEXP, SEXP lower_SEXP, SEXP upper_SEXP) {
+RcppExport SEXP _LRMoE_intWeibullPowYLat(SEXP k_SEXP, SEXP lambda_SEXP, SEXP p_SEXP, SEXP lower_SEXP, SEXP upper_SEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -449,7 +449,7 @@ END_RCPP
 }
 // sumZTPoissonY
 double sumZTPoissonY(double mu, double lower_, double upper_);
-RcppExport SEXP _LRMoECPNew_sumZTPoissonY(SEXP muSEXP, SEXP lower_SEXP, SEXP upper_SEXP) {
+RcppExport SEXP _LRMoE_sumZTPoissonY(SEXP muSEXP, SEXP lower_SEXP, SEXP upper_SEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -462,7 +462,7 @@ END_RCPP
 }
 // sumZTPoissonYObs
 SEXP sumZTPoissonYObs(SEXP mu_, SEXP lower_, SEXP upper_);
-RcppExport SEXP _LRMoECPNew_sumZTPoissonYObs(SEXP mu_SEXP, SEXP lower_SEXP, SEXP upper_SEXP) {
+RcppExport SEXP _LRMoE_sumZTPoissonYObs(SEXP mu_SEXP, SEXP lower_SEXP, SEXP upper_SEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -475,7 +475,7 @@ END_RCPP
 }
 // sumZTPoissonYLat
 SEXP sumZTPoissonYLat(SEXP mu_, SEXP lower_, SEXP upper_);
-RcppExport SEXP _LRMoECPNew_sumZTPoissonYLat(SEXP mu_SEXP, SEXP lower_SEXP, SEXP upper_SEXP) {
+RcppExport SEXP _LRMoE_sumZTPoissonYLat(SEXP mu_SEXP, SEXP lower_SEXP, SEXP upper_SEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -488,7 +488,7 @@ END_RCPP
 }
 // XAPlusYZB
 SEXP XAPlusYZB(SEXP x, SEXP a, SEXP y, SEXP z, SEXP b);
-RcppExport SEXP _LRMoECPNew_XAPlusYZB(SEXP xSEXP, SEXP aSEXP, SEXP ySEXP, SEXP zSEXP, SEXP bSEXP) {
+RcppExport SEXP _LRMoE_XAPlusYZB(SEXP xSEXP, SEXP aSEXP, SEXP ySEXP, SEXP zSEXP, SEXP bSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -503,7 +503,7 @@ END_RCPP
 }
 // XColMinusY
 SEXP XColMinusY(SEXP x, SEXP y);
-RcppExport SEXP _LRMoECPNew_XColMinusY(SEXP xSEXP, SEXP ySEXP) {
+RcppExport SEXP _LRMoE_XColMinusY(SEXP xSEXP, SEXP ySEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -515,7 +515,7 @@ END_RCPP
 }
 // XPlusYColTimesZ
 SEXP XPlusYColTimesZ(SEXP x, SEXP y, SEXP z);
-RcppExport SEXP _LRMoECPNew_XPlusYColTimesZ(SEXP xSEXP, SEXP ySEXP, SEXP zSEXP) {
+RcppExport SEXP _LRMoE_XPlusYColTimesZ(SEXP xSEXP, SEXP ySEXP, SEXP zSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -528,7 +528,7 @@ END_RCPP
 }
 // XPlusYZ
 SEXP XPlusYZ(SEXP x, SEXP y, SEXP z);
-RcppExport SEXP _LRMoECPNew_XPlusYZ(SEXP xSEXP, SEXP ySEXP, SEXP zSEXP) {
+RcppExport SEXP _LRMoE_XPlusYZ(SEXP xSEXP, SEXP ySEXP, SEXP zSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -541,48 +541,48 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_LRMoECPNew_ColMaxIdx", (DL_FUNC) &_LRMoECPNew_ColMaxIdx, 1},
-    {"_LRMoECPNew_EMalphadQ", (DL_FUNC) &_LRMoECPNew_EMalphadQ, 4},
-    {"_LRMoECPNew_EMalphadQ2", (DL_FUNC) &_LRMoECPNew_EMalphadQ2, 4},
-    {"_LRMoECPNew_sumBinomialY", (DL_FUNC) &_LRMoECPNew_sumBinomialY, 4},
-    {"_LRMoECPNew_sumBinomialYObs", (DL_FUNC) &_LRMoECPNew_sumBinomialYObs, 4},
-    {"_LRMoECPNew_sumBinomialYLat", (DL_FUNC) &_LRMoECPNew_sumBinomialYLat, 4},
-    {"_LRMoECPNew_intBurrLogYObs", (DL_FUNC) &_LRMoECPNew_intBurrLogYObs, 5},
-    {"_LRMoECPNew_intBurrLogYLat", (DL_FUNC) &_LRMoECPNew_intBurrLogYLat, 5},
-    {"_LRMoECPNew_intBurrPolYObs", (DL_FUNC) &_LRMoECPNew_intBurrPolYObs, 7},
-    {"_LRMoECPNew_intBurrPolYLat", (DL_FUNC) &_LRMoECPNew_intBurrPolYLat, 7},
-    {"_LRMoECPNew_intGammaLogYObs", (DL_FUNC) &_LRMoECPNew_intGammaLogYObs, 4},
-    {"_LRMoECPNew_intGammaLogYLat", (DL_FUNC) &_LRMoECPNew_intGammaLogYLat, 4},
-    {"_LRMoECPNew_intInvGaussLogYObs", (DL_FUNC) &_LRMoECPNew_intInvGaussLogYObs, 4},
-    {"_LRMoECPNew_intInvGaussLogYLat", (DL_FUNC) &_LRMoECPNew_intInvGaussLogYLat, 4},
-    {"_LRMoECPNew_intInvGaussYObs", (DL_FUNC) &_LRMoECPNew_intInvGaussYObs, 4},
-    {"_LRMoECPNew_intInvGaussYLat", (DL_FUNC) &_LRMoECPNew_intInvGaussYLat, 4},
-    {"_LRMoECPNew_intInvGaussInvYObs", (DL_FUNC) &_LRMoECPNew_intInvGaussInvYObs, 4},
-    {"_LRMoECPNew_intInvGaussInvYLat", (DL_FUNC) &_LRMoECPNew_intInvGaussInvYLat, 4},
-    {"_LRMoECPNew_sumNegativeBinomialY", (DL_FUNC) &_LRMoECPNew_sumNegativeBinomialY, 4},
-    {"_LRMoECPNew_sumNegativeBinomialYObs", (DL_FUNC) &_LRMoECPNew_sumNegativeBinomialYObs, 4},
-    {"_LRMoECPNew_sumNegativeBinomialYLat", (DL_FUNC) &_LRMoECPNew_sumNegativeBinomialYLat, 4},
-    {"_LRMoECPNew_sumNegativeBinomialLfacY", (DL_FUNC) &_LRMoECPNew_sumNegativeBinomialLfacY, 5},
-    {"_LRMoECPNew_sumNegativeBinomialLfacYObs", (DL_FUNC) &_LRMoECPNew_sumNegativeBinomialLfacYObs, 5},
-    {"_LRMoECPNew_sumNegativeBinomialLfacYLat", (DL_FUNC) &_LRMoECPNew_sumNegativeBinomialLfacYLat, 5},
-    {"_LRMoECPNew_sumPoissonY", (DL_FUNC) &_LRMoECPNew_sumPoissonY, 3},
-    {"_LRMoECPNew_sumPoissonYObs", (DL_FUNC) &_LRMoECPNew_sumPoissonYObs, 3},
-    {"_LRMoECPNew_sumPoissonYLat", (DL_FUNC) &_LRMoECPNew_sumPoissonYLat, 3},
-    {"_LRMoECPNew_intWeibullLogYObs", (DL_FUNC) &_LRMoECPNew_intWeibullLogYObs, 4},
-    {"_LRMoECPNew_intWeibullLogYLat", (DL_FUNC) &_LRMoECPNew_intWeibullLogYLat, 4},
-    {"_LRMoECPNew_intWeibullPowYObs", (DL_FUNC) &_LRMoECPNew_intWeibullPowYObs, 5},
-    {"_LRMoECPNew_intWeibullPowYLat", (DL_FUNC) &_LRMoECPNew_intWeibullPowYLat, 5},
-    {"_LRMoECPNew_sumZTPoissonY", (DL_FUNC) &_LRMoECPNew_sumZTPoissonY, 3},
-    {"_LRMoECPNew_sumZTPoissonYObs", (DL_FUNC) &_LRMoECPNew_sumZTPoissonYObs, 3},
-    {"_LRMoECPNew_sumZTPoissonYLat", (DL_FUNC) &_LRMoECPNew_sumZTPoissonYLat, 3},
-    {"_LRMoECPNew_XAPlusYZB", (DL_FUNC) &_LRMoECPNew_XAPlusYZB, 5},
-    {"_LRMoECPNew_XColMinusY", (DL_FUNC) &_LRMoECPNew_XColMinusY, 2},
-    {"_LRMoECPNew_XPlusYColTimesZ", (DL_FUNC) &_LRMoECPNew_XPlusYColTimesZ, 3},
-    {"_LRMoECPNew_XPlusYZ", (DL_FUNC) &_LRMoECPNew_XPlusYZ, 3},
+    {"_LRMoE_ColMaxIdx", (DL_FUNC) &_LRMoE_ColMaxIdx, 1},
+    {"_LRMoE_EMalphadQ", (DL_FUNC) &_LRMoE_EMalphadQ, 4},
+    {"_LRMoE_EMalphadQ2", (DL_FUNC) &_LRMoE_EMalphadQ2, 4},
+    {"_LRMoE_sumBinomialY", (DL_FUNC) &_LRMoE_sumBinomialY, 4},
+    {"_LRMoE_sumBinomialYObs", (DL_FUNC) &_LRMoE_sumBinomialYObs, 4},
+    {"_LRMoE_sumBinomialYLat", (DL_FUNC) &_LRMoE_sumBinomialYLat, 4},
+    {"_LRMoE_intBurrLogYObs", (DL_FUNC) &_LRMoE_intBurrLogYObs, 5},
+    {"_LRMoE_intBurrLogYLat", (DL_FUNC) &_LRMoE_intBurrLogYLat, 5},
+    {"_LRMoE_intBurrPolYObs", (DL_FUNC) &_LRMoE_intBurrPolYObs, 7},
+    {"_LRMoE_intBurrPolYLat", (DL_FUNC) &_LRMoE_intBurrPolYLat, 7},
+    {"_LRMoE_intGammaLogYObs", (DL_FUNC) &_LRMoE_intGammaLogYObs, 4},
+    {"_LRMoE_intGammaLogYLat", (DL_FUNC) &_LRMoE_intGammaLogYLat, 4},
+    {"_LRMoE_intInvGaussLogYObs", (DL_FUNC) &_LRMoE_intInvGaussLogYObs, 4},
+    {"_LRMoE_intInvGaussLogYLat", (DL_FUNC) &_LRMoE_intInvGaussLogYLat, 4},
+    {"_LRMoE_intInvGaussYObs", (DL_FUNC) &_LRMoE_intInvGaussYObs, 4},
+    {"_LRMoE_intInvGaussYLat", (DL_FUNC) &_LRMoE_intInvGaussYLat, 4},
+    {"_LRMoE_intInvGaussInvYObs", (DL_FUNC) &_LRMoE_intInvGaussInvYObs, 4},
+    {"_LRMoE_intInvGaussInvYLat", (DL_FUNC) &_LRMoE_intInvGaussInvYLat, 4},
+    {"_LRMoE_sumNegativeBinomialY", (DL_FUNC) &_LRMoE_sumNegativeBinomialY, 4},
+    {"_LRMoE_sumNegativeBinomialYObs", (DL_FUNC) &_LRMoE_sumNegativeBinomialYObs, 4},
+    {"_LRMoE_sumNegativeBinomialYLat", (DL_FUNC) &_LRMoE_sumNegativeBinomialYLat, 4},
+    {"_LRMoE_sumNegativeBinomialLfacY", (DL_FUNC) &_LRMoE_sumNegativeBinomialLfacY, 5},
+    {"_LRMoE_sumNegativeBinomialLfacYObs", (DL_FUNC) &_LRMoE_sumNegativeBinomialLfacYObs, 5},
+    {"_LRMoE_sumNegativeBinomialLfacYLat", (DL_FUNC) &_LRMoE_sumNegativeBinomialLfacYLat, 5},
+    {"_LRMoE_sumPoissonY", (DL_FUNC) &_LRMoE_sumPoissonY, 3},
+    {"_LRMoE_sumPoissonYObs", (DL_FUNC) &_LRMoE_sumPoissonYObs, 3},
+    {"_LRMoE_sumPoissonYLat", (DL_FUNC) &_LRMoE_sumPoissonYLat, 3},
+    {"_LRMoE_intWeibullLogYObs", (DL_FUNC) &_LRMoE_intWeibullLogYObs, 4},
+    {"_LRMoE_intWeibullLogYLat", (DL_FUNC) &_LRMoE_intWeibullLogYLat, 4},
+    {"_LRMoE_intWeibullPowYObs", (DL_FUNC) &_LRMoE_intWeibullPowYObs, 5},
+    {"_LRMoE_intWeibullPowYLat", (DL_FUNC) &_LRMoE_intWeibullPowYLat, 5},
+    {"_LRMoE_sumZTPoissonY", (DL_FUNC) &_LRMoE_sumZTPoissonY, 3},
+    {"_LRMoE_sumZTPoissonYObs", (DL_FUNC) &_LRMoE_sumZTPoissonYObs, 3},
+    {"_LRMoE_sumZTPoissonYLat", (DL_FUNC) &_LRMoE_sumZTPoissonYLat, 3},
+    {"_LRMoE_XAPlusYZB", (DL_FUNC) &_LRMoE_XAPlusYZB, 5},
+    {"_LRMoE_XColMinusY", (DL_FUNC) &_LRMoE_XColMinusY, 2},
+    {"_LRMoE_XPlusYColTimesZ", (DL_FUNC) &_LRMoE_XPlusYColTimesZ, 3},
+    {"_LRMoE_XPlusYZ", (DL_FUNC) &_LRMoE_XPlusYZ, 3},
     {NULL, NULL, 0}
 };
 
-RcppExport void R_init_LRMoECPNew(DllInfo *dll) {
+RcppExport void R_init_LRMoE(DllInfo *dll) {
     R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
     R_useDynamicSymbols(dll, FALSE);
 }

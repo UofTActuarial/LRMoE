@@ -1,4 +1,4 @@
-#' @useDynLib LRMoECPNew, .registration = TRUE
+#' @useDynLib LRMoE, .registration = TRUE
 #' @importFrom Rcpp sourceCpp
 #' @import RcppEigen
 #' @import RcppNumerical
