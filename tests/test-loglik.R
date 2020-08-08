@@ -36,6 +36,7 @@
 # temp1 = PredictVariancePrior(X, alpha.init, comp.dist, zero.init, params.init)
 # temp2 = PredictVariancePosterior(Y, X, alpha.init, comp.dist, zero.init, params.init)
 
+
 # Returns numbers!
 
 

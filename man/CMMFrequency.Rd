@@ -7,7 +7,7 @@
 CMMFrequency(Y, X, n.comp)
 }
 \arguments{
-\item{Y}{A vector of response variables.}
+\item{Y}{A matrix of response variables.}
 
 \item{X}{A matrix of covariates (normalized for running \code{\link[stats]{kmeans}}).}
 
