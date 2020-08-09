@@ -182,11 +182,11 @@ EMMNegativeBinomial = function(params.old,
     # Integration
     y.lfac.e.obs.unique = array(0,dim=c(y.unique.length,1))
 
-    y.lfac.e.obs.unique[,1]= sumNegativeBinomialLfacYObs(size.n.old, prob.p.old, size.n.new, (yl.unique), (yu.unique))
-      # mapply(function(x, y) ifelse(x!=y,
-      #                              int.y.log.fac.fcn(size.n.new = size.n.new, lower = x, upper = y, size.n.j = size.n.old, prob.p.j = prob.p.old),
-      #                              0),
-      #        yl.unique, yu.unique)
+    y.lfac.e.obs.unique[,1]= # sumNegativeBinomialLfacYObs(size.n.old, prob.p.old, size.n.new, (yl.unique), (yu.unique))
+      mapply(function(x, y) ifelse(x!=y,
+                                   int.y.log.fac.fcn(size.n.new = size.n.new, lower = x, upper = y, size.n.j = size.n.old, prob.p.j = prob.p.old),
+                                   0),
+             yl.unique, yu.unique)
 
     # Match to all observations of y
     temp.y.lfac.e.obs = array(0, dim = c(sample.size.n, 1))
@@ -206,17 +206,17 @@ EMMNegativeBinomial = function(params.old,
     # Integration
     y.lfac.e.lat.unique = array(0,dim=c(tn.unique.length,1))
 
-    y.lfac.e.lat.unique[,1]= sumNegativeBinomialLfacYLat(size.n.old, prob.p.old, size.n.new, (tl.unique), (tu.unique))
-      # mapply(function(x, y) ifelse(x!=y,
-      #                              int.y.log.fac.fcn(size.n.new = size.n.new, lower = x, upper = y, size.n.j = size.n.old, prob.p.j = prob.p.old),
-      #                              0),
-      #        # rep(0,tn.unique.length), tl.unique) +
-      #        rep(0,tn.unique.length), (ceiling(tl.unique)-1)*(ceiling(tl.unique)-1 >=0) ) +
-      # mapply(function(x, y) ifelse(x!=y,
-      #                              int.y.log.fac.fcn(size.n.new = size.n.new, lower = x, upper = y, size.n.j = size.n.old, prob.p.j = prob.p.old),
-      #                              0),
-      #        # tu.unique, rep(Inf,tn.unique.length))
-      #        floor(tu.unique)+1, rep(Inf,tn.unique.length))
+    y.lfac.e.lat.unique[,1]= # sumNegativeBinomialLfacYLat(size.n.old, prob.p.old, size.n.new, (tl.unique), (tu.unique))
+      mapply(function(x, y) ifelse(x!=y,
+                                   int.y.log.fac.fcn(size.n.new = size.n.new, lower = x, upper = y, size.n.j = size.n.old, prob.p.j = prob.p.old),
+                                   0),
+             # rep(0,tn.unique.length), tl.unique) +
+             rep(0,tn.unique.length), (ceiling(tl.unique)-1)*(ceiling(tl.unique)-1 >=0) ) +
+      mapply(function(x, y) ifelse(x!=y,
+                                   int.y.log.fac.fcn(size.n.new = size.n.new, lower = x, upper = y, size.n.j = size.n.old, prob.p.j = prob.p.old),
+                                   0),
+             # tu.unique, rep(Inf,tn.unique.length))
+             floor(tu.unique)+1, rep(Inf,tn.unique.length))
 
     # Match to all observations of y
     temp.y.lfac.e.lat = array(0, dim = c(sample.size.n, 1))
