@@ -27,7 +27,7 @@ SimYSet = function(X, alpha, comp.dist, zero.prob, params.list)
                 zero.prob = zero.prob, params.list = params.list,
                 sample.size = 1)
 
-  # return(t(y.sim))
+  return(t(y.sim))
   # return(t(t(y.sim)))
-  return(y.sim)
+  # return(y.sim)
 }
