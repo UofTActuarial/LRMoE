@@ -321,8 +321,9 @@ EMMBurr = function(params.old,
                       hyper.k.1 = hyper.k.1, hyper.k.2 = hyper.k.2,
                       hyper.c.1 = hyper.c.1, hyper.c.2 = hyper.c.2,
                       hyper.lambda.1 = hyper.lambda.1, hyper.lambda.2 = hyper.lambda.2,
-                      lower = 0.5*params.init, upper = 2*params.init,
-                      method = "L-BFGS-B")$par
+                      lower = pmax(0.5*params.init, 0), upper = pmax(2*params.init, 0),
+                      # method = "L-BFGS-B")$par
+                      method = "Nelder-Mead")$par
 
   # Update of c and lambda
   # shape2.c.new = temp.update[1]
