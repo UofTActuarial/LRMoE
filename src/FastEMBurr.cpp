@@ -82,8 +82,22 @@ SEXP intBurrLogYLat(SEXP k_, SEXP c_, SEXP lambda_, SEXP lower_, SEXP upper_)
   NumericVector result(lower.length());
 
   for(int j=0; j<lower.length(); j++){
-    double temp1 = intBurrLogY(k(0), c(0), lambda(0), R_NegInf, lower(j))[0];
-    double temp2 = intBurrLogY(k(0), c(0), lambda(0), upper(j), R_PosInf)[0];
+    double temp1;
+    if(lower(j)==R_NegInf){
+      temp1 = 0.0;
+    }else{
+      temp1 = intBurrLogY(k(0), c(0), lambda(0), R_NegInf, lower(j))[0];
+    }
+    double temp2;
+    if(upper(j)==R_PosInf){
+      temp2 = 0.0;
+    }else{
+      temp2 = intBurrLogY(k(0), c(0), lambda(0), upper(j), R_PosInf)[0];
+    }
+
+    // double temp1 = intBurrLogY(k(0), c(0), lambda(0), R_NegInf, lower(j))[0];
+    // double temp2 = intBurrLogY(k(0), c(0), lambda(0), upper(j), R_PosInf)[0];
+
     result(j) = temp1 + temp2;
 
   }
