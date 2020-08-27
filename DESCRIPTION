@@ -31,7 +31,8 @@ Imports:
     reshape2,
     rmutil,
     statmod,
-    stats
+    stats,
+    fitdistrplus
 RoxygenNote: 7.1.1
 LinkingTo: 
     Rcpp, RcppEigen, RcppNumerical

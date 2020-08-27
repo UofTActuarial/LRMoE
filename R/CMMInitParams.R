@@ -7,7 +7,9 @@
 #' @return A list of parameter initialization.
 #'
 #' @importFrom EnvStats skewness kurtosis
-#' @importFrom stats var kmeans
+#' @importFrom stats var kmeans optim
+#' @importFrom fitdistrplus mledist
+#' @importFrom actuar dburr
 #'
 #' @export CMMSeverity
 CMMSeverity = function(Y, X, n.comp)
@@ -41,12 +43,22 @@ CMMSeverity = function(Y, X, n.comp)
       gamma.init = c(shape = mean.pos^2/var.pos, scale = var.pos/mean.pos)
       lnorm.init = c(meanlog = log(mean.pos)- 0.5*(log(var.pos/(mean.pos^2) + 1)), sdlog = sqrt(log(var.pos/(mean.pos^2) + 1)))
       invgauss.init = c(mean = mean.pos, scale = (mean.pos)^3/var.pos )
-      weibull.init = c(shape = 3, scale = mean.pos * 1.5 )# Ad-hoc
-      burr.init = c(shape1 = 2, shape2 = 5, scale = mean.pos/0.136) # Ad-hoc. 0.136 = Beta(4.8, 1.2)
+
+      tmp = mledist(subset.pos, "weibull")
+      weibull.init = c(shape = tmp$estimate[1], scale = tmp$estimate[2] )
+      # c(shape = 3, scale = mean.pos * 1.5 )# Ad-hoc
+
+      tempf = function(params, y){
+        return(-sum(dburr(y, shape1 = exp(params[1]), shape2 = exp(params[2]), scale = exp(params[3]), log = T)))
+      }
+      tmp = tryCatch({tmp = optim(log(c(2, 1, 10)), tempf, y = subset.pos, method = "Nelder-Mead")$par}, finally = {tmp = (c(NaN, NaN, NaN))})
+      burr.init = c(shape1 = exp(tmp[1]), shape2 = exp(tmp[2]), scale = exp(tmp[3]))
+      # c(shape1 = 2, shape2 = 5, scale = mean.pos/0.136) # Ad-hoc. 0.136 = Beta(4.8, 1.2)
 
       temp[[length(temp)+1]] = list(cluster.prop = cluster.prop, zero.prop = zero.prop, mean.pos = mean.pos, var.pos = var.pos, cv.pos = cv.pos, skew.pos = skew.pos, kurt.pos = kurt.pos,
-                                        gamma.init = gamma.init, lnorm.init = lnorm.init, invgauss.init = invgauss.init,
-                                        weibull.init = weibull.init, burr.init = burr.init)
+                                    gamma.init = gamma.init, lnorm.init = lnorm.init, invgauss.init = invgauss.init,
+                                    weibull.init = weibull.init, burr.init = burr.init)
+
     }
     result[[length(result)+1]] = temp
   }
@@ -124,7 +136,9 @@ CMMFrequency = function(Y, X, n.comp)
 #' @return A list of parameter initialization.
 #'
 #' @importFrom EnvStats skewness kurtosis
-#' @importFrom stats var kmeans
+#' @importFrom stats var kmeans optim
+#' @importFrom fitdistrplus mledist
+#' @importFrom actuar dburr
 #'
 #' @export CMMInit
 CMMInit = function(Y, X, n.comp, type = NULL)
@@ -183,19 +197,28 @@ CMMInit = function(Y, X, n.comp, type = NULL)
         mean.pos = mean(subset.pos)
         var.pos = var(subset.pos)
         cv.pos = sqrt(var.pos)/mean.pos
-        skew.pos = skewness(subset.pos, method = "moment")
-        kurt.pos = kurtosis(subset.pos, method = "moment")
+        skew.pos = skewness(subset.pos)
+        kurt.pos = kurtosis(subset.pos)
 
-        poisson.init = c(lambda = mean.pos)
-        ztpoisson.init = c(lambda = mean.pos)
-        nbinom.init = c(size.n = mean.pos * (mean.pos/var.pos/(1-mean.pos/var.pos)), prob.p = mean.pos/var.pos)
-        binom.init = c(size.n = mean.pos/(1-var.pos/mean.pos), prob.p = 1-var.pos/mean.pos)
-        gammacount.init = c(shape = mean.pos * (mean.pos/var.pos/(1-mean.pos/var.pos)), scale = mean.pos/var.pos ) # ad-hoc, same as nbinom
+        gamma.init = c(shape = mean.pos^2/var.pos, scale = var.pos/mean.pos)
+        lnorm.init = c(meanlog = log(mean.pos)- 0.5*(log(var.pos/(mean.pos^2) + 1)), sdlog = sqrt(log(var.pos/(mean.pos^2) + 1)))
+        invgauss.init = c(mean = mean.pos, scale = (mean.pos)^3/var.pos )
 
+        tmp = mledist(subset.pos, "weibull")
+        weibull.init = c(shape = tmp$estimate[1], scale = tmp$estimate[2] )
+        # c(shape = 3, scale = mean.pos * 1.5 )# Ad-hoc
+
+        tempf = function(params, y){
+          return(-sum(dburr(y, shape1 = exp(params[1]), shape2 = exp(params[2]), scale = exp(params[3]), log = T)))
+        }
+        tmp = tryCatch({tmp = optim(log(c(2, 1, 10)), tempf, y = subset.pos, method = "Nelder-Mead")$par}, finally = {tmp = (c(NaN, NaN, NaN))})
+        burr.init = c(shape1 = exp(tmp[1]), shape2 = exp(tmp[2]), scale = exp(tmp[3]))
+        # c(shape1 = 2, shape2 = 5, scale = mean.pos/0.136) # Ad-hoc. 0.136 = Beta(4.8, 1.2)
 
         temp[[length(temp)+1]] = list(cluster.prop = cluster.prop, zero.prop = zero.prop, mean.pos = mean.pos, var.pos = var.pos, cv.pos = cv.pos, skew.pos = skew.pos, kurt.pos = kurt.pos,
-                                      poisson.init = poisson.init, ztpoisson.init = ztpoisson.init,
-                                      nbinom.init = nbinom.init, binom.init = binom.init, gammacount.init = gammacount.init)
+                                      gamma.init = gamma.init, lnorm.init = lnorm.init, invgauss.init = invgauss.init,
+                                      weibull.init = weibull.init, burr.init = burr.init)
+
       }
     }
     result[[length(result)+1]] = temp
