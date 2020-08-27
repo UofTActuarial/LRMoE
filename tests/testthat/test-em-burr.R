@@ -64,6 +64,21 @@ context("EMMBurr")
 #
 # temp4 = intBurrLogYLat(k, c, lambda, log(yl), log(yu))
 #
+# temp3 = sapply(tl,
+#                function(x) ifelse(x!=0,
+#                                   integrate(int.y.log.fcn, -Inf, log(x),
+#                                             shape1.k.j = k, shape2.c.j = c, scale.lambda.j = lambda,
+#                                             rel.tol=.Machine$double.eps^0.5)$value,
+#                                   0))+
+#   sapply(tu,
+#          function(x) ifelse(x!=Inf,
+#                             integrate(int.y.log.fcn, log(x), Inf, # actuar::qburr(1-1e-09, shape1 = shape1.k, shape2 = shape2.c, scale = scale.lambda, lower.tail = T, log.p = F), # Inf causes a problem
+#                                       shape1.k.j = k, shape2.c.j = c, scale.lambda.j = lambda,
+#                                       rel.tol=.Machine$double.eps^0.5)$value,
+#                             0))
+#
+# temp4 = intBurrLogYLat(k, c, lambda, log(tl), log(tu))
+#
 # summary(temp1-temp2)
 # summary(temp3-temp4)
 #

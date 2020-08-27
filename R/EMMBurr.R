@@ -39,18 +39,18 @@ EMMBurr = function(params.old,
   y.log.e.obs[!censor.idx, 1] = log(yu[!censor.idx])
 
   # Function to numerically integrate for censored and truncated case
-  int.y.log.fcn = function(u, shape1.k.j, shape2.c.j, scale.lambda.j) # u = log(y) for numerical stability
-  {
-    u.density.log = u + actuar::dburr(exp(u), shape1 = shape1.k.j, shape2 = shape2.c.j, scale = scale.lambda.j, log = TRUE)
-    temp = u * exp(u.density.log)
-    temp[which(u==Inf)] = 0
-    temp[which(u==-Inf)] = 0
-    temp[which(is.na(temp))] = 0
-
-    temp[which(temp==Inf)] = 0
-
-    return(temp)
-  }
+  # int.y.log.fcn = function(u, shape1.k.j, shape2.c.j, scale.lambda.j) # u = log(y) for numerical stability
+  # {
+  #   u.density.log = u + actuar::dburr(exp(u), shape1 = shape1.k.j, shape2 = shape2.c.j, scale = scale.lambda.j, log = TRUE)
+  #   temp = u * exp(u.density.log)
+  #   temp[which(u==Inf)] = 0
+  #   temp[which(u==-Inf)] = 0
+  #   temp[which(is.na(temp))] = 0
+  #
+  #   temp[which(temp==Inf)] = 0
+  #
+  #   return(temp)
+  # }
 
   # First find unique upper and lower bounds of integration: untruncated case
   y.unique = unique(cbind(yl,yu),MARGIN=1)
@@ -62,13 +62,13 @@ EMMBurr = function(params.old,
   # Integration
   y.log.e.obs.unique = array(0,dim=c(y.unique.length,1))
 
-  y.log.e.obs.unique[,1]= # intBurrLogYObs(shape1.k, shape2.c, scale.lambda, log(yl.unique), log(yu.unique))
-    mapply(function(x, y) ifelse(x!=y,
-                                 integrate(int.y.log.fcn, log(x), log(y),
-                                           shape1.k.j = shape1.k, shape2.c.j = shape2.c, scale.lambda.j = scale.lambda,
-                                           rel.tol=.Machine$double.eps^0.5)$value,
-                                 0),
-           yl.unique, yu.unique)
+  y.log.e.obs.unique[,1]= intBurrLogYObs(shape1.k, shape2.c, scale.lambda, log(yl.unique), log(yu.unique))
+    # mapply(function(x, y) ifelse(x!=y,
+    #                              integrate(int.y.log.fcn, log(x), log(y),
+    #                                        shape1.k.j = shape1.k, shape2.c.j = shape2.c, scale.lambda.j = scale.lambda,
+    #                                        rel.tol=.Machine$double.eps^0.5)$value,
+    #                              0),
+    #        yl.unique, yu.unique)
   # Match to all observations of y
   temp.y.log.e.obs = array(0, dim = c(sample.size.n, 1))
   temp.y.log.e.obs = y.log.e.obs.unique[y.unique.match,]
@@ -85,19 +85,19 @@ EMMBurr = function(params.old,
   # Integration
   y.log.e.lat.unique = array(0,dim=c(tn.unique.length, 1))
 
-  y.log.e.lat.unique[,1]= # intBurrLogYObs(shape1.k, shape2.c, scale.lambda, log(tl.unique), log(tu.unique))
-    sapply(tl.unique,
-           function(x) ifelse(x!=0,
-                              integrate(int.y.log.fcn, -Inf, log(x),
-                                        shape1.k.j = shape1.k, shape2.c.j = shape2.c, scale.lambda.j = scale.lambda,
-                                        rel.tol=.Machine$double.eps^0.5)$value,
-                              0))+
-    sapply(tu.unique,
-           function(x) ifelse(x!=Inf,
-                              integrate(int.y.log.fcn, log(x), Inf, # actuar::qburr(1-1e-09, shape1 = shape1.k, shape2 = shape2.c, scale = scale.lambda, lower.tail = T, log.p = F), # Inf causes a problem
-                                        shape1.k.j = shape1.k, shape2.c.j = shape2.c, scale.lambda.j = scale.lambda,
-                                        rel.tol=.Machine$double.eps^0.5)$value,
-                              0))
+  y.log.e.lat.unique[,1]= intBurrLogYLat(shape1.k, shape2.c, scale.lambda, log(tl.unique), log(tu.unique))
+    # sapply(tl.unique,
+    #        function(x) ifelse(x!=0,
+    #                           integrate(int.y.log.fcn, -Inf, log(x),
+    #                                     shape1.k.j = shape1.k, shape2.c.j = shape2.c, scale.lambda.j = scale.lambda,
+    #                                     rel.tol=.Machine$double.eps^0.5)$value,
+    #                           0))+
+    # sapply(tu.unique,
+    #        function(x) ifelse(x!=Inf,
+    #                           integrate(int.y.log.fcn, log(x), Inf, # actuar::qburr(1-1e-09, shape1 = shape1.k, shape2 = shape2.c, scale = scale.lambda, lower.tail = T, log.p = F), # Inf causes a problem
+    #                                     shape1.k.j = shape1.k, shape2.c.j = shape2.c, scale.lambda.j = scale.lambda,
+    #                                     rel.tol=.Machine$double.eps^0.5)$value,
+    #                           0))
 
   # Match to all observations of y
   temp.y.log.e.lat = array(0, dim = c(sample.size.n, 1))
@@ -147,19 +147,19 @@ EMMBurr = function(params.old,
     return(result)
   }
   # A function to numerically integrate for y.pol
-  int.y.pol.fcn = function(u, shape2.c.new, scale.lambda.new,
-                           shape1.k.j, shape2.c.j, scale.lambda.j) # u = log(y) for numerical stability
-  {
-    # Use existing package so that I don't have to manually type in the density!
-    u.density.log = u + actuar::dburr(exp(u), shape1 = shape1.k.j, shape2 = shape2.c.j, scale = scale.lambda.j, log = TRUE)
-    temp = log(1+(exp(u)/scale.lambda.new)^shape2.c.new) * exp(u.density.log)
-    temp[which(u==Inf)] = 0
-    temp[which(u==-Inf)] = 0
-    temp[which(is.na(temp))] = 0
-
-    temp[which(temp==Inf)] = 0
-    return(temp)
-  }
+  # int.y.pol.fcn = function(u, shape2.c.new, scale.lambda.new,
+  #                          shape1.k.j, shape2.c.j, scale.lambda.j) # u = log(y) for numerical stability
+  # {
+  #   # Use existing package so that I don't have to manually type in the density!
+  #   u.density.log = u + actuar::dburr(exp(u), shape1 = shape1.k.j, shape2 = shape2.c.j, scale = scale.lambda.j, log = TRUE)
+  #   temp = log(1+(exp(u)/scale.lambda.new)^shape2.c.new) * exp(u.density.log)
+  #   temp[which(u==Inf)] = 0
+  #   temp[which(u==-Inf)] = 0
+  #   temp[which(is.na(temp))] = 0
+  #
+  #   temp[which(temp==Inf)] = 0
+  #   return(temp)
+  # }
   # A function to numerically optimize
   Q.T = function(params.new, shape1.k.old, shape2.c.old, scale.lambda.old,
                  z.e.obs, z.e.lat, k.e,
@@ -196,15 +196,15 @@ EMMBurr = function(params.old,
     # Integration
     y.pol.e.obs.unique = array(0,dim=c(y.unique.length,1))
 
-    y.pol.e.obs.unique[,1]= # intBurrPolYObs(shape1.k.old, shape2.c.old, scale.lambda.old,
-      #                                      shape2.c.new, scale.lambda.new, log(yl.unique), log(yu.unique))
-      mapply(function(x, y) ifelse(x!=y,
-                                   integrate(int.y.pol.fcn, log(x), log(y),
-                                             shape2.c.new = shape2.c.new, scale.lambda.new = scale.lambda.new,
-                                             shape1.k.j = shape1.k.old, shape2.c.j = shape2.c.old, scale.lambda.j = scale.lambda.old,
-                                             rel.tol=.Machine$double.eps^0.5)$value,
-                                   0),
-             yl.unique, yu.unique)
+    y.pol.e.obs.unique[,1]= intBurrPolYObs(shape1.k.old, shape2.c.old, scale.lambda.old,
+                                           shape2.c.new, scale.lambda.new, log(yl.unique), log(yu.unique))
+      # mapply(function(x, y) ifelse(x!=y,
+      #                              integrate(int.y.pol.fcn, log(x), log(y),
+      #                                        shape2.c.new = shape2.c.new, scale.lambda.new = scale.lambda.new,
+      #                                        shape1.k.j = shape1.k.old, shape2.c.j = shape2.c.old, scale.lambda.j = scale.lambda.old,
+      #                                        rel.tol=.Machine$double.eps^0.5)$value,
+      #                              0),
+      #        yl.unique, yu.unique)
     # Match to all observations of y
     temp.y.pol.e.obs = array(0, dim = c(sample.size.n, 1))
     temp.y.pol.e.obs = y.pol.e.obs.unique[y.unique.match,]
@@ -221,22 +221,22 @@ EMMBurr = function(params.old,
     # Integration
     y.pol.e.lat.unique = array(0,dim=c(tn.unique.length, 1))
 
-    y.pol.e.lat.unique[,1]=# intBurrPolYLat(shape1.k.old, shape2.c.old, scale.lambda.old,
-                           #                shape2.c.new, scale.lambda.new, log(tl.unique), log(tu.unique))
-      sapply(tl.unique,
-             function(x) ifelse(x!=0,
-                                integrate(int.y.pol.fcn, -Inf, log(x),
-                                          shape2.c.new = shape2.c.new, scale.lambda.new = scale.lambda.new,
-                                          shape1.k.j = shape1.k.old, shape2.c.j = shape2.c.old, scale.lambda.j = scale.lambda.old,
-                                          rel.tol=.Machine$double.eps^0.5)$value,
-                                0))+
-      sapply(tu.unique,
-             function(x) ifelse(x!=Inf,
-                                integrate(int.y.pol.fcn, log(x), Inf, # actuar::qburr(1-1e-09, shape1 = shape1.k, shape2 = shape2.c, scale = scale.lambda, lower.tail = T, log.p = F), # Inf causes a problem
-                                          shape2.c.new = shape2.c.new, scale.lambda.new = scale.lambda.new,
-                                          shape1.k.j = shape1.k.old, shape2.c.j = shape2.c.old, scale.lambda.j = scale.lambda.old,
-                                          rel.tol=.Machine$double.eps^0.5)$value,
-                                0))
+    y.pol.e.lat.unique[,1]=intBurrPolYLat(shape1.k.old, shape2.c.old, scale.lambda.old,
+                                         shape2.c.new, scale.lambda.new, log(tl.unique), log(tu.unique))
+      # sapply(tl.unique,
+      #        function(x) ifelse(x!=0,
+      #                           integrate(int.y.pol.fcn, -Inf, log(x),
+      #                                     shape2.c.new = shape2.c.new, scale.lambda.new = scale.lambda.new,
+      #                                     shape1.k.j = shape1.k.old, shape2.c.j = shape2.c.old, scale.lambda.j = scale.lambda.old,
+      #                                     rel.tol=.Machine$double.eps^0.5)$value,
+      #                           0))+
+      # sapply(tu.unique,
+      #        function(x) ifelse(x!=Inf,
+      #                           integrate(int.y.pol.fcn, log(x), Inf, # actuar::qburr(1-1e-09, shape1 = shape1.k, shape2 = shape2.c, scale = scale.lambda, lower.tail = T, log.p = F), # Inf causes a problem
+      #                                     shape2.c.new = shape2.c.new, scale.lambda.new = scale.lambda.new,
+      #                                     shape1.k.j = shape1.k.old, shape2.c.j = shape2.c.old, scale.lambda.j = scale.lambda.old,
+      #                                     rel.tol=.Machine$double.eps^0.5)$value,
+      #                           0))
     # Match to all observations of y
     temp.y.pol.e.lat = array(0, dim = c(sample.size.n, 1))
     temp.y.pol.e.lat = y.pol.e.lat.unique[tn.unique.match,]
@@ -350,15 +350,15 @@ EMMBurr = function(params.old,
   # Integration
   y.pol.e.obs.unique = array(0,dim=c(y.unique.length,1))
 
-  y.pol.e.obs.unique[,1]= # intBurrPolYObs(shape1.k.old, shape2.c.old, scale.lambda.old,
-    #                                      shape2.c.new, scale.lambda.new, log(yl.unique), log(yu.unique))
-    mapply(function(x, y) ifelse(x!=y,
-                                 integrate(int.y.pol.fcn, log(x), log(y),
-                                           shape2.c.new = shape2.c.new, scale.lambda.new = scale.lambda.new,
-                                           shape1.k.j = shape1.k.old, shape2.c.j = shape2.c.old, scale.lambda.j = scale.lambda.old,
-                                           rel.tol=.Machine$double.eps^0.5)$value,
-                                 0),
-           yl.unique, yu.unique)
+  y.pol.e.obs.unique[,1]= intBurrPolYObs(shape1.k.old, shape2.c.old, scale.lambda.old,
+                                         shape2.c.new, scale.lambda.new, log(yl.unique), log(yu.unique))
+    # mapply(function(x, y) ifelse(x!=y,
+    #                              integrate(int.y.pol.fcn, log(x), log(y),
+    #                                        shape2.c.new = shape2.c.new, scale.lambda.new = scale.lambda.new,
+    #                                        shape1.k.j = shape1.k.old, shape2.c.j = shape2.c.old, scale.lambda.j = scale.lambda.old,
+    #                                        rel.tol=.Machine$double.eps^0.5)$value,
+    #                              0),
+    #        yl.unique, yu.unique)
   # Match to all observations of y
   temp.y.pol.e.obs = array(0, dim = c(sample.size.n, 1))
   temp.y.pol.e.obs = y.pol.e.obs.unique[y.unique.match,]
@@ -375,22 +375,22 @@ EMMBurr = function(params.old,
   # Integration
   y.pol.e.lat.unique = array(0,dim=c(tn.unique.length, 1))
 
-  y.pol.e.lat.unique[,1]=# intBurrPolYLat(shape1.k.old, shape2.c.old, scale.lambda.old,
-                        #                 shape2.c.new, scale.lambda.new, log(tl.unique), log(tu.unique))
-    sapply(tl.unique,
-           function(x) ifelse(x!=0,
-                              integrate(int.y.pol.fcn, -Inf, log(x),
-                                        shape2.c.new = shape2.c.new, scale.lambda.new = scale.lambda.new,
-                                        shape1.k.j = shape1.k.old, shape2.c.j = shape2.c.old, scale.lambda.j = scale.lambda.old,
-                                        rel.tol=.Machine$double.eps^0.5)$value,
-                              0))+
-    sapply(tu.unique,
-           function(x) ifelse(x!=Inf,
-                              integrate(int.y.pol.fcn, log(x), Inf, # actuar::qburr(1-1e-09, shape1 = shape1.k, shape2 = shape2.c, scale = scale.lambda, lower.tail = T, log.p = F), # Inf causes a problem
-                                        shape2.c.new = shape2.c.new, scale.lambda.new = scale.lambda.new,
-                                        shape1.k.j = shape1.k.old, shape2.c.j = shape2.c.old, scale.lambda.j = scale.lambda.old,
-                                        rel.tol=.Machine$double.eps^0.5)$value,
-                              0))
+  y.pol.e.lat.unique[,1]=intBurrPolYLat(shape1.k.old, shape2.c.old, scale.lambda.old,
+                                        shape2.c.new, scale.lambda.new, log(tl.unique), log(tu.unique))
+    # sapply(tl.unique,
+    #        function(x) ifelse(x!=0,
+    #                           integrate(int.y.pol.fcn, -Inf, log(x),
+    #                                     shape2.c.new = shape2.c.new, scale.lambda.new = scale.lambda.new,
+    #                                     shape1.k.j = shape1.k.old, shape2.c.j = shape2.c.old, scale.lambda.j = scale.lambda.old,
+    #                                     rel.tol=.Machine$double.eps^0.5)$value,
+    #                           0))+
+    # sapply(tu.unique,
+    #        function(x) ifelse(x!=Inf,
+    #                           integrate(int.y.pol.fcn, log(x), Inf, # actuar::qburr(1-1e-09, shape1 = shape1.k, shape2 = shape2.c, scale = scale.lambda, lower.tail = T, log.p = F), # Inf causes a problem
+    #                                     shape2.c.new = shape2.c.new, scale.lambda.new = scale.lambda.new,
+    #                                     shape1.k.j = shape1.k.old, shape2.c.j = shape2.c.old, scale.lambda.j = scale.lambda.old,
+    #                                     rel.tol=.Machine$double.eps^0.5)$value,
+    #                           0))
   # Match to all observations of y
   temp.y.pol.e.lat = array(0, dim = c(sample.size.n, 1))
   temp.y.pol.e.lat = y.pol.e.lat.unique[tn.unique.match,]
