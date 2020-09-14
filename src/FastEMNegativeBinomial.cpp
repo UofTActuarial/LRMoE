@@ -80,9 +80,10 @@ SEXP sumNegativeBinomialYLat(SEXP n_, SEXP p_, SEXP lower_, SEXP upper_)
   NumericVector result(lower.length());
 
   for(int j=0; j<lower.length(); j++){
-    double temp1 = sumNegativeBinomialY(n(0), p(0), 0, lower(j)-1);
-    double temp2 = sumNegativeBinomialY(n(0), p(0), upper(j)+1, n(0));
-    result(j) = temp1 + temp2;
+    double temp1 = sumNegativeBinomialY(n(0), p(0), lower(j), upper(j));
+      // sumNegativeBinomialY(n(0), p(0), 0, lower(j)-1);
+    // double temp2 = sumNegativeBinomialY(n(0), p(0), upper(j)+1, n(0));
+    result(j) = n(0) * (1-p(0)) / p(0) - temp1; // temp1 + temp2;
   }
 
   return result;
