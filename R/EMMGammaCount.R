@@ -99,8 +99,8 @@ EMMGammaCount = function(params.old,
     censor.idx = (yl!=yu)
     sample.size.n = length(tl)
 
-    shape.m.new = params.new[1]
-    disp.s.new = params.new[2]
+    shape.m.new = exp(params.new[1])
+    disp.s.new = exp(params.new[2])
     shape.m.old = params.old[1]
     disp.s.old = params.old[2]
 
@@ -180,7 +180,7 @@ EMMGammaCount = function(params.old,
   # pos.idx = (yu!=0)
   pos.idx = rep(TRUE, length(yu))
 
-  temp.params = optim(par = params.old, fn = Q.params,
+  temp.params = optim(par = log(params.old), fn = Q.params,
                       params.old = params.old,
                       tl = tl[pos.idx], yl = yl[pos.idx], yu = yu[pos.idx], tu = tu[pos.idx],
                       expert.ll = expert.ll[pos.idx], expert.tn = expert.tn[pos.idx], expert.tn.bar = expert.tn.bar[pos.idx],
@@ -189,7 +189,7 @@ EMMGammaCount = function(params.old,
                       # method = "L-BFGS-B", lower = 0.5*params.old, upper = 2*params.old)$par
                       method = "Nelder-Mead")$par
 
-  params.new = temp.params
+  params.new = exp(temp.params)
 
 
   return(params.new)
