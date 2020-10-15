@@ -3,4 +3,8 @@
 language: R
 apt_packages:
   - libgsl-dev
-cache: packages
+cache:
+  directories:
+    - $TRAVIS_BUILD_DIR/packrat/src
+    - $TRAVIS_BUILD_DIR/packrat/lib
+  packages: true
