@@ -7,7 +7,8 @@ using namespace Numer;
 
 // For accessing constant PI
 #define _USE_MATH_DEFINES
-#include <math.h>
+// #include <math.h>
+#include <cmath>
 
 class BurrLogY: public Func
 {
@@ -21,13 +22,13 @@ public:
   double operator()(const double& u) const
   {
     double temp;
-    if(isinf(u)){
+    if(std::isinf(u)){
       temp = 0.0;
     }else{
       temp = u* exp( log(c*k/lambda) + (c-1)*log(exp(u)/lambda) + (-k-1)*log(1+pow(exp(u)/lambda, c)) + u );
         // log(u) * c*k/lambda * pow((u/lambda), c-1) * pow(1+pow(u/lambda, c), -k-1);
     }
-    if(isnan(temp) || isinf(temp)){
+    if(std::isnan(temp) || std::isinf(temp)){
       return 0.0;
     }else{
       return temp;
@@ -121,14 +122,14 @@ public:
   double operator()(const double& u) const
   {
     double temp;
-    if(isinf(u)){
+    if(std::isinf(u)){
       temp = 0.0;
     }else{
       temp = log1p( exp(cc* (u-log(ll)) ) ) * exp( log(c*k/lambda) + (c-1)*log(exp(u)/lambda) + (-k-1)*log(1+pow(exp(u)/lambda, c)) + u );
         // log(1+pow(exp(u)/ll, cc))* exp( log(c*k/lambda) + (c-1)*log(exp(u)/lambda) + (-k-1)*log(1+pow(exp(u)/lambda, c)) + u );
       // log(u) * c*k/lambda * pow((u/lambda), c-1) * pow(1+pow(u/lambda, c), -k-1);
     }
-    if(isnan(temp) || isinf(temp)){
+    if(std::isnan(temp) || std::isinf(temp)){
       return 0.0;
     }else{
       return temp;

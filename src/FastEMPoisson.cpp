@@ -7,8 +7,8 @@ using namespace Numer;
 
 // For accessing constant isinf
 #define _USE_MATH_DEFINES
-#include <math.h>
-
+// #include <math.h>
+#include <cmath>
 
 // //' @export
 // [[Rcpp::export]]
@@ -18,7 +18,7 @@ double sumPoissonY(double mu, double lower_, double upper_)
   double lower = fmax(floor(lower_), 0.0);
   double upper = ceil(upper_);
 
-  if(!isinf(upper)){
+  if(!std::isinf(upper)){
     for(int j=0; j<upper-lower+1; j++){
       result = result + (lower+j)* exp(-mu + (lower+j)*log(mu) - lgamma(lower+j+1));
     }

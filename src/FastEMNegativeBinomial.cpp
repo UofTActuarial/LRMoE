@@ -7,7 +7,8 @@ using namespace Numer;
 
 // For accessing constant isinf
 #define _USE_MATH_DEFINES
-#include <math.h>
+// #include <math.h>
+#include <cmath>
 
 // For qnbinom
 #include <Rmath.h>
@@ -21,7 +22,7 @@ double sumNegativeBinomialY(double n, double p, double lower_, double upper_)
   double lower = fmax(floor(lower_), 0.0);
   double upper = ceil(upper_);
 
-  if(!isinf(upper)){
+  if(!std::isinf(upper)){
     for(int j=0; j<upper-lower+1; j++){
       result = result + (lower+j)* exp( (n)*log(p) + (lower+j)*log(1-p) + lgamma(n+(lower+j)) - lgamma(n) - lgamma((lower+j)+1) );
         // result + (lower+j)* exp((n)*log(p) + (lower+j)*log(1-p)) * tgamma(n+(lower+j)) / (tgamma(n) * tgamma((lower+j)+1));

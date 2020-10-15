@@ -7,7 +7,8 @@ using namespace Numer;
 
 // For accessing constant PI
 #define _USE_MATH_DEFINES
-#include <math.h>
+// #include <math.h>
+#include <cmath>
 
 class InvGaussLogY: public Func
 {
@@ -20,7 +21,7 @@ public:
   double operator()(const double& u) const
   {
     double temp = u * exp( 0.5*log(lambda/(2*M_PI*exp(3*u))) - (lambda*(exp(u)-mu)*(exp(u)-mu))/(2*mu*mu*exp(u)) + u );
-    if(isnan(temp) || isinf(temp)){
+    if(std::isnan(temp) || std::isinf(temp)){
       return 0.0;
     }else{
       return temp;
@@ -98,7 +99,7 @@ public:
   double operator()(const double& u) const
   {
     double temp = exp(u) * exp( 0.5*log(lambda/(2*M_PI*exp(3*u))) - (lambda*(exp(u)-mu)*(exp(u)-mu))/(2*mu*mu*exp(u)) + u );
-    if(isnan(temp) || isinf(temp)){
+    if(std::isnan(temp) || std::isinf(temp)){
       return 0.0;
     }else{
       return temp;
@@ -176,7 +177,7 @@ public:
   double operator()(const double& u) const
   {
     double temp = exp(-u) * exp( 0.5*log(lambda/(2*M_PI*exp(3*u))) - (lambda*(exp(u)-mu)*(exp(u)-mu))/(2*mu*mu*exp(u)) + u );
-    if(isnan(temp) || isinf(temp)){
+    if(std::isnan(temp) || std::isinf(temp)){
       return 0.0;
     }else{
       return temp;

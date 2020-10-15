@@ -7,7 +7,8 @@ using namespace Numer;
 
 // For accessing constant PI
 #define _USE_MATH_DEFINES
-#include <math.h>
+//#include <math.h>
+#include <cmath>
 
 // For accessing gamma function
 #include <Rmath.h>
@@ -29,7 +30,7 @@ public:
     // }else{
     //   temp = u * exp( log(k/lambda) - (k-1)*log(exp(u)/lambda) - pow(exp(u)/lambda, k) + u );
     // }
-    if(isnan(temp) || isinf(temp)){
+    if(std::isnan(temp) || std::isinf(temp)){
       return 0.0;
     }else{
       return temp;
@@ -114,7 +115,7 @@ public:
     // }else{
     //   temp = k/lambda * pow((u/lambda),k-1) * exp(-1.0*pow(u/lambda, k)) * pow(u, p);
     // }
-    if(isnan(temp) || isinf(temp)){
+    if(std::isnan(temp) || std::isinf(temp)){
       return 0.0;
     }else{
       return temp;

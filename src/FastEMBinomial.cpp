@@ -7,8 +7,8 @@ using namespace Numer;
 
 // For accessing constant isinf
 #define _USE_MATH_DEFINES
-#include <math.h>
-
+// #include <math.h>
+#include <cmath>
 
 // //' @export
 // [[Rcpp::export]]
@@ -18,7 +18,8 @@ double sumBinomialY(double n, double p, double lower_, double upper_)
   double lower = fmax(floor(lower_), 0.0);
   double upper = fmin(ceil(upper_), n);
 
-  if(!isinf(upper)){
+  // if(!isinf(upper)){
+  if(!std::isinf(upper)){
     for(int j=0; j<upper-lower+1; j++){
       result = result + (lower+j)* exp((lower+j)*log(p) + (n-(lower+j))*log(1-p) + lgamma(n+1) - lgamma(lower+j+1) - lgamma(n-(lower+j)+1));
     }
