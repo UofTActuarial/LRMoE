@@ -2,154 +2,154 @@
 # Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 ColMaxIdx <- function(w) {
-    .Call(`_LRMoExp_ColMaxIdx`, w)
+    .Call(`_LRMoE_ColMaxIdx`, w)
 }
 
 EMalphadQ <- function(x, zj, z, p) {
-    .Call(`_LRMoExp_EMalphadQ`, x, zj, z, p)
+    .Call(`_LRMoE_EMalphadQ`, x, zj, z, p)
 }
 
 EMalphadQ2 <- function(x, z, p, q) {
-    .Call(`_LRMoExp_EMalphadQ2`, x, z, p, q)
+    .Call(`_LRMoE_EMalphadQ2`, x, z, p, q)
 }
 
 sumBinomialY <- function(n, p, lower_, upper_) {
-    .Call(`_LRMoExp_sumBinomialY`, n, p, lower_, upper_)
+    .Call(`_LRMoE_sumBinomialY`, n, p, lower_, upper_)
 }
 
 sumBinomialYObs <- function(n_, p_, lower_, upper_) {
-    .Call(`_LRMoExp_sumBinomialYObs`, n_, p_, lower_, upper_)
+    .Call(`_LRMoE_sumBinomialYObs`, n_, p_, lower_, upper_)
 }
 
 sumBinomialYLat <- function(n_, p_, lower_, upper_) {
-    .Call(`_LRMoExp_sumBinomialYLat`, n_, p_, lower_, upper_)
+    .Call(`_LRMoE_sumBinomialYLat`, n_, p_, lower_, upper_)
 }
 
 intBurrLogYObs <- function(k_, c_, lambda_, lower_, upper_) {
-    .Call(`_LRMoExp_intBurrLogYObs`, k_, c_, lambda_, lower_, upper_)
+    .Call(`_LRMoE_intBurrLogYObs`, k_, c_, lambda_, lower_, upper_)
 }
 
 intBurrLogYLat <- function(k_, c_, lambda_, lower_, upper_) {
-    .Call(`_LRMoExp_intBurrLogYLat`, k_, c_, lambda_, lower_, upper_)
+    .Call(`_LRMoE_intBurrLogYLat`, k_, c_, lambda_, lower_, upper_)
 }
 
 intBurrPolYObs <- function(k_, c_, lambda_, cc_, ll_, lower_, upper_) {
-    .Call(`_LRMoExp_intBurrPolYObs`, k_, c_, lambda_, cc_, ll_, lower_, upper_)
+    .Call(`_LRMoE_intBurrPolYObs`, k_, c_, lambda_, cc_, ll_, lower_, upper_)
 }
 
 intBurrPolYLat <- function(k_, c_, lambda_, cc_, ll_, lower_, upper_) {
-    .Call(`_LRMoExp_intBurrPolYLat`, k_, c_, lambda_, cc_, ll_, lower_, upper_)
+    .Call(`_LRMoE_intBurrPolYLat`, k_, c_, lambda_, cc_, ll_, lower_, upper_)
 }
 
 intGammaLogYObs <- function(m_, theta_, lower_, upper_) {
-    .Call(`_LRMoExp_intGammaLogYObs`, m_, theta_, lower_, upper_)
+    .Call(`_LRMoE_intGammaLogYObs`, m_, theta_, lower_, upper_)
 }
 
 intGammaLogYLat <- function(m_, theta_, lower_, upper_) {
-    .Call(`_LRMoExp_intGammaLogYLat`, m_, theta_, lower_, upper_)
+    .Call(`_LRMoE_intGammaLogYLat`, m_, theta_, lower_, upper_)
 }
 
 intInvGaussLogYObs <- function(mu_, lambda_, lower_, upper_) {
-    .Call(`_LRMoExp_intInvGaussLogYObs`, mu_, lambda_, lower_, upper_)
+    .Call(`_LRMoE_intInvGaussLogYObs`, mu_, lambda_, lower_, upper_)
 }
 
 intInvGaussLogYLat <- function(mu_, lambda_, lower_, upper_) {
-    .Call(`_LRMoExp_intInvGaussLogYLat`, mu_, lambda_, lower_, upper_)
+    .Call(`_LRMoE_intInvGaussLogYLat`, mu_, lambda_, lower_, upper_)
 }
 
 intInvGaussYObs <- function(mu_, lambda_, lower_, upper_) {
-    .Call(`_LRMoExp_intInvGaussYObs`, mu_, lambda_, lower_, upper_)
+    .Call(`_LRMoE_intInvGaussYObs`, mu_, lambda_, lower_, upper_)
 }
 
 intInvGaussYLat <- function(mu_, lambda_, lower_, upper_) {
-    .Call(`_LRMoExp_intInvGaussYLat`, mu_, lambda_, lower_, upper_)
+    .Call(`_LRMoE_intInvGaussYLat`, mu_, lambda_, lower_, upper_)
 }
 
 intInvGaussInvYObs <- function(mu_, lambda_, lower_, upper_) {
-    .Call(`_LRMoExp_intInvGaussInvYObs`, mu_, lambda_, lower_, upper_)
+    .Call(`_LRMoE_intInvGaussInvYObs`, mu_, lambda_, lower_, upper_)
 }
 
 intInvGaussInvYLat <- function(mu_, lambda_, lower_, upper_) {
-    .Call(`_LRMoExp_intInvGaussInvYLat`, mu_, lambda_, lower_, upper_)
+    .Call(`_LRMoE_intInvGaussInvYLat`, mu_, lambda_, lower_, upper_)
 }
 
 sumNegativeBinomialY <- function(n, p, lower_, upper_) {
-    .Call(`_LRMoExp_sumNegativeBinomialY`, n, p, lower_, upper_)
+    .Call(`_LRMoE_sumNegativeBinomialY`, n, p, lower_, upper_)
 }
 
 sumNegativeBinomialYObs <- function(n_, p_, lower_, upper_) {
-    .Call(`_LRMoExp_sumNegativeBinomialYObs`, n_, p_, lower_, upper_)
+    .Call(`_LRMoE_sumNegativeBinomialYObs`, n_, p_, lower_, upper_)
 }
 
 sumNegativeBinomialYLat <- function(n_, p_, lower_, upper_) {
-    .Call(`_LRMoExp_sumNegativeBinomialYLat`, n_, p_, lower_, upper_)
+    .Call(`_LRMoE_sumNegativeBinomialYLat`, n_, p_, lower_, upper_)
 }
 
 sumNegativeBinomialLfacY <- function(n, p, nn, lower_, upper_) {
-    .Call(`_LRMoExp_sumNegativeBinomialLfacY`, n, p, nn, lower_, upper_)
+    .Call(`_LRMoE_sumNegativeBinomialLfacY`, n, p, nn, lower_, upper_)
 }
 
 sumNegativeBinomialLfacYObs <- function(n_, p_, nn_, lower_, upper_) {
-    .Call(`_LRMoExp_sumNegativeBinomialLfacYObs`, n_, p_, nn_, lower_, upper_)
+    .Call(`_LRMoE_sumNegativeBinomialLfacYObs`, n_, p_, nn_, lower_, upper_)
 }
 
 sumNegativeBinomialLfacYLat <- function(n_, p_, nn_, lower_, upper_) {
-    .Call(`_LRMoExp_sumNegativeBinomialLfacYLat`, n_, p_, nn_, lower_, upper_)
+    .Call(`_LRMoE_sumNegativeBinomialLfacYLat`, n_, p_, nn_, lower_, upper_)
 }
 
 sumPoissonY <- function(mu, lower_, upper_) {
-    .Call(`_LRMoExp_sumPoissonY`, mu, lower_, upper_)
+    .Call(`_LRMoE_sumPoissonY`, mu, lower_, upper_)
 }
 
 sumPoissonYObs <- function(mu_, lower_, upper_) {
-    .Call(`_LRMoExp_sumPoissonYObs`, mu_, lower_, upper_)
+    .Call(`_LRMoE_sumPoissonYObs`, mu_, lower_, upper_)
 }
 
 sumPoissonYLat <- function(mu_, lower_, upper_) {
-    .Call(`_LRMoExp_sumPoissonYLat`, mu_, lower_, upper_)
+    .Call(`_LRMoE_sumPoissonYLat`, mu_, lower_, upper_)
 }
 
 intWeibullLogYObs <- function(k_, lambda_, lower_, upper_) {
-    .Call(`_LRMoExp_intWeibullLogYObs`, k_, lambda_, lower_, upper_)
+    .Call(`_LRMoE_intWeibullLogYObs`, k_, lambda_, lower_, upper_)
 }
 
 intWeibullLogYLat <- function(k_, lambda_, lower_, upper_) {
-    .Call(`_LRMoExp_intWeibullLogYLat`, k_, lambda_, lower_, upper_)
+    .Call(`_LRMoE_intWeibullLogYLat`, k_, lambda_, lower_, upper_)
 }
 
 intWeibullPowYObs <- function(k_, lambda_, p_, lower_, upper_) {
-    .Call(`_LRMoExp_intWeibullPowYObs`, k_, lambda_, p_, lower_, upper_)
+    .Call(`_LRMoE_intWeibullPowYObs`, k_, lambda_, p_, lower_, upper_)
 }
 
 intWeibullPowYLat <- function(k_, lambda_, p_, lower_, upper_) {
-    .Call(`_LRMoExp_intWeibullPowYLat`, k_, lambda_, p_, lower_, upper_)
+    .Call(`_LRMoE_intWeibullPowYLat`, k_, lambda_, p_, lower_, upper_)
 }
 
 sumZTPoissonY <- function(mu, lower_, upper_) {
-    .Call(`_LRMoExp_sumZTPoissonY`, mu, lower_, upper_)
+    .Call(`_LRMoE_sumZTPoissonY`, mu, lower_, upper_)
 }
 
 sumZTPoissonYObs <- function(mu_, lower_, upper_) {
-    .Call(`_LRMoExp_sumZTPoissonYObs`, mu_, lower_, upper_)
+    .Call(`_LRMoE_sumZTPoissonYObs`, mu_, lower_, upper_)
 }
 
 sumZTPoissonYLat <- function(mu_, lower_, upper_) {
-    .Call(`_LRMoExp_sumZTPoissonYLat`, mu_, lower_, upper_)
+    .Call(`_LRMoE_sumZTPoissonYLat`, mu_, lower_, upper_)
 }
 
 XAPlusYZB <- function(x, a, y, z, b) {
-    .Call(`_LRMoExp_XAPlusYZB`, x, a, y, z, b)
+    .Call(`_LRMoE_XAPlusYZB`, x, a, y, z, b)
 }
 
 XColMinusY <- function(x, y) {
-    .Call(`_LRMoExp_XColMinusY`, x, y)
+    .Call(`_LRMoE_XColMinusY`, x, y)
 }
 
 XPlusYColTimesZ <- function(x, y, z) {
-    .Call(`_LRMoExp_XPlusYColTimesZ`, x, y, z)
+    .Call(`_LRMoE_XPlusYColTimesZ`, x, y, z)
 }
 
 XPlusYZ <- function(x, y, z) {
-    .Call(`_LRMoExp_XPlusYZ`, x, y, z)
+    .Call(`_LRMoE_XPlusYZ`, x, y, z)
 }
 

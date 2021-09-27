@@ -1,4 +1,4 @@
-Package: LRMoExp
+Package: LRMoE
 Type: Package
 Title: Logit-Weighted Reduced Mixture-of-Experts
 Version: 0.1.0
