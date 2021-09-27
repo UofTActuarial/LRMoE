@@ -3,7 +3,7 @@
 language: R
 env:
   global:
-    - TRAVIS_R_VERSION=4.1.0
+    - TRAVIS_R_VERSION="4.1.0"
 apt_packages:
   - libgsl-dev
 cache:
