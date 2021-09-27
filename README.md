@@ -24,7 +24,7 @@ The package **LRMoE** offers several new distinctive features which are motivate
 
 # Package Installation and Usage
 
-While we prepare for submitting the package to Comprehensive R Archive Network ([CRAN](https://cran.r-project.org/)), the package is available in this github repository. The package manual documenting all functions in the package can also be found in [the current repository](https://github.com/sparktseung/LRMoE/blob/master/LRMoE_0.1.0.pdf). 
+While we prepare for submitting the package to Comprehensive R Archive Network ([CRAN](https://cran.r-project.org/)), the package is available in this github repository. The package manual documenting all functions in the package can also be found in the current repository. 
 
 In R, the **LRMoE** package can be downloaded and installed by running the following code.
 

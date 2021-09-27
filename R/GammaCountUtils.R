@@ -7,7 +7,6 @@
 #' @seealso \code{\link[rmutil]{GammaCount}}.
 #'
 #' @importFrom stats pgamma
-#' @importFrom copula log1mexp
 #'
 #' @export pgammacount
 #'
@@ -15,15 +14,15 @@ pgammacount = function(q, m, s, log.p=FALSE)
 {
   if(any(m<=0))stop("m must be positive")
   if(any(s<=0))stop("s must be positive")
-
+  
   neg.idx = which(q<0)
   inf.idx = which(q==Inf)
-
+  
   q = floor(q) # convert to integers
-
+  
   if(log.p==TRUE){
     temp = log1mexp(-pgamma(m*s, shape = (q+1)*s, rate = 1,log.p=TRUE) )
-      # log1mexp(-pgamma(m*s, shape = (q+1)*s, rate = 1,log.p=TRUE))
+    # log1mexp(-pgamma(m*s, shape = (q+1)*s, rate = 1,log.p=TRUE))
     temp[neg.idx] = -Inf
     return(temp)
   }else{
@@ -42,7 +41,6 @@ pgammacount = function(q, m, s, log.p=FALSE)
 #' @seealso \code{\link[rmutil]{GammaCount}}.
 #'
 #' @importFrom stats pgamma
-#' @importFrom copula log1mexp
 #'
 #' @export dgammacount
 #'
@@ -50,16 +48,16 @@ dgammacount = function(y, m, s, log=FALSE)
 {
   if(any(m<=0))stop("m must be positive")
   if(any(s<=0))stop("s must be positive")
-
+  
   neg.idx = which(y<0)
   nonint.idx = which(y!=floor(y))
   tmp = ifelse(y==0,pgamma(m*s, shape = (y+1)*s, rate = 1,log.p=TRUE,lower.tail=FALSE),
                # pgamma(m*s,y*s+(y==0),1,log=TRUE) + log1mexp(pgamma(m*s,y*s+(y==0),1,log.p=TRUE)-pgamma(m*s,(y+1)*s,1,log.p=TRUE)) )
                pgamma(m*s, shape = y*s, rate = 1,log.p=TRUE) + log1mexp( pgamma(m*s, shape = y*s, rate = 1,log.p=TRUE)-pgamma(m*s, shape = (y+1)*s, rate = 1,log.p=TRUE)) )
-
+  
   tmp[neg.idx] = -Inf
   tmp[nonint.idx] = -Inf
-
+  
   if(log==TRUE){
     return(tmp)
   }else{
@@ -83,15 +81,15 @@ dgammacount = function(y, m, s, log=FALSE)
 mgammacount = function(order, m, s, tol = 1e-10)
 {
   upper = rmutil::qgammacount(p = 1 - tol, m = m, s= s)
-
+  
   y.series = c(1:upper)
   prob.series = dgammacount(y.series, m = m, s= s, log = FALSE)
-
+  
   means = array(0, length(order))
   for(j in 1:length(order))
   {
     means[j] = sum((y.series^order[j])*prob.series)
   }
-
+  
   return(means)
 }

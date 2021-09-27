@@ -1,11 +1,12 @@
-Package: LRMoE
+Package: LRMoExp
 Type: Package
 Title: Logit-Weighted Reduced Mixture-of-Experts
 Version: 0.1.0
 Author: Spark Tseung [aut, cre],
   Tsz Chai Fung [aut],
   Andrei L. Badescu [aut],
-  Sheldon X. Lin [aut]
+  Sheldon X. Lin [aut],
+  Siyi Wei [dev]
 Maintainer: Spark Tseung <spark.tseung@mail.utoronto.ca>
 Description: The Logit-Weighted Reduced Mixture-of-Experts (LRMoE) 
   proposed by Fung et al. (2019) is a flexible framework actuarial loss modelling.
@@ -16,23 +17,20 @@ Description: The Logit-Weighted Reduced Mixture-of-Experts (LRMoE)
 License: GPL-3 + file LICENSE
 Encoding: UTF-8
 LazyData: true
-Depends: R (>= 3.5)
-Imports: 
+Depends: R (>= 4.1.0)
+Imports:
     Rcpp,
     RcppEigen,
     RcppNumerical,
-    actuar,
-    copula,
-    expint,
-    EnvStats,
-    ggplot2,
-    matrixStats,
-    NMOF,
-    reshape2,
-    rmutil,
-    statmod,
+    testthat,
+    checkmate,
+    R6,
     stats,
-    fitdistrplus
-RoxygenNote: 7.1.1
+    matrixStats,
+    actuar,
+    rmutil,
+    expint
+RoxygenNote: 7.1.2
+Roxygen: list(markdown = TRUE)
 LinkingTo: 
     Rcpp, RcppEigen, RcppNumerical
