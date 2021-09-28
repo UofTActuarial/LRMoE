@@ -65,23 +65,14 @@
       </header><div class="row">
   <div class="contents col-md-9">
 
-<div id="lrmoe" class="section level1">
-<div class="page-header"><h1 class="hasAnchor">
-<a href="#lrmoe" class="anchor"></a>LRMoE</h1></div>
 
-<ul>
-<li><a href="#overview">Overview</a></li>
-<li><a href="#package-installation-and-usage">Package Installation and Usage</a></li>
-<li><a href="#model-description">Model Description</a></li>
-<li><a href="#supported-distributions">Supported Distributions</a></li>
-<li><a href="#issue-report-and-suggestions">Issue Report and Suggestions</a></li>
-<li><a href="#development-planned-and-in-progress">Development Planned and In Progress</a></li>
-</ul>
-</div>
-<div id="overview" class="section level1">
-<h1 class="hasAnchor">
-<a href="#overview" class="anchor"></a>Overview</h1>
-<p><strong>LRMoE</strong> is an R package tailor-made for actuarial applications which allows actuarial researchers and practitioners to model and analyze insurance loss frequencies and severities using the Logit-weighted Reduced Mixture-of-Experts (LRMoE) model. The flexibility of LRMoE models is theoretically justified in <a href="https://www.sciencedirect.com/science/article/pii/S0167668719303956">Fung et al. (2019)</a>, and an application of LRMoE for modelling correlated insurance claim frequencies is in <a href="https://www.cambridge.org/core/journals/astin-bulletin-journal-of-the-iaa/article/class-of-mixture-of-experts-models-for-general-insurance-application-to-correlated-claim-frequencies/E9FCCAD03E68C3908008448B806BAF8E">Fung et al. (2019)</a>.</p>
+<div id="lrmoe-package" class="section level1">
+<div class="page-header"><h1 class="hasAnchor">
+<a href="#lrmoe-package" class="anchor"></a>LRMoE Package</h1></div>
+<div id="introduction" class="section level2">
+<h2 class="hasAnchor">
+<a href="#introduction" class="anchor"></a>Introduction</h2>
+<p><strong>LRMoE</strong> is a package tailor-made for actuarial applications which allows actuarial researchers and practitioners to model and analyze insurance loss frequencies and severities using the Logit-weighted Reduced Mixture-of-Experts (LRMoE) model. The flexibility of LRMoE models is theoretically justified in <a href="https://www.sciencedirect.com/science/article/pii/S0167668719303956">Fung et al. (2019)</a>, and an application of LRMoE for modelling correlated insurance claim frequencies is in <a href="https://www.cambridge.org/core/journals/astin-bulletin-journal-of-the-iaa/article/class-of-mixture-of-experts-models-for-general-insurance-application-to-correlated-claim-frequencies/E9FCCAD03E68C3908008448B806BAF8E">Fung et al. (2019)</a>.</p>
 <p>The package <strong>LRMoE</strong> offers several new distinctive features which are motivated by various actuarial applications and mostly cannot be achieved using existing packages for mixture models. Key features include:</p>
 <ul>
 <li>A wider coverage on frequency and severity distributions and their zero inflation;</li>
@@ -90,125 +81,28 @@
 <li>A collection of insurance rate making and reserving functions; and</li>
 <li>Model selection and visualization tools.</li>
 </ul>
+<p>While <strong>LRMoE</strong> was initially developed for actuarial application, this package also allows for customized expert functions for various modelling problems outside of the insurance context.</p>
 </div>
-<div id="package-installation-and-usage" class="section level1">
-<h1 class="hasAnchor">
-<a href="#package-installation-and-usage" class="anchor"></a>Package Installation and Usage</h1>
+<div id="package-installation-and-usage" class="section level2">
+<h2 class="hasAnchor">
+<a href="#package-installation-and-usage" class="anchor"></a>Package Installation and Usage</h2>
 <p>While we prepare for submitting the package to Comprehensive R Archive Network (<a href="https://cran.r-project.org/">CRAN</a>), the package is available in this github repository. The package manual documenting all functions in the package can also be found in the current repository.</p>
 <p>In R, the <strong>LRMoE</strong> package can be downloaded and installed by running the following code.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">devtools</span><span class="op">)</span>
 <span class="fu">install_github</span><span class="op">(</span><span class="st">"sparktseung/LRMoE"</span><span class="op">)</span></code></pre></div>
-<p>For a detailed demonstration of using the package, we have set up a a separate repository <a href="https://github.com/sparktseung/LRMoE-Paper-Demo">LRMoE-Paper-Demo</a>, which also accompanies a paper submitted to the Annals of Actuarial Science (as of Feb 29, 2020). In that paper (and repository), we have provided two illustrative examples (one on a simulated dataset and another on a real dataset), in order to demonstrate the basic procedures of model fitting, selection, visualization and application.</p>
+<p>To get started, see <a href="./articles/LRMoE.html">here</a>.</p>
 </div>
-<div id="model-description" class="section level1">
-<h1 class="hasAnchor">
-<a href="#model-description" class="anchor"></a>Model Description</h1>
-<p>Let <embed src="https://latex.codecogs.com/svg.latex?x_%7Bi%7D"></embed> denote the <embed src="https://latex.codecogs.com/svg.latex?(P+1)"></embed>-dimensional covariate vector (age, sex, policy region, etc.) of policyholder <embed src="https://latex.codecogs.com/svg.latex?i"></embed>. Based on the covariates, the policyholder is classified into one of <embed src="https://latex.codecogs.com/svg.latex?g"></embed> latent risk classes by a logit <em>gating function</em> such that the probability of class <embed src="https://latex.codecogs.com/svg.latex?j"></embed> is</p>
-<p><img src="https://latex.codecogs.com/svg.latex?%5Cpi_%7Bj%7D(x_%7Bi%7D;&amp;space;%5Calpha)&amp;space;=&amp;space;%5Cfrac%7B%5Cexp(%5Calpha_j%5ET&amp;space;x_i)%7D%7B%5Csum_%7Bj%5E%5Cprime&amp;space;=&amp;space;i%7D%5E%7Bg%7D%5Cexp(%5Calpha_%7Bj%5E%5Cprime%7D%5ET&amp;space;x_i)%7D."></p>
-<p>Let <embed src="https://latex.codecogs.com/svg.latex?y_%7Bi%7D"></embed> denote the <embed src="https://latex.codecogs.com/svg.latex?D"></embed>-dimensional response vector (claim number, claim amount, etc.) of policyholder <embed src="https://latex.codecogs.com/svg.latex?i"></embed>. Conditional on being assigned to latent risk class <embed src="https://latex.codecogs.com/svg.latex?j"></embed>, each dimension of <embed src="https://latex.codecogs.com/svg.latex?y_%7Bi%7D"></embed> are conditionally independent with the <embed src="https://latex.codecogs.com/svg.latex?d"></embed>-th marginal density given by the <em>expert function</em></p>
-<p><img src="https://latex.codecogs.com/svg.latex?g_%7Bjd%7D&amp;space;=&amp;space;%5Cdelta_%7Bjd%7DI_%7B%7By_%7Bid%7D&amp;space;=&amp;space;0%7D%7D&amp;space;+&amp;space;(1-%5Cdelta_%7Bjd%7D)f_%7Bjd%7D(y_%7Bid%7D;&amp;space;%5Cpsi_%7Bjd%7D)"></p>
-<p>where <img src="https://latex.codecogs.com/svg.latex?%5Cdelta_%7Bjd%7D"> represents a zero-inflation probability mass, <embed src="https://latex.codecogs.com/svg.latex?I_%7By_%7Bjd%7D=0%7D"></embed> is the indicator function, and <embed src="https://latex.codecogs.com/svg.latex?f_%7Bjd%7D"></embed> is a commonly-used parametric distribution for actuarial loss modelling with parameter <img src="https://latex.codecogs.com/svg.latex?%5Cpsi_%7Bjd%7D">. For policyholder <embed src="https://latex.codecogs.com/svg.latex?i"></embed>, the density function of <embed src="https://latex.codecogs.com/svg.latex?y_%7Bi%7D"></embed> is therefore</p>
-<p><img src="https://latex.codecogs.com/svg.latex?f(y_%7Bi%7D;&amp;space;x_%7Bi%7D,&amp;space;%5Calpha,&amp;space;%5Cdelta,&amp;space;%5CPsi)&amp;space;=&amp;space;%5Csum_%7Bj=1%7D%5E%7Bg%7D&amp;space;%5Cpi_%7Bj%7D(x_%7Bi%7D;&amp;space;%5Calpha)%5Cprod_%7Bd=1%7D%5E%7BD%7Dg_%7Bjd%7D(y_%7Bjd%7D;&amp;space;%5Cdelta_%7Bjd%7D,&amp;space;%5Cpsi_%7Bjd%7D)."></p>
-<p>The parameters <img src="https://latex.codecogs.com/svg.latex?(%5Calpha,&amp;space;%5Cdelta,&amp;space;%5CPsi)"> can be estimated using the Expectation-Conditional-Maximization algorithm, which is implemented in this package.</p>
-</div>
-<div id="supported-distributions" class="section level1">
-<h1 class="hasAnchor">
-<a href="#supported-distributions" class="anchor"></a>Supported Distributions</h1>
-<p>Currently, the <strong>LRMoE</strong> package support the following distributions, which are motivated by modelling insurance claim frequency and severity in actuarial science.</p>
-<table class="table">
-<thead><tr class="header">
-<th align="center">R-root</th>
-<th align="center">Distribution</th>
-<th align="center">Density <embed src="https://latex.codecogs.com/svg.latex?f_%7Bjd%7D(y)"></embed>
-</th>
-<th align="center">Parameters</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td align="center"><code>gamma</code></td>
-<td align="center">Gamma</td>
-<td align="center"><img src="https://latex.codecogs.com/svg.latex?%5Cfrac%7B1%7D%7B%5Ctheta%5E%7Bm%7D%5CGamma(m)%7Dy%5E%7Bm-1%7De%5E%7B-y/%5Ctheta%7D"></td>
-<td align="center">
-<code>shape</code> <embed src="https://latex.codecogs.com/svg.latex?m%3E0"></embed>, <code>scale</code> <img src="https://latex.codecogs.com/svg.latex?%5Ctheta%3E0">
-</td>
-</tr>
-<tr class="even">
-<td align="center"><code>lnorm</code></td>
-<td align="center">Log Normal</td>
-<td align="center"><img src="https://latex.codecogs.com/svg.latex?%5Cfrac%7B1%7D%7By%5Csigma%5Csqrt%7B2%5Cpi%7D%7D%5Cexp&amp;space;%5Cleft%5B&amp;space;-&amp;space;%5Cfrac%7B1%7D%7B2%7D%5Cleft(&amp;space;%5Cfrac%7B%5Clog(y)-%5Cmu%7D%7B%5Csigma%7D&amp;space;%5Cright&amp;space;)%5E2&amp;space;%5Cright&amp;space;%5D"></td>
-<td align="center">
-<code>meanlog</code> <img src="https://latex.codecogs.com/svg.latex?%5Cmu%3E0">, <code>sdlog</code> <img src="https://latex.codecogs.com/svg.latex?%5Csigma%3E0">
-</td>
-</tr>
-<tr class="odd">
-<td align="center"><code>invgauss</code></td>
-<td align="center">Inverse Gaussian</td>
-<td align="center"><img src="https://latex.codecogs.com/svg.latex?%5Csqrt%7B%5Cfrac%7B%5Clambda%7D%7B2%5Cpi&amp;space;y%5E3%7D%7D&amp;space;%5Cexp&amp;space;%5Cleft%5B&amp;space;-&amp;space;%5Cfrac%7B%5Clambda%7D%7B2y%7D%5Cleft(&amp;space;%5Cfrac%7By-%5Cmu%7D%7B%5Cmu%7D&amp;space;%5Cright&amp;space;)%5E2&amp;space;%5Cright&amp;space;%5D"></td>
-<td align="center">
-<code>mean</code> <img src="https://latex.codecogs.com/svg.latex?%5Cmu%3E0">, <code>scale</code> <img src="https://latex.codecogs.com/svg.latex?%5Clambda%3E0">
-</td>
-</tr>
-<tr class="even">
-<td align="center"><code>weibull</code></td>
-<td align="center">Weibull</td>
-<td align="center"><img src="https://latex.codecogs.com/svg.latex?%5Cfrac%7Bk%7D%7B%5Clambda%7D&amp;space;%5Cleft(%5Cfrac%7By%7D%7B%5Clambda%7D&amp;space;%5Cright)%5E%7Bk-1%7D&amp;space;%5Cexp&amp;space;%5Cleft%5B&amp;space;-%5Cleft(%5Cfrac%7By%7D%7B%5Clambda%7D&amp;space;%5Cright&amp;space;)%5E%7Bk%7D&amp;space;%5Cright&amp;space;%5D"></td>
-<td align="center">
-<code>shape</code> <embed src="https://latex.codecogs.com/svg.latex?k%3E0"></embed>, <code>scale</code> <img src="https://latex.codecogs.com/svg.latex?%5Clambda%3E0">
-</td>
-</tr>
-<tr class="odd">
-<td align="center"><code>burr</code></td>
-<td align="center">Burr</td>
-<td align="center"><img src="https://latex.codecogs.com/svg.latex?%5Cfrac%7Bck%7D%7B%5Clambda%7D&amp;space;%5Cleft(%5Cfrac%7By%7D%7B%5Clambda%7D&amp;space;%5Cright)%5E%7Bc-1%7D&amp;space;%5Cleft%5B&amp;space;1&amp;space;+%5Cleft(%5Cfrac%7By%7D%7B%5Clambda%7D&amp;space;%5Cright&amp;space;)%5E%7Bc%7D&amp;space;%5Cright&amp;space;%5D%5E%7B-k-1%7D"></td>
-<td align="center">
-<code>shape1</code> <embed src="https://latex.codecogs.com/svg.latex?k%3E0"></embed>, <code>shape2</code> <embed src="https://latex.codecogs.com/svg.latex?c%3E0"></embed>, <br><code>scale</code> <img src="https://latex.codecogs.com/svg.latex?%5Clambda%3E0">
-</td>
-</tr>
-<tr class="even">
-<td align="center"><code>poisson</code></td>
-<td align="center">Poisson</td>
-<td align="center"><img src="https://latex.codecogs.com/svg.latex?e%5E%7B-%5Clambda%7D%5Cfrac%7B%5Clambda%5Ey%7D%7By!%7D"></td>
-<td align="center">
-<code>mean</code> <img src="https://latex.codecogs.com/svg.latex?%5Clambda%3E0">
-</td>
-</tr>
-<tr class="odd">
-<td align="center"><code>nbinom</code></td>
-<td align="center">Negative Binomial</td>
-<td align="center"><img src="https://latex.codecogs.com/svg.latex?%5Cbinom%7By+n-1%7D%7Bn-1%7Dp%5En(1-p)%5Ey"></td>
-<td align="center">
-<code>size.n</code> <img src="https://latex.codecogs.com/svg.latex?n&amp;space;%5Cin&amp;space;N%5E+">, <code>prob.p</code> <embed src="https://latex.codecogs.com/svg.latex?0%3Cp%3C1"></embed>
-</td>
-</tr>
-<tr class="even">
-<td align="center"><code>gammacount</code></td>
-<td align="center">Gamma-Count</td>
-<td align="center">
-<code>pgamma(ms, ys, 1) -</code> <br><code>pgamma(ms, (y+1)s, 1)</code>
-</td>
-<td align="center">
-<embed src="https://latex.codecogs.com/svg.latex?m%3E0"></embed>, <embed src="https://latex.codecogs.com/svg.latex?s%3E0"></embed>
-</td>
-</tr>
-<tr class="odd">
-<td align="center"><code>ZI-root</code></td>
-<td align="center">Zero inflation<br>of all above</td>
-<td align="center"><img src="https://latex.codecogs.com/svg.latex?g_%7Bjd%7D&amp;space;=&amp;space;%5Cdelta_%7Bjd%7DI_%7B%7By_%7Bid%7D&amp;space;=&amp;space;0%7D%7D&amp;space;+&amp;space;(1-%5Cdelta_%7Bjd%7D)f_%7Bjd%7D(y_%7Bid%7D;&amp;space;%5Cpsi_%7Bjd%7D)"></td>
-<td align="center"><img src="https://latex.codecogs.com/svg.latex?0%3C%5Cdelta_%7Bjd%7D%3C1"></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div id="issue-report-and-suggestions" class="section level1">
-<h1 class="hasAnchor">
-<a href="#issue-report-and-suggestions" class="anchor"></a>Issue Report and Suggestions</h1>
+<div id="issue-report-and-suggestions" class="section level2">
+<h2 class="hasAnchor">
+<a href="#issue-report-and-suggestions" class="anchor"></a>Issue Report and Suggestions</h2>
 <p>Issues and suggestions can be posted on <a href="https://github.com/sparktseung/LRMoE/issues">https://github.com/sparktseung/LRMoE/issues</a>.</p>
 </div>
-<div id="development-planned-and-in-progress" class="section level1">
-<h1 class="hasAnchor">
-<a href="#development-planned-and-in-progress" class="anchor"></a>Development Planned and In Progress</h1>
+<div id="development-planned-and-in-progress" class="section level2">
+<h2 class="hasAnchor">
+<a href="#development-planned-and-in-progress" class="anchor"></a>Development Planned and In Progress</h2>
 <p>See <a href="https://github.com/sparktseung/LRMoE/projects">https://github.com/sparktseung/LRMoE/projects</a>.</p>
+</div>
 </div>
 
   </div>
