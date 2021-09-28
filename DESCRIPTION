@@ -43,7 +43,9 @@ Imports:
     actuar,
     rmutil,
     expint
+Suggests: knitr, rmarkdown
 RoxygenNote: 7.1.2
 Roxygen: list(markdown = TRUE)
+VignetteBuilder: knitr
 LinkingTo: 
     Rcpp, RcppEigen, RcppNumerical
