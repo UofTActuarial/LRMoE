@@ -13,3 +13,15 @@ The Logit-Weighted Reduced Mixture-of-Experts (LRMoE)
   Fung et al. (2019) "A CLASS OF MIXTURE OF EXPERTS MODELS FOR GENERAL INSURANCE: APPLICATION TO CORRELATED CLAIM FREQUENCIES"
   in ASTIN Bulletin: The Journal of the IAA.
 }
+\author{
+\strong{Maintainer}: Spark Tseung \email{spark.tseung@mail.utoronto.ca}
+
+Authors:
+\itemize{
+  \item Tsz Chai Fung
+  \item Andrei L. Badescu
+  \item Sheldon X. Lin
+  \item Siyi Wei
+}
+
+}
