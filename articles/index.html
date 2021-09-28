@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>predict_excess_posterior — predict_excess_posterior • LRMoE</title>
+<title>Articles • LRMoE</title>
 
 
 <!-- jquery -->
@@ -39,9 +39,7 @@
 
 
 
-<meta property="og:title" content="predict_excess_posterior — predict_excess_posterior" />
-<meta property="og:description" content="Predicts the excess expectation of response, given covariates X,
-logit regression coefficients alpha and a specified model of expert functions." />
+<meta property="og:title" content="Articles" />
 
 
 
@@ -60,7 +58,7 @@ logit regression coefficients alpha and a specified model of expert functions." 
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-reference-topic">
+    <div class="container template-article-index">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -107,73 +105,18 @@ logit regression coefficients alpha and a specified model of expert functions." 
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>predict_excess_posterior</h1>
-    
-    <div class="hidden name"><code>predict_excess_posterior.Rd</code></div>
+      <h1>Articles</h1>
     </div>
 
-    <div class="ref-description">
-    <p>Predicts the excess expectation of response, given covariates <code>X</code>,
-logit regression coefficients <code>alpha</code> and a specified <code>model</code> of expert functions.</p>
+    <div class="section ">
+      <h3></h3>
+      <p class="section-desc"></p>
+
+      <dl>
+        <dt><a href="modellingframework.html">Modelling Framework</a></dt>
+        <dd><p>Overview of the LRMoE modelling framework.</p></dt>
+      </dl>
     </div>
-
-    <pre class="usage"><span class='fu'>predict_excess_posterior</span><span class='op'>(</span>
-  <span class='va'>Y</span>,
-  <span class='va'>X</span>,
-  <span class='va'>alpha</span>,
-  <span class='va'>model</span>,
-  <span class='va'>limit</span>,
-  exposure_past <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='op'>)</span>,
-  exposure_future <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='op'>)</span>,
-  exact_Y <span class='op'>=</span> <span class='cn'>F</span>
-<span class='op'>)</span></pre>
-
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>Y</th>
-      <td><p>A matrix of responses.</p></td>
-    </tr>
-    <tr>
-      <th>X</th>
-      <td><p>A matrix of covariates.</p></td>
-    </tr>
-    <tr>
-      <th>alpha</th>
-      <td><p>A matrix of logit regression coefficients.</p></td>
-    </tr>
-    <tr>
-      <th>model</th>
-      <td><p>A matrix specifying the expert functions.</p></td>
-    </tr>
-    <tr>
-      <th>limit</th>
-      <td><p>A matrix specifying the cutoff point.</p></td>
-    </tr>
-    <tr>
-      <th>exposure_past</th>
-      <td><p>A vector indicating the time exposure (past) of each observation. If nothing is supplied,it is set to 1.0 by default.</p></td>
-    </tr>
-    <tr>
-      <th>exposure_future</th>
-      <td><p>A vector indicating the time exposure (future) of each observation. If nothing is supplied,it is set to 1.0 by default.</p></td>
-    </tr>
-    <tr>
-      <th>exact_Y</th>
-      <td><p>Bool variable. indicating if <code>Y</code> is observed exactly or with censoring and truncation. Default set to be False</p></td>
-    </tr>
-    </table>
-
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>result: A matrix of predicted excess expectation of response, based on posterior probabilities.</p>
-
-  </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
-    <nav id="toc" data-toggle="toc" class="sticky-top">
-      <h2 data-toc-skip>Contents</h2>
-    </nav>
   </div>
 </div>
 
