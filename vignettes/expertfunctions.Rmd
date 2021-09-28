@@ -1,0 +1,125 @@
+---
+title: "Expert Functions"
+description: >
+  All expert functions currently supported in the LRMoE R package.
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Expert Functions}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+
+The LRMoE.jl package supports a collection of distributions commonly used for modelling insurance claim frequency and severity.
+
+## Discrete Distributions (Frequency Modelling)
+
+### Binomial
+
+* Paramater: `list(n = n, p = p)`, where `n>0` and `0<=p<=1`.
+* PMF
+\[
+P(X = k) = {n \choose k}p^k(1-p)^{n-k},  \quad \text{ for } k = 0,1,2, \ldots, n.
+\]
+* See also: [Binomial Distribution](https://en.wikipedia.org/wiki/Binomial_distribution) (Wikipedia) 
+
+### Negative Binomial
+
+* Parameter: `list(n = n, p = p)`, where `n>0` and `0<=p<=1`.
+* PMF:
+\[
+P(X = k) = \frac{\Gamma(k+r)}{k! \Gamma(r)} p^r (1 - p)^k, \quad \text{for } k = 0,1,2,\ldots.
+\]
+* See also: [Negative Binomial Distribution](https://reference.wolfram.com/language/ref/NegativeBinomialDistribution.html) (Wolfram) 
+
+### Poisson
+
+* Parameter: `list(lambda = lambda)`, where `lambda>0`.
+* PMF: 
+\[
+P(X = k) = \frac{\lambda^k}{k!} e^{-\lambda}, \quad \text{ for } k = 0,1,2,\ldots.
+\]
+* See also: [Poisson Distribution](https://en.wikipedia.org/wiki/Poisson_distribution) (Wikipedia) 
+
+### Gamma Count
+
+* Parameter: `list(m = m, s = s)`, where `m>0` and `s>0`.
+* PMF:
+\[
+P(X = k) = G(m k, s T) - G(m (k+1), s T), \quad \text{ for } k = 0,1,2, \ldots, n.
+\]
+with
+\[
+G(m k, s T) = \frac{1}{\Gamma(mk)}  \int^{sT}_{0} u^{mk - 1} e^{-u} du
+\]
+See also: [Gamma Count Distribution](https://arxiv.org/abs/1312.2423) (Arxiv) 
+
+
+## Continuous Distributions (Severity Modelling)
+
+### Burr
+
+* Parameter: `list(shape1 = k, shape2 = c, scale = lambda)`, where `k>0`, `c>0` and `lambda>0`.
+* PDF:
+\[
+f(x; k, c, \lambda) = \frac{kc}{\lambda} \left( \frac{x}{\lambda} \right)^{c-1} \left( 1+ \left( \frac{x}{\lambda} \right)^{c} \right)^{-k-1},
+\quad x \geq 0
+\]
+* See also: [Burr Distribution](https://www.mathworks.com/help/stats/burr-type-xii-distribution.html) (Mathworks, implemented in this package),
+    [Burr Distribution](https://en.wikipedia.org/wiki/Burr_distribution) (Wikipedia, with `lambda = 1`)
+    
+    
+### Gamma
+
+* Parameter: `list(k = k, theta = theta)`, where `k>0` and `theta>0`.
+* PDF:
+\[
+f(x; k, \theta) = \frac{x^{k-1} e^{-x/\theta}}{\Gamma(k) \theta^k},
+\quad x > 0
+\]
+* See also: [Gamma Distribution](https://en.wikipedia.org/wiki/Gamma_distribution) (Wikipedia), shape-scale parameterization 
+
+
+### Inverse Gaussian
+
+* Parameter: `list(mean = mu, shape = lambda)`, where `mu>0` and `lambda>0`.
+* PDF:
+PDF:
+\[
+f(x; \mu, \lambda) = \sqrt{\frac{\lambda}{2\pi x^3}}
+\exp\left(\frac{-\lambda(x-\mu)^2}{2\mu^2x}\right), 
+\quad x > 0
+\]
+* See also: [Inverse Gaussian Distribution](https://en.wikipedia.org/wiki/Inverse_Gaussian_distribution) (Wikipedia) 
+
+
+### Lognormal
+
+* Parameter: `list(meanlog = mu, sdlog = sigma)`, where `sigma>0`.
+* PDF:
+PDF:
+\[
+f(x; \mu, \lambda) = \sqrt{\frac{\lambda}{2\pi x^3}}
+\exp\left(\frac{-\lambda(x-\mu)^2}{2\mu^2x}\right), 
+\quad x > 0
+\]
+* See also: [Inverse Gaussian Distribution](https://en.wikipedia.org/wiki/Inverse_Gaussian_distribution) (Wikipedia) 
+
+
+### Weibull
+
+* Parameter: `list(shape = k, scale = theta)`, where `k>0` and `theta>0`.
+* PDF:
+\[
+f(x; k, \theta) = \frac{k}{\theta} \left( \frac{x}{\theta} \right)^{k-1} e^{-(x/\theta)^k},
+\quad x \geq 0
+\]
+* See also: [Weibull Distribution](https://en.wikipedia.org/wiki/Weibull_distribution) (Wikipedia) 
+
+## Zero Inflation
+
+Zero inflation is supported for all discrete and continuous experts. They can be constructed by adding ZI in front of an expert function, with an additional parameter `p_zero` for modelling a probability mass at zero. Zero-inflated experts are used in the same way as their non-zero-inflated counterpart. For example, the parameters for a zero-inflated Poisson expert are given by `list(p_zero = p0, lambda = lambda)`.
+
+## Adding Customized Expert Functions
+
+See [here](customizedexperts.html).
