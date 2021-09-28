@@ -118,7 +118,7 @@ f(x; k, \theta) = \frac{k}{\theta} \left( \frac{x}{\theta} \right)^{k-1} e^{-(x/
 
 ## Zero Inflation
 
-Zero inflation is supported for all discrete and continuous experts. They can be constructed by adding ZI in front of an expert function, with an additional parameter `p_zero` for modelling a probability mass at zero. Zero-inflated experts are used in the same way as their non-zero-inflated counterpart. For example, the parameters for a zero-inflated Poisson expert are given by `list(p_zero = p0, lambda = lambda)`.
+Zero inflation is supported for all discrete and continuous experts. They can be constructed by adding `zi` in front of an expert function, with an additional parameter `p_zero` for modelling a probability mass at zero. Zero-inflated experts are used in the same way as their non-zero-inflated counterpart. For example, the parameters for a zero-inflated Poisson expert `zipoisson` are given by `list(p_zero = p0, lambda = lambda)`.
 
 ## Adding Customized Expert Functions
 
