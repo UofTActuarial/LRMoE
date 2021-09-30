@@ -14,6 +14,7 @@ knitr::opts_chunk$set(echo = TRUE, cache = TRUE)
 library(LRMoE)
 library(reshape2)
 library(matrixStats)
+data("LRMoEDemoData")
 ```
 
 ## Introduction
@@ -65,12 +66,16 @@ params_list = matrix( list(list(lambda = 6), list(p_zero = 0.2, m = 30, s = 0.5)
 
 The `LRMoE` package includes a simulator. Given the covariates and parameters defined above, we can directly simulate a dataset.
 
-```{r, eval=TRUE}
+```{r, eval=FALSE}
 Y.complete = LRMoE::sim_dataset(alpha = alpha, x = X, 
                                 comp_dist = comp_dist, params_list = params_list)
 ```
 
 The simulated values are plotted as follows. For each dimension of `Y`, the histogram is relatively well separated as two components. This is more or less done on purpose to demonstrate that the fitting procedure can identify the *true* model when it is known. In practice, we are usually less concerned of the underlying data generating distribution, as long as the LRMoE model provides a reasonable fit of data.
+
+```{r setup, include=FALSE}
+Y.complete = Y[, c(2, 6)]
+```
 
 ```{r, eval=TRUE, echo=FALSE, fig.align='center'}
 # Dimension 1
@@ -91,7 +96,7 @@ For illustration purposes, we assume the dataset is subject to the following tru
 | 6001-8000  	| No truncation  or censoring 	| Left Truncated at 5         	|
 | 8001-10000 	| No truncation  or censoring  	| Right Censored at 100  	      |
 
-```{r, eval=TRUE}
+```{r, eval=FALSE}
 # First block: 1~6000
 X.obs = X[1:6000,]
 tl.1 = rep(0, 6000)
