@@ -4,17 +4,31 @@
 \alias{sim_dataset}
 \title{Generate the simulations of the expert_matrix}
 \usage{
-sim_dataset(alpha, x, expert_matrix, exposure = rep(1, dim(x)[1]))
+sim_dataset(
+  alpha,
+  x,
+  expert_matrix = NULL,
+  comp_dist,
+  params_list,
+  exposure = rep(1, dim(x)[1])
+)
 }
 \arguments{
 \item{alpha}{(\code{matrix})
 A g * P matrix. Logit regression coefficients.}
 
 \item{x}{(\code{matrix})
-An N * P covariate matrix, where N is sample size. The first column MUST be 1.}
+An N * P covariate matrix, where N is sample size. The first column MUST be 1
+for an intercept term.}
 
 \item{expert_matrix}{(\code{ExpertMatrix})
 A D*g expert matrix.}
+
+\item{comp_dist}{(\code{matrix})
+A D * g string matrix, representing the name of expert functions.}
+
+\item{params_list}{(\code{matrix})
+A D * g matrix of lists, representing the parameters of expert functions.}
 
 \item{exposure}{A N*1 vector that contain the exposure value for each column in expert_matrix}
 }

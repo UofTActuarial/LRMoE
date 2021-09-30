@@ -13,9 +13,9 @@ An object of class \code{matrix} (inherits from \code{array}) with 10000 rows an
 
 An object of class \code{matrix} (inherits from \code{array}) with 10000 rows and 8 columns.
 
-An object of class \code{matrix} (inherits from \code{array}) with 9828 rows and 5 columns.
+An object of class \code{matrix} (inherits from \code{array}) with 9842 rows and 5 columns.
 
-An object of class \code{matrix} (inherits from \code{array}) with 9828 rows and 8 columns.
+An object of class \code{matrix} (inherits from \code{array}) with 9842 rows and 8 columns.
 }
 \usage{
 X
