@@ -16,3 +16,6 @@ articles:
 - title:
   contents:
   - modellingframework
+  - expertfunctions
+  - simulatedataset
+  - customizedexperts

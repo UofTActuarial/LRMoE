@@ -7,3 +7,4 @@ s-9F8CCDB1
 .DS_Store
 .gitignore
 docs
+vignettes/simulatedataset_cache/*
