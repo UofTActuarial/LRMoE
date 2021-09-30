@@ -73,7 +73,7 @@ Y.complete = LRMoE::sim_dataset(alpha = alpha, x = X,
 
 The simulated values are plotted as follows. For each dimension of `Y`, the histogram is relatively well separated as two components. This is more or less done on purpose to demonstrate that the fitting procedure can identify the *true* model when it is known. In practice, we are usually less concerned of the underlying data generating distribution, as long as the LRMoE model provides a reasonable fit of data.
 
-```{r setup, include=FALSE}
+```{r, include=FALSE}
 Y.complete = Y[, c(2, 6)]
 ```
 
