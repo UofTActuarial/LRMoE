@@ -115,7 +115,14 @@
     <p>Generate the simulations of the expert_matrix</p>
     </div>
 
-    <pre class="usage"><span class='fu'>sim_dataset</span><span class='op'>(</span><span class='va'>alpha</span>, <span class='va'>x</span>, <span class='va'>expert_matrix</span>, exposure <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fu'><a href='https://rdrr.io/r/base/dim.html'>dim</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>)</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>sim_dataset</span><span class='op'>(</span>
+  <span class='va'>alpha</span>,
+  <span class='va'>x</span>,
+  expert_matrix <span class='op'>=</span> <span class='cn'>NULL</span>,
+  <span class='va'>comp_dist</span>,
+  <span class='va'>params_list</span>,
+  exposure <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fu'><a href='https://rdrr.io/r/base/dim.html'>dim</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>)</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -128,12 +135,23 @@ A g * P matrix. Logit regression coefficients.</p></td>
     <tr>
       <th>x</th>
       <td><p>(<code>matrix</code>)
-An N * P covariate matrix, where N is sample size. The first column MUST be 1.</p></td>
+An N * P covariate matrix, where N is sample size. The first column MUST be 1
+for an intercept term.</p></td>
     </tr>
     <tr>
       <th>expert_matrix</th>
       <td><p>(<code>ExpertMatrix</code>)
 A D*g expert matrix.</p></td>
+    </tr>
+    <tr>
+      <th>comp_dist</th>
+      <td><p>(<code>matrix</code>)
+A D * g string matrix, representing the name of expert functions.</p></td>
+    </tr>
+    <tr>
+      <th>params_list</th>
+      <td><p>(<code>matrix</code>)
+A D * g matrix of lists, representing the parameters of expert functions.</p></td>
     </tr>
     <tr>
       <th>exposure</th>
