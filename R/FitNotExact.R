@@ -11,7 +11,7 @@ FitNotExact = function(Y, X, alpha, model,
   gate_init = GateLogit(X, alpha)
   ll_np_list = LogLikelihoodNotExact(Y, gate_init, model, exposure)
   ll_init_np = ll_np_list$ll
-  ll_penalty = model$get_penalty_value()
+  ll_penalty = model$get_penalty_value(penalty)
   ll_init = ll_init_np + ll_penalty
 
   if(print_steps){
@@ -49,7 +49,7 @@ FitNotExact = function(Y, X, alpha, model,
     gate_em = GateLogit(X, alpha_em)
     ll_em_list = LogLikelihoodNotExact(Y, gate_em, model_em, exposure)
     ll_em_np = ll_em_list$ll
-    ll_em_penalty = model_em$get_penalty_value()
+    ll_em_penalty = model_em$get_penalty_value(penalty)
     ll_em = ll_em_np + ll_em_penalty
 
     diff = ifelse(ll_em - ll_em_temp>0, "+", "-")
@@ -81,7 +81,7 @@ FitNotExact = function(Y, X, alpha, model,
 
         ll_em_list = LogLikelihoodNotExact(Y, gate_em, model_em, exposure)
         ll_em_np = ll_em_list$ll
-        ll_em_penalty = model_em$get_penalty_value()
+        ll_em_penalty = model_em$get_penalty_value(penalty)
         ll_em = ll_em_np + ll_em_penalty
 
         diff = ifelse(ll_em - ll_em_temp>0, "+", "-")
@@ -102,7 +102,7 @@ FitNotExact = function(Y, X, alpha, model,
     gate_em = GateLogit(X, alpha_em)
     ll_em_list = LogLikelihoodNotExact(Y, gate_em, model_em, exposure)
     ll_em_np = ll_em_list$ll
-    ll_em_penalty = model_em$get_penalty_value()
+    ll_em_penalty = model_em$get_penalty_value(penalty)
     ll_em = ll_em_np + ll_em_penalty
 
   }
