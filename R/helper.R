@@ -1,22 +1,22 @@
 #' @title Compute f(a) = log(1 +/- exp(-a)) Numerically Optimally
 #' @name log1mexp
-#' 
+#'
 #' @description
 #' Compute f(a) = log(1 +/- exp(-a)) Numerically Optimally
 #' This helper function was a directly copy from `copula` package. It was initialized here intend to maintain the minimum package complexity
 #'
 #' @param a \cr
 #' numeric vector of positive values
-#' 
+#'
 #' @param cutoff \cr
 #' log(2) is “optimal”, but the exact value is unimportant, and anything in (0.5, 1) is fine.
-log1mexp <- function(a, cutoff = log(2)) 
+log1mexp <- function(a, cutoff = log(2))
 {
   if (has.na <- any(ina <- is.na(a))) {
     y <- a
     a <- a[ok <- !ina]
   }
-  if (any(a < 0)) 
+  if (any(a < 0))
     warning("'a' >= 0 needed")
   tst <- a <= cutoff
   r <- a
@@ -46,7 +46,7 @@ faster_zi_result <- function(tl, tu, yl, yu, params, distribution) {
   expert_tn = faster_zi_process(tl == 0, p0, result[["expert_tn"]])
   expert_tn_bar = faster_zi_process(tl > 0, p0, result[["expert_tn_bar"]])
   ######################################################################################
-  
+
   # Return values
   return( list(expert_ll = expert_ll, expert_tn = expert_tn, expert_tn_bar = expert_tn_bar) )
 }
@@ -65,4 +65,9 @@ print_nl <- function(nl) {
 print_vc <- function(vc) {
   vec_str = paste(vc,collapse=", ")
   paste("c(", vec_str, ")")
+}
+
+# The helper function to count the number of parameters in alpha
+count_alpha <- function(alpha) {
+  return((nrow(alpha)-1)*ncol(alpha))
 }
