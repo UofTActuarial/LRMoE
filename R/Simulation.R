@@ -1,10 +1,10 @@
 #' Simulation based on Logit Gating Function
 #' @name sim_logit_gating
-# 
+#
 #' @description Given alpha and x, generate a probability matrix. Give the simulation matrix with each row
 #' of the probability matrix to be multinomial probability.
-#' 
-#' @param probs The probability matrix with N x P dimentions. 
+#'
+#' @param probs The probability matrix with N x P dimentions.
 #'
 #' @return result The result matrix with N X P results
 sim_logit_gating <- function(probs) {
@@ -17,9 +17,9 @@ sim_logit_gating <- function(probs) {
 
 #' Simulations of Exposurized Models
 #' @name sim_exposurize_model
-#' 
+#'
 #' @description Give one simulation for each expert in the expert_matrix after they got exposurized.
-#' 
+#'
 #' @param expert_matrix (`ExpertMatrix`)\cr
 #' The Expert Matrix that will be exposurized and simulated.
 #' @param exposure_list (`numeric`)\cr
@@ -46,14 +46,19 @@ sim_exposurize_model <- function(expert_matrix, exposure_list, selected_index) {
 #' @param alpha (`matrix`)
 #' A g * P matrix. Logit regression coefficients.
 #' @param x (`matrix`)
-#' An N * P covariate matrix, where N is sample size. The first column MUST be 1.
+#' An N * P covariate matrix, where N is sample size. The first column MUST be 1
+#' for an intercept term.
 #' @param expert_matrix (`ExpertMatrix`)
-#' A D*g expert matrix. 
+#' A D*g expert matrix.
+#' @param comp_dist (`matrix`)
+#' A D * g string matrix, representing the name of expert functions.
+#' @param params_list (`matrix`)
+#' A D * g matrix of lists, representing the parameters of expert functions.
 #' @param exposure
 #' A N*1 vector that contain the exposure value for each column in expert_matrix
 #'
 #' @return A N*D simulation matrix of expert_matrix.
-#' 
+#'
 #' @export
 #'
 #' @examples
@@ -74,7 +79,15 @@ sim_exposurize_model <- function(expert_matrix, exposure_list, selected_index) {
 #' #exposure_list = c(1,2,1,2,2,2,1)
 #' #sim_dataset(alpha, x, expert_matrix, exposure = exposure_list)
 
-sim_dataset <- function(alpha, x, expert_matrix, exposure = rep(1.0, dim(x)[1])) {
+sim_dataset <- function(alpha, x, expert_matrix = NULL, comp_dist, params_list,
+                        exposure = rep(1.0, dim(x)[1])) {
+  if(is.null(expert_matrix)){
+    if(missing(comp_dist) | missing(params_list)){
+      stop("At least one of expert_matrix and (comp_dist + params_list) should be provided.")
+    }
+    expert_matrix = ExpertMatrix$new(comp_dist, params_list)
+  }
+
   probs = exp(GateLogit(x, alpha))
   gating_sim = sim_logit_gating(probs)
   selected_index = apply(gating_sim, 1, which.max)
