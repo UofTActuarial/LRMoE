@@ -206,8 +206,6 @@ select the expert function object inside expert matrix}
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{row_index}}{}
-
 \item{\code{col_index}}{Exposurize all the expert functions inside the expert matrix}
 }
 \if{html}{\out{</div>}}
@@ -296,7 +294,7 @@ Get the sum of penalty value of all the expert functions. Users are required to 
 \if{latex}{\out{\hypertarget{method-get_penalty_value}{}}}
 \subsection{Method \code{get_penalty_value()}}{
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ExpertMatrix$get_penalty_value()}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{ExpertMatrix$get_penalty_value(penalty)}\if{html}{\out{</div>}}
 }
 
 \subsection{Returns}{

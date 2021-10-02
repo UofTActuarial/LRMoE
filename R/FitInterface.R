@@ -13,6 +13,13 @@ FitLRMoE = function(Y, X, alpha_init,
   Y = as.matrix(Y)
   X = as.matrix(X)
 
+  if(is.null(exposure)){
+    exposure= rep(1, nrow(X))
+    warning("No exposure provided. The default value exposure=1 is used for all observations.")
+  }
+
+  model_guess = ExpertMatrix$new(comp_dist, params_list)
+
   if(penalty == FALSE){
     pen_alpha = Inf
   }else{
@@ -20,14 +27,14 @@ FitLRMoE = function(Y, X, alpha_init,
       pen_alpha = 5.0
       warning("No pen_alpha provided. The default value pen_alpha=5.0 is used.")
     }
+    if(is.null(pen_params)){
+      pen_params = matrix(list(NULL),
+                          nrow = model_guess$nrow, ncol = model_guess$ncol)
+      warning("No pen_params provided. The default value pen_params is used.")
+    }
   }
 
-  if(is.null(exposure)){
-    exposure= rep(1, nrow(X))
-    warning("No exposure provided. The default value exposure=1 is used for all observations.")
-  }
-
-  model_guess = ExpertMatrix$new(comp_dist, params_list)
+  model_guess$set_penalty_params(pen_params)
 
   if(exact_Y == TRUE){
     result = FitExact(Y = Y, X = X, alpha = alpha_init, model = model_guess,
