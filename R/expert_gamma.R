@@ -8,10 +8,10 @@ gamma.params_init <- function(y){
   pos_index = which(y > 0)
   mu = mean(y[pos_index])
   variance = var(y[pos_index])
-  
+
   theta_init = variance/mu
   k_init = mu/theta_init
-  
+
   return( list(shape = k_init, scale = theta_init) )
 }
 
@@ -36,48 +36,48 @@ gamma.expert_ll_exact <- function(y, params){
 gamma.expert_ll_not_exact <- function(tl, tu, yl, yu, params){
   # Check dim tl == yl == tu == yu
   # Check value
-  
+
   # Find indexes of unequal yl & yu: Not exact observations, but censored
   expert.ll = expert.tn = expert.tn.bar = rep(-Inf, length(yu))
   censor.idx = (yl!=yu)
   no.trunc.idx = (tl==tu)
-  
+
   # Expert LL calculation
   ######################################################################################
   prob.log.yu = gamma.logcdf(params, yu[censor.idx])
   prob.log.yl = gamma.logcdf(params, yl[censor.idx])
-  
+
   # Compute loglikelihood for expert j, first for y
   # likelihood of censored interval: some easy algebra
   expert.ll[censor.idx] = prob.log.yu + log1mexp(prob.log.yu - prob.log.yl)
   # exact likelihood
   expert.ll[!censor.idx] = gamma.logpdf(params, yu[!censor.idx])
   ######################################################################################
-  
+
   # Expert TN Calculation
   ######################################################################################
   # Compute loglikelihood for expert j, then for truncation limits t
   prob.log.tu = gamma.logcdf(params, tu)
   prob.log.tl = gamma.logcdf(params, tl)
-  
+
   # Normalizing factor for truncation limits, in log
   expert.tn = prob.log.tu + log1mexp(prob.log.tu - prob.log.tl)
-  
+
   # Deal with no truncation case
   expert.tn[no.trunc.idx] = gamma.logpdf(params, tu[no.trunc.idx])
-  
+
   # Deal with exact zero case
   zero.idx = (tu==0)
   expert.ll[zero.idx]=(-Inf)
   expert.tn[zero.idx]=(-Inf)
   ######################################################################################
-  
+
   # Expert TN Bar Calculation
   ######################################################################################
   expert.tn.bar[!no.trunc.idx] = log1mexp(-expert.tn[!no.trunc.idx])
   expert.tn.bar[no.trunc.idx] = 0
   ######################################################################################
-  
+
   # Return values
   return( list(expert_ll = expert.ll, expert_tn = expert.tn, expert_tn_bar = expert.tn.bar) )
 }
@@ -90,6 +90,10 @@ gamma.penalty <- function(params, penalty_params) {
   d.k = params[["shape"]]
   d.theta = params[["scale"]]
   return( (p[1]-1)*log(d.k) - d.k/p[2] + (p[3]-1)*log(d.theta) - d.theta/p[4] )
+}
+
+gamma.default_penalty <- function() {
+  return(c(2.0, 10.0, 2.0, 10.0))
 }
 
 ######################################################################################
@@ -167,21 +171,21 @@ gamma.EM_exact <- function(expert_old, ye, exposure, z_e_obs, penalty, pen_param
   return(list(shape = k_new, scale = theta_new))
 }
 
-gamma.EM_notexact <- function(expert_old, 
-                              tl, yl, yu, tu, 
-                              exposure, 
+gamma.EM_notexact <- function(expert_old,
+                              tl, yl, yu, tu,
+                              exposure,
                               z_e_obs, z_e_lat, k_e,
                               penalty, pen_params) {
-  
+
   # Old parameters
   k_old = expert_old$get_params()$shape
   theta_old = expert_old$get_params()$scale
-  
+
   # Old loglikelihoods
   expert_ll = rep(-Inf, length(yl))
   expert_tn = rep(-Inf, length(yl))
   expert_tn_bar = rep(-Inf, length(yl))
-  
+
   for(i in 1:length(yl)){
     expert_expo = expert_old$exposurize(exposure[i])
     result_set = expert_expo$ll_not_exact(tl[i], yl[i], yu[i], tu[i])
@@ -189,75 +193,75 @@ gamma.EM_notexact <- function(expert_old,
     expert_tn[i] = result_set[["expert_tn"]]
     expert_tn_bar[i] = result_set[["expert_tn_bar"]]
   }
-  
+
   # Additional E-step
   cencor_idx = (yl!=yu)
   y_e_obs = rep(0, length(yl))
   y_e_lat = rep(0, length(yl))
   logY_e_obs = rep(0, length(yl))
   logY_e_lat = rep(0, length(yl))
-  
+
   # Uncensored observations
   y_e_obs[!cencor_idx] = yl[!cencor_idx]
   logY_e_obs[!cencor_idx] = log(yl[!cencor_idx])
-  
+
   # Unique upper/lower bounds for integration: yl+yu
   y_unique = unique(cbind(yl, yu), MARGIN=1)
   y_unique_length = nrow(y_unique)
   y_unique_match = match(data.frame(t(cbind(yl, yu))), data.frame(t(y_unique)))
   yl_unique = y_unique[,1]
   yu_unique = y_unique[,2]
-  
+
   # Unique values of integration
   y_e_obs_unique = rep(0, length(y_unique_length))
   logY_e_obs_unique = rep(0, length(y_unique_length))
-  
+
   y_e_obs_unique = intGammaYObs(k_old, theta_old, yl_unique, yu_unique)
   logY_e_obs_unique = intGammaLogYObs(k_old, theta_old, log(yl_unique), log(yu_unique))
-  
+
   # Match to original observations
   y_e_obs_match = y_e_obs_unique[y_unique_match]
   logY_e_obs_match = logY_e_obs_unique[y_unique_match]
-  
+
   y_e_obs[cencor_idx] = exp(-expert_ll[cencor_idx]) * y_e_obs_match[cencor_idx]
   logY_e_obs[cencor_idx] = exp(-expert_ll[cencor_idx]) * logY_e_obs_match[cencor_idx]
-  
-  
+
+
   # Unique upper/lower bounds for integration: tl+tu
   t_unique = unique(cbind(tl, tu), MARGIN=1)
   t_unique_length = nrow(t_unique)
   t_unique_match = match(data.frame(t(cbind(tl, tu))), data.frame(t(t_unique)))
   tl_unique = t_unique[,1]
   tu_unique = t_unique[,2]
-  
+
   # Unique values of integration
   y_e_lat_unique = rep(0, length(t_unique_length))
   logY_e_lat_unique = rep(0, length(t_unique_length))
-  
+
   y_e_lat_unique = intGammaYLat(k_old, theta_old, tl_unique, tu_unique)
   logY_e_lat_unique = intGammaLogYLat(k_old, theta_old, log(tl_unique), log(tu_unique))
-  
+
   # Match to original observations
   y_e_lat_match = y_e_lat_unique[t_unique_match]
   logY_e_lat_match = logY_e_lat_unique[t_unique_match]
-  
+
   y_e_lat = exp(-expert_tn_bar) * y_e_lat_match
   logY_e_lat = exp(-expert_tn_bar) * logY_e_lat_match
-  
+
   # Get rid of NaN's
   y_e_obs[is.na(y_e_obs)] = 0
   y_e_lat[is.na(y_e_lat)] = 0
   logY_e_obs[is.na(logY_e_obs)] = 0
   logY_e_lat[is.na(logY_e_lat)] = 0
-  
-  
+
+
   # Update parameters
   pos_idx = (yu!=0)
-  
+
   term_zkz = XPlusYZ(z_e_obs[pos_idx], z_e_lat[pos_idx], k_e[pos_idx])
   term_zkz_Y = XAPlusYZB(z_e_obs[pos_idx], y_e_obs[pos_idx], z_e_lat[pos_idx], k_e[pos_idx], y_e_lat[pos_idx])
   term_zkz_logY = XAPlusYZB(z_e_obs[pos_idx], logY_e_obs[pos_idx], z_e_lat[pos_idx], k_e[pos_idx], logY_e_lat[pos_idx])
-  
+
   logk_new = stats::optimise(f = gamma_optim_k,
                              sum_term_zkz = sum(term_zkz),
                              sum_term_zkzy = sum(term_zkz_Y),
@@ -270,7 +274,7 @@ gamma.EM_notexact <- function(expert_old,
   k_new = exp(logk_new)
   theta_new = gamma_k_to_theta(k_new, sum(term_zkz), sum(term_zkz_Y),
                                penalty = penalty, pen_params = pen_params)
-  
+
   return(list(shape = k_new, scale = theta_new))
 }
 
@@ -302,13 +306,13 @@ gamma_optim_k <- function(logk, sum_term_zkz, sum_term_zkzy, sum_term_zkzlogy,
 }
 
 intGammaYObs <- function(m, theta, lower, upper) {
-  diff.dist.untrunc = pgamma(upper, shape = m+1, scale = theta, lower.tail = TRUE, log.p = FALSE) - 
+  diff.dist.untrunc = pgamma(upper, shape = m+1, scale = theta, lower.tail = TRUE, log.p = FALSE) -
     pgamma(lower, shape = m+1, scale = theta, lower.tail = TRUE, log.p = FALSE)
   return(diff.dist.untrunc*m*theta)
 }
 
 intGammaYLat <- function(m, theta, lower, upper) {
-  diff.dist.untrunc = pgamma(upper, shape = m+1, scale = theta, lower.tail = TRUE, log.p = FALSE) - 
+  diff.dist.untrunc = pgamma(upper, shape = m+1, scale = theta, lower.tail = TRUE, log.p = FALSE) -
     pgamma(lower, shape = m+1, scale = theta, lower.tail = TRUE, log.p = FALSE)
   return((1-diff.dist.untrunc)*m*theta)
 }

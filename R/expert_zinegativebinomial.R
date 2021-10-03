@@ -48,6 +48,10 @@ zinegativebinomial.penalty <- function(params, penalty_params) {
   return( negativebinomial.penalty(params, penalty_params) )
 }
 
+zinegativebinomial.default_penalty <- function() {
+  return(negativebinomial.default_penalty())
+}
+
 ######################################################################################
 # dzinegativebinomial, pzinegativebinomial, qzinegativebinomial and rzinegativebinomial implementations.
 ######################################################################################
@@ -101,12 +105,12 @@ zinegativebinomial.quantile <- function(params, p) {
 #   # Perform the E step
 #   NULL
 # }
-# 
+#
 # zinegativebinomial._MStep <- function() {
 #   # Perform the M step
 #   NULL
 # }
-# 
+#
 # zinegativebinomial.compute_EM <- function() {
 #   # Perform the EM optimization
 #   NULL
@@ -114,73 +118,73 @@ zinegativebinomial.quantile <- function(params, p) {
 
 zinegativebinomial.EM_exact <- function(expert_old, ye, exposure, z_e_obs, penalty, pen_params) {
   # Perform the EM optimization with exact observations
-  
+
   p_old = expert_old$get_params()$p_zero
-  
-  tmp_exp = ExpertFunction$new("negativebinomial", 
+
+  tmp_exp = ExpertFunction$new("negativebinomial",
                                list(n = expert_old$get_params()$n,
                                     p = expert_old$get_params()$p),
                                pen_params)
-  
+
   expert_ll_pos = tmp_exp$ll_exact(ye)
-  
+
   z_zero_e_obs = z_e_obs * EM_E_z_zero_obs(ye, p_old, expert_ll_pos)
   z_pos_e_obs = z_e_obs - z_zero_e_obs
   p_new = EM_M_zero(z_zero_e_obs, z_pos_e_obs, 0.0, 0.0, 0.0)
-  
+
   tmp_update = negativebinomial.EM_exact(tmp_exp, ye, exposure, z_pos_e_obs,
                               penalty, pen_params)
-  
-  return(list(p_zero = p_new, 
-              n = tmp_update$n, 
+
+  return(list(p_zero = p_new,
+              n = tmp_update$n,
               p = tmp_update$p))
 }
 
-zinegativebinomial.EM_notexact <- function(expert_old, 
-                                  tl, yl, yu, tu, 
-                                  exposure, 
+zinegativebinomial.EM_notexact <- function(expert_old,
+                                  tl, yl, yu, tu,
+                                  exposure,
                                   z_e_obs, z_e_lat, k_e,
                                   penalty, pen_params) {
   # Perform the EM optimization with exact observations
-  
+
   p_old = expert_old$get_params()$p_zero
-  
+
   if(p_old > 0.999999){
-    return(list(p_zero = p_old, 
-                n = expert_old$n, 
+    return(list(p_zero = p_old,
+                n = expert_old$n,
                 p = expert_old$p))
   }
-  
-  tmp_exp = ExpertFunction$new("negativebinomial", 
+
+  tmp_exp = ExpertFunction$new("negativebinomial",
                                list(n = expert_old$get_params()$n,
                                     p = expert_old$get_params()$p),
                                pen_params)
-  
+
   expert_ll = rep(-Inf, length(yl))
   expert_tn_bar = rep(-Inf, length(yl))
-  
+
   for(i in 1:length(yl)){
     expert_expo = tmp_exp$exposurize(exposure[i])
     result_set = expert_expo$ll_not_exact(tl[i], yl[i], yu[i], tu[i])
     expert_ll[i] = result_set[["expert_ll"]]
     expert_tn_bar[i] = result_set[["expert_tn_bar"]]
   }
-  
+
   z_zero_e_obs = z_e_obs * EM_E_z_zero_obs(yl, p_old, expert_ll)
   z_pos_e_obs = z_e_obs - z_zero_e_obs
   z_zero_e_lat = z_e_lat * EM_E_z_zero_lat(tl, p_old, expert_tn_bar)
   z_pos_e_lat = z_e_lat - z_zero_e_lat
   p_new = EM_M_zero(z_zero_e_obs, z_pos_e_obs, z_zero_e_lat, z_pos_e_lat, k_e)
-  
-  tmp_update = negativebinomial.EM_notexact(expert_old = tmp_exp, 
-                                   tl = tl, yl = yl, yu = yu, tu = tu, 
-                                   exposure = exposure, 
-                                   z_e_obs = z_pos_e_obs, z_e_lat = z_pos_e_lat, 
+
+  tmp_update = negativebinomial.EM_notexact(expert_old = tmp_exp,
+                                   tl = tl, yl = yl, yu = yu, tu = tu,
+                                   exposure = exposure,
+                                   z_e_obs = z_pos_e_obs, z_e_lat = z_pos_e_lat,
                                    k_e = k_e,
                                    penalty = penalty, pen_params = pen_params)
-  
-  return(list(p_zero = p_new, 
-              n = tmp_update$n, 
+
+  return(list(p_zero = p_new,
+              n = tmp_update$n,
               p = tmp_update$p))
 }
 ######################################################################################

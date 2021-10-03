@@ -1,7 +1,7 @@
 #' @title Expert Function Classes
 #' @name ExpertFunction
 #'
-#' @description 
+#' @description
 #' This is the base class for Expert Functions. Users are expected to interact with `ExpertFunction` to perform all the computations.
 #'
 #' @export
@@ -27,11 +27,11 @@ ExpertFunction = R6Class("ExpertFunction", cloneable = TRUE,
       #' @field distribution  (`character`)\cr
       #' The distribution name specified by the user.
       distribution = NULL,
-      
+
       #' @field continuous (`logical`)\cr
       #' Given distribution is continuous or not, default set to be `TRUE`.
       continuous = NULL,
-      
+
       #' @description
       #' Create a new ExpertFunction Class
       #'
@@ -50,11 +50,11 @@ ExpertFunction = R6Class("ExpertFunction", cloneable = TRUE,
       },
 
       #' Calculate the penalty value of the Expert Distribution
-      #' 
+      #'
       #' @param default (`logical`)\cr
       #' Use default penalty parameters if default is TRUE, else use user defined penalty parameters. Default set to be TRUE.
-      #' 
-      #' @description 
+      #'
+      #' @description
       #' Prerequisite: self$params and self$penalty_params need to be set. Otherwise will return the default penalty value.
       initialize_penalty = function() {
         penalty = ifelse(!length(private$penalty_params),
@@ -65,7 +65,7 @@ ExpertFunction = R6Class("ExpertFunction", cloneable = TRUE,
                          )
         private$penalty = penalty
       },
-      
+
       #' @description
       #' Estimate all the parameters for this expert function based on observation
       #'
@@ -75,15 +75,23 @@ ExpertFunction = R6Class("ExpertFunction", cloneable = TRUE,
         params = do.call( paste0(self$distribution, ".params_init"), list(y=y) )
         private$params = self$set_params(params)
       },
-      
+
+      #' @description
+      #' Set default hyper parameters
+      #'
+      default_penalty = function() {
+        hyper = do.call(paste0(self$distribution, ".default_penalty"), list())
+        return(hyper)
+      },
+
       #' Set the parameters for the expert function
-      #' 
+      #'
       #' @param expert_params (`logical`)\cr
       #' The parameters for the given distribution.
       set_params = function(expert_params) {
         private$params = do.call( paste0(self$distribution, ".set_params"), list(params = expert_params) )
       },
-      
+
       #' Get the parameters for the expert function
       #'
       #' @param params (`logical`)\cr
@@ -91,77 +99,77 @@ ExpertFunction = R6Class("ExpertFunction", cloneable = TRUE,
       get_params = function() {
         return( private$params )
       },
-      
+
       #' Set the penalty parameters
       #' If there are no expert_penalty_params given, use default penalty parameters.
       #'
       #' @param expert_penalty_params (`logical`)\cr
-      #' The parameters for the given distribution. Could be preset by users or postset by running `ExpertFunction$initialize_params(observations)` 
+      #' The parameters for the given distribution. Could be preset by users or postset by running `ExpertFunction$initialize_params(observations)`
       set_penalty_params = function(expert_penalty_params) {
         private$penalty_params = expert_penalty_params
         if(length(expert_penalty_params)){ self$initialize_penalty() }
       },
-      
-      #' @description 
+
+      #' @description
       #' Get the penalty parameters
       get_penalty_params = function() {
         return(private$penalty_params)
       },
-      
-      #' @description 
+
+      #' @description
       #' Get the penalty value, penalty value cannot be set. It can only been initialized.
       get_penalty = function() {
         return(private$penalty)
       },
-      
-      #' @description 
+
+      #' @description
       #' Get mean of this expert function
       get_mean = function() {
         do.call( paste0(self$distribution, ".mean"), list(params = private$params) )
       },
-      
-      #' @description 
+
+      #' @description
       #' Get variance of this expert function
       get_variance = function() {
         do.call( paste0(self$distribution, ".variance"), list(params = private$params) )
       },
-      
-      #' @description 
+
+      #' @description
       #' Get the cdf of this expert function given RV
       #' @param q The value of random variable
       get_cdf = function(q) {
         do.call( paste0(self$distribution, ".cdf"), list(params = private$params, q = q) )
       },
-      
-      #' @description 
+
+      #' @description
       #' Get the logcdf of this expert function given RV
       #' @param q The value of random variable
       get_logcdf = function(q) {
         do.call( paste0(self$distribution, ".logcdf"), list(params = private$params, q = q) )
       },
-      
-      #' @description 
+
+      #' @description
       #' Get the pdf of this expert function given RV
       #' @param x The value of random variable
       get_pdf = function(x) {
         do.call( paste0(self$distribution, ".pdf"), list(params = private$params, x = x) )
       },
-      
-      #' @description 
+
+      #' @description
       #' Get the logpdf of this expert function given RV
       #' @param x The value of random variable
       get_logpdf = function(x) {
         do.call( paste0(self$distribution, ".logpdf"), list(params = private$params, x = x) )
       },
-      
-      #' @description 
+
+      #' @description
       #' Get the quantile of this expert function given probability
       #' @param p The probability
       get_quantile = function(p) {
         do.call( paste0(self$distribution, ".quantile"), list(params = private$params, p = p) )
       },
-      
-      #' @description 
+
+      #' @description
       #' Get the Limited Expected Value of the expert function.
       #' @param u (`numeric`)
       get_lev = function(u) {
@@ -173,18 +181,18 @@ ExpertFunction = R6Class("ExpertFunction", cloneable = TRUE,
         }
         return(result)
       },
-      
-      #' @description 
+
+      #' @description
       #' Get the Excess of the function.
       #' @param u (`numeric`)
       get_excess = function(u) {
         return(self$get_mean() - self$get_lev(u))
       },
-      
+
       #' @description
       #' Exposurize the parameters, return a copy of the object with the updated parameters
       #' Note this function will not change the parameters of the original object
-      #' 
+      #'
       #' @param exposure (`numeric`)\cr
       #' The exposure applied to the parameters, default set to be 1
       exposurize = function(exposure = 1) {
@@ -193,17 +201,17 @@ ExpertFunction = R6Class("ExpertFunction", cloneable = TRUE,
         new_expert$set_params(exposure)
         return( new_expert )
       },
-      
+
       #' @description
       #' Simulate value based on distribution parameters
-      #' 
+      #'
       #' @param n (`numeric`)\cr
       #' The number of simulated values you want
       simulate = function(n = 1) {
         simulations = do.call( paste0(self$distribution, ".simulation"), list(params=private$params, n = n) )
         return( simulations )
       },
-      
+
       #' Calculate the exact log likelihood of the Expert Distribution
       #'
       #' @param y (`numeric`)\cr
@@ -212,8 +220,8 @@ ExpertFunction = R6Class("ExpertFunction", cloneable = TRUE,
         ll_value = do.call( paste0(self$distribution, ".expert_ll_exact"), list(y = y, params = private$params) )
         return(ll_value)
       },
-      
-      
+
+
       #' Calculate the non-exact log likelihood of the Expert Distribution
       #'
       #' @param tl (`numeric`)\cr A vector of length N: lower bounds of truncation.
@@ -221,14 +229,14 @@ ExpertFunction = R6Class("ExpertFunction", cloneable = TRUE,
       #' @param yu (`numeric`)\cr A vector of length N: upper bounds of censoring.
       #' @param tu (`numeric`)\cr A vector of length N: upper bounds of truncation.
       ll_not_exact = function(tl, yl, yu, tu) {
-        result_set = do.call( paste0(self$distribution, ".expert_ll_not_exact"), 
+        result_set = do.call( paste0(self$distribution, ".expert_ll_not_exact"),
                               list(tl = tl, yl = yl, yu = yu, tu = tu, params = private$params) )
         return(result_set)
       },
-      
-      #' @description 
+
+      #' @description
       #' Perform the EM optimization with non-exact observations
-      #' 
+      #'
       #' @param expert_old Old expert function
       #' @param tl (`numeric`)\cr A vector of length N: lower bounds of truncation.
       #' @param yl (`numeric`)\cr A vector of length N: lower bounds of censoring.
@@ -240,36 +248,36 @@ ExpertFunction = R6Class("ExpertFunction", cloneable = TRUE,
       #' @param k_e Calculated from E-step
       #' @param penalty T/F: whether penalty is imposed
       #' @param pen_params A vector of penalty parameters
-      #' 
+      #'
       EM_notexact = function(expert_old, tl, yl, yu, tu, exposure,
                              z_e_obs, z_e_lat, k_e,
                              penalty, pen_params) {
-        result = do.call( paste0(self$distribution, ".EM_notexact"), 
-                          list(expert_old = expert_old, 
+        result = do.call( paste0(self$distribution, ".EM_notexact"),
+                          list(expert_old = expert_old,
                                tl = tl, yl = yl, yu = yu, tu = tu,
-                               exposure = exposure, 
+                               exposure = exposure,
                                z_e_obs = z_e_obs, z_e_lat = z_e_lat, k_e = k_e,
                                penalty = penalty, pen_params = pen_params) )
         return(result)
       },
-      
-      #' @description 
+
+      #' @description
       #' Perform the EM optimization with exact observations
-      #' 
+      #'
       #' @param expert_old Old expert function
       #' @param ye A vector of length N: exact observations
       #' @param exposure A vector of length N: exposures for observations
       #' @param z_e_obs Calculated from E-step
       #' @param penalty T/F: whether penalty is imposed
       #' @param pen_params A vector of penalty parameters
-      #' 
+      #'
       EM_exact = function(expert_old, ye, exposure, z_e_obs, penalty, pen_params) {
-        result = do.call( paste0(self$distribution, ".EM_exact"), 
+        result = do.call( paste0(self$distribution, ".EM_exact"),
                           list(expert_old = expert_old, ye = ye, exposure = exposure, z_e_obs = z_e_obs, penalty = penalty, pen_params = pen_params) )
         return(result)
       }
     ),
-                          
+
     private = list(
       params = NULL,
       penalty_params = NULL,

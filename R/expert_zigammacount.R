@@ -26,7 +26,7 @@ zigammacount.set_params <- function(params){
 zigammacount.expert_ll_exact <- function(y, params){
   # If all the observations are exact, calculate its corresponding likelihood
   p0 = params[["p_zero"]]
-  return( ifelse(y == 0, 
+  return( ifelse(y == 0,
                  log(p0 + (1-p0)*gammacount.pdf(params, x = y)),
                  log(1-p0) + gammacount.logpdf(params, x = y)
                  )
@@ -41,6 +41,10 @@ zigammacount.penalty <- function(params, penalty_params) {
   # Return the penalty applied on the parameters.
   # Keep in mind to set the default penalty parameters
   return( gammacount.penalty(params, penalty_params) )
+}
+
+zigammacount.default_penalty <- function() {
+  return(gammacount.default_penalty())
 }
 
 ######################################################################################
@@ -91,12 +95,12 @@ zigammacount.quantile <- function(params, p) {
 #   # Perform the E step
 #   NULL
 # }
-# 
+#
 # zigammacount._MStep <- function() {
 #   # Perform the M step
 #   NULL
 # }
-# 
+#
 # zigammacount.compute_EM <- function() {
 #   # Perform the EM optimization
 #   NULL
@@ -104,73 +108,73 @@ zigammacount.quantile <- function(params, p) {
 
 zigammacount.EM_exact <- function(expert_old, ye, exposure, z_e_obs, penalty, pen_params) {
   # Perform the EM optimization with exact observations
-  
+
   p_old = expert_old$get_params()$p_zero
-  
-  tmp_exp = ExpertFunction$new("gammacount", 
+
+  tmp_exp = ExpertFunction$new("gammacount",
                                list(m = expert_old$get_params()$m,
                                     s = expert_old$get_params()$s),
                                pen_params)
-  
+
   expert_ll_pos = tmp_exp$ll_exact(ye)
-  
+
   z_zero_e_obs = z_e_obs * EM_E_z_zero_obs(ye, p_old, expert_ll_pos)
   z_pos_e_obs = z_e_obs - z_zero_e_obs
   p_new = EM_M_zero(z_zero_e_obs, z_pos_e_obs, 0.0, 0.0, 0.0)
-  
+
   tmp_update = gammacount.EM_exact(tmp_exp, ye, exposure, z_pos_e_obs,
                                          penalty, pen_params)
-  
-  return(list(p_zero = p_new, 
-              m = tmp_update$m, 
+
+  return(list(p_zero = p_new,
+              m = tmp_update$m,
               s = tmp_update$s))
 }
 
-zigammacount.EM_notexact <- function(expert_old, 
-                                           tl, yl, yu, tu, 
-                                           exposure, 
+zigammacount.EM_notexact <- function(expert_old,
+                                           tl, yl, yu, tu,
+                                           exposure,
                                            z_e_obs, z_e_lat, k_e,
                                            penalty, pen_params) {
   # Perform the EM optimization with exact observations
-  
+
   p_old = expert_old$get_params()$p_zero
-  
+
   if(p_old > 0.999999){
-    return(list(p_zero = p_old, 
-                m = expert_old$m, 
+    return(list(p_zero = p_old,
+                m = expert_old$m,
                 s = expert_old$s))
   }
-  
-  tmp_exp = ExpertFunction$new("gammacount", 
+
+  tmp_exp = ExpertFunction$new("gammacount",
                                list(m = expert_old$get_params()$m,
                                     s = expert_old$get_params()$s),
                                pen_params)
-  
+
   expert_ll = rep(-Inf, length(yl))
   expert_tn_bar = rep(-Inf, length(yl))
-  
+
   for(i in 1:length(yl)){
     expert_expo = tmp_exp$exposurize(exposure[i])
     result_set = expert_expo$ll_not_exact(tl[i], yl[i], yu[i], tu[i])
     expert_ll[i] = result_set[["expert_ll"]]
     expert_tn_bar[i] = result_set[["expert_tn_bar"]]
   }
-  
+
   z_zero_e_obs = z_e_obs * EM_E_z_zero_obs(yl, p_old, expert_ll)
   z_pos_e_obs = z_e_obs - z_zero_e_obs
   z_zero_e_lat = z_e_lat * EM_E_z_zero_lat(tl, p_old, expert_tn_bar)
   z_pos_e_lat = z_e_lat - z_zero_e_lat
   p_new = EM_M_zero(z_zero_e_obs, z_pos_e_obs, z_zero_e_lat, z_pos_e_lat, k_e)
-  
-  tmp_update = gammacount.EM_notexact(expert_old = tmp_exp, 
-                                            tl = tl, yl = yl, yu = yu, tu = tu, 
-                                            exposure = exposure, 
-                                            z_e_obs = z_pos_e_obs, z_e_lat = z_pos_e_lat, 
+
+  tmp_update = gammacount.EM_notexact(expert_old = tmp_exp,
+                                            tl = tl, yl = yl, yu = yu, tu = tu,
+                                            exposure = exposure,
+                                            z_e_obs = z_pos_e_obs, z_e_lat = z_pos_e_lat,
                                             k_e = k_e,
                                             penalty = penalty, pen_params = pen_params)
-  
-  return(list(p_zero = p_new, 
-              m = tmp_update$m, 
+
+  return(list(p_zero = p_new,
+              m = tmp_update$m,
               s = tmp_update$s))
 }
 

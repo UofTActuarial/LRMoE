@@ -49,6 +49,10 @@ zipoisson.penalty <- function(params, penalty_params) {
   return(poisson.penalty(params, penalty_params))
 }
 
+zipoisson.default_penalty <- function() {
+  return(poisson.default_penalty())
+}
+
 ######################################################################################
 # dzipoisson, pzipoisson, qzipoisson and rzipoisson implementations.
 ######################################################################################
@@ -100,68 +104,68 @@ zipoisson.quantile <- function(params, p) {
 ######################################################################################
 zipoisson.EM_exact <- function(expert_old, ye, exposure, z_e_obs, penalty, pen_params) {
   # Perform the EM optimization with exact observations
-  
+
   p_old = expert_old$get_params()$p_zero
-  
-  tmp_exp = ExpertFunction$new("poisson", 
+
+  tmp_exp = ExpertFunction$new("poisson",
                                list(lambda = expert_old$get_params()$lambda),
                                pen_params)
-  
+
   expert_ll_pos = tmp_exp$ll_exact(ye)
-  
+
   z_zero_e_obs = z_e_obs * EM_E_z_zero_obs(ye, p_old, expert_ll_pos)
   z_pos_e_obs = z_e_obs - z_zero_e_obs
   p_new = EM_M_zero(z_zero_e_obs, z_pos_e_obs, 0.0, 0.0, 0.0)
-  
+
   tmp_update = poisson.EM_exact(tmp_exp, ye, exposure, z_pos_e_obs,
                                          penalty, pen_params)
-  
-  return(list(p_zero = p_new, 
+
+  return(list(p_zero = p_new,
               lambda = tmp_update$lambda))
 }
 
-zipoisson.EM_notexact <- function(expert_old, 
-                                tl, yl, yu, tu, 
-                                exposure, 
+zipoisson.EM_notexact <- function(expert_old,
+                                tl, yl, yu, tu,
+                                exposure,
                                 z_e_obs, z_e_lat, k_e,
                                 penalty, pen_params) {
   # Perform the EM optimization with exact observations
-  
+
   p_old = expert_old$get_params()$p_zero
-  
+
   if(p_old > 0.999999){
-    return(list(p_zero = p_old, 
+    return(list(p_zero = p_old,
                 lambda = expert_old$lambda))
   }
-  
-  tmp_exp = ExpertFunction$new("poisson", 
+
+  tmp_exp = ExpertFunction$new("poisson",
                                list(lambda = expert_old$get_params()$lambda),
                                pen_params)
-  
+
   expert_ll = rep(-Inf, length(yl))
   expert_tn_bar = rep(-Inf, length(yl))
-  
+
   for(i in 1:length(yl)){
     expert_expo = tmp_exp$exposurize(exposure[i])
     result_set = expert_expo$ll_not_exact(tl[i], yl[i], yu[i], tu[i])
     expert_ll[i] = result_set[["expert_ll"]]
     expert_tn_bar[i] = result_set[["expert_tn_bar"]]
   }
-  
+
   z_zero_e_obs = z_e_obs * EM_E_z_zero_obs(yl, p_old, expert_ll)
   z_pos_e_obs = z_e_obs - z_zero_e_obs
   z_zero_e_lat = z_e_lat * EM_E_z_zero_lat(tl, p_old, expert_tn_bar)
   z_pos_e_lat = z_e_lat - z_zero_e_lat
   p_new = EM_M_zero(z_zero_e_obs, z_pos_e_obs, z_zero_e_lat, z_pos_e_lat, k_e)
-  
-  tmp_update = poisson.EM_notexact(expert_old = tmp_exp, 
-                                 tl = tl, yl = yl, yu = yu, tu = tu, 
-                                 exposure = exposure, 
-                                 z_e_obs = z_pos_e_obs, z_e_lat = z_pos_e_lat, 
+
+  tmp_update = poisson.EM_notexact(expert_old = tmp_exp,
+                                 tl = tl, yl = yl, yu = yu, tu = tu,
+                                 exposure = exposure,
+                                 z_e_obs = z_pos_e_obs, z_e_lat = z_pos_e_lat,
                                  k_e = k_e,
                                  penalty = penalty, pen_params = pen_params)
-  
-  return(list(p_zero = p_new, 
+
+  return(list(p_zero = p_new,
               lambda = tmp_update$lambda))
 }
 ######################################################################################

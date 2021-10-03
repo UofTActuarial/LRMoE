@@ -33,6 +33,10 @@ ziinversegaussian.penalty <- function(params, penalty_params) {
   return( inversegaussian.penalty(params, penalty_params) )
 }
 
+ziinversegaussian.default_penalty <- function() {
+  return(inversegaussian.default_penalty())
+}
+
 ######################################################################################
 # dziinversegaussian, pziinversegaussian, qziinversegaussian and rziinversegaussian implementations.
 ######################################################################################
@@ -80,46 +84,46 @@ ziinversegaussian.lev <- function(params, u) {
 ######################################################################################
 ziinversegaussian.EM_exact <- function(expert_old, ye, exposure, z_e_obs, penalty, pen_params) {
   # Perform the EM optimization with exact observations
-  
+
   p_old = expert_old$get_params()$p_zero
-  
-  tmp_exp = ExpertFunction$new("inversegaussian", 
+
+  tmp_exp = ExpertFunction$new("inversegaussian",
                                list(mean = expert_old$get_params()$mean,
                                     shape = expert_old$get_params()$shape),
                                pen_params)
-  
+
   expert_ll_pos = tmp_exp$ll_exact(ye)
-  
+
   z_zero_e_obs = z_e_obs * EM_E_z_zero_obs(ye, p_old, expert_ll_pos)
   z_pos_e_obs = z_e_obs - z_zero_e_obs
   p_new = EM_M_zero(z_zero_e_obs, z_pos_e_obs, 0.0, 0.0, 0.0)
-  
+
   tmp_update = inversegaussian.EM_exact(tmp_exp, ye, exposure, z_pos_e_obs,
                                         penalty, pen_params)
-  
-  return(list(p_zero = p_new, 
-              mean = tmp_update$mean, 
+
+  return(list(p_zero = p_new,
+              mean = tmp_update$mean,
               shape = tmp_update$shape))
 }
 
-ziinversegaussian.EM_notexact <- function(expert_old, 
-                                    tl, yl, yu, tu, 
-                                    exposure, 
+ziinversegaussian.EM_notexact <- function(expert_old,
+                                    tl, yl, yu, tu,
+                                    exposure,
                                     z_e_obs, z_e_lat, k_e,
                                     penalty, pen_params) {
   # Perform the EM optimization with exact observations
-  
+
   p_old = expert_old$get_params()$p_zero
-  
-  tmp_exp = ExpertFunction$new("inversegaussian", 
+
+  tmp_exp = ExpertFunction$new("inversegaussian",
                                list(mean = expert_old$get_params()$mean,
                                     shape = expert_old$get_params()$shape),
                                pen_params)
-  
+
   expert_ll = rep(-Inf, length(yl))
   expert_tn = rep(-Inf, length(yl))
   expert_tn_bar = rep(-Inf, length(yl))
-  
+
   for(i in 1:length(yl)){
     expert_expo = tmp_exp$exposurize(exposure[i])
     result_set = expert_expo$ll_not_exact(tl[i], yl[i], yu[i], tu[i])
@@ -127,22 +131,22 @@ ziinversegaussian.EM_notexact <- function(expert_old,
     expert_tn[i] = result_set[["expert_tn"]]
     expert_tn_bar[i] = result_set[["expert_tn_bar"]]
   }
-  
+
   z_zero_e_obs = z_e_obs * EM_E_z_zero_obs(yl, p_old, expert_ll)
   z_pos_e_obs = z_e_obs - z_zero_e_obs
   z_zero_e_lat = z_e_lat * EM_E_z_zero_lat(tl, p_old, expert_tn_bar)
   z_pos_e_lat = z_e_lat - z_zero_e_lat
   p_new = EM_M_zero(z_zero_e_obs, z_pos_e_obs, z_zero_e_lat, z_pos_e_lat, k_e)
-  
-  tmp_update = inversegaussian.EM_notexact(expert_old = tmp_exp, 
-                                     tl = tl, yl = yl, yu = yu, tu = tu, 
-                                     exposure = exposure, 
-                                     z_e_obs = z_pos_e_obs, z_e_lat = z_pos_e_lat, 
+
+  tmp_update = inversegaussian.EM_notexact(expert_old = tmp_exp,
+                                     tl = tl, yl = yl, yu = yu, tu = tu,
+                                     exposure = exposure,
+                                     z_e_obs = z_pos_e_obs, z_e_lat = z_pos_e_lat,
                                      k_e = k_e,
                                      penalty = penalty, pen_params = pen_params)
-  
-  return(list(p_zero = p_new, 
-              mean = tmp_update$mean, 
+
+  return(list(p_zero = p_new,
+              mean = tmp_update$mean,
               shape = tmp_update$shape))
 }
 ######################################################################################
