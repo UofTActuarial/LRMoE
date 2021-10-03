@@ -7,6 +7,8 @@
 #' @param probs The probability matrix with N x P dimentions.
 #'
 #' @return result The result matrix with N X P results
+#'
+#' @keywords internal
 sim_logit_gating <- function(probs) {
   result = matrix(0, nrow = dim(probs)[1], ncol = dim(probs)[2])
   for(index in c(1:dim(probs)[1])) {
@@ -29,6 +31,8 @@ sim_logit_gating <- function(probs) {
 #'
 #' @return result (`matrix`)\cr
 #' The result matrix with dimension to be `expert_matrix$nrow` rows and `expert_matrix$ncol` columns
+#'
+#' @keywords internal
 sim_exposurize_model <- function(expert_matrix, exposure_list, selected_index) {
   result = matrix(0, nrow = length(selected_index), ncol = expert_matrix$nrow)
   for(i in c(1:length(selected_index))){

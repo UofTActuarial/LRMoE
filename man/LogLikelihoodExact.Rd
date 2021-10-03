@@ -22,3 +22,4 @@ The Ix1 numerical vector which specify the exposure for each observation.}
 \description{
 Calculate the log likelihood based on the observations, gate matrix, model matrix and exposure matrix.
 }
+\keyword{internal}

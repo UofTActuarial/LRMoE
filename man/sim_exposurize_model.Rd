@@ -23,3 +23,4 @@ The result matrix with dimension to be \code{expert_matrix$nrow} rows and \code{
 \description{
 Give one simulation for each expert in the expert_matrix after they got exposurized.
 }
+\keyword{internal}

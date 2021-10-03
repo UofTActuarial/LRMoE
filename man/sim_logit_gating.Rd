@@ -16,3 +16,4 @@ result The result matrix with N X P results
 Given alpha and x, generate a probability matrix. Give the simulation matrix with each row
 of the probability matrix to be multinomial probability.
 }
+\keyword{internal}
