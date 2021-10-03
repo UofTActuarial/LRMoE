@@ -9,6 +9,8 @@
 #' @import checkmate
 #' @importFrom Rcpp sourceCpp
 #' @importFrom expint gammainc
+#' @importFrom EnvStats skewness kurtosis
+#' @importFrom fitdistrplus mledist
 "_PACKAGE"
 
 .onLoad = function(libname, pkgname) {
