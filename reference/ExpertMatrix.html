@@ -278,9 +278,10 @@ select the expert function object inside expert matrix</p></dd>
 
 <h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Arguments</h4>
 <p><div class="arguments"></p><dl>
-<dt><code>row_index</code></dt><dd><p></p></dd>
+<dt><code>row_index</code></dt><dd><p>Row index</p></dd>
 
-<dt><code>col_index</code></dt><dd><p>Exposurize all the expert functions inside the expert matrix</p></dd>
+<dt><code>col_index</code></dt><dd><p>Column index
+Exposurize all the expert functions inside the expert matrix</p></dd>
 
 </dl><p></div></p>
 <p><hr>
@@ -336,8 +337,13 @@ Get the sum of penalty value of all the expert functions. Users are required to 
 <a id="method-get_penalty_value"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code>get_penalty_value()</code></h3>
 
 <h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
-<p><div class="r"></p><pre><span class='va'>ExpertMatrix</span><span class='op'>$</span><span class='fu'>get_penalty_value</span><span class='op'>(</span><span class='op'>)</span></pre><p></div></p>
+<p><div class="r"></p><pre><span class='va'>ExpertMatrix</span><span class='op'>$</span><span class='fu'>get_penalty_value</span><span class='op'>(</span><span class='va'>penalty</span><span class='op'>)</span></pre><p></div></p>
 
+<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Arguments</h4>
+<p><div class="arguments"></p><dl>
+<dt><code>penalty</code></dt><dd><p>TRUE/FALSE</p></dd>
+
+</dl><p></div></p>
 <h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Returns</h4>
 <p>value
 The total penalty value of Expert Matrix

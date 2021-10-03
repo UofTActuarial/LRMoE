@@ -13,6 +13,9 @@
     <loc>http://sparktseung.github.io/LRMoE/reference/ExpertMatrix.html</loc>
   </url>
   <url>
+    <loc>http://sparktseung.github.io/LRMoE/reference/FitLRMoE.html</loc>
+  </url>
+  <url>
     <loc>http://sparktseung.github.io/LRMoE/reference/GateLogit.html</loc>
   </url>
   <url>
@@ -76,6 +79,9 @@
     <loc>http://sparktseung.github.io/LRMoE/reference/predict_var_prior.html</loc>
   </url>
   <url>
+    <loc>http://sparktseung.github.io/LRMoE/reference/print_expert_matrix.html</loc>
+  </url>
+  <url>
     <loc>http://sparktseung.github.io/LRMoE/reference/sim_dataset.html</loc>
   </url>
   <url>
@@ -86,6 +92,9 @@
   </url>
   <url>
     <loc>http://sparktseung.github.io/LRMoE/articles/expertfunctions.html</loc>
+  </url>
+  <url>
+    <loc>http://sparktseung.github.io/LRMoE/articles/fitsimulatedataset.html</loc>
   </url>
   <url>
     <loc>http://sparktseung.github.io/LRMoE/articles/modellingframework.html</loc>
