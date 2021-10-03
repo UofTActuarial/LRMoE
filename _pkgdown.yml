@@ -18,4 +18,5 @@ articles:
   - modellingframework
   - expertfunctions
   - simulatedataset
+  - fitsimulatedataset
   - customizedexperts
