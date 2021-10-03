@@ -10,6 +10,7 @@ FitLRMoE(
   alpha_init,
   comp_dist,
   params_list,
+  experts_init = NULL,
   exposure = NULL,
   exact_Y = FALSE,
   penalty = TRUE,
@@ -41,6 +42,9 @@ The rows represent the dimensions of \code{Y}, while the columns represent the c
 
 \item{params_list}{A d * g matrix of list with paramster names and values,
 which is the initial parameter guess for the corresponding \code{comp_dist}.}
+
+\item{experts_init}{An initialization of expert functions returned by \code{cmm_init}.
+Provide either \code{experts_init} or (\code{comp_dist} and \code{params_init}).}
 
 \item{exposure}{A vector of length N, representing the exposure of the observations (how long it has been observed).}
 
