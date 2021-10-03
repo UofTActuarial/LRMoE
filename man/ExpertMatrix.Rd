@@ -206,7 +206,10 @@ select the expert function object inside expert matrix}
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{col_index}}{Exposurize all the expert functions inside the expert matrix}
+\item{\code{row_index}}{Row index}
+
+\item{\code{col_index}}{Column index
+Exposurize all the expert functions inside the expert matrix}
 }
 \if{html}{\out{</div>}}
 }
@@ -297,6 +300,13 @@ Get the sum of penalty value of all the expert functions. Users are required to 
 \if{html}{\out{<div class="r">}}\preformatted{ExpertMatrix$get_penalty_value(penalty)}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{penalty}}{TRUE/FALSE}
+}
+\if{html}{\out{</div>}}
+}
 \subsection{Returns}{
 value
 The total penalty value of Expert Matrix

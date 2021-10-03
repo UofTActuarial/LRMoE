@@ -65,8 +65,8 @@ ExpertMatrix = R6Class("ExpertMatrix", cloneable = TRUE,
 
     #' select the expert function object inside expert matrix
     #'
-    #' @param row_index
-    #' @param col_index
+    #' @param row_index Row index
+    #' @param col_index Column index
     select = function(row_index = 0, col_index = 0) {
       # Validate the row index and col index
       assertNumber(row_index, lower = 0, upper = self$nrow)
@@ -148,6 +148,7 @@ ExpertMatrix = R6Class("ExpertMatrix", cloneable = TRUE,
     },
 
     #' Get the sum of penalty value of all the expert functions. Users are required to set the penalty parameters before call this function.
+    #' @param penalty TRUE/FALSE
     #' @return value
     #' The total penalty value of Expert Matrix
     get_penalty_value = function(penalty) {

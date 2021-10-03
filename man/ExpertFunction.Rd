@@ -41,6 +41,7 @@ Given distribution is continuous or not, default set to be \code{TRUE}.}
 \item \href{#method-new}{\code{ExpertFunction$new()}}
 \item \href{#method-initialize_penalty}{\code{ExpertFunction$initialize_penalty()}}
 \item \href{#method-initialize_params}{\code{ExpertFunction$initialize_params()}}
+\item \href{#method-default_penalty}{\code{ExpertFunction$default_penalty()}}
 \item \href{#method-set_params}{\code{ExpertFunction$set_params()}}
 \item \href{#method-get_params}{\code{ExpertFunction$get_params()}}
 \item \href{#method-set_penalty_params}{\code{ExpertFunction$set_penalty_params()}}
@@ -121,11 +122,22 @@ Estimate all the parameters for this expert function based on observation
 \if{html}{\out{<div class="arguments">}}
 \describe{
 \item{\code{y}}{(\code{numeric})\cr
-The observations from the preset expert distribution
-Set the parameters for the expert function}
+The observations from the preset expert distribution}
 }
 \if{html}{\out{</div>}}
 }
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-default_penalty"></a>}}
+\if{latex}{\out{\hypertarget{method-default_penalty}{}}}
+\subsection{Method \code{default_penalty()}}{
+Set default hyper parameters
+
+Set the parameters for the expert function
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ExpertFunction$default_penalty()}\if{html}{\out{</div>}}
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-set_params"></a>}}

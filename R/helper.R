@@ -67,6 +67,19 @@ print_vc <- function(vc) {
   paste("c(", vec_str, ")")
 }
 
+#' Print expert matrix.
+#' @param expert_matrix A matrix of expert functions
+#' @export print_expert_matrix
+print_expert_matrix <- function(expert_matrix) {
+  for(i in c(1:expert_matrix$nrow)){
+    for(j in c(1:expert_matrix$ncol)){
+      print(paste("Dimension ", i, " Component ", j, ":"))
+      print(paste(expert_matrix$select(i,j)$distribution, ": ",
+                  print_nl(expert_matrix$select(i,j)$get_params())), sep = "")
+    }
+  }
+}
+
 # The helper function to count the number of parameters in alpha
 count_alpha <- function(alpha) {
   return((nrow(alpha)-1)*ncol(alpha))
