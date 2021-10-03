@@ -35,7 +35,6 @@ Imports:
     Rcpp,
     RcppEigen,
     RcppNumerical,
-    testthat,
     checkmate,
     R6,
     stats,
@@ -43,7 +42,7 @@ Imports:
     actuar,
     rmutil,
     expint
-Suggests: knitr, rmarkdown, reshape2
+Suggests: knitr, rmarkdown, reshape2, testthat
 RoxygenNote: 7.1.2
 Roxygen: list(markdown = TRUE)
 VignetteBuilder: knitr
