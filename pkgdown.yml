@@ -5,8 +5,9 @@ articles:
   expertfunctions: expertfunctions.html
   fitsimulatedataset: fitsimulatedataset.html
   modellingframework: modellingframework.html
+  predictivefunctions: predictivefunctions.html
   simulatedataset: simulatedataset.html
-last_built: 2021-10-03T02:36Z
+last_built: 2021-10-03T06:18Z
 urls:
   reference: http://sparktseung.github.io/LRMoE/reference
   article: http://sparktseung.github.io/LRMoE/articles
