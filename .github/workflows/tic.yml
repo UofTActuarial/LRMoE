@@ -11,9 +11,9 @@ on:
     branches:
       - main
       - dev
-  schedule:
-    # * is a special character in YAML so you have to quote this string
-    - cron: "0 4 * * *"
+  # schedule:
+  #   # * is a special character in YAML so you have to quote this string
+  #   - cron: "0 4 * * *"
 
 name: tic
 
