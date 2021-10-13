@@ -1,0 +1,192 @@
+---
+title: "Analyzing Real Data with LRMoE"
+description: >
+  An example of LRMoE on fitting real claim frequency data.
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Analyzing Real Data with LRMoE}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, cache = TRUE)
+library(LRMoE)
+library(reshape2)
+library(matrixStats)
+library(CASdatasets)
+glm_fit = readRDS("realdata_glm_model.rda")
+df = readRDS("realdata_converted_data.rda")
+init = readRDS("realdata_init_3comp.rda")
+LRMoE_fit = readRDS("realdata_LRMoE_3Poisson.rda")
+# data("LRMoEDemoData")
+# fitted_model = readRDS("fitted_model_true.rda")
+# fitted_model_new = readRDS("fitted_model_new-raw.rda")
+```
+
+## Introduction
+
+In this document, we will analyze a real dataset of claim frequency with LRMoE.
+We will compare how it performs compared with the classical Poisson generalized
+linear model (GLM).
+
+## Overview of Dataset
+
+We will use the `ausprivauto0405` dataset available in the R package [`CASdatasets`](http://cas.uqam.ca/).
+
+```{r}
+library(CASdatasets)
+data(ausprivauto0405)
+```
+
+The dataset contains some typical covariates used in predicting auto-insurance claim frequency and severity.
+For simplicity, we will only consider the problem of modelling claim frequency. A brief summary of the dataset
+is given below.
+
+```{r}
+summary(ausprivauto0405)
+```
+
+
+
+## Poisson GLM
+
+As a benchmark, we will first fit a Poisson GLM (with `log` link) to claim frequency. Note that `Exposure` represents how long the policy has been in force / observed, which is used as an `offset` term in model fitting.
+The usual model summary is also given below.
+
+```{r, eval=FALSE}
+glm_fit = glm(ClaimNb ~ Gender + DrivAge +
+            VehBody + VehAge + VehValue,
+            offset = Exposure,
+            family = poisson(link = "log"),
+            data = ausprivauto0405)
+```
+
+```{r}
+summary(glm_fit)
+```
+
+## Data Transformation
+
+In order to fit an LRMoE, we first need to transform the dataset. Since `DriverAge`, `VehBody` and
+`VehAge` are factors, we will use `model.matrix` to augment a dummy matrix of zeros and ones to represent them.
+
+```{r, eval=FALSE}
+# 1: Intercept
+df = data.frame(Intercept = rep(1, nrow(ausprivauto0405)))
+# 2: Gender
+df = cbind(df, GenderMale = model.matrix(~Gender, data = ausprivauto0405)[,2])
+# 3-7: DrivAge
+df = cbind(df, model.matrix(~DrivAge, data = ausprivauto0405)[,2:6])
+# 8-19: VehBody
+df = cbind(df, model.matrix(~VehBody, data = ausprivauto0405)[,2:13])
+# 20-22: VehAge
+df = cbind(df, VehAge = model.matrix(~VehAge, data = ausprivauto0405)[,2:4])
+# 23: VehValue
+df =  cbind(df, VehValue = ausprivauto0405$VehValue)
+
+
+# 24: Exposure
+df = cbind(df, Exposure = ausprivauto0405$Exposure)
+
+
+# 25: ClaimNb
+df = cbind(df, ClaimNb = ausprivauto0405$ClaimNb)
+
+df = as.matrix(df)
+```
+
+
+## Model Initialization
+
+When fitting an LRMoE model, a good starting point usually reduces run time and can potentially land on a better fit. In the **LRMoE** package, we provide a function for parameter initialization based on the Clustered Method-of-Moments (CMM).
+
+The following demonstrates how to initialize a 3-component LRMoE model.
+
+```{r, eval=TRUE}
+set.seed(2021)
+X = as.matrix(df[,1:23])
+exposure = as.matrix(df[,24])
+Y = as.matrix(df[,25])
+```
+
+```{r, eval=FALSE}
+init = LRMoE::cmm_init(Y = Y, X = X, n_comp = 3, 
+                       type = c("discrete"), exact_Y = TRUE)
+```
+
+The `init` object contains a list of summary statistics of `Y`, as well as a set of parameter
+initialization. Let us consider a 3-component Poisson mixture.
+
+```{r, eval=TRUE}
+# Initialization of alpha
+alpha_init = init$alpha_init
+alpha_init
+```
+
+```{r, eval=TRUE}
+# Initialization of component distributions
+# The list indices are specified as:
+# [[1]]: the 1st dimension of the response of Y
+# [[1]]/[[2]]/[[3]]: the 1st, 2nd and 3rd latent component/group
+# [[5]]: the 5th ponential choice of expert is zipoisson
+comp_dist = matrix(list(init$params_init[[1]][[1]][[1]]$distribution,
+                        init$params_init[[1]][[2]][[1]]$distribution,
+                        init$params_init[[1]][[3]][[1]]$distribution),
+                   nrow = 1, byrow = TRUE)
+params_init = matrix(list(init$params_init[[1]][[1]][[1]]$params,
+                          init$params_init[[1]][[2]][[1]]$params,
+                          init$params_init[[1]][[3]][[1]]$params),
+                     nrow = 1, byrow = TRUE)
+```
+
+If interested, we can also check some summary statistics of `Y` based on the initialization.
+For example, the proportion of zeros and the mean of positive `Y`'s are given below. These summary statistics may help with selecting the appropriate expert functions for each latent component/group.
+```{r}
+init$zero_y
+```
+
+```{r}
+init$mean_y_pos
+```
+
+## Poisson LRMoE
+
+With an initialization of model, we can now fit the LRMoE with zero-inflated Poisson experts.
+Note that `exposure` is also taken into account. In the case of Poisson distribution with parameter $\lambda$, a policy with exposure $E_i$ would have claim frequency distribution $Poisson(\lambda E_i)$. The same rate parameter $\lambda$ is shared by all policyholders who have potentially different policy exposures.
+
+(Note: **The fitting function takes more than 30 minutes to run.** Adjusting parameters such as a larger `eps` or smaller `ecm_iter_max` will provide a quicker, but potentially worse, model fit.)
+
+```{r, eval=FALSE}
+LRMoE_fit = LRMoE::FitLRMoE(Y = Y, X = X,
+                            alpha_init = alpha_init,
+                            comp_dist = comp_dist, params_list = params_init,
+                            exposure = exposure,
+                            exact_Y = TRUE,
+                            eps = 0.05, ecm_iter_max = 25)
+```
+
+We can examine the fitted model as follows, as well as its loglikelihood, AIC and BIC.
+Note that, although we are fitting the same dataset, the result above is different from that presented in the Actuary Magazine. This is most likely due to a different initialization as well as stopping conditions. In practice, such differences are unlikely to have a material impact, as long as the overall goodness-of-fit is similar for these different models.
+
+```{r}
+LRMoE_fit$alpha_fit
+```
+
+```{r}
+LRMoE::print_expert_matrix(LRMoE_fit$model_fit)
+```
+
+```{r}
+LRMoE_fit$ll
+```
+
+```{r}
+LRMoE_fit$AIC
+```
+
+```{r}
+LRMoE_fit$BIC
+```
+
+

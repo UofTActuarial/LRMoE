@@ -1,0 +1,12 @@
+---
+title: "Adding Customized Expert Functions"
+description: >
+  A guide to adding customized expert functions for use in the LRMoE package.
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Adding Customized Expert Functions}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+TODO
