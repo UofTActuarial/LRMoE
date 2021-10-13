@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Articles • LRMoE</title>
+<title>Initialize an LRMoE model based on Clustered Method of Moments — cmm_init • LRMoE</title>
 
 
 <!-- jquery -->
@@ -39,7 +39,8 @@
 
 
 
-<meta property="og:title" content="Articles" />
+<meta property="og:title" content="Initialize an LRMoE model based on Clustered Method of Moments — cmm_init" />
+<meta property="og:description" content="Initialize an LRMoE model based on Clustered Method of Moments" />
 
 
 
@@ -58,7 +59,7 @@
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-article-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -105,30 +106,62 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Articles</h1>
+    <h1>Initialize an LRMoE model based on Clustered Method of Moments</h1>
+    
+    <div class="hidden name"><code>cmm_init.Rd</code></div>
     </div>
 
-    <div class="section ">
-      <h3></h3>
-      <p class="section-desc"></p>
-
-      <dl>
-        <dt><a href="modellingframework.html">Modelling Framework</a></dt>
-        <dd><p>Overview of the LRMoE modelling framework.</p></dt>
-        <dt><a href="expertfunctions.html">Expert Functions</a></dt>
-        <dd><p>All expert functions currently supported in the LRMoE R package.</p></dt>
-        <dt><a href="simulatedataset.html">Simulation in LRMoE</a></dt>
-        <dd><p>How to simulate from an LRMoE model.</p></dt>
-        <dt><a href="fitsimulatedataset.html">Fitting Function in LRMoE</a></dt>
-        <dd><p>How to fit an LRMoE model.</p></dt>
-        <dt><a href="fitrealdata.html">Analyzing Real Data with LRMoE</a></dt>
-        <dd><p>An example of LRMoE on fitting real claim frequency data.</p></dt>
-        <dt><a href="predictivefunctions.html">Predictive Functions in LRMoE</a></dt>
-        <dd><p>Using the LRMoE model to make predictions.</p></dt>
-        <dt><a href="customizedexperts.html">Adding Customized Expert Functions</a></dt>
-        <dd><p>A guide to adding customized expert functions for use in the LRMoE package.</p></dt>
-      </dl>
+    <div class="ref-description">
+    <p>Initialize an LRMoE model based on Clustered Method of Moments</p>
     </div>
+
+    <pre class="usage"><span class='fu'>cmm_init</span><span class='op'>(</span><span class='va'>Y</span>, <span class='va'>X</span>, <span class='va'>n_comp</span>, <span class='va'>type</span>, exact_Y <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
+
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>Y</th>
+      <td><p>A N by d (<code>exact_Y=T</code>) or N by 4d (<code>exact_Y=F</code>) matrix of numerics,
+where N is sample size and d is the dimension of each obsevation.
+If the size is N by 4d, Each block of four columns should be organized as <code>(tl, yl, yu, tu)</code>, representing the
+truncation lower bound, censoring lower bound, censoring upper bound and truncation upper bound.</p></td>
+    </tr>
+    <tr>
+      <th>X</th>
+      <td><p>X A N*P matrix of numerics, where P is the number of covariates.
+The first column of <code>X</code> should be 1, which is the intercept.</p></td>
+    </tr>
+    <tr>
+      <th>n_comp</th>
+      <td><p>Numeric, representing how many latent classes/groups to use.</p></td>
+    </tr>
+    <tr>
+      <th>type</th>
+      <td><p>A vector of strings of either "continuous" or "exact", representing
+whether each dimension of <code>Y</code> is continuous or discrete.</p></td>
+    </tr>
+    <tr>
+      <th>exact_Y</th>
+      <td><p>TRUE/FALSE: whether <code>Y</code> is observed exactly, or with censoring and/or truncation.</p></td>
+    </tr>
+    </table>
+
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A list where <code>zero_y</code>, <code>mean_y_pos</code>, <code>var_y_pos</code>,
+<code>skewness_y_pos</code> and <code>kurtosis_y_pos</code> represent the summary statistics of <code>Y</code>
+by dimension and by component.
+<code>alpha_init</code> and <code>experts_init</code> represents the parameter initializations.
+<code>ll_init</code> contains the loglikelihood of each experts fitted to <code>Y</code> by
+dimension and by component.
+<code>ll_best</code> suggests an initialization of expert functions based on the best loglikelihood.</p>
+
+  </div>
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 

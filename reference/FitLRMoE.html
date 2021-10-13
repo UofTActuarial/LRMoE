@@ -121,6 +121,7 @@
   <span class='va'>alpha_init</span>,
   <span class='va'>comp_dist</span>,
   <span class='va'>params_list</span>,
+  experts_init <span class='op'>=</span> <span class='cn'>NULL</span>,
   exposure <span class='op'>=</span> <span class='cn'>NULL</span>,
   exact_Y <span class='op'>=</span> <span class='cn'>FALSE</span>,
   penalty <span class='op'>=</span> <span class='cn'>TRUE</span>,
@@ -164,6 +165,11 @@ The rows represent the dimensions of <code>Y</code>, while the columns represent
       <th>params_list</th>
       <td><p>A d * g matrix of list with paramster names and values,
 which is the initial parameter guess for the corresponding <code>comp_dist</code>.</p></td>
+    </tr>
+    <tr>
+      <th>experts_init</th>
+      <td><p>An initialization of expert functions returned by <code>cmm_init</code>.
+Provide either <code>experts_init</code> or (<code>comp_dist</code> and <code>params_init</code>).</p></td>
     </tr>
     <tr>
       <th>exposure</th>

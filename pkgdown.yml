@@ -2,12 +2,14 @@ pandoc: 2.7.3
 pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
+  customizedexperts: customizedexperts.html
   expertfunctions: expertfunctions.html
+  fitrealdata: fitrealdata.html
   fitsimulatedataset: fitsimulatedataset.html
   modellingframework: modellingframework.html
   predictivefunctions: predictivefunctions.html
   simulatedataset: simulatedataset.html
-last_built: 2021-10-03T06:18Z
+last_built: 2021-10-13T01:06Z
 urls:
   reference: http://sparktseung.github.io/LRMoE/reference
   article: http://sparktseung.github.io/LRMoE/articles

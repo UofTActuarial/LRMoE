@@ -31,6 +31,9 @@
     <loc>http://sparktseung.github.io/LRMoE/reference/LogLikelihoodNotExact.html</loc>
   </url>
   <url>
+    <loc>http://sparktseung.github.io/LRMoE/reference/cmm_init.html</loc>
+  </url>
+  <url>
     <loc>http://sparktseung.github.io/LRMoE/reference/dgammacount.html</loc>
   </url>
   <url>
@@ -91,7 +94,13 @@
     <loc>http://sparktseung.github.io/LRMoE/reference/sim_logit_gating.html</loc>
   </url>
   <url>
+    <loc>http://sparktseung.github.io/LRMoE/articles/customizedexperts.html</loc>
+  </url>
+  <url>
     <loc>http://sparktseung.github.io/LRMoE/articles/expertfunctions.html</loc>
+  </url>
+  <url>
+    <loc>http://sparktseung.github.io/LRMoE/articles/fitrealdata.html</loc>
   </url>
   <url>
     <loc>http://sparktseung.github.io/LRMoE/articles/fitsimulatedataset.html</loc>
