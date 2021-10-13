@@ -44,7 +44,7 @@ Imports:
     expint,
     EnvStats,
     fitdistrplus
-Suggests: knitr, rmarkdown, reshape2, testthat, CASdatasets
+Suggests: knitr, rmarkdown, reshape2, testthat
 RoxygenNote: 7.1.2
 Roxygen: list(markdown = TRUE)
 VignetteBuilder: knitr
