@@ -21,13 +21,13 @@ jobs:
         with:
           use-public-rspm: true
 
+      - name: Add CASdatasets dependency
+        run: Rscript -e 'install.packages("CASdatasets", repos = "http://cas.uqam.ca/pub/", type="source")'
+
       - uses: r-lib/actions/setup-r-dependencies@v1
         with:
           extra-packages: pkgdown
           needs: website
-      
-      - name: Add CASdatasets dependency 
-        run: Rscript -e 'install.packages("CASdatasets", repos = "http://cas.uqam.ca/pub/", type="source")'
 
       - name: Deploy package
         run: |
