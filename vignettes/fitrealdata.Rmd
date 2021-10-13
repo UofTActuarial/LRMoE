@@ -11,6 +11,9 @@ vignette: >
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, cache = TRUE)
+install.packages("xts") 
+install.packages("sp")
+install.packages("CASdatasets", repos = "http://cas.uqam.ca/pub/", type="source")
 library(LRMoE)
 library(reshape2)
 library(matrixStats)
