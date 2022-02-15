@@ -28,7 +28,7 @@ library(devtools)
 install_github("sparktseung/LRMoE")
 ```
 
-To get started, see [here](./articles/LRMoE.html).
+To get started, see [here](https://uoftactuarial.github.io/LRMoE/).
 
 ## Issue Report and Suggestions
 
