@@ -1,5 +1,5 @@
 pandoc: 2.7.3
-pkgdown: 1.6.1
+pkgdown: 2.0.2
 pkgdown_sha: ~
 articles:
   customizedexperts: customizedexperts.html
@@ -9,7 +9,7 @@ articles:
   modellingframework: modellingframework.html
   predictivefunctions: predictivefunctions.html
   simulatedataset: simulatedataset.html
-last_built: 2021-10-13T03:48Z
+last_built: 2022-02-15T17:18Z
 urls:
   reference: http://UofTActuarial.github.io/LRMoE/reference
   article: http://UofTActuarial.github.io/LRMoE/articles

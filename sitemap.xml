@@ -1,6 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://UofTActuarial.github.io/LRMoE/404.html</loc>
+  </url>
+  <url>
+    <loc>http://UofTActuarial.github.io/LRMoE/LICENSE-text.html</loc>
+  </url>
+  <url>
+    <loc>http://UofTActuarial.github.io/LRMoE/articles/customizedexperts.html</loc>
+  </url>
+  <url>
+    <loc>http://UofTActuarial.github.io/LRMoE/articles/expertfunctions.html</loc>
+  </url>
+  <url>
+    <loc>http://UofTActuarial.github.io/LRMoE/articles/fitrealdata.html</loc>
+  </url>
+  <url>
+    <loc>http://UofTActuarial.github.io/LRMoE/articles/fitsimulatedataset.html</loc>
+  </url>
+  <url>
+    <loc>http://UofTActuarial.github.io/LRMoE/articles/index.html</loc>
+  </url>
+  <url>
+    <loc>http://UofTActuarial.github.io/LRMoE/articles/modellingframework.html</loc>
+  </url>
+  <url>
+    <loc>http://UofTActuarial.github.io/LRMoE/articles/predictivefunctions.html</loc>
+  </url>
+  <url>
+    <loc>http://UofTActuarial.github.io/LRMoE/articles/simulatedataset.html</loc>
+  </url>
+  <url>
+    <loc>http://UofTActuarial.github.io/LRMoE/authors.html</loc>
+  </url>
+  <url>
     <loc>http://UofTActuarial.github.io/LRMoE/index.html</loc>
   </url>
   <url>
@@ -35,6 +68,9 @@
   </url>
   <url>
     <loc>http://UofTActuarial.github.io/LRMoE/reference/dgammacount.html</loc>
+  </url>
+  <url>
+    <loc>http://UofTActuarial.github.io/LRMoE/reference/index.html</loc>
   </url>
   <url>
     <loc>http://UofTActuarial.github.io/LRMoE/reference/log1mexp.html</loc>
@@ -92,26 +128,5 @@
   </url>
   <url>
     <loc>http://UofTActuarial.github.io/LRMoE/reference/sim_logit_gating.html</loc>
-  </url>
-  <url>
-    <loc>http://UofTActuarial.github.io/LRMoE/articles/customizedexperts.html</loc>
-  </url>
-  <url>
-    <loc>http://UofTActuarial.github.io/LRMoE/articles/expertfunctions.html</loc>
-  </url>
-  <url>
-    <loc>http://UofTActuarial.github.io/LRMoE/articles/fitrealdata.html</loc>
-  </url>
-  <url>
-    <loc>http://UofTActuarial.github.io/LRMoE/articles/fitsimulatedataset.html</loc>
-  </url>
-  <url>
-    <loc>http://UofTActuarial.github.io/LRMoE/articles/modellingframework.html</loc>
-  </url>
-  <url>
-    <loc>http://UofTActuarial.github.io/LRMoE/articles/predictivefunctions.html</loc>
-  </url>
-  <url>
-    <loc>http://UofTActuarial.github.io/LRMoE/articles/simulatedataset.html</loc>
   </url>
 </urlset>

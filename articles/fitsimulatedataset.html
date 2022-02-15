@@ -20,6 +20,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -32,18 +34,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">LRMoE</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.0</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
@@ -74,26 +70,25 @@
 
     
     
-<div id="introduction" class="section level2">
-<h2 class="hasAnchor">
-<a href="#introduction" class="anchor"></a>Introduction</h2>
+<div class="section level2">
+<h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
+</h2>
 <p>This document contains the data fitting process for the dataset <code>LRMoEDemoData</code> included in the <code>LRMoE</code> package. This serves as an example of using the main fitting function <code>FitLRMoE</code> included in the package.</p>
 </div>
-<div id="data-loading" class="section level2">
-<h2 class="hasAnchor">
-<a href="#data-loading" class="anchor"></a>Data Loading</h2>
+<div class="section level2">
+<h2 id="data-loading">Data Loading<a class="anchor" aria-label="anchor" href="#data-loading"></a>
+</h2>
 <p>The <code>LRMoEDemoData</code> in the package can be loaded as follows. The data generation process has been described in <a href="simulatedataset.html">here</a>.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"LRMoEDemoData"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"LRMoEDemoData"</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="fitting-lrmoe" class="section level2">
-<h2 class="hasAnchor">
-<a href="#fitting-lrmoe" class="anchor"></a>Fitting <code>LRMoE</code>
+<div class="section level2">
+<h2 id="fitting-lrmoe">Fitting <code>LRMoE</code><a class="anchor" aria-label="anchor" href="#fitting-lrmoe"></a>
 </h2>
 <p>In this section, we demonstrate how to fit an LRMoE model in the package. In the current version of <code>LRMoE</code>, the minimal inputs required from the user are: response, covariates, number of component distributions to use, specification of component distributions, initial guesses of parameters.</p>
-<div id="correctly-specified-model" class="section level3">
-<h3 class="hasAnchor">
-<a href="#correctly-specified-model" class="anchor"></a>Correctly Specified Model</h3>
+<div class="section level3">
+<h3 id="correctly-specified-model">Correctly Specified Model<a class="anchor" aria-label="anchor" href="#correctly-specified-model"></a>
+</h3>
 <p>We first start with a correctly specified LRMoE with parameter guesses close to the true ones, which aims to show that the package can identify the true model when the component distributions are correctly given along with reasonable guesses of parameters.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Number of component distributions; Number of response dimension</span>
@@ -102,18 +97,18 @@
 <span class="co"># Specify component distributions</span>
 <span class="co"># by dimension (row) and by component (column)</span>
 <span class="co"># Dimension is d * g</span>
-<span class="va">comp_dist</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"poisson"</span>, <span class="st">"zigammacount"</span>,
+<span class="va">comp_dist</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"poisson"</span>, <span class="st">"zigammacount"</span>,
                      <span class="st">"lognormal"</span>, <span class="st">"inversegaussian"</span><span class="op">)</span>,
                    nrow <span class="op">=</span> <span class="va">dim.m</span>, byrow <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 <span class="co"># Initial guesses of alpha: logit regression weights</span>
 <span class="co"># Dimension is g * P</span>
-<span class="va">alpha_init</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>,
+<span class="va">alpha_init</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>,
                         <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span>,
                       nrow <span class="op">=</span> <span class="va">n.comp</span>, byrow <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 <span class="co"># Initial guesses of component distribution parameters</span>
 <span class="co"># d-length list, where each elememtn is a g-length list of vectors</span>
-<span class="va">params_init</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>lambda <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>p_zero <span class="op">=</span> <span class="fl">0.5</span>, m <span class="op">=</span> <span class="fl">40</span>, s <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span>,
-                      <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>meanlog <span class="op">=</span> <span class="fl">3</span>, sdlog <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="fl">15</span>, shape <span class="op">=</span> <span class="fl">15</span><span class="op">)</span><span class="op">)</span>,
+<span class="va">params_init</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>lambda <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>p_zero <span class="op">=</span> <span class="fl">0.5</span>, m <span class="op">=</span> <span class="fl">40</span>, s <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span>,
+                      <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>meanlog <span class="op">=</span> <span class="fl">3</span>, sdlog <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="fl">15</span>, shape <span class="op">=</span> <span class="fl">15</span><span class="op">)</span><span class="op">)</span>,
                       nrow <span class="op">=</span> <span class="va">dim.m</span>, byrow <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 <p>Now we are ready to call the fitting function. It is optional to print out intermediate updates of parameters. (<em>Note: The fitting function takes about 15 minutes to run.</em>)</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
@@ -126,55 +121,55 @@
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Fitted logit regression weights</span>
 <span class="va">fitted_model</span><span class="op">$</span><span class="va">alpha_fit</span></code></pre></div>
-<pre><code>##            [,1]     [,2]       [,3]      [,4]     [,5]
-## [1,] -0.5666869 1.048366 -0.0503908 0.1056327 1.266084
-## [2,]  0.0000000 0.000000  0.0000000 0.0000000 0.000000</code></pre>
+<pre><code><span class="co">##            [,1]     [,2]       [,3]      [,4]     [,5]</span>
+<span class="co">## [1,] -0.5666869 1.048366 -0.0503908 0.1056327 1.266084</span>
+<span class="co">## [2,]  0.0000000 0.000000  0.0000000 0.0000000 0.000000</span></code></pre>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Fitted parameters of component distributions</span>
 <span class="fu"><a href="../reference/print_expert_matrix.html">print_expert_matrix</a></span><span class="op">(</span><span class="va">fitted_model</span><span class="op">$</span><span class="va">model_fit</span><span class="op">)</span></code></pre></div>
-<pre><code>## [1] "Dimension  1  Component  1 :"
-## [1] "poisson :  lambda=5.95754926807758"
-## [1] "Dimension  1  Component  2 :"
-## [1] "zigammacount :  p_zero=0.196052813930312;  m=29.2440472280268;  s=0.493269790215848"
-## [1] "Dimension  2  Component  1 :"
-## [1] "lognormal :  meanlog=4.00361664571559;  sdlog=0.297196008443668"
-## [1] "Dimension  2  Component  2 :"
-## [1] "inversegaussian :  mean=20.4013342433473;  shape=20.8940698925462"</code></pre>
+<pre><code><span class="co">## [1] "Dimension  1  Component  1 :"</span>
+<span class="co">## [1] "poisson :  lambda=5.95754926807758"</span>
+<span class="co">## [1] "Dimension  1  Component  2 :"</span>
+<span class="co">## [1] "zigammacount :  p_zero=0.196052813930312;  m=29.2440472280268;  s=0.493269790215848"</span>
+<span class="co">## [1] "Dimension  2  Component  1 :"</span>
+<span class="co">## [1] "lognormal :  meanlog=4.00361664571559;  sdlog=0.297196008443668"</span>
+<span class="co">## [1] "Dimension  2  Component  2 :"</span>
+<span class="co">## [1] "inversegaussian :  mean=20.4013342433473;  shape=20.8940698925462"</span></code></pre>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Loglikelihood: with and without parameter penalty</span>
 <span class="va">fitted_model</span><span class="op">$</span><span class="va">ll</span></code></pre></div>
-<pre><code>## [1] -73185.87</code></pre>
+<pre><code><span class="co">## [1] -73185.87</span></code></pre>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">fitted_model</span><span class="op">$</span><span class="va">ll_np</span></code></pre></div>
-<pre><code>## [1] -73177.56</code></pre>
+<pre><code><span class="co">## [1] -73177.56</span></code></pre>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># AIC</span>
 <span class="va">fitted_model</span><span class="op">$</span><span class="va">AIC</span></code></pre></div>
-<pre><code>## [1] 146381.1</code></pre>
+<pre><code><span class="co">## [1] 146381.1</span></code></pre>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># BIC</span>
 <span class="va">fitted_model</span><span class="op">$</span><span class="va">BIC</span></code></pre></div>
-<pre><code>## [1] 146474.6</code></pre>
+<pre><code><span class="co">## [1] 146474.6</span></code></pre>
 </div>
-<div id="mis-specified-model" class="section level3">
-<h3 class="hasAnchor">
-<a href="#mis-specified-model" class="anchor"></a>Mis-Specified Model</h3>
+<div class="section level3">
+<h3 id="mis-specified-model">Mis-Specified Model<a class="anchor" aria-label="anchor" href="#mis-specified-model"></a>
+</h3>
 <p>In practice, it is almost impossible to know the <strong>true</strong> underlying distribution of data. Assume the user has conducted some preliminary analysis, and proposes to use the following LRMoE.</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Number of component distributions; Number of response dimension</span>
 <span class="va">n.comp</span> <span class="op">=</span> <span class="fl">2</span> <span class="co"># = g</span>
 <span class="va">dim.m</span> <span class="op">=</span> <span class="fl">2</span> <span class="co"># = d</span>
 <span class="co"># Specify component distributions</span>
-<span class="va">comp_guess</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"zipoisson"</span>, <span class="st">"zinegativebinomial"</span>, 
+<span class="va">comp_guess</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"zipoisson"</span>, <span class="st">"zinegativebinomial"</span>, 
                      <span class="st">"burr"</span>, <span class="st">"gamma"</span><span class="op">)</span>,
                    nrow <span class="op">=</span> <span class="va">dim.m</span>, byrow <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 <span class="co"># Initial guesses of alpha: logit regression weights</span>
-<span class="va">alpha_guess</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>,
+<span class="va">alpha_guess</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>,
                         <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span>,
                       nrow <span class="op">=</span> <span class="va">n.comp</span>, byrow <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 <span class="co"># Initial guesses of component distribution parameters</span>
-<span class="va">params_guess</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>p_zero <span class="op">=</span> <span class="fl">0.5</span>, lambda <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>p_zero <span class="op">=</span> <span class="fl">0.5</span>, n <span class="op">=</span> <span class="fl">25</span>, p <span class="op">=</span> <span class="fl">0.4</span><span class="op">)</span>,
-                     <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>shape1 <span class="op">=</span> <span class="fl">5</span>, shape2 <span class="op">=</span> <span class="fl">2</span>, scale <span class="op">=</span> <span class="fl">30</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fl">1</span>, scale <span class="op">=</span> <span class="fl">10</span><span class="op">)</span><span class="op">)</span>,
+<span class="va">params_guess</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>p_zero <span class="op">=</span> <span class="fl">0.5</span>, lambda <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>p_zero <span class="op">=</span> <span class="fl">0.5</span>, n <span class="op">=</span> <span class="fl">25</span>, p <span class="op">=</span> <span class="fl">0.4</span><span class="op">)</span>,
+                     <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>shape1 <span class="op">=</span> <span class="fl">5</span>, shape2 <span class="op">=</span> <span class="fl">2</span>, scale <span class="op">=</span> <span class="fl">30</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fl">1</span>, scale <span class="op">=</span> <span class="fl">10</span><span class="op">)</span><span class="op">)</span>,
                      nrow <span class="op">=</span> <span class="va">dim.m</span>, byrow <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 <p>The fitting function can be called similarly. (<em>Note: The fitting function takes about 15 minutes to run, mostly due to numerical integration and optimization of the Burr component.</em>)</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
@@ -187,40 +182,40 @@
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Fitted logit regression weights</span>
 <span class="va">fitted_model_new</span><span class="op">$</span><span class="va">alpha_fit</span></code></pre></div>
-<pre><code>##            [,1]     [,2]        [,3]      [,4]     [,5]
-## [1,] -0.5396191 1.042177 -0.05026247 0.1057345 1.266994
-## [2,]  0.0000000 0.000000  0.00000000 0.0000000 0.000000</code></pre>
+<pre><code><span class="co">##            [,1]     [,2]        [,3]      [,4]     [,5]</span>
+<span class="co">## [1,] -0.5396191 1.042177 -0.05026247 0.1057345 1.266994</span>
+<span class="co">## [2,]  0.0000000 0.000000  0.00000000 0.0000000 0.000000</span></code></pre>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Fitted parameters of component distributions</span>
 <span class="fu"><a href="../reference/print_expert_matrix.html">print_expert_matrix</a></span><span class="op">(</span><span class="va">fitted_model_new</span><span class="op">$</span><span class="va">model_fit</span><span class="op">)</span></code></pre></div>
-<pre><code>## [1] "Dimension  1  Component  1 :"
-## [1] "zipoisson :  p_zero=0.0151523936573011;  lambda=5.97506249087493"
-## [1] "Dimension  1  Component  2 :"
-## [1] "zinegativebinomial :  p_zero=0.192140355195741;  n=30.1999977021988;  p=0.503479897629853"
-## [1] "Dimension  2  Component  1 :"
-## [1] "burr :  shape1=1.01476951770362;  shape2=5.7579625863322;  scale=55.1624200894894"
-## [1] "Dimension  2  Component  2 :"
-## [1] "gamma :  shape=1.60656085137562;  scale=12.4849575759799"</code></pre>
+<pre><code><span class="co">## [1] "Dimension  1  Component  1 :"</span>
+<span class="co">## [1] "zipoisson :  p_zero=0.0151523936573011;  lambda=5.97506249087493"</span>
+<span class="co">## [1] "Dimension  1  Component  2 :"</span>
+<span class="co">## [1] "zinegativebinomial :  p_zero=0.192140355195741;  n=30.1999977021988;  p=0.503479897629853"</span>
+<span class="co">## [1] "Dimension  2  Component  1 :"</span>
+<span class="co">## [1] "burr :  shape1=1.01476951770362;  shape2=5.7579625863322;  scale=55.1624200894894"</span>
+<span class="co">## [1] "Dimension  2  Component  2 :"</span>
+<span class="co">## [1] "gamma :  shape=1.60656085137562;  scale=12.4849575759799"</span></code></pre>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Loglikelihood: with and without parameter penalty</span>
 <span class="va">fitted_model_new</span><span class="op">$</span><span class="va">ll</span></code></pre></div>
-<pre><code>## [1] -73718.28</code></pre>
+<pre><code><span class="co">## [1] -73718.28</span></code></pre>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">fitted_model_new</span><span class="op">$</span><span class="va">ll_np</span></code></pre></div>
-<pre><code>## [1] -73714.51</code></pre>
+<pre><code><span class="co">## [1] -73714.51</span></code></pre>
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># AIC</span>
 <span class="va">fitted_model_new</span><span class="op">$</span><span class="va">AIC</span></code></pre></div>
-<pre><code>## [1] 147459</code></pre>
+<pre><code><span class="co">## [1] 147459</span></code></pre>
 <div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># BIC</span>
 <span class="va">fitted_model_new</span><span class="op">$</span><span class="va">BIC</span></code></pre></div>
-<pre><code>## [1] 147566.9</code></pre>
+<pre><code><span class="co">## [1] 147566.9</span></code></pre>
 </div>
 </div>
-<div id="some-model-visualization" class="section level2">
-<h2 class="hasAnchor">
-<a href="#some-model-visualization" class="anchor"></a>Some Model Visualization</h2>
+<div class="section level2">
+<h2 id="some-model-visualization">Some Model Visualization<a class="anchor" aria-label="anchor" href="#some-model-visualization"></a>
+</h2>
 <p>While loglikelihood can indicate to some extent the goodness-of-fit of the two models above, one may wish to visualize the models.</p>
 <p>Model visualization in the presence of data censoring and truncation is somewhat delicate: for example, when plotting a histogram or QQ-plot, how does one represent censored data? One solution is to simply discard those censored data points when plotting. Since we have the complete dataset at hand, we will make use of it and plot all 10,000 data points, although the model is only fitted based on a (slightly smaller) subset.</p>
 <p>The fitted distribution by dimension against similated dataset are shown as follows.</p>
@@ -245,11 +240,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by <a href="http://sparktseung.com/">Spark Tseung</a>, <a href="https://scholar.google.com/citations?user=atdCdk8AAAAJ&amp;hl=en&amp;oi=ao">Tsz Chai Fung</a>, <a href="https://www.statistics.utoronto.ca/people/directories/all-faculty/andrei-badescu">Andrei L. Badescu</a>, <a href="https://www.statistics.utoronto.ca/people/directories/all-faculty/sheldon-lin">Sheldon X. Lin</a>, <a href="https://www.wei-siyi.com/">Siyi Wei</a>.</p>
+  <p></p>
+<p>Developed by <a href="http://sparktseung.com/" class="external-link">Spark Tseung</a>, <a href="https://scholar.google.com/citations?user=atdCdk8AAAAJ&amp;hl=en&amp;oi=ao" class="external-link">Tsz Chai Fung</a>, <a href="https://www.statistics.utoronto.ca/people/directories/all-faculty/andrei-badescu" class="external-link">Andrei L. Badescu</a>, <a href="https://www.statistics.utoronto.ca/people/directories/all-faculty/sheldon-lin" class="external-link">Sheldon X. Lin</a>, <a href="https://www.wei-siyi.com/" class="external-link">Siyi Wei</a>.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer>
@@ -257,6 +254,8 @@
 
   
 
+
+  
 
   </body>
 </html>

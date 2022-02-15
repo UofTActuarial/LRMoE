@@ -20,6 +20,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -32,18 +34,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">LRMoE</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.0</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
@@ -74,185 +70,185 @@
 
     
     
-<div id="introduction" class="section level2">
-<h2 class="hasAnchor">
-<a href="#introduction" class="anchor"></a>Introduction</h2>
+<div class="section level2">
+<h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
+</h2>
 <p>In this document, we will analyze a real dataset of claim frequency with LRMoE. We will compare how it performs compared with the classical Poisson generalized linear model (GLM).</p>
 </div>
-<div id="overview-of-dataset" class="section level2">
-<h2 class="hasAnchor">
-<a href="#overview-of-dataset" class="anchor"></a>Overview of Dataset</h2>
-<p>We will use the <code>ausprivauto0405</code> dataset available in the R package <a href="http://cas.uqam.ca/"><code>CASdatasets</code></a>.</p>
+<div class="section level2">
+<h2 id="overview-of-dataset">Overview of Dataset<a class="anchor" aria-label="anchor" href="#overview-of-dataset"></a>
+</h2>
+<p>We will use the <code>ausprivauto0405</code> dataset available in the R package <a href="http://cas.uqam.ca/" class="external-link"><code>CASdatasets</code></a>.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://dutangc.free.fr/pub/RRepos/web/CASdatasets-index.html">CASdatasets</a></span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">ausprivauto0405</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://dutangc.free.fr/pub/RRepos/web/CASdatasets-index.html" class="external-link">CASdatasets</a></span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">ausprivauto0405</span><span class="op">)</span></code></pre></div>
 <p>The dataset contains some typical covariates used in predicting auto-insurance claim frequency and severity. For simplicity, we will only consider the problem of modelling claim frequency. A brief summary of the dataset is given below.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">ausprivauto0405</span><span class="op">)</span></code></pre></div>
-<pre><code>##     Exposure           VehValue                VehAge     
-##  Min.   :0.002738   Min.   : 0.000   old cars     :20064  
-##  1st Qu.:0.219028   1st Qu.: 1.010   oldest cars  :18948  
-##  Median :0.446270   Median : 1.500   young cars   :16587  
-##  Mean   :0.468651   Mean   : 1.777   youngest cars:12257  
-##  3rd Qu.:0.709103   3rd Qu.: 2.150                        
-##  Max.   :0.999316   Max.   :34.560                        
-##                                                           
-##           VehBody         Gender                    DrivAge     
-##  Sedan        :22233   Female:38603   old people        :10736  
-##  Hatchback    :18915   Male  :29253   older work. people:16189  
-##  Station wagon:16261                  oldest people     : 6547  
-##  Utility      : 4586                  working people    :15767  
-##  Truck        : 1750                  young people      :12875  
-##  Hardtop      : 1579                  youngest people   : 5742  
-##  (Other)      : 2532                                            
-##     ClaimOcc          ClaimNb         ClaimAmount     
-##  Min.   :0.00000   Min.   :0.00000   Min.   :    0.0  
-##  1st Qu.:0.00000   1st Qu.:0.00000   1st Qu.:    0.0  
-##  Median :0.00000   Median :0.00000   Median :    0.0  
-##  Mean   :0.06814   Mean   :0.07276   Mean   :  137.3  
-##  3rd Qu.:0.00000   3rd Qu.:0.00000   3rd Qu.:    0.0  
-##  Max.   :1.00000   Max.   :4.00000   Max.   :55922.1  
-## </code></pre>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">ausprivauto0405</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">##     Exposure           VehValue                VehAge     </span>
+<span class="co">##  Min.   :0.002738   Min.   : 0.000   old cars     :20064  </span>
+<span class="co">##  1st Qu.:0.219028   1st Qu.: 1.010   oldest cars  :18948  </span>
+<span class="co">##  Median :0.446270   Median : 1.500   young cars   :16587  </span>
+<span class="co">##  Mean   :0.468651   Mean   : 1.777   youngest cars:12257  </span>
+<span class="co">##  3rd Qu.:0.709103   3rd Qu.: 2.150                        </span>
+<span class="co">##  Max.   :0.999316   Max.   :34.560                        </span>
+<span class="co">##                                                           </span>
+<span class="co">##           VehBody         Gender                    DrivAge     </span>
+<span class="co">##  Sedan        :22233   Female:38603   old people        :10736  </span>
+<span class="co">##  Hatchback    :18915   Male  :29253   older work. people:16189  </span>
+<span class="co">##  Station wagon:16261                  oldest people     : 6547  </span>
+<span class="co">##  Utility      : 4586                  working people    :15767  </span>
+<span class="co">##  Truck        : 1750                  young people      :12875  </span>
+<span class="co">##  Hardtop      : 1579                  youngest people   : 5742  </span>
+<span class="co">##  (Other)      : 2532                                            </span>
+<span class="co">##     ClaimOcc          ClaimNb         ClaimAmount     </span>
+<span class="co">##  Min.   :0.00000   Min.   :0.00000   Min.   :    0.0  </span>
+<span class="co">##  1st Qu.:0.00000   1st Qu.:0.00000   1st Qu.:    0.0  </span>
+<span class="co">##  Median :0.00000   Median :0.00000   Median :    0.0  </span>
+<span class="co">##  Mean   :0.06814   Mean   :0.07276   Mean   :  137.3  </span>
+<span class="co">##  3rd Qu.:0.00000   3rd Qu.:0.00000   3rd Qu.:    0.0  </span>
+<span class="co">##  Max.   :1.00000   Max.   :4.00000   Max.   :55922.1  </span>
+<span class="co">## </span></code></pre>
 </div>
-<div id="poisson-glm" class="section level2">
-<h2 class="hasAnchor">
-<a href="#poisson-glm" class="anchor"></a>Poisson GLM</h2>
+<div class="section level2">
+<h2 id="poisson-glm">Poisson GLM<a class="anchor" aria-label="anchor" href="#poisson-glm"></a>
+</h2>
 <p>As a benchmark, we will first fit a Poisson GLM (with <code>log</code> link) to claim frequency. Note that <code>Exposure</code> represents how long the policy has been in force / observed, which is used as an <code>offset</code> term in model fitting. The usual model summary is also given below.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">glm_fit</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">ClaimNb</span> <span class="op">~</span> <span class="va">Gender</span> <span class="op">+</span> <span class="va">DrivAge</span> <span class="op">+</span>
+<code class="sourceCode R"><span class="va">glm_fit</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span><span class="va">ClaimNb</span> <span class="op">~</span> <span class="va">Gender</span> <span class="op">+</span> <span class="va">DrivAge</span> <span class="op">+</span>
             <span class="va">VehBody</span> <span class="op">+</span> <span class="va">VehAge</span> <span class="op">+</span> <span class="va">VehValue</span>,
             offset <span class="op">=</span> <span class="va">Exposure</span>,
-            family <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/family.html">poisson</a></span><span class="op">(</span>link <span class="op">=</span> <span class="st">"log"</span><span class="op">)</span>,
+            family <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/family.html" class="external-link">poisson</a></span><span class="op">(</span>link <span class="op">=</span> <span class="st">"log"</span><span class="op">)</span>,
             data <span class="op">=</span> <span class="va">ausprivauto0405</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">glm_fit</span><span class="op">)</span></code></pre></div>
-<pre><code>## 
-## Call:
-## glm(formula = ClaimNb ~ Gender + DrivAge + VehBody + VehAge + 
-##     VehValue, family = poisson(link = "log"), data = ausprivauto0405, 
-##     offset = Exposure)
-## 
-## Deviance Residuals: 
-##     Min       1Q   Median       3Q      Max  
-## -0.8211  -0.4128  -0.3587  -0.3153   4.7158  
-## 
-## Coefficients:
-##                            Estimate Std. Error z value Pr(&gt;|z|)    
-## (Intercept)               -2.413863   0.320949  -7.521 5.44e-14 ***
-## GenderMale                -0.016251   0.030083  -0.540 0.589057    
-## DrivAgeolder work. people  0.208764   0.048913   4.268 1.97e-05 ***
-## DrivAgeoldest people       0.005946   0.064328   0.092 0.926357    
-## DrivAgeworking people      0.235899   0.049037   4.811 1.50e-06 ***
-## DrivAgeyoung people        0.281227   0.050684   5.549 2.88e-08 ***
-## DrivAgeyoungest people     0.450164   0.059049   7.624 2.47e-14 ***
-## VehBodyConvertible        -1.864772   0.668202  -2.791 0.005259 ** 
-## VehBodyCoupe              -0.647945   0.336949  -1.923 0.054483 .  
-## VehBodyHardtop            -0.864757   0.327828  -2.638 0.008344 ** 
-## VehBodyHatchback          -1.018979   0.318260  -3.202 0.001366 ** 
-## VehBodyMinibus            -1.083799   0.350034  -3.096 0.001960 ** 
-## VehBodyMotorized caravan  -0.461968   0.409251  -1.129 0.258976    
-## VehBodyPanel van          -0.850211   0.338824  -2.509 0.012097 *  
-## VehBodyRoadster           -0.674147   0.659735  -1.022 0.306854    
-## VehBodySedan              -0.974533   0.317675  -3.068 0.002157 ** 
-## VehBodyStation wagon      -0.973794   0.317997  -3.062 0.002197 ** 
-## VehBodyTruck              -1.015281   0.328322  -3.092 0.001986 ** 
-## VehBodyUtility            -1.189603   0.322057  -3.694 0.000221 ***
-## VehAgeoldest cars         -0.051289   0.040946  -1.253 0.210354    
-## VehAgeyoung cars           0.105528   0.039636   2.662 0.007757 ** 
-## VehAgeyoungest cars       -0.004183   0.048134  -0.087 0.930754    
-## VehValue                   0.034926   0.016855   2.072 0.038248 *  
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## (Dispersion parameter for poisson family taken to be 1)
-## 
-##     Null deviance: 25716  on 67855  degrees of freedom
-## Residual deviance: 25561  on 67833  degrees of freedom
-## AIC: 35042
-## 
-## Number of Fisher Scoring iterations: 6</code></pre>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">glm_fit</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">## </span>
+<span class="co">## Call:</span>
+<span class="co">## glm(formula = ClaimNb ~ Gender + DrivAge + VehBody + VehAge + </span>
+<span class="co">##     VehValue, family = poisson(link = "log"), data = ausprivauto0405, </span>
+<span class="co">##     offset = Exposure)</span>
+<span class="co">## </span>
+<span class="co">## Deviance Residuals: </span>
+<span class="co">##     Min       1Q   Median       3Q      Max  </span>
+<span class="co">## -0.8211  -0.4128  -0.3587  -0.3153   4.7158  </span>
+<span class="co">## </span>
+<span class="co">## Coefficients:</span>
+<span class="co">##                            Estimate Std. Error z value Pr(&gt;|z|)    </span>
+<span class="co">## (Intercept)               -2.413863   0.320949  -7.521 5.44e-14 ***</span>
+<span class="co">## GenderMale                -0.016251   0.030083  -0.540 0.589057    </span>
+<span class="co">## DrivAgeolder work. people  0.208764   0.048913   4.268 1.97e-05 ***</span>
+<span class="co">## DrivAgeoldest people       0.005946   0.064328   0.092 0.926357    </span>
+<span class="co">## DrivAgeworking people      0.235899   0.049037   4.811 1.50e-06 ***</span>
+<span class="co">## DrivAgeyoung people        0.281227   0.050684   5.549 2.88e-08 ***</span>
+<span class="co">## DrivAgeyoungest people     0.450164   0.059049   7.624 2.47e-14 ***</span>
+<span class="co">## VehBodyConvertible        -1.864772   0.668202  -2.791 0.005259 ** </span>
+<span class="co">## VehBodyCoupe              -0.647945   0.336949  -1.923 0.054483 .  </span>
+<span class="co">## VehBodyHardtop            -0.864757   0.327828  -2.638 0.008344 ** </span>
+<span class="co">## VehBodyHatchback          -1.018979   0.318260  -3.202 0.001366 ** </span>
+<span class="co">## VehBodyMinibus            -1.083799   0.350034  -3.096 0.001960 ** </span>
+<span class="co">## VehBodyMotorized caravan  -0.461968   0.409251  -1.129 0.258976    </span>
+<span class="co">## VehBodyPanel van          -0.850211   0.338824  -2.509 0.012097 *  </span>
+<span class="co">## VehBodyRoadster           -0.674147   0.659735  -1.022 0.306854    </span>
+<span class="co">## VehBodySedan              -0.974533   0.317675  -3.068 0.002157 ** </span>
+<span class="co">## VehBodyStation wagon      -0.973794   0.317997  -3.062 0.002197 ** </span>
+<span class="co">## VehBodyTruck              -1.015281   0.328322  -3.092 0.001986 ** </span>
+<span class="co">## VehBodyUtility            -1.189603   0.322057  -3.694 0.000221 ***</span>
+<span class="co">## VehAgeoldest cars         -0.051289   0.040946  -1.253 0.210354    </span>
+<span class="co">## VehAgeyoung cars           0.105528   0.039636   2.662 0.007757 ** </span>
+<span class="co">## VehAgeyoungest cars       -0.004183   0.048134  -0.087 0.930754    </span>
+<span class="co">## VehValue                   0.034926   0.016855   2.072 0.038248 *  </span>
+<span class="co">## ---</span>
+<span class="co">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span>
+<span class="co">## </span>
+<span class="co">## (Dispersion parameter for poisson family taken to be 1)</span>
+<span class="co">## </span>
+<span class="co">##     Null deviance: 25716  on 67855  degrees of freedom</span>
+<span class="co">## Residual deviance: 25561  on 67833  degrees of freedom</span>
+<span class="co">## AIC: 35042</span>
+<span class="co">## </span>
+<span class="co">## Number of Fisher Scoring iterations: 6</span></code></pre>
 </div>
-<div id="data-transformation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#data-transformation" class="anchor"></a>Data Transformation</h2>
+<div class="section level2">
+<h2 id="data-transformation">Data Transformation<a class="anchor" aria-label="anchor" href="#data-transformation"></a>
+</h2>
 <p>In order to fit an LRMoE, we first need to transform the dataset. Since <code>DriverAge</code>, <code>VehBody</code> and <code>VehAge</code> are factors, we will use <code>model.matrix</code> to augment a dummy matrix of zeros and ones to represent them.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># 1: Intercept</span>
-<span class="va">df</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>Intercept <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">ausprivauto0405</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+<span class="va">df</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>Intercept <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">ausprivauto0405</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
 <span class="co"># 2: Gender</span>
-<span class="va">df</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">df</span>, GenderMale <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/model.matrix.html">model.matrix</a></span><span class="op">(</span><span class="op">~</span><span class="va">Gender</span>, data <span class="op">=</span> <span class="va">ausprivauto0405</span><span class="op">)</span><span class="op">[</span>,<span class="fl">2</span><span class="op">]</span><span class="op">)</span>
+<span class="va">df</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">df</span>, GenderMale <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/model.matrix.html" class="external-link">model.matrix</a></span><span class="op">(</span><span class="op">~</span><span class="va">Gender</span>, data <span class="op">=</span> <span class="va">ausprivauto0405</span><span class="op">)</span><span class="op">[</span>,<span class="fl">2</span><span class="op">]</span><span class="op">)</span>
 <span class="co"># 3-7: DrivAge</span>
-<span class="va">df</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">df</span>, <span class="fu"><a href="https://rdrr.io/r/stats/model.matrix.html">model.matrix</a></span><span class="op">(</span><span class="op">~</span><span class="va">DrivAge</span>, data <span class="op">=</span> <span class="va">ausprivauto0405</span><span class="op">)</span><span class="op">[</span>,<span class="fl">2</span><span class="op">:</span><span class="fl">6</span><span class="op">]</span><span class="op">)</span>
+<span class="va">df</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">df</span>, <span class="fu"><a href="https://rdrr.io/r/stats/model.matrix.html" class="external-link">model.matrix</a></span><span class="op">(</span><span class="op">~</span><span class="va">DrivAge</span>, data <span class="op">=</span> <span class="va">ausprivauto0405</span><span class="op">)</span><span class="op">[</span>,<span class="fl">2</span><span class="op">:</span><span class="fl">6</span><span class="op">]</span><span class="op">)</span>
 <span class="co"># 8-19: VehBody</span>
-<span class="va">df</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">df</span>, <span class="fu"><a href="https://rdrr.io/r/stats/model.matrix.html">model.matrix</a></span><span class="op">(</span><span class="op">~</span><span class="va">VehBody</span>, data <span class="op">=</span> <span class="va">ausprivauto0405</span><span class="op">)</span><span class="op">[</span>,<span class="fl">2</span><span class="op">:</span><span class="fl">13</span><span class="op">]</span><span class="op">)</span>
+<span class="va">df</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">df</span>, <span class="fu"><a href="https://rdrr.io/r/stats/model.matrix.html" class="external-link">model.matrix</a></span><span class="op">(</span><span class="op">~</span><span class="va">VehBody</span>, data <span class="op">=</span> <span class="va">ausprivauto0405</span><span class="op">)</span><span class="op">[</span>,<span class="fl">2</span><span class="op">:</span><span class="fl">13</span><span class="op">]</span><span class="op">)</span>
 <span class="co"># 20-22: VehAge</span>
-<span class="va">df</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">df</span>, VehAge <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/model.matrix.html">model.matrix</a></span><span class="op">(</span><span class="op">~</span><span class="va">VehAge</span>, data <span class="op">=</span> <span class="va">ausprivauto0405</span><span class="op">)</span><span class="op">[</span>,<span class="fl">2</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span><span class="op">)</span>
+<span class="va">df</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">df</span>, VehAge <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/model.matrix.html" class="external-link">model.matrix</a></span><span class="op">(</span><span class="op">~</span><span class="va">VehAge</span>, data <span class="op">=</span> <span class="va">ausprivauto0405</span><span class="op">)</span><span class="op">[</span>,<span class="fl">2</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span><span class="op">)</span>
 <span class="co"># 23: VehValue</span>
-<span class="va">df</span> <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">df</span>, VehValue <span class="op">=</span> <span class="va">ausprivauto0405</span><span class="op">$</span><span class="va">VehValue</span><span class="op">)</span>
+<span class="va">df</span> <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">df</span>, VehValue <span class="op">=</span> <span class="va">ausprivauto0405</span><span class="op">$</span><span class="va">VehValue</span><span class="op">)</span>
 
 
 <span class="co"># 24: Exposure</span>
-<span class="va">df</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">df</span>, Exposure <span class="op">=</span> <span class="va">ausprivauto0405</span><span class="op">$</span><span class="va">Exposure</span><span class="op">)</span>
+<span class="va">df</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">df</span>, Exposure <span class="op">=</span> <span class="va">ausprivauto0405</span><span class="op">$</span><span class="va">Exposure</span><span class="op">)</span>
 
 
 <span class="co"># 25: ClaimNb</span>
-<span class="va">df</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">df</span>, ClaimNb <span class="op">=</span> <span class="va">ausprivauto0405</span><span class="op">$</span><span class="va">ClaimNb</span><span class="op">)</span>
+<span class="va">df</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">df</span>, ClaimNb <span class="op">=</span> <span class="va">ausprivauto0405</span><span class="op">$</span><span class="va">ClaimNb</span><span class="op">)</span>
 
-<span class="va">df</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></code></pre></div>
+<span class="va">df</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="model-initialization" class="section level2">
-<h2 class="hasAnchor">
-<a href="#model-initialization" class="anchor"></a>Model Initialization</h2>
+<div class="section level2">
+<h2 id="model-initialization">Model Initialization<a class="anchor" aria-label="anchor" href="#model-initialization"></a>
+</h2>
 <p>When fitting an LRMoE model, a good starting point usually reduces run time and can potentially land on a better fit. In the <strong>LRMoE</strong> package, we provide a function for parameter initialization based on the Clustered Method-of-Moments (CMM).</p>
 <p>The following demonstrates how to initialize a 3-component LRMoE model.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">2021</span><span class="op">)</span>
-<span class="va">X</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">df</span><span class="op">[</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">23</span><span class="op">]</span><span class="op">)</span>
-<span class="va">exposure</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">df</span><span class="op">[</span>,<span class="fl">24</span><span class="op">]</span><span class="op">)</span>
-<span class="va">Y</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">df</span><span class="op">[</span>,<span class="fl">25</span><span class="op">]</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">2021</span><span class="op">)</span>
+<span class="va">X</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">df</span><span class="op">[</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">23</span><span class="op">]</span><span class="op">)</span>
+<span class="va">exposure</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">df</span><span class="op">[</span>,<span class="fl">24</span><span class="op">]</span><span class="op">)</span>
+<span class="va">Y</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">df</span><span class="op">[</span>,<span class="fl">25</span><span class="op">]</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">init</span> <span class="op">=</span> <span class="fu">LRMoE</span><span class="fu">::</span><span class="fu"><a href="../reference/cmm_init.html">cmm_init</a></span><span class="op">(</span>Y <span class="op">=</span> <span class="va">Y</span>, X <span class="op">=</span> <span class="va">X</span>, n_comp <span class="op">=</span> <span class="fl">3</span>, 
-                       type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"discrete"</span><span class="op">)</span>, exact_Y <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+                       type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"discrete"</span><span class="op">)</span>, exact_Y <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 <p>The <code>init</code> object contains a list of summary statistics of <code>Y</code>, as well as a set of parameter initialization. Let us consider a 3-component Poisson mixture.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Initialization of alpha</span>
 <span class="va">alpha_init</span> <span class="op">=</span> <span class="va">init</span><span class="op">$</span><span class="va">alpha_init</span>
 <span class="va">alpha_init</span></code></pre></div>
-<pre><code>##           [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10] [,11] [,12] [,13]
-## [1,] 1.9156411    0    0    0    0    0    0    0    0     0     0     0     0
-## [2,] 0.9463612    0    0    0    0    0    0    0    0     0     0     0     0
-## [3,] 0.0000000    0    0    0    0    0    0    0    0     0     0     0     0
-##      [,14] [,15] [,16] [,17] [,18] [,19] [,20] [,21] [,22] [,23]
-## [1,]     0     0     0     0     0     0     0     0     0     0
-## [2,]     0     0     0     0     0     0     0     0     0     0
-## [3,]     0     0     0     0     0     0     0     0     0     0</code></pre>
+<pre><code><span class="co">##           [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10] [,11] [,12] [,13]</span>
+<span class="co">## [1,] 1.9156411    0    0    0    0    0    0    0    0     0     0     0     0</span>
+<span class="co">## [2,] 0.9463612    0    0    0    0    0    0    0    0     0     0     0     0</span>
+<span class="co">## [3,] 0.0000000    0    0    0    0    0    0    0    0     0     0     0     0</span>
+<span class="co">##      [,14] [,15] [,16] [,17] [,18] [,19] [,20] [,21] [,22] [,23]</span>
+<span class="co">## [1,]     0     0     0     0     0     0     0     0     0     0</span>
+<span class="co">## [2,]     0     0     0     0     0     0     0     0     0     0</span>
+<span class="co">## [3,]     0     0     0     0     0     0     0     0     0     0</span></code></pre>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Initialization of component distributions</span>
 <span class="co"># The list indices are specified as:</span>
 <span class="co"># [[1]]: the 1st dimension of the response of Y</span>
 <span class="co"># [[1]]/[[2]]/[[3]]: the 1st, 2nd and 3rd latent component/group</span>
 <span class="co"># [[5]]: the 5th ponential choice of expert is zipoisson</span>
-<span class="va">comp_dist</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">init</span><span class="op">$</span><span class="va">params_init</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">distribution</span>,
+<span class="va">comp_dist</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">init</span><span class="op">$</span><span class="va">params_init</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">distribution</span>,
                         <span class="va">init</span><span class="op">$</span><span class="va">params_init</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">distribution</span>,
                         <span class="va">init</span><span class="op">$</span><span class="va">params_init</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">[[</span><span class="fl">3</span><span class="op">]</span><span class="op">]</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">distribution</span><span class="op">)</span>,
                    nrow <span class="op">=</span> <span class="fl">1</span>, byrow <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="va">params_init</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">init</span><span class="op">$</span><span class="va">params_init</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">params</span>,
+<span class="va">params_init</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">init</span><span class="op">$</span><span class="va">params_init</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">params</span>,
                           <span class="va">init</span><span class="op">$</span><span class="va">params_init</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">params</span>,
                           <span class="va">init</span><span class="op">$</span><span class="va">params_init</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">[[</span><span class="fl">3</span><span class="op">]</span><span class="op">]</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">params</span><span class="op">)</span>,
                      nrow <span class="op">=</span> <span class="fl">1</span>, byrow <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 <p>If interested, we can also check some summary statistics of <code>Y</code> based on the initialization. For example, the proportion of zeros and the mean of positive <code>Y</code>’s are given below. These summary statistics may help with selecting the appropriate expert functions for each latent component/group.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">init</span><span class="op">$</span><span class="va">zero_y</span></code></pre></div>
-<pre><code>##           [,1]     [,2]      [,3]
-## [1,] 0.9303021 0.931147 0.9442322</code></pre>
+<pre><code><span class="co">##           [,1]     [,2]      [,3]</span>
+<span class="co">## [1,] 0.9303021 0.931147 0.9442322</span></code></pre>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">init</span><span class="op">$</span><span class="va">mean_y_pos</span></code></pre></div>
-<pre><code>##          [,1]     [,2]     [,3]
-## [1,] 1.073273 1.052541 1.068493</code></pre>
+<pre><code><span class="co">##          [,1]     [,2]     [,3]</span>
+<span class="co">## [1,] 1.073273 1.052541 1.068493</span></code></pre>
 </div>
-<div id="poisson-lrmoe" class="section level2">
-<h2 class="hasAnchor">
-<a href="#poisson-lrmoe" class="anchor"></a>Poisson LRMoE</h2>
+<div class="section level2">
+<h2 id="poisson-lrmoe">Poisson LRMoE<a class="anchor" aria-label="anchor" href="#poisson-lrmoe"></a>
+</h2>
 <p>With an initialization of model, we can now fit the LRMoE with zero-inflated Poisson experts. Note that <code>exposure</code> is also taken into account. In the case of Poisson distribution with parameter <span class="math inline">\(\lambda\)</span>, a policy with exposure <span class="math inline">\(E_i\)</span> would have claim frequency distribution <span class="math inline">\(Poisson(\lambda E_i)\)</span>. The same rate parameter <span class="math inline">\(\lambda\)</span> is shared by all policyholders who have potentially different policy exposures.</p>
 <p>(Note: <strong>The fitting function takes more than 30 minutes to run.</strong> Adjusting parameters such as a larger <code>eps</code> or smaller <code>ecm_iter_max</code> will provide a quicker, but potentially worse, model fit.)</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
@@ -265,39 +261,39 @@
 <p>We can examine the fitted model as follows, as well as its loglikelihood, AIC and BIC. Note that, although we are fitting the same dataset, the result above is different from that presented in the Actuary Magazine. This is most likely due to a different initialization as well as stopping conditions. In practice, such differences are unlikely to have a material impact, as long as the overall goodness-of-fit is similar for these different models.</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">LRMoE_fit</span><span class="op">$</span><span class="va">alpha_fit</span></code></pre></div>
-<pre><code>##           [,1]         [,2]       [,3]        [,4]       [,5]       [,6]
-## [1,] 2.0585699 -0.005688619 0.05877480 0.005617090 0.06715980 0.08454027
-## [2,] 0.8942683 -0.003519320 0.04131673 0.004095807 0.04718328 0.05913152
-## [3,] 0.0000000  0.000000000 0.00000000 0.000000000 0.00000000 0.00000000
-##            [,7]       [,8]        [,9]       [,10]       [,11]        [,12]
-## [1,] 0.14109229 -0.3651218 -0.09086990 -0.18098895 -0.22567502 -0.227055362
-## [2,] 0.09868725 -0.1000964  0.08362063  0.02455771 -0.00649267 -0.007299331
-## [3,] 0.00000000  0.0000000  0.00000000  0.00000000  0.00000000  0.000000000
-##            [,13]       [,14]      [,15]         [,16]        [,17]        [,18]
-## [1,] -0.02089958 -0.19311414 -0.1066918 -0.2138805707 -0.210504745 -0.227362371
-## [2,]  0.12861213  0.01369662  0.0543942  0.0006437923  0.003129555 -0.009435871
-## [3,]  0.00000000  0.00000000  0.0000000  0.0000000000  0.000000000  0.000000000
-##            [,19]       [,20]      [,21]      [,22]       [,23]
-## [1,] -0.26573563 -0.01533255 0.03216934 0.01467385 0.008048246
-## [2,] -0.03527813 -0.01064473 0.02187543 0.01022420 0.005992822
-## [3,]  0.00000000  0.00000000 0.00000000 0.00000000 0.000000000</code></pre>
+<pre><code><span class="co">##           [,1]         [,2]       [,3]        [,4]       [,5]       [,6]</span>
+<span class="co">## [1,] 2.0585699 -0.005688619 0.05877480 0.005617090 0.06715980 0.08454027</span>
+<span class="co">## [2,] 0.8942683 -0.003519320 0.04131673 0.004095807 0.04718328 0.05913152</span>
+<span class="co">## [3,] 0.0000000  0.000000000 0.00000000 0.000000000 0.00000000 0.00000000</span>
+<span class="co">##            [,7]       [,8]        [,9]       [,10]       [,11]        [,12]</span>
+<span class="co">## [1,] 0.14109229 -0.3651218 -0.09086990 -0.18098895 -0.22567502 -0.227055362</span>
+<span class="co">## [2,] 0.09868725 -0.1000964  0.08362063  0.02455771 -0.00649267 -0.007299331</span>
+<span class="co">## [3,] 0.00000000  0.0000000  0.00000000  0.00000000  0.00000000  0.000000000</span>
+<span class="co">##            [,13]       [,14]      [,15]         [,16]        [,17]        [,18]</span>
+<span class="co">## [1,] -0.02089958 -0.19311414 -0.1066918 -0.2138805707 -0.210504745 -0.227362371</span>
+<span class="co">## [2,]  0.12861213  0.01369662  0.0543942  0.0006437923  0.003129555 -0.009435871</span>
+<span class="co">## [3,]  0.00000000  0.00000000  0.0000000  0.0000000000  0.000000000  0.000000000</span>
+<span class="co">##            [,19]       [,20]      [,21]      [,22]       [,23]</span>
+<span class="co">## [1,] -0.26573563 -0.01533255 0.03216934 0.01467385 0.008048246</span>
+<span class="co">## [2,] -0.03527813 -0.01064473 0.02187543 0.01022420 0.005992822</span>
+<span class="co">## [3,]  0.00000000  0.00000000 0.00000000 0.00000000 0.000000000</span></code></pre>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">LRMoE</span><span class="fu">::</span><span class="fu"><a href="../reference/print_expert_matrix.html">print_expert_matrix</a></span><span class="op">(</span><span class="va">LRMoE_fit</span><span class="op">$</span><span class="va">model_fit</span><span class="op">)</span></code></pre></div>
-<pre><code>## [1] "Dimension  1  Component  1 :"
-## [1] "poisson :  lambda=0.170144405986577"
-## [1] "Dimension  1  Component  2 :"
-## [1] "poisson :  lambda=0.145955830488811"
-## [1] "Dimension  1  Component  3 :"
-## [1] "poisson :  lambda=0.0771593490653163"</code></pre>
+<pre><code><span class="co">## [1] "Dimension  1  Component  1 :"</span>
+<span class="co">## [1] "poisson :  lambda=0.170144405986577"</span>
+<span class="co">## [1] "Dimension  1  Component  2 :"</span>
+<span class="co">## [1] "poisson :  lambda=0.145955830488811"</span>
+<span class="co">## [1] "Dimension  1  Component  3 :"</span>
+<span class="co">## [1] "poisson :  lambda=0.0771593490653163"</span></code></pre>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">LRMoE_fit</span><span class="op">$</span><span class="va">ll</span></code></pre></div>
-<pre><code>## [1] -17473.37</code></pre>
+<pre><code><span class="co">## [1] -17473.37</span></code></pre>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">LRMoE_fit</span><span class="op">$</span><span class="va">AIC</span></code></pre></div>
-<pre><code>## [1] 35028.25</code></pre>
+<pre><code><span class="co">## [1] 35028.25</span></code></pre>
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">LRMoE_fit</span><span class="op">$</span><span class="va">BIC</span></code></pre></div>
-<pre><code>## [1] 35475.38</code></pre>
+<pre><code><span class="co">## [1] 35475.38</span></code></pre>
 </div>
   </div>
 
@@ -312,11 +308,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by <a href="http://sparktseung.com/">Spark Tseung</a>, <a href="https://scholar.google.com/citations?user=atdCdk8AAAAJ&amp;hl=en&amp;oi=ao">Tsz Chai Fung</a>, <a href="https://www.statistics.utoronto.ca/people/directories/all-faculty/andrei-badescu">Andrei L. Badescu</a>, <a href="https://www.statistics.utoronto.ca/people/directories/all-faculty/sheldon-lin">Sheldon X. Lin</a>, <a href="https://www.wei-siyi.com/">Siyi Wei</a>.</p>
+  <p></p>
+<p>Developed by <a href="http://sparktseung.com/" class="external-link">Spark Tseung</a>, <a href="https://scholar.google.com/citations?user=atdCdk8AAAAJ&amp;hl=en&amp;oi=ao" class="external-link">Tsz Chai Fung</a>, <a href="https://www.statistics.utoronto.ca/people/directories/all-faculty/andrei-badescu" class="external-link">Andrei L. Badescu</a>, <a href="https://www.statistics.utoronto.ca/people/directories/all-faculty/sheldon-lin" class="external-link">Sheldon X. Lin</a>, <a href="https://www.wei-siyi.com/" class="external-link">Siyi Wei</a>.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer>
@@ -324,6 +322,8 @@
 
   
 
+
+  
 
   </body>
 </html>

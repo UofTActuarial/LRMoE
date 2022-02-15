@@ -20,6 +20,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -32,18 +34,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">LRMoE</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.0</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
@@ -75,137 +71,137 @@
     
     
 <p>The LRMoE.jl package supports a collection of distributions commonly used for modelling insurance claim frequency and severity.</p>
-<div id="discrete-distributions-frequency-modelling" class="section level2">
-<h2 class="hasAnchor">
-<a href="#discrete-distributions-frequency-modelling" class="anchor"></a>Discrete Distributions (Frequency Modelling)</h2>
-<div id="binomial" class="section level3">
-<h3 class="hasAnchor">
-<a href="#binomial" class="anchor"></a>Binomial</h3>
+<div class="section level2">
+<h2 id="discrete-distributions-frequency-modelling">Discrete Distributions (Frequency Modelling)<a class="anchor" aria-label="anchor" href="#discrete-distributions-frequency-modelling"></a>
+</h2>
+<div class="section level3">
+<h3 id="binomial">Binomial<a class="anchor" aria-label="anchor" href="#binomial"></a>
+</h3>
 <ul>
-<li>Paramater: <code><a href="https://rdrr.io/r/base/list.html">list(n = n, p = p)</a></code>, where <code>n&gt;0</code> and <code>0&lt;=p&lt;=1</code>.</li>
+<li>Paramater: <code>list(n = n, p = p)</code>, where <code>n&gt;0</code> and <code>0&lt;=p&lt;=1</code>.</li>
 <li>PMF <span class="math display">\[
 P(X = k) = {n \choose k}p^k(1-p)^{n-k},  \quad \text{ for } k = 0,1,2, \ldots, n.
 \]</span>
 </li>
-<li>See also: <a href="https://en.wikipedia.org/wiki/Binomial_distribution">Binomial Distribution</a> (Wikipedia)</li>
+<li>See also: <a href="https://en.wikipedia.org/wiki/Binomial_distribution" class="external-link">Binomial Distribution</a> (Wikipedia)</li>
 </ul>
 </div>
-<div id="negative-binomial" class="section level3">
-<h3 class="hasAnchor">
-<a href="#negative-binomial" class="anchor"></a>Negative Binomial</h3>
+<div class="section level3">
+<h3 id="negative-binomial">Negative Binomial<a class="anchor" aria-label="anchor" href="#negative-binomial"></a>
+</h3>
 <ul>
-<li>Parameter: <code><a href="https://rdrr.io/r/base/list.html">list(n = n, p = p)</a></code>, where <code>n&gt;0</code> and <code>0&lt;=p&lt;=1</code>.</li>
+<li>Parameter: <code>list(n = n, p = p)</code>, where <code>n&gt;0</code> and <code>0&lt;=p&lt;=1</code>.</li>
 <li>PMF: <span class="math display">\[
 P(X = k) = \frac{\Gamma(k+r)}{k! \Gamma(r)} p^r (1 - p)^k, \quad \text{for } k = 0,1,2,\ldots.
 \]</span>
 </li>
-<li>See also: <a href="https://reference.wolfram.com/language/ref/NegativeBinomialDistribution.html">Negative Binomial Distribution</a> (Wolfram)</li>
+<li>See also: <a href="https://reference.wolfram.com/language/ref/NegativeBinomialDistribution.html" class="external-link">Negative Binomial Distribution</a> (Wolfram)</li>
 </ul>
 </div>
-<div id="poisson" class="section level3">
-<h3 class="hasAnchor">
-<a href="#poisson" class="anchor"></a>Poisson</h3>
+<div class="section level3">
+<h3 id="poisson">Poisson<a class="anchor" aria-label="anchor" href="#poisson"></a>
+</h3>
 <ul>
-<li>Parameter: <code><a href="https://rdrr.io/r/base/list.html">list(lambda = lambda)</a></code>, where <code>lambda&gt;0</code>.</li>
+<li>Parameter: <code>list(lambda = lambda)</code>, where <code>lambda&gt;0</code>.</li>
 <li>PMF: <span class="math display">\[
 P(X = k) = \frac{\lambda^k}{k!} e^{-\lambda}, \quad \text{ for } k = 0,1,2,\ldots.
 \]</span>
 </li>
-<li>See also: <a href="https://en.wikipedia.org/wiki/Poisson_distribution">Poisson Distribution</a> (Wikipedia)</li>
+<li>See also: <a href="https://en.wikipedia.org/wiki/Poisson_distribution" class="external-link">Poisson Distribution</a> (Wikipedia)</li>
 </ul>
 </div>
-<div id="gamma-count" class="section level3">
-<h3 class="hasAnchor">
-<a href="#gamma-count" class="anchor"></a>Gamma Count</h3>
+<div class="section level3">
+<h3 id="gamma-count">Gamma Count<a class="anchor" aria-label="anchor" href="#gamma-count"></a>
+</h3>
 <ul>
-<li>Parameter: <code><a href="https://rdrr.io/r/base/list.html">list(m = m, s = s)</a></code>, where <code>m&gt;0</code> and <code>s&gt;0</code>.</li>
+<li>Parameter: <code>list(m = m, s = s)</code>, where <code>m&gt;0</code> and <code>s&gt;0</code>.</li>
 <li>PMF: <span class="math display">\[
 P(X = k) = G(m k, s T) - G(m (k+1), s T), \quad \text{ for } k = 0,1,2, \ldots, n.
 \]</span> with <span class="math display">\[
 G(m k, s T) = \frac{1}{\Gamma(mk)}  \int^{sT}_{0} u^{mk - 1} e^{-u} du
-\]</span> See also: <a href="https://arxiv.org/abs/1312.2423">Gamma Count Distribution</a> (Arxiv)</li>
+\]</span> See also: <a href="https://arxiv.org/abs/1312.2423" class="external-link">Gamma Count Distribution</a> (Arxiv)</li>
 </ul>
 </div>
 </div>
-<div id="continuous-distributions-severity-modelling" class="section level2">
-<h2 class="hasAnchor">
-<a href="#continuous-distributions-severity-modelling" class="anchor"></a>Continuous Distributions (Severity Modelling)</h2>
-<div id="burr" class="section level3">
-<h3 class="hasAnchor">
-<a href="#burr" class="anchor"></a>Burr</h3>
+<div class="section level2">
+<h2 id="continuous-distributions-severity-modelling">Continuous Distributions (Severity Modelling)<a class="anchor" aria-label="anchor" href="#continuous-distributions-severity-modelling"></a>
+</h2>
+<div class="section level3">
+<h3 id="burr">Burr<a class="anchor" aria-label="anchor" href="#burr"></a>
+</h3>
 <ul>
-<li>Parameter: <code><a href="https://rdrr.io/r/base/list.html">list(shape1 = k, shape2 = c, scale = lambda)</a></code>, where <code>k&gt;0</code>, <code>c&gt;0</code> and <code>lambda&gt;0</code>.</li>
+<li>Parameter: <code>list(shape1 = k, shape2 = c, scale = lambda)</code>, where <code>k&gt;0</code>, <code>c&gt;0</code> and <code>lambda&gt;0</code>.</li>
 <li>PDF: <span class="math display">\[
 f(x; k, c, \lambda) = \frac{kc}{\lambda} \left( \frac{x}{\lambda} \right)^{c-1} \left( 1+ \left( \frac{x}{\lambda} \right)^{c} \right)^{-k-1},
 \quad x \geq 0
 \]</span>
 </li>
-<li>See also: <a href="https://www.mathworks.com/help/stats/burr-type-xii-distribution.html">Burr Distribution</a> (Mathworks, implemented in this package), <a href="https://en.wikipedia.org/wiki/Burr_distribution">Burr Distribution</a> (Wikipedia, with <code>lambda = 1</code>)</li>
+<li>See also: <a href="https://www.mathworks.com/help/stats/burr-type-xii-distribution.html" class="external-link">Burr Distribution</a> (Mathworks, implemented in this package), <a href="https://en.wikipedia.org/wiki/Burr_distribution" class="external-link">Burr Distribution</a> (Wikipedia, with <code>lambda = 1</code>)</li>
 </ul>
 </div>
-<div id="gamma" class="section level3">
-<h3 class="hasAnchor">
-<a href="#gamma" class="anchor"></a>Gamma</h3>
+<div class="section level3">
+<h3 id="gamma">Gamma<a class="anchor" aria-label="anchor" href="#gamma"></a>
+</h3>
 <ul>
-<li>Parameter: <code><a href="https://rdrr.io/r/base/list.html">list(k = k, theta = theta)</a></code>, where <code>k&gt;0</code> and <code>theta&gt;0</code>.</li>
+<li>Parameter: <code>list(k = k, theta = theta)</code>, where <code>k&gt;0</code> and <code>theta&gt;0</code>.</li>
 <li>PDF: <span class="math display">\[
 f(x; k, \theta) = \frac{x^{k-1} e^{-x/\theta}}{\Gamma(k) \theta^k},
 \quad x &gt; 0
 \]</span>
 </li>
-<li>See also: <a href="https://en.wikipedia.org/wiki/Gamma_distribution">Gamma Distribution</a> (Wikipedia), shape-scale parameterization</li>
+<li>See also: <a href="https://en.wikipedia.org/wiki/Gamma_distribution" class="external-link">Gamma Distribution</a> (Wikipedia), shape-scale parameterization</li>
 </ul>
 </div>
-<div id="inverse-gaussian" class="section level3">
-<h3 class="hasAnchor">
-<a href="#inverse-gaussian" class="anchor"></a>Inverse Gaussian</h3>
+<div class="section level3">
+<h3 id="inverse-gaussian">Inverse Gaussian<a class="anchor" aria-label="anchor" href="#inverse-gaussian"></a>
+</h3>
 <ul>
-<li>Parameter: <code><a href="https://rdrr.io/r/base/list.html">list(mean = mu, shape = lambda)</a></code>, where <code>mu&gt;0</code> and <code>lambda&gt;0</code>.</li>
+<li>Parameter: <code>list(mean = mu, shape = lambda)</code>, where <code>mu&gt;0</code> and <code>lambda&gt;0</code>.</li>
 <li>PDF: PDF: <span class="math display">\[
 f(x; \mu, \lambda) = \sqrt{\frac{\lambda}{2\pi x^3}}
 \exp\left(\frac{-\lambda(x-\mu)^2}{2\mu^2x}\right), 
 \quad x &gt; 0
 \]</span>
 </li>
-<li>See also: <a href="https://en.wikipedia.org/wiki/Inverse_Gaussian_distribution">Inverse Gaussian Distribution</a> (Wikipedia)</li>
+<li>See also: <a href="https://en.wikipedia.org/wiki/Inverse_Gaussian_distribution" class="external-link">Inverse Gaussian Distribution</a> (Wikipedia)</li>
 </ul>
 </div>
-<div id="lognormal" class="section level3">
-<h3 class="hasAnchor">
-<a href="#lognormal" class="anchor"></a>Lognormal</h3>
+<div class="section level3">
+<h3 id="lognormal">Lognormal<a class="anchor" aria-label="anchor" href="#lognormal"></a>
+</h3>
 <ul>
-<li>Parameter: <code><a href="https://rdrr.io/r/base/list.html">list(meanlog = mu, sdlog = sigma)</a></code>, where <code>sigma&gt;0</code>.</li>
+<li>Parameter: <code>list(meanlog = mu, sdlog = sigma)</code>, where <code>sigma&gt;0</code>.</li>
 <li>PDF: PDF: <span class="math display">\[
 f(x; \mu, \lambda) = \sqrt{\frac{\lambda}{2\pi x^3}}
 \exp\left(\frac{-\lambda(x-\mu)^2}{2\mu^2x}\right), 
 \quad x &gt; 0
 \]</span>
 </li>
-<li>See also: <a href="https://en.wikipedia.org/wiki/Inverse_Gaussian_distribution">Inverse Gaussian Distribution</a> (Wikipedia)</li>
+<li>See also: <a href="https://en.wikipedia.org/wiki/Inverse_Gaussian_distribution" class="external-link">Inverse Gaussian Distribution</a> (Wikipedia)</li>
 </ul>
 </div>
-<div id="weibull" class="section level3">
-<h3 class="hasAnchor">
-<a href="#weibull" class="anchor"></a>Weibull</h3>
+<div class="section level3">
+<h3 id="weibull">Weibull<a class="anchor" aria-label="anchor" href="#weibull"></a>
+</h3>
 <ul>
-<li>Parameter: <code><a href="https://rdrr.io/r/base/list.html">list(shape = k, scale = theta)</a></code>, where <code>k&gt;0</code> and <code>theta&gt;0</code>.</li>
+<li>Parameter: <code>list(shape = k, scale = theta)</code>, where <code>k&gt;0</code> and <code>theta&gt;0</code>.</li>
 <li>PDF: <span class="math display">\[
 f(x; k, \theta) = \frac{k}{\theta} \left( \frac{x}{\theta} \right)^{k-1} e^{-(x/\theta)^k},
 \quad x \geq 0
 \]</span>
 </li>
-<li>See also: <a href="https://en.wikipedia.org/wiki/Weibull_distribution">Weibull Distribution</a> (Wikipedia)</li>
+<li>See also: <a href="https://en.wikipedia.org/wiki/Weibull_distribution" class="external-link">Weibull Distribution</a> (Wikipedia)</li>
 </ul>
 </div>
 </div>
-<div id="zero-inflation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#zero-inflation" class="anchor"></a>Zero Inflation</h2>
-<p>Zero inflation is supported for all discrete and continuous experts. They can be constructed by adding <code>zi</code> in front of an expert function, with an additional parameter <code>p_zero</code> for modelling a probability mass at zero. Zero-inflated experts are used in the same way as their non-zero-inflated counterpart. For example, the parameters for a zero-inflated Poisson expert <code>zipoisson</code> are given by <code><a href="https://rdrr.io/r/base/list.html">list(p_zero = p0, lambda = lambda)</a></code>.</p>
+<div class="section level2">
+<h2 id="zero-inflation">Zero Inflation<a class="anchor" aria-label="anchor" href="#zero-inflation"></a>
+</h2>
+<p>Zero inflation is supported for all discrete and continuous experts. They can be constructed by adding <code>zi</code> in front of an expert function, with an additional parameter <code>p_zero</code> for modelling a probability mass at zero. Zero-inflated experts are used in the same way as their non-zero-inflated counterpart. For example, the parameters for a zero-inflated Poisson expert <code>zipoisson</code> are given by <code>list(p_zero = p0, lambda = lambda)</code>.</p>
 </div>
-<div id="adding-customized-expert-functions" class="section level2">
-<h2 class="hasAnchor">
-<a href="#adding-customized-expert-functions" class="anchor"></a>Adding Customized Expert Functions</h2>
+<div class="section level2">
+<h2 id="adding-customized-expert-functions">Adding Customized Expert Functions<a class="anchor" aria-label="anchor" href="#adding-customized-expert-functions"></a>
+</h2>
 <p>See <a href="customizedexperts.html">here</a>.</p>
 </div>
   </div>
@@ -221,11 +217,13 @@ f(x; k, \theta) = \frac{k}{\theta} \left( \frac{x}{\theta} \right)^{k-1} e^{-(x/
 
 
       <footer><div class="copyright">
-  <p>Developed by <a href="http://sparktseung.com/">Spark Tseung</a>, <a href="https://scholar.google.com/citations?user=atdCdk8AAAAJ&amp;hl=en&amp;oi=ao">Tsz Chai Fung</a>, <a href="https://www.statistics.utoronto.ca/people/directories/all-faculty/andrei-badescu">Andrei L. Badescu</a>, <a href="https://www.statistics.utoronto.ca/people/directories/all-faculty/sheldon-lin">Sheldon X. Lin</a>, <a href="https://www.wei-siyi.com/">Siyi Wei</a>.</p>
+  <p></p>
+<p>Developed by <a href="http://sparktseung.com/" class="external-link">Spark Tseung</a>, <a href="https://scholar.google.com/citations?user=atdCdk8AAAAJ&amp;hl=en&amp;oi=ao" class="external-link">Tsz Chai Fung</a>, <a href="https://www.statistics.utoronto.ca/people/directories/all-faculty/andrei-badescu" class="external-link">Andrei L. Badescu</a>, <a href="https://www.statistics.utoronto.ca/people/directories/all-faculty/sheldon-lin" class="external-link">Sheldon X. Lin</a>, <a href="https://www.wei-siyi.com/" class="external-link">Siyi Wei</a>.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer>
@@ -233,6 +231,8 @@ f(x; k, \theta) = \frac{k}{\theta} \left( \frac{x}{\theta} \right)^{k-1} e^{-(x/
 
   
 
+
+  
 
   </body>
 </html>

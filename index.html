@@ -24,6 +24,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -36,18 +38,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">LRMoE</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.0</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="reference/index.html">Reference</a>
 </li>
@@ -69,42 +65,35 @@
   <div class="contents col-md-9">
 
 
-<div id="lrmoe-package" class="section level1">
-<div class="page-header"><h1 class="hasAnchor">
-<a href="#lrmoe-package" class="anchor"></a>LRMoE Package</h1></div>
-<div id="introduction" class="section level2">
-<h2 class="hasAnchor">
-<a href="#introduction" class="anchor"></a>Introduction</h2>
-<p><strong>LRMoE</strong> is a package tailor-made for actuarial applications which allows actuarial researchers and practitioners to model and analyze insurance loss frequencies and severities using the Logit-weighted Reduced Mixture-of-Experts (LRMoE) model. The flexibility of LRMoE models is theoretically justified in <a href="https://www.sciencedirect.com/science/article/pii/S0167668719303956">Fung et al. (2019)</a>, and an application of LRMoE for modelling correlated insurance claim frequencies is in <a href="https://www.cambridge.org/core/journals/astin-bulletin-journal-of-the-iaa/article/class-of-mixture-of-experts-models-for-general-insurance-application-to-correlated-claim-frequencies/E9FCCAD03E68C3908008448B806BAF8E">Fung et al. (2019)</a>.</p>
-<p>The package <strong>LRMoE</strong> offers several new distinctive features which are motivated by various actuarial applications and mostly cannot be achieved using existing packages for mixture models. Key features include:</p>
-<ul>
-<li>A wider coverage on frequency and severity distributions and their zero inflation;</li>
-<li>The flexibility to vary classes of distributions across components;</li>
-<li>Parameter estimation under data censoring and truncation;</li>
-<li>A collection of insurance rate making and reserving functions; and</li>
-<li>Model selection and visualization tools.</li>
-</ul>
+<div class="section level1">
+<div class="page-header"><h1 id="lrmoe-package">LRMoE Package<a class="anchor" aria-label="anchor" href="#lrmoe-package"></a>
+</h1></div>
+<div class="section level2">
+<h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
+</h2>
+<p><strong>LRMoE</strong> is a package tailor-made for actuarial applications which allows actuarial researchers and practitioners to model and analyze insurance loss frequencies and severities using the Logit-weighted Reduced Mixture-of-Experts (LRMoE) model. The flexibility of LRMoE models is theoretically justified in <a href="https://www.sciencedirect.com/science/article/pii/S0167668719303956" class="external-link">Fung et al. (2019)</a>, and an application of LRMoE for modelling correlated insurance claim frequencies is in <a href="https://www.cambridge.org/core/journals/astin-bulletin-journal-of-the-iaa/article/class-of-mixture-of-experts-models-for-general-insurance-application-to-correlated-claim-frequencies/E9FCCAD03E68C3908008448B806BAF8E" class="external-link">Fung et al. (2019)</a>.</p>
+<p>The package <strong>LRMoE</strong> offers several new distinctive features which are motivated by various actuarial applications and mostly cannot be achieved using existing packages for mixture models. Key features include: * A wider coverage on frequency and severity distributions and their zero inflation; * The flexibility to vary classes of distributions across components; * Parameter estimation under data censoring and truncation; * A collection of insurance rate making and reserving functions; and * Model selection and visualization tools.</p>
 <p>While <strong>LRMoE</strong> was initially developed for actuarial application, this package also allows for customized expert functions for various modelling problems outside of the insurance context.</p>
 </div>
-<div id="package-installation-and-usage" class="section level2">
-<h2 class="hasAnchor">
-<a href="#package-installation-and-usage" class="anchor"></a>Package Installation and Usage</h2>
-<p>While we prepare for submitting the package to Comprehensive R Archive Network (<a href="https://cran.r-project.org/">CRAN</a>), the package is available in this github repository. The package manual documenting all functions in the package can also be found in the current repository.</p>
+<div class="section level2">
+<h2 id="package-installation-and-usage">Package Installation and Usage<a class="anchor" aria-label="anchor" href="#package-installation-and-usage"></a>
+</h2>
+<p>While we prepare for submitting the package to Comprehensive R Archive Network (<a href="https://cran.r-project.org/" class="external-link">CRAN</a>), the package is available in this github repository. The package manual documenting all functions in the package can also be found in the current repository.</p>
 <p>In R, the <strong>LRMoE</strong> package can be downloaded and installed by running the following code.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">devtools</span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://devtools.r-lib.org/" class="external-link">devtools</a></span><span class="op">)</span>
 <span class="fu">install_github</span><span class="op">(</span><span class="st">"sparktseung/LRMoE"</span><span class="op">)</span></code></pre></div>
-<p>To get started, see <a href="./articles/LRMoE.html">here</a>.</p>
+<p>To get started, see <a href="https://uoftactuarial.github.io/LRMoE/" class="external-link">here</a>.</p>
 </div>
-<div id="issue-report-and-suggestions" class="section level2">
-<h2 class="hasAnchor">
-<a href="#issue-report-and-suggestions" class="anchor"></a>Issue Report and Suggestions</h2>
-<p>Issues and suggestions can be posted on <a href="https://github.com/sparktseung/LRMoE/issues">https://github.com/sparktseung/LRMoE/issues</a>.</p>
+<div class="section level2">
+<h2 id="issue-report-and-suggestions">Issue Report and Suggestions<a class="anchor" aria-label="anchor" href="#issue-report-and-suggestions"></a>
+</h2>
+<p>Issues and suggestions can be posted on <a href="https://github.com/sparktseung/LRMoE/issues" class="external-link">https://github.com/sparktseung/LRMoE/issues</a>.</p>
 </div>
-<div id="development-planned-and-in-progress" class="section level2">
-<h2 class="hasAnchor">
-<a href="#development-planned-and-in-progress" class="anchor"></a>Development Planned and In Progress</h2>
-<p>See <a href="https://github.com/sparktseung/LRMoE/projects">https://github.com/sparktseung/LRMoE/projects</a>.</p>
+<div class="section level2">
+<h2 id="development-planned-and-in-progress">Development Planned and In Progress<a class="anchor" aria-label="anchor" href="#development-planned-and-in-progress"></a>
+</h2>
+<p>See <a href="https://github.com/sparktseung/LRMoE/projects" class="external-link">https://github.com/sparktseung/LRMoE/projects</a>.</p>
 </div>
 </div>
 
@@ -112,47 +101,59 @@
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="license">
-<h2>License</h2>
+<h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li>
-<a href="https://www.r-project.org/Licenses/GPL-3">GPL-3</a> + file <a href="LICENSE-text.html">LICENSE</a>
+<a href="https://www.r-project.org/Licenses/GPL-3" class="external-link">GPL-3</a> + file <a href="LICENSE-text.html">LICENSE</a>
 </li>
 </ul>
 </div>
-<div class="developers">
-<h2>Developers</h2>
+
+
+<div class="citation">
+<h2 data-toc-skip>Citation</h2>
 <ul class="list-unstyled">
-<li>
-<a href="http://sparktseung.com/">Spark Tseung</a> <br><small class="roles"> Author, maintainer </small>  </li>
-<li>
-<a href="https://scholar.google.com/citations?user=atdCdk8AAAAJ&amp;hl=en&amp;oi=ao">Tsz Chai Fung</a> <br><small class="roles"> Author </small>  </li>
-<li>
-<a href="https://www.statistics.utoronto.ca/people/directories/all-faculty/andrei-badescu">Andrei L. Badescu</a> <br><small class="roles"> Author </small>  </li>
-<li>
-<a href="https://www.statistics.utoronto.ca/people/directories/all-faculty/sheldon-lin">Sheldon X. Lin</a> <br><small class="roles"> Author </small>  </li>
-<li>
-<a href="https://www.wei-siyi.com/">Siyi Wei</a> <br><small class="roles"> Author </small>  </li>
+<li><a href="authors.html#citation">Citing LRMoE</a></li>
 </ul>
 </div>
 
-  <div class="dev-status">
-<h2>Dev status</h2>
+<div class="developers">
+<h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
-<li><a href="https://github.com/sparktseung/LRMoE/issues"><img src="https://img.shields.io/github/issues/sparktseung/LRMoE" alt="issues"></a></li>
-<li><a href="https://github.com/sparktseung/LRMoE/network/members"><img src="https://img.shields.io/github/forks/sparktseung/LRMoE" alt="forks"></a></li>
-<li><a href="https://github.com/sparktseung/LRMoE/stargazers"><img src="https://img.shields.io/github/stars/sparktseung/LRMoE" alt="stars"></a></li>
+<li>
+<a href="http://sparktseung.com/" class="external-link">Spark Tseung</a> <br><small class="roles"> Author, maintainer </small>  </li>
+<li>
+<a href="https://scholar.google.com/citations?user=atdCdk8AAAAJ&amp;hl=en&amp;oi=ao" class="external-link">Tsz Chai Fung</a> <br><small class="roles"> Author </small>  </li>
+<li>
+<a href="https://www.statistics.utoronto.ca/people/directories/all-faculty/andrei-badescu" class="external-link">Andrei L. Badescu</a> <br><small class="roles"> Author </small>  </li>
+<li>
+<a href="https://www.statistics.utoronto.ca/people/directories/all-faculty/sheldon-lin" class="external-link">Sheldon X. Lin</a> <br><small class="roles"> Author </small>  </li>
+<li>
+<a href="https://www.wei-siyi.com/" class="external-link">Siyi Wei</a> <br><small class="roles"> Author </small>  </li>
 </ul>
 </div>
+
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://github.com/sparktseung/LRMoE/issues" class="external-link"><img src="https://img.shields.io/github/issues/sparktseung/LRMoE" alt="issues"></a></li>
+<li><a href="https://github.com/sparktseung/LRMoE/network/members" class="external-link"><img src="https://img.shields.io/github/forks/sparktseung/LRMoE" alt="forks"></a></li>
+<li><a href="https://github.com/sparktseung/LRMoE/stargazers" class="external-link"><img src="https://img.shields.io/github/stars/sparktseung/LRMoE" alt="stars"></a></li>
+</ul>
 </div>
+
+  </div>
 </div>
 
 
       <footer><div class="copyright">
-  <p>Developed by <a href="http://sparktseung.com/">Spark Tseung</a>, <a href="https://scholar.google.com/citations?user=atdCdk8AAAAJ&amp;hl=en&amp;oi=ao">Tsz Chai Fung</a>, <a href="https://www.statistics.utoronto.ca/people/directories/all-faculty/andrei-badescu">Andrei L. Badescu</a>, <a href="https://www.statistics.utoronto.ca/people/directories/all-faculty/sheldon-lin">Sheldon X. Lin</a>, <a href="https://www.wei-siyi.com/">Siyi Wei</a>.</p>
+  <p></p>
+<p>Developed by <a href="http://sparktseung.com/" class="external-link">Spark Tseung</a>, <a href="https://scholar.google.com/citations?user=atdCdk8AAAAJ&amp;hl=en&amp;oi=ao" class="external-link">Tsz Chai Fung</a>, <a href="https://www.statistics.utoronto.ca/people/directories/all-faculty/andrei-badescu" class="external-link">Andrei L. Badescu</a>, <a href="https://www.statistics.utoronto.ca/people/directories/all-faculty/sheldon-lin" class="external-link">Sheldon X. Lin</a>, <a href="https://www.wei-siyi.com/" class="external-link">Siyi Wei</a>.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer>
@@ -160,6 +161,8 @@
 
   
 
+
+  
 
   </body>
 </html>
